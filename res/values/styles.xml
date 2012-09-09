@@ -1,0 +1,15 @@
+<resources>
+
+    <style name="AppTheme" parent="android:Theme.Light" />
+
+    <style name="ImageButtonWithText" parent="@android:style/Widget.Button">
+	    <item name="android:layout_width">0dp</item>
+	    <item name="android:layout_height">wrap_content</item>
+	    <item name="android:paddingTop">22sp</item>
+	    <item name="android:drawablePadding">0sp</item>
+	    <item name="android:background">@android:color/transparent</item>
+	    <item name="android:textColor">#005941</item>
+	    <item name="android:clickable">true</item>
+	</style>
+	
+</resources>
