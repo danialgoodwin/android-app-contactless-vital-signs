@@ -30,6 +30,30 @@ public class MainActivity extends Activity {
 	public void goToTestVitalSigns(View v) {
     	startActivity(new Intent(_activity, TestVitalSigns.class));
 	}
+	public void goToTestHeartRate(View v) {
+    	startActivity(new Intent(_activity, TestHeartRate.class));
+	}
+	public void goToTestBloodPressure(View v) {
+    	startActivity(new Intent(_activity, TestBloodPressure.class));
+	}
+	public void goToTestBodyTemperature(View v) {
+    	startActivity(new Intent(_activity, TestBodyTemperature.class));
+	}
+	public void goToTestRespiratoryRate(View v) {
+    	startActivity(new Intent(_activity, TestRespiratoryRate.class));
+	}
+	public void goToTestOxygenSaturation(View v) {
+    	startActivity(new Intent(_activity, TestOxygenSaturation.class));
+	}
+	public void goToTestPupilDilation(View v) {
+    	startActivity(new Intent(_activity, TestPupilDilation.class));
+	}
+	public void goToTestEyeSaccades(View v) {
+    	startActivity(new Intent(_activity, TestEyeSaccades.class));
+	}
+	public void goToTestFacialGestures(View v) {
+    	startActivity(new Intent(_activity, TestFacialGestures.class));
+	}
 	public void goTo(View v) {
 		setAlertDialogs(null, "Ex: Heart Rate", "Right Here", "The is for a single vital sign. To be complete.");
 	}
