@@ -1,6 +1,7 @@
 package net.simplyadvanced.vitalsigns;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.lang.Math;
 
@@ -29,6 +30,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v4.app.NavUtils;
 
+import net.simplyadvanced.vitalsigns.heartrate.FFT;
+import net.simplyadvanced.vitalsigns.heartrate.FastICA_RGB;
+
 public class TestBloodPressure extends Activity {
 	private TestBloodPressure _activity;
 	TextView mTextViewAge, mTextViewSex, mTextViewWeight, mTextViewHeight, mTextViewBloodPressure;
@@ -39,6 +43,15 @@ public class TestBloodPressure extends Activity {
     SharedPreferences settings;
     int previewWidth = 0, previewHeight = 0;
 
+    ArrayList<Double> arrayRed, arrayGreen, arrayBlue;
+    //double[] dArrayRed, arrayGreen, arrayBlue;
+    int lengthOfPreview = 0;
+    
+    /* Heart Rate Variables */
+    double[] outRed, outGreen, outBlue;
+    double[] heartRateFrequency;
+    int heartRateFrameLength = 32;
+    
     @Override
     public void onCreate(Bundle savedInstanceState) {
         _activity = this;
@@ -66,6 +79,7 @@ public class TestBloodPressure extends Activity {
        
         settings = getSharedPreferences(PREFS_NAME, 0); // Load saved stats
         setBloodPressure(/*first param,*/ settings.getInt("age", 25), settings.getString("sex", "Male"), settings.getInt("weight", 160), settings.getInt("height", 70));
+
     }
 
     protected void onResume() {
@@ -180,6 +194,35 @@ public class TestBloodPressure extends Activity {
 					mRed.setText("Fps: " + previewFPSRange[0] + previewFPSRange[1]);
 			        mGreen.setText("data.length: " + data.length);
 			        mBlue.setText("RGB: " + r + "," + g + "," + b); // YCbCr_420_SP (NV21) format
+			        
+			        while(arrayRed.size() < 32) {
+				        arrayRed.add((double) r);
+				        arrayGreen.add((double) g);
+				        arrayBlue.add((double) b);
+			        }
+			        
+			        if(arrayRed.size() == 32) { // So that these functions don't run every frame preview, just on the 32nd one
+				        for(int a=0; a<32; a++) {
+				        	outRed[a] = (Double) arrayRed.get(a);
+				        	outGreen[a] = (Double) arrayGreen.get(a);
+				        	outBlue[a] = (Double) arrayBlue.get(a);
+				        }
+				        
+				        outRed = new double[heartRateFrameLength]; // heartRateFrameLength = 32 for now
+				        FastICA_RGB.preICA(outRed, outGreen, outBlue, heartRateFrameLength, outRed, outGreen, outBlue);
+				        
+				        heartRateFrequency = new double[heartRateFrameLength];
+				        FFT.fft(outGreen, heartRateFrameLength, heartRateFrequency);
+				        
+				        double temp = 0;
+				        for(int a=0; a<32; a++) {
+				        	if(temp < heartRateFrequency[a]) {
+				        		temp = heartRateFrequency[a];
+				        	}
+					        System.out.println(String.valueOf(a) +": " + Double.toString(heartRateFrequency[a]));
+				        }
+			        }
+			        
 				}
         	});
         }
