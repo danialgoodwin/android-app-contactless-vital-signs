@@ -31,7 +31,6 @@ import android.support.v4.app.NavUtils;
 
 public class TestBloodPressure extends Activity {
 	private TestBloodPressure _activity;
-	TextView textViewAge, textViewSex, textViewWeight, textViewHeight, textViewBloodPressure;
 	TextView mTextViewAge, mTextViewSex, mTextViewWeight, mTextViewHeight, mTextViewBloodPressure;
 	TextView mDebug, mRed, mGreen, mBlue;
     public static final String PREFS_NAME = "MyPrefsFile";
@@ -45,7 +44,7 @@ public class TestBloodPressure extends Activity {
         _activity = this;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_blood_pressure);
-        // requestWindowFeature(Window.FEATURE_NO_TITLE); // Hide the window title
+        //requestWindowFeature(Window.FEATURE_NO_TITLE); // Hide the window title
 
         mTextViewAge = (TextView) findViewById(R.id.textViewAge); // Connects variables here to ids in xml
         mTextViewSex = (TextView) findViewById(R.id.textViewSex);
@@ -57,54 +56,41 @@ public class TestBloodPressure extends Activity {
         mGreen = (TextView) findViewById(R.id.green);
         mBlue = (TextView) findViewById(R.id.blue);
         
-        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0); // Load saved stats
-        mTextViewAge.setText("Age: " + settings.getInt("age", 25));
-        mTextViewSex.setText("Sex: " + settings.getString("sex", "Male"));
-        mTextViewWeight.setText("Weight: " + settings.getInt("weight", 160) + " pounds");
-        mTextViewHeight.setText("Height: " + settings.getInt("height", 70) + " inches");
+        loadPatientEditableStats();
 
     	mCamera = getCameraInstance(); // Create an instance of Camera
     	
-        // Create our Preview view and set it as the content of our activity.
-        mPreview = new CameraPreview(this, mCamera);
+        mPreview = new CameraPreview(this, mCamera); // Create our Preview view and set it as the content of our activity
         FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
         preview.addView(mPreview);
-        
-
+       
         settings = getSharedPreferences(PREFS_NAME, 0); // Load saved stats
         setBloodPressure(/*first param,*/ settings.getInt("age", 25), settings.getString("sex", "Male"), settings.getInt("weight", 160), settings.getInt("height", 70));
     }
 
     protected void onResume() {
     	super.onResume();
-        settings = getSharedPreferences(PREFS_NAME, 0); // Load saved stats
-        mTextViewAge.setText("Age: " + settings.getInt("age", 25));
-        mTextViewSex.setText("Sex: " + settings.getString("sex", "Male"));
-        mTextViewWeight.setText("Weight: " + settings.getInt("weight", 160) + " pounds");
-        mTextViewHeight.setText("Height: " + settings.getInt("height", 70) + " inches");
-        
+    	loadPatientEditableStats();        
         setBloodPressure(/*first param,*/ settings.getInt("age", 25), settings.getString("sex", "Male"), settings.getInt("weight", 160), settings.getInt("height", 70));
     }
     protected void onPause() {
     	super.onPause();
-    	
     	//tempReleaseCamera();
     }
     protected void onDestroy() {
     	super.onDestroy();
-
     	releaseCamera();
     }
     
     public void setBloodPressure(/*double[][] cameraData OR red[], green[], blue[], time[85123456]*/ int age, String sex, int weight, int height) {
     	int systolicPressure;
     	int diastolicPressure;
-    	double BSA, SV, pulsePressure;
-    	double ejectionTime = .35, heartRate = 60, meanPulsePressure = 40; // TODO calculate each of these with data from camera, except mPP
+    	double bodySurfaceArea, strokeVolume, pulsePressure;
+    	double ejectionTime = .35, heartRate = 60, meanPulsePressure = 100; // TODO calculate each of these with data from camera, except mPP
     	
-    	BSA = 0.007184*(Math.pow(weight,0.425))*(Math.pow(height,0.725));
-        SV = -6.6 + 0.25*(ejectionTime-35) - 0.62*heartRate + 40.4*BSA - 0.51*age;
-        pulsePressure = SV / ((0.013*weight - 0.007*age-0.004*heartRate)+1.307);
+    	bodySurfaceArea = 0.007184*(Math.pow(weight,0.425))*(Math.pow(height,0.725));
+        strokeVolume = -6.6 + 0.25*(ejectionTime-35) - 0.62*heartRate + 40.4*bodySurfaceArea - 0.51*age; // Volume of blood pumped from heart in one beat
+        pulsePressure = strokeVolume / ((0.013*weight - 0.007*age-0.004*heartRate)+1.307);
         
         systolicPressure = (int) (meanPulsePressure + 2/3*pulsePressure);
         diastolicPressure = (int) (meanPulsePressure - pulsePressure/3);
@@ -134,15 +120,13 @@ public class TestBloodPressure extends Activity {
             super(context);
             mCamera = camera;
 
-            // Install a SurfaceHolder.Callback so we get notified when the
-            // underlying surface is created and destroyed.
-            mHolder = getHolder();
+            mHolder = getHolder(); // Install a SurfaceHolder.Callback so we get notified when the underlying surface is created and destroyed
             mHolder.addCallback(this);
             mHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS); // deprecated setting, but required on Android versions prior to 3.0
         }
 
-        public void surfaceCreated(SurfaceHolder holder) {
-            // The Surface has been created, now tell the camera where to draw the preview.
+        public void surfaceCreated(SurfaceHolder holder) { // The Surface has been created, now tell the camera where to draw the preview
+
 //            try {
 //                //mCamera.setDisplayOrientation(90);
 //                //mCamera.setPreviewDisplay(holder);
@@ -152,7 +136,6 @@ public class TestBloodPressure extends Activity {
 //            }
         	
         	mCamera.setPreviewCallback(new PreviewCallback() { // Gets called for every frame
-
 				@Override
 				public void onPreviewFrame(byte[] data, Camera c) {
 //					final String TAG = "onPreviewFrame";
@@ -179,35 +162,31 @@ public class TestBloodPressure extends Activity {
 //			        blue /= 81;
 					
 					
-					
-					
 					decodeYUV(pixels, data, previewWidth, previewHeight);
 					
 					int r = 0, g = 0, b = 0;
 					for(int i = 0; i < pixels.length; i++) {
-						r += Color.red(pixels[0]);   //1.164(Y-16)                + 2.018(U-128);
-						g += Color.green(pixels[0]); //1.164(Y-16) - 0.813(V-128) - 0.391(U-128);
-						b += Color.blue(pixels[0]);  //1.164(Y-16) + 1.596(V-128);
+						r += Color.red(pixels[i]);   //1.164(Y-16)                + 2.018(U-128);
+						g += Color.green(pixels[i]); //1.164(Y-16) - 0.813(V-128) - 0.391(U-128);
+						b += Color.blue(pixels[i]);  //1.164(Y-16) + 1.596(V-128);
 					}
 					r /= pixels.length;
 					g /= pixels.length;
 					b /= pixels.length;
 
-
 		            Camera.Parameters parameters = mCamera.getParameters();
-					mRed.setText("Fps: " + parameters.getPreviewFrameRate());
+		            int[] previewFPSRange = new int[2];
+		            parameters.getPreviewFpsRange(previewFPSRange);
+					mRed.setText("Fps: " + previewFPSRange[0] + previewFPSRange[1]);
 			        mGreen.setText("data.length: " + data.length);
 			        mBlue.setText("RGB: " + r + "," + g + "," + b); // YCbCr_420_SP (NV21) format
 				}
-        		
         	});
-        	
         }
 
         public void surfaceDestroyed(SurfaceHolder holder) {
         	// Surface will be destroyed when we return, so stop the preview.
-            // Because the CameraDevice object is not a shared resource, it's very
-            // important to release it when the activity is paused.
+            // Because the CameraDevice object is not a shared resource, it's very important to release it when the activity is paused.
             mCamera.stopPreview();
             mCamera.release();
             mCamera = null;
@@ -287,7 +266,7 @@ public class TestBloodPressure extends Activity {
                 }
             }
 
-            // Cannot find the one match the aspect ratio, ignore the requirement
+            // Cannot find the match of aspect ratio, ignore the requirement
             if (optimalSize == null) {
                 minDiff = Double.MAX_VALUE;
                 for (Size size : sizes) {
@@ -299,7 +278,6 @@ public class TestBloodPressure extends Activity {
             }
             return optimalSize;
         }
-        
     }
     
     private void releaseCamera() {
@@ -407,6 +385,13 @@ public class TestBloodPressure extends Activity {
 	    }
 	}
 	
+	private void loadPatientEditableStats() {
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0); // Load saved stats
+        mTextViewAge.setText("Age: " + settings.getInt("age", 25));
+        mTextViewSex.setText("Sex: " + settings.getString("sex", "Male"));
+        mTextViewWeight.setText("Weight: " + settings.getInt("weight", 160) + " pounds");
+        mTextViewHeight.setText("Height: " + settings.getInt("height", 70) + " inches");
+	}
 	
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
