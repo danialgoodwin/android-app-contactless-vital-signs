@@ -35,7 +35,7 @@ import net.simplyadvanced.vitalsigns.heartrate.FastICA_RGB;
 
 public class TestBloodPressure extends Activity {
 	private TestBloodPressure _activity;
-	TextView mTextViewAge, mTextViewSex, mTextViewWeight, mTextViewHeight, mTextViewBloodPressure;
+	TextView mTextViewAge, mTextViewSex, mTextViewWeight, mTextViewHeight, mTextViewBloodPressure, mTextViewHeartRateFrequency;
 	TextView mDebug, mRed, mGreen, mBlue;
     public static final String PREFS_NAME = "MyPrefsFile";
     private Camera mCamera;
@@ -49,7 +49,7 @@ public class TestBloodPressure extends Activity {
     
     /* Heart Rate Variables */
     double[] outRed, outGreen, outBlue;
-    double[] heartRateFrequency;
+    double heartRateFrequency;
     int heartRateFrameLength = 32;
     
     @Override
@@ -64,6 +64,7 @@ public class TestBloodPressure extends Activity {
         mTextViewWeight = (TextView) findViewById(R.id.textViewWeight);
         mTextViewHeight = (TextView) findViewById(R.id.textViewHeight);
         mTextViewBloodPressure = (TextView) findViewById(R.id.textViewBloodPressure);
+        mTextViewHeartRateFrequency = (TextView) findViewById(R.id.textViewHeartRateFrequency);
         mDebug = (TextView) findViewById(R.id.debug);
         mRed = (TextView) findViewById(R.id.red);
         mGreen = (TextView) findViewById(R.id.green);
@@ -79,7 +80,8 @@ public class TestBloodPressure extends Activity {
        
         settings = getSharedPreferences(PREFS_NAME, 0); // Load saved stats
         setBloodPressure(/*first param,*/ settings.getInt("age", 25), settings.getString("sex", "Male"), settings.getInt("weight", 160), settings.getInt("height", 70));
-
+        
+        
     }
 
     protected void onResume() {
@@ -150,7 +152,6 @@ public class TestBloodPressure extends Activity {
 //            }
         	
         	mCamera.setPreviewCallback(new PreviewCallback() { // Gets called for every frame
-				@Override
 				public void onPreviewFrame(byte[] data, Camera c) {
 //					final String TAG = "onPreviewFrame";
 //					long timeAtStart = System.currentTimeMillis();
@@ -190,7 +191,7 @@ public class TestBloodPressure extends Activity {
 
 		            Camera.Parameters parameters = mCamera.getParameters();
 		            int[] previewFPSRange = new int[2];
-		            parameters.getPreviewFpsRange(previewFPSRange);
+		            //parameters.getPreviewFpsRange(previewFPSRange);
 					mRed.setText("Fps: " + previewFPSRange[0] + previewFPSRange[1]);
 			        mGreen.setText("data.length: " + data.length);
 			        mBlue.setText("RGB: " + r + "," + g + "," + b); // YCbCr_420_SP (NV21) format
@@ -200,6 +201,8 @@ public class TestBloodPressure extends Activity {
 				        arrayGreen.add((double) g);
 				        arrayBlue.add((double) b);
 			        }
+			        
+			        //mTextViewHeartRateFrequency.setText("array red size "+ arrayRed.size());
 			        
 			        if(arrayRed.size() == 32) { // So that these functions don't run every frame preview, just on the 32nd one
 				        for(int a=0; a<32; a++) {
@@ -211,16 +214,11 @@ public class TestBloodPressure extends Activity {
 				        outRed = new double[heartRateFrameLength]; // heartRateFrameLength = 32 for now
 				        FastICA_RGB.preICA(outRed, outGreen, outBlue, heartRateFrameLength, outRed, outGreen, outBlue);
 				        
-				        heartRateFrequency = new double[heartRateFrameLength];
+				        
 				        FFT.fft(outGreen, heartRateFrameLength, heartRateFrequency);
 				        
-				        double temp = 0;
-				        for(int a=0; a<32; a++) {
-				        	if(temp < heartRateFrequency[a]) {
-				        		temp = heartRateFrequency[a];
-				        	}
-					        System.out.println(String.valueOf(a) +": " + Double.toString(heartRateFrequency[a]));
-				        }
+				       mTextViewHeartRateFrequency.setText("Heart Rate Frequency: "+heartRateFrequency);
+				       mGreen.setText("Heart Rate: "+heartRateFrequency*60);
 			        }
 			        
 				}

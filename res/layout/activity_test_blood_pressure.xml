@@ -44,6 +44,13 @@
 		        <TextView android:id="@+id/blue" android:layout_width="wrap_content" android:layout_height="wrap_content"
 		            android:text="Blue: bValue"
 		            android:layout_weight="1" />
+
+		        <TextView
+		            android:id="@+id/textViewHeartRateFrequency"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_weight="1"
+		            android:text="TextView" />
 		        
 		        <Button
 		            android:layout_width="wrap_content"

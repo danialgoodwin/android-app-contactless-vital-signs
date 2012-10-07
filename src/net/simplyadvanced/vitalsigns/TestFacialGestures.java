@@ -32,8 +32,7 @@ public class TestFacialGestures extends Activity implements SurfaceHolder.Callba
     
     
     
-    @Override
-	public void surfaceChanged(SurfaceHolder holder, int format, int width,
+    public void surfaceChanged(SurfaceHolder holder, int format, int width,
 			int height) {
 		// TODO Auto-generated method stub
 		camera.stopPreview();
@@ -50,12 +49,10 @@ public class TestFacialGestures extends Activity implements SurfaceHolder.Callba
     		}
     	}
 	}
-	@Override
 	public void surfaceCreated(SurfaceHolder holder) {
 		// TODO Auto-generated method stub
 		camera = Camera.open();
 	}
-	@Override
 	public void surfaceDestroyed(SurfaceHolder holder) {
 		// TODO Auto-generated method stub
 		camera.stopPreview();
