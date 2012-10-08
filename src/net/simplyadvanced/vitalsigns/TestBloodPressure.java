@@ -1,6 +1,5 @@
 package net.simplyadvanced.vitalsigns;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.lang.Math;
@@ -13,21 +12,17 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.ImageFormat;
 import android.hardware.Camera;
 import android.hardware.Camera.PreviewCallback;
 import android.hardware.Camera.Size;
 import android.util.Log;
-import android.view.Display;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.support.v4.app.NavUtils;
 
 import net.simplyadvanced.vitalsigns.heartrate.FFT;
@@ -41,17 +36,19 @@ public class TestBloodPressure extends Activity {
     private Camera mCamera;
     private CameraPreview mPreview;
     SharedPreferences settings;
+    FrameLayout preview;
     int previewWidth = 0, previewHeight = 0;
 
-    ArrayList<Double> arrayRed, arrayGreen, arrayBlue;
-    //double[] dArrayRed, arrayGreen, arrayBlue;
-    int lengthOfPreview = 0;
-    
-    /* Heart Rate Variables */
-    double[] outRed, outGreen, outBlue;
+    /* Heart Rate Related Variables */
+    ArrayList<Double> arrayRed = new ArrayList<Double>();
+    ArrayList<Double> arrayGreen = new ArrayList<Double>();
+    ArrayList<Double> arrayBlue = new ArrayList<Double>();
+    double[] outRed = new double[32];
+    double[] outGreen = new double[32];
+    double[] outBlue = new double[32];
     double heartRateFrequency;
     int heartRateFrameLength = 32;
-    
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         _activity = this;
@@ -75,13 +72,12 @@ public class TestBloodPressure extends Activity {
     	mCamera = getCameraInstance(); // Create an instance of Camera
     	
         mPreview = new CameraPreview(this, mCamera); // Create our Preview view and set it as the content of our activity
-        FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
+        preview = (FrameLayout) findViewById(R.id.camera_preview);
         preview.addView(mPreview);
        
         settings = getSharedPreferences(PREFS_NAME, 0); // Load saved stats
         setBloodPressure(/*first param,*/ settings.getInt("age", 25), settings.getString("sex", "Male"), settings.getInt("weight", 160), settings.getInt("height", 70));
-        
-        
+
     }
 
     protected void onResume() {
@@ -144,19 +140,19 @@ public class TestBloodPressure extends Activity {
         public void surfaceCreated(SurfaceHolder holder) { // The Surface has been created, now tell the camera where to draw the preview
 
 //            try {
-//                //mCamera.setDisplayOrientation(90);
-//                //mCamera.setPreviewDisplay(holder);
-//                //mCamera.startPreview();
+////                mCamera.setDisplayOrientation(90);
+//                mCamera.setPreviewDisplay(holder);
+//                mCamera.startPreview();
 //            } catch (IOException e) {
 //                Log.d(TAG, "Error setting camera preview: " + e.getMessage());
 //            }
         	
         	mCamera.setPreviewCallback(new PreviewCallback() { // Gets called for every frame
-				public void onPreviewFrame(byte[] data, Camera c) {
+        		//@Override
+        		public void onPreviewFrame(byte[] data, Camera c) {
 //					final String TAG = "onPreviewFrame";
 //					long timeAtStart = System.currentTimeMillis();
-//					Log.d(TAG, "Width and Height Retrieved As: " + previewWidth + ", " + previewHeight);
-					
+
 //					int centerX = (previewWidth / 2), centerY = (previewHeight / 2);
 //					int sampleWidth = 9, sampleHeight = 9;
 					int[] pixels = new int[previewWidth * previewHeight];
@@ -176,11 +172,10 @@ public class TestBloodPressure extends Activity {
 //			        green /= 81;
 //			        blue /= 81;
 					
-					
 					decodeYUV(pixels, data, previewWidth, previewHeight);
 					
 					int r = 0, g = 0, b = 0;
-					for(int i = 0; i < pixels.length; i++) {
+					for(int i = 0; i < pixels.length; i++) { // TODO change back to i's in the arrays
 						r += Color.red(pixels[i]);   //1.164(Y-16)                + 2.018(U-128);
 						g += Color.green(pixels[i]); //1.164(Y-16) - 0.813(V-128) - 0.391(U-128);
 						b += Color.blue(pixels[i]);  //1.164(Y-16) + 1.596(V-128);
@@ -190,37 +185,37 @@ public class TestBloodPressure extends Activity {
 					b /= pixels.length;
 
 		            Camera.Parameters parameters = mCamera.getParameters();
-		            int[] previewFPSRange = new int[2];
-		            //parameters.getPreviewFpsRange(previewFPSRange);
-					mRed.setText("Fps: " + previewFPSRange[0] + previewFPSRange[1]);
-			        mGreen.setText("data.length: " + data.length);
+		            //int[] previewFPSRange = new int[2];
+		            //parameters.getPreviewFpsRange(previewFPSRange); // Android API 9+
+					//mRed.setText("Fps: " + previewFPSRange[0] + previewFPSRange[1]);
+			        //mGreen.setText("data.length: " + data.length);
 			        mBlue.setText("RGB: " + r + "," + g + "," + b); // YCbCr_420_SP (NV21) format
 			        
-			        while(arrayRed.size() < 32) {
+			        if(arrayRed.size() < 32) {
 				        arrayRed.add((double) r);
 				        arrayGreen.add((double) g);
 				        arrayBlue.add((double) b);
+				        mTextViewHeartRateFrequency.setText("arrayRed.size() = " + arrayRed.size());
 			        }
-			        
-			        //mTextViewHeartRateFrequency.setText("array red size "+ arrayRed.size());
-			        
-			        if(arrayRed.size() == 32) { // So that these functions don't run every frame preview, just on the 32nd one
+			        else if(arrayRed.size() == 32) { // So that these functions don't run every frame preview, just on the 32nd one
 				        for(int a=0; a<32; a++) {
 				        	outRed[a] = (Double) arrayRed.get(a);
 				        	outGreen[a] = (Double) arrayGreen.get(a);
 				        	outBlue[a] = (Double) arrayBlue.get(a);
 				        }
 				        
-				        outRed = new double[heartRateFrameLength]; // heartRateFrameLength = 32 for now
-				        FastICA_RGB.preICA(outRed, outGreen, outBlue, heartRateFrameLength, outRed, outGreen, outBlue);
-				        
+				        FastICA_RGB.preICA(outRed, outGreen, outBlue, heartRateFrameLength, outRed, outGreen, outBlue); // heartRateFrameLength = 32 for now
 				        
 				        FFT.fft(outGreen, heartRateFrameLength, heartRateFrequency);
 				        
-				       mTextViewHeartRateFrequency.setText("Heart Rate Frequency: "+heartRateFrequency);
-				       mGreen.setText("Heart Rate: "+heartRateFrequency*60);
+				        mTextViewHeartRateFrequency.setText("Heart Rate Frequency: " + heartRateFrequency);
+				        mGreen.setText("Heart Rate: " + heartRateFrequency*60);
+				        
+				        arrayRed.add(1.0); // Ensures this if-statement is only ran once
 			        }
-			        
+			        else {
+			        	// do nothing
+			        }
 				}
         	});
         }
@@ -234,54 +229,36 @@ public class TestBloodPressure extends Activity {
         }
 
         public void surfaceChanged(SurfaceHolder holder, int format, int w, int h) {
-            // If your preview can change or rotate, take care of those events here.
+            // If your preview can change or rotate, take care of those events here
             // Make sure to stop the preview before resizing or reformatting it.
-
         	previewWidth = w;
         	previewHeight = h;
         	//mDebug.setText("format: " + Integer.toString(format));
         	
-            if (mHolder.getSurface() == null) {
-              // preview surface does not exist
-              return;
+            if(mHolder.getSurface() == null) { // preview surface does not exist
+                return;
             }
 
             // stop preview before making changes
             try {
                 mCamera.stopPreview();
             } catch (Exception e) {
-              // ignore: tried to stop a non-existent preview
+                // ignore: tried to stop a non-existent preview
             }
 
-            // set preview size and make any resize, rotate or
-            // reformatting changes here
-            
-            
+            // set preview size and make any resize, rotate or reformatting changes here
             Camera.Parameters parameters = mCamera.getParameters();
 
             List<Size> sizes = parameters.getSupportedPreviewSizes();
             Size optimalSize = getOptimalPreviewSize(sizes, w, h);
             parameters.setPreviewSize(optimalSize.width, optimalSize.height);
-//            List<Integer> supportedFormats = parameters.getSupportedPreviewFormats();
-//            if(supportedFormats.contains(ImageFormat.RGB_565)) {
-//            	parameters.setPreviewFormat(ImageFormat.RGB_565);
-//            	Toast.makeText(_activity, "Preview Format will be RGB_565", Toast.LENGTH_LONG).show();
-//            }
-//            else {
-            	Toast.makeText(_activity, "Preview Format will be NV16 (YCbCr)", Toast.LENGTH_LONG).show();
-//            }
-            
-            //mBlue.setText("Fps: " + parameters.getPreviewFrameRate()); // DEBUG
             
             mCamera.setParameters(parameters);
             
-
-            // start preview with new settings
-            try {
+            try { // start preview with new settings
                 mCamera.setDisplayOrientation(90);
                 mCamera.setPreviewDisplay(mHolder);
                 mCamera.startPreview();
-
             } catch (Exception e) {
                 Log.d(TAG, "Error starting camera preview: " + e.getMessage());
             }
@@ -323,13 +300,13 @@ public class TestBloodPressure extends Activity {
     
     private void releaseCamera() {
         if (mCamera != null) {
-            mCamera.release();        // release the camera for other applications
+            mCamera.release(); // release the camera for other applications
             mCamera = null;
         }
     }
     private void tempReleaseCamera() {
         if (mCamera != null) {
-            mCamera.lock();        // lock camera for later use
+            mCamera.lock(); // lock camera for later use
             mCamera = null;
         }
     }
@@ -375,25 +352,21 @@ public class TestBloodPressure extends Activity {
         long totalTime = timeAtEnd - timeAtStart;
         Log.d(TAG, "Fetching the color took " + totalTime + " milliseconds");
         mDebug.setText("Total Time: " + totalTime + " ms");
-        mRed.setText("RGB: " + red + "," + green + "," + blue);
+        //mRed.setText("RGB: " + red + "," + green + "," + blue);
         //mGreen.setText("Green: " + green);
         //mBlue.setText("Blue: " + blue);
 	}
-    
 	
-	public void decodeYUV(int[] out, byte[] fg, int width, int height)
-	        throws NullPointerException, IllegalArgumentException {
+	public void decodeYUV(int[] out, byte[] fg, int width, int height) throws NullPointerException, IllegalArgumentException {
 	    int sz = width * height;
 	    if (out == null)
 	        throw new NullPointerException("buffer out is null");
 	    if (out.length < sz)
-	        throw new IllegalArgumentException("buffer out size " + out.length
-	                + " < minimum " + sz);
+	        throw new IllegalArgumentException("buffer out size " + out.length + " < minimum " + sz);
 	    if (fg == null)
 	        throw new NullPointerException("buffer 'fg' is null");
 	    if (fg.length < sz)
-	        throw new IllegalArgumentException("buffer fg size " + fg.length
-	                + " < minimum " + sz * 3 / 2);
+	        throw new IllegalArgumentException("buffer fg size " + fg.length + " < minimum " + sz * 3 / 2);
 	    int i, j;
 	    int Y, Cr = 0, Cb = 0;
 	    for (j = 0; j < height; j++) {
@@ -414,8 +387,7 @@ public class TestBloodPressure extends Activity {
 	            int R = Y + Cr + (Cr >> 2) + (Cr >> 3) + (Cr >> 5);
 	            if (R < 0) R = 0;
 	            else if (R > 255) R = 255;
-	            int G = Y - (Cb >> 2) + (Cb >> 4) + (Cb >> 5) - (Cr >> 1)
-	                    + (Cr >> 3) + (Cr >> 4) + (Cr >> 5);
+	            int G = Y - (Cb >> 2) + (Cb >> 4) + (Cb >> 5) - (Cr >> 1) + (Cr >> 3) + (Cr >> 4) + (Cr >> 5);
 	            if (G < 0) G = 0;
 	            else if (G > 255) G = 255;
 	            int B = Y + Cb + (Cb >> 1) + (Cb >> 2) + (Cb >> 6);
@@ -439,6 +411,5 @@ public class TestBloodPressure extends Activity {
         getMenuInflater().inflate(R.menu.activity_test_blood_pressure, menu);
         return true;
     }
-
     
 }
