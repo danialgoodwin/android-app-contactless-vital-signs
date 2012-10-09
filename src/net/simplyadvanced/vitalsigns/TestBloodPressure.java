@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.lang.Math;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
@@ -25,7 +26,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.support.v4.app.NavUtils;
 
-import net.simplyadvanced.vitalsigns.heartrate.FFT;
+import net.simplyadvanced.vitalsigns.heartrate.fft;
 import net.simplyadvanced.vitalsigns.heartrate.FastICA_RGB;
 
 public class TestBloodPressure extends Activity {
@@ -43,11 +44,14 @@ public class TestBloodPressure extends Activity {
     ArrayList<Double> arrayRed = new ArrayList<Double>();
     ArrayList<Double> arrayGreen = new ArrayList<Double>();
     ArrayList<Double> arrayBlue = new ArrayList<Double>();
-    double[] outRed = new double[32];
-    double[] outGreen = new double[32];
-    double[] outBlue = new double[32];
+    int heartRateFrameLength = 64;
+    double[] outRed = new double[heartRateFrameLength];
+    double[] outGreen = new double[heartRateFrameLength];
+    double[] outBlue = new double[heartRateFrameLength];
     double heartRateFrequency;
-    int heartRateFrameLength = 32;
+    
+    /*Frame Frequency*/
+    long samplingFrequency;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -190,24 +194,43 @@ public class TestBloodPressure extends Activity {
 					//mRed.setText("Fps: " + previewFPSRange[0] + previewFPSRange[1]);
 			        //mGreen.setText("data.length: " + data.length);
 			        mBlue.setText("RGB: " + r + "," + g + "," + b); // YCbCr_420_SP (NV21) format
-			        
-			        if(arrayRed.size() < 32) {
+
+			        if(arrayRed.size() == 0) {
+			        	samplingFrequency = System.nanoTime(); // Start time
+			        	Log.d("DEBUG Freq", "DEBUG - System.nanoTimeInitial(): " + samplingFrequency);
+			        }
+			        if(arrayRed.size() < heartRateFrameLength) {
+			        	
 				        arrayRed.add((double) r);
 				        arrayGreen.add((double) g);
 				        arrayBlue.add((double) b);
 				        mTextViewHeartRateFrequency.setText("arrayRed.size() = " + arrayRed.size());
 			        }
-			        else if(arrayRed.size() == 32) { // So that these functions don't run every frame preview, just on the 32nd one
-				        for(int a=0; a<32; a++) {
+			        else if(arrayRed.size() == heartRateFrameLength) { // So that these functions don't run every frame preview, just on the 32nd one
+
+				        samplingFrequency = System.nanoTime() - samplingFrequency; // Minus end time = length of heartRateFrameLength frames
+			        	Log.d("DEBUG Freq", "DEBUG - System.nanoTimeDifference(): " + samplingFrequency);
+				        samplingFrequency /= 1000000000; // Length of time to get 64 frames in seconds
+				        samplingFrequency = heartRateFrameLength / samplingFrequency; // Frames per second in seconds
+			        	Log.d("DEBUG Freq", "DEBUG - samplingFrequency: " + samplingFrequency);
+				        
+				        for(int a=0; a<heartRateFrameLength; a++) {
 				        	outRed[a] = (Double) arrayRed.get(a);
 				        	outGreen[a] = (Double) arrayGreen.get(a);
 				        	outBlue[a] = (Double) arrayBlue.get(a);
+				        	Log.d("DEBUG RGB", "DEBUG - outRed: " + outRed[a]);
+				        	Log.d("DEBUG RGB", "DEBUG - outGreen: " + outGreen[a]);
 				        }
 				        
 				        FastICA_RGB.preICA(outRed, outGreen, outBlue, heartRateFrameLength, outRed, outGreen, outBlue); // heartRateFrameLength = 32 for now
 				        
-				        FFT.fft(outGreen, heartRateFrameLength, heartRateFrequency);
-				        
+				        heartRateFrequency = fft.FFT(outGreen, heartRateFrameLength, (double) samplingFrequency);
+			        	Log.d("DEBUG RGB", "DEBUG - samplingFrequency: " + samplingFrequency);
+
+				        for(int a=0; a<heartRateFrameLength; a++) {
+				        	Log.d("DEBUG RGB", "DEBUG - outRed2: " + outRed[a]);
+				        	Log.d("DEBUG RGB", "DEBUG - outGreen2: " + outGreen[a]);
+				        }
 				        mTextViewHeartRateFrequency.setText("Heart Rate Frequency: " + heartRateFrequency);
 				        mGreen.setText("Heart Rate: " + heartRateFrequency*60);
 				        
@@ -405,6 +428,15 @@ public class TestBloodPressure extends Activity {
         mTextViewWeight.setText("Weight: " + settings.getInt("weight", 160) + " pounds");
         mTextViewHeight.setText("Height: " + settings.getInt("height", 70) + " inches");
 	}
+	
+	public void playSound() {     
+        new Thread() {
+        	public void run() {
+                //MediaPlayer mp = MediaPlayer.create(_activity, R.raw.mysound);   
+                //mp.start();
+            }
+        }.start();
+    }
 	
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
