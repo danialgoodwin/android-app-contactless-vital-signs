@@ -2,10 +2,17 @@ package net.simplyadvanced.vitalsigns;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.lang.Math;
 
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Environment;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -22,8 +29,10 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.support.v4.app.NavUtils;
 
 import net.simplyadvanced.vitalsigns.heartrate.fft;
@@ -44,7 +53,7 @@ public class TestBloodPressure extends Activity {
     ArrayList<Double> arrayRed = new ArrayList<Double>();
     ArrayList<Double> arrayGreen = new ArrayList<Double>();
     ArrayList<Double> arrayBlue = new ArrayList<Double>();
-    int heartRateFrameLength = 64;
+    int heartRateFrameLength = 300;
     double[] outRed = new double[heartRateFrameLength];
     double[] outGreen = new double[heartRateFrameLength];
     double[] outBlue = new double[heartRateFrameLength];
@@ -52,15 +61,22 @@ public class TestBloodPressure extends Activity {
     
     /*Frame Frequency*/
     long samplingFrequency;
+    
+    /* Writing to SD card */
+	boolean mExternalStorageAvailable = false;
+	boolean mExternalStorageWriteable = false;
+	String fileDataRed = "";
+	String fileDataGreen = "";
+	String fileDataBlue = "";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         _activity = this;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_blood_pressure);
-        //requestWindowFeature(Window.FEATURE_NO_TITLE); // Hide the window title
+        requestWindowFeature(Window.FEATURE_NO_TITLE); // Hide the window title
 
-        mTextViewAge = (TextView) findViewById(R.id.textViewAge); // Connects variables here to ids in xml
+        mTextViewAge = (TextView) findViewById(R.id.textViewAge); // Connects variables here to id's in xml, must be done in order to access id's in the layout (xml)
         mTextViewSex = (TextView) findViewById(R.id.textViewSex);
         mTextViewWeight = (TextView) findViewById(R.id.textViewWeight);
         mTextViewHeight = (TextView) findViewById(R.id.textViewHeight);
@@ -72,6 +88,7 @@ public class TestBloodPressure extends Activity {
         mBlue = (TextView) findViewById(R.id.blue);
         
         loadPatientEditableStats();
+        checkMediaAvailability(); // Check to see if sd card is available to write, using mExternalStorageAvailable and mExternalStorageWriteable
 
     	mCamera = getCameraInstance(); // Create an instance of Camera
     	
@@ -95,7 +112,7 @@ public class TestBloodPressure extends Activity {
     }
     protected void onDestroy() {
     	super.onDestroy();
-    	releaseCamera();
+    	//releaseCamera();
     }
     
     public void setBloodPressure(/*double[][] cameraData OR red[], green[], blue[], time[85123456]*/ int age, String sex, int weight, int height) {
@@ -179,7 +196,7 @@ public class TestBloodPressure extends Activity {
 					decodeYUV(pixels, data, previewWidth, previewHeight);
 					
 					int r = 0, g = 0, b = 0;
-					for(int i = 0; i < pixels.length; i++) { // TODO change back to i's in the arrays
+					for(int i = 0; i < pixels.length; i++) {
 						r += Color.red(pixels[i]);   //1.164(Y-16)                + 2.018(U-128);
 						g += Color.green(pixels[i]); //1.164(Y-16) - 0.813(V-128) - 0.391(U-128);
 						b += Color.blue(pixels[i]);  //1.164(Y-16) + 1.596(V-128);
@@ -200,17 +217,22 @@ public class TestBloodPressure extends Activity {
 			        	Log.d("DEBUG Freq", "DEBUG - System.nanoTimeInitial(): " + samplingFrequency);
 			        }
 			        if(arrayRed.size() < heartRateFrameLength) {
-			        	
+			        	fileDataRed += r + " "; // a string
+			        	fileDataGreen += g + " "; // a string
+			        	fileDataBlue += b + " "; // a string
 				        arrayRed.add((double) r);
 				        arrayGreen.add((double) g);
 				        arrayBlue.add((double) b);
 				        mTextViewHeartRateFrequency.setText("arrayRed.size() = " + arrayRed.size());
 			        }
 			        else if(arrayRed.size() == heartRateFrameLength) { // So that these functions don't run every frame preview, just on the 32nd one
+				        writeToTextFile(fileDataRed, "red"); // file located root/VitalSigns
+				        writeToTextFile(fileDataGreen, "green"); // file located root/VitalSigns
+				        writeToTextFile(fileDataBlue, "blue"); // file located root/VitalSigns
 
 				        samplingFrequency = System.nanoTime() - samplingFrequency; // Minus end time = length of heartRateFrameLength frames
 			        	Log.d("DEBUG Freq", "DEBUG - System.nanoTimeDifference(): " + samplingFrequency);
-				        samplingFrequency /= 1000000000; // Length of time to get 64 frames in seconds
+				        samplingFrequency /= 1000000000; // Length of time to get 600 frames in seconds
 				        samplingFrequency = heartRateFrameLength / samplingFrequency; // Frames per second in seconds
 			        	Log.d("DEBUG Freq", "DEBUG - samplingFrequency: " + samplingFrequency);
 				        
@@ -246,8 +268,9 @@ public class TestBloodPressure extends Activity {
         public void surfaceDestroyed(SurfaceHolder holder) {
         	// Surface will be destroyed when we return, so stop the preview.
             // Because the CameraDevice object is not a shared resource, it's very important to release it when the activity is paused.
+            mCamera.setPreviewCallback(null);
             mCamera.stopPreview();
-            mCamera.release();
+            releaseCamera(); // same as mCamera.release();
             mCamera = null;
         }
 
@@ -407,15 +430,21 @@ public class TestBloodPressure extends Activity {
 	                if (Cr < 0) Cr += 127;
 	                else Cr -= 128;
 	            }
-	            int R = Y + Cr + (Cr >> 2) + (Cr >> 3) + (Cr >> 5);
-	            if (R < 0) R = 0;
-	            else if (R > 255) R = 255;
-	            int G = Y - (Cb >> 2) + (Cb >> 4) + (Cb >> 5) - (Cr >> 1) + (Cr >> 3) + (Cr >> 4) + (Cr >> 5);
-	            if (G < 0) G = 0;
-	            else if (G > 255) G = 255;
-	            int B = Y + Cb + (Cb >> 1) + (Cb >> 2) + (Cb >> 6);
-	            if (B < 0) B = 0;
-	            else if (B > 255) B = 255;
+	            
+//	            int R = Y + Cr + (Cr >> 2) + (Cr >> 3) + (Cr >> 5);
+//	            if (R < 0) R = 0;
+//	            else if (R > 255) R = 255;
+//	            int G = Y - (Cb >> 2) + (Cb >> 4) + (Cb >> 5) - (Cr >> 1) + (Cr >> 3) + (Cr >> 4) + (Cr >> 5);
+//	            if (G < 0) G = 0;
+//	            else if (G > 255) G = 255;
+//	            int B = Y + Cb + (Cb >> 1) + (Cb >> 2) + (Cb >> 6);
+//	            if (B < 0) B = 0;
+//	            else if (B > 255) B = 255;
+	            
+				int R = 1.164*(Y-16)                  + 2.018*(Cr-128);
+				int G = 1.164*(Y-16) - 0.813*(Cb-128) - 0.391*(Cr-128);
+				int B = 1.164*(Y-16) + 1.596*(Cb-128);
+	            
 	            out[pixPtr++] = 0xff000000 + (B << 16) + (G << 8) + R;
 	        }
 	    }
@@ -429,7 +458,45 @@ public class TestBloodPressure extends Activity {
         mTextViewHeight.setText("Height: " + settings.getInt("height", 70) + " inches");
 	}
 	
-	public void playSound() {     
+	private void checkMediaAvailability() {
+		String state = Environment.getExternalStorageState();
+
+		if (Environment.MEDIA_MOUNTED.equals(state)) {
+		    // We can read and write the media
+		    mExternalStorageAvailable = mExternalStorageWriteable = true;
+		} else if (Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
+		    // We can only read the media
+		    mExternalStorageAvailable = true;
+		    mExternalStorageWriteable = false;
+		} else {
+		    // Something else is wrong. It may be one of many other states, but all we need
+		    //  to know is we can neither read nor write
+		    mExternalStorageAvailable = mExternalStorageWriteable = false;
+		}
+	}
+	
+	private void writeToTextFile(String data, String fileName) {
+		//File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+    	File sdCard = Environment.getExternalStorageDirectory();
+    	File directory = new File (sdCard.getAbsolutePath() + "/VitalSigns");
+    	directory.mkdirs();
+    	File file = new File(directory, fileName + ".txt");
+
+    	FileOutputStream fOut;
+		try {
+			fOut = new FileOutputStream(file);
+	    	OutputStreamWriter osw = new OutputStreamWriter(fOut);
+	    	osw.write(data);
+	    	osw.flush();
+	    	osw.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void playSound() { // TODO play sound when finished calculating heart rate
         new Thread() {
         	public void run() {
                 //MediaPlayer mp = MediaPlayer.create(_activity, R.raw.mysound);   
