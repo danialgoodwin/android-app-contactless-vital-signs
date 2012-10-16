@@ -73,8 +73,8 @@ public class TestBloodPressure extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         _activity = this;
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test_blood_pressure);
         requestWindowFeature(Window.FEATURE_NO_TITLE); // Hide the window title
+        setContentView(R.layout.activity_test_blood_pressure);
 
         mTextViewAge = (TextView) findViewById(R.id.textViewAge); // Connects variables here to id's in xml, must be done in order to access id's in the layout (xml)
         mTextViewSex = (TextView) findViewById(R.id.textViewSex);
@@ -159,24 +159,15 @@ public class TestBloodPressure extends Activity {
         }
 
         public void surfaceCreated(SurfaceHolder holder) { // The Surface has been created, now tell the camera where to draw the preview
-
-//            try {
-////                mCamera.setDisplayOrientation(90);
-//                mCamera.setPreviewDisplay(holder);
-//                mCamera.startPreview();
-//            } catch (IOException e) {
-//                Log.d(TAG, "Error setting camera preview: " + e.getMessage());
-//            }
-        	
         	mCamera.setPreviewCallback(new PreviewCallback() { // Gets called for every frame
         		//@Override
         		public void onPreviewFrame(byte[] data, Camera c) {
-//					final String TAG = "onPreviewFrame";
 //					long timeAtStart = System.currentTimeMillis();
 
 //					int centerX = (previewWidth / 2), centerY = (previewHeight / 2);
 //					int sampleWidth = 9, sampleHeight = 9;
-					int[] pixels = new int[previewWidth * previewHeight];
+        			int previewNumberOfPixels = previewWidth * previewHeight; 
+					int[] pixels = new int[previewNumberOfPixels];
 //					
 //					int tempNum, red = 0, green = 0, blue = 0;
 //					for(int i =0; i<81; i++) {
@@ -188,23 +179,51 @@ public class TestBloodPressure extends Activity {
 //			            Log.d("lookingFor", "current Blue: " + Color.blue(tempNum));
 //			            Log.d("lookingFor", "added blue: " + blue);
 //			        }
-//			        Log.v("lookingFor", blue + " " + red + " " + green);
 //			        red /= 81;
 //			        green /= 81;
 //			        blue /= 81;
 					
-					decodeYUV(pixels, data, previewWidth, previewHeight);
+					decodeYUV(pixels, data, previewWidth, previewHeight); // Good, works
+//					int sz = previewNumberOfPixels;
+//				    int i, j;
+//				    int Y, Cr = 0, Cb = 0;
+//				    double R = 0, G = 0, B = 0;
+//				    for (j = 0; j < previewHeight; j++) {
+//				        int pixPtr = j * previewWidth;
+//				        final int jDiv2 = j >> 1;
+//				        for (i = 0; i < previewWidth; i++) {
+//				            Y = data[pixPtr];
+//				            if (Y < 0) Y += 255;
+//				            if ((i & 0x1) != 1) {
+//				                final int cOff = sz + jDiv2 * previewWidth + (i >> 1) * 2;
+//				                Cb = data[cOff];
+//				                if (Cb < 0) Cb += 127;
+//				                else Cb -= 128;
+//				                Cr = data[cOff + 1];
+//				                if (Cr < 0) Cr += 127;
+//				                else Cr -= 128;
+//				            }
+//				            
+//							R += 1.164*(Y-16)                  + 2.018*(Cr-128);
+//							G += 1.164*(Y-16) - 0.813*(Cb-128) - 0.391*(Cr-128);
+//							B += 1.164*(Y-16) + 1.596*(Cb-128);
+//				        }
+//				    }
 					
-					int r = 0, g = 0, b = 0;
-					for(int i = 0; i < pixels.length; i++) {
-						r += Color.red(pixels[i]);   //1.164(Y-16)                + 2.018(U-128);
-						g += Color.green(pixels[i]); //1.164(Y-16) - 0.813(V-128) - 0.391(U-128);
-						b += Color.blue(pixels[i]);  //1.164(Y-16) + 1.596(V-128);
+					double r = 0, g = 0, b = 0; // Works, good, was int
+					for(int k = 0; k < pixels.length; k++) { // Good, works
+						r += Color.red(pixels[k]);   //1.164(Y-16)                + 2.018(U-128);
+						g += Color.green(pixels[k]); //1.164(Y-16) - 0.813(V-128) - 0.391(U-128);
+						b += Color.blue(pixels[k]);  //1.164(Y-16) + 1.596(V-128);
 					}
 					r /= pixels.length;
 					g /= pixels.length;
 					b /= pixels.length;
 
+//					r = R/previewNumberOfPixels;
+//					g = G/previewNumberOfPixels;
+//					b = B/previewNumberOfPixels;
+					
 		            Camera.Parameters parameters = mCamera.getParameters();
 		            //int[] previewFPSRange = new int[2];
 		            //parameters.getPreviewFpsRange(previewFPSRange); // Android API 9+
@@ -256,7 +275,7 @@ public class TestBloodPressure extends Activity {
 				        mTextViewHeartRateFrequency.setText("Heart Rate Frequency: " + heartRateFrequency);
 				        mGreen.setText("Heart Rate: " + heartRateFrequency*60);
 				        
-				        arrayRed.add(1.0); // Ensures this if-statement is only ran once
+				        arrayRed.add(1.0); // Ensures this if-statement is only ran once by making arrayRed.size() one bigger than heartRateLength
 			        }
 			        else {
 			        	// do nothing
@@ -431,19 +450,15 @@ public class TestBloodPressure extends Activity {
 	                else Cr -= 128;
 	            }
 	            
-//	            int R = Y + Cr + (Cr >> 2) + (Cr >> 3) + (Cr >> 5);
-//	            if (R < 0) R = 0;
-//	            else if (R > 255) R = 255;
-//	            int G = Y - (Cb >> 2) + (Cb >> 4) + (Cb >> 5) - (Cr >> 1) + (Cr >> 3) + (Cr >> 4) + (Cr >> 5);
-//	            if (G < 0) G = 0;
-//	            else if (G > 255) G = 255;
-//	            int B = Y + Cb + (Cb >> 1) + (Cb >> 2) + (Cb >> 6);
-//	            if (B < 0) B = 0;
-//	            else if (B > 255) B = 255;
-	            
-				int R = 1.164*(Y-16)                  + 2.018*(Cr-128);
-				int G = 1.164*(Y-16) - 0.813*(Cb-128) - 0.391*(Cr-128);
-				int B = 1.164*(Y-16) + 1.596*(Cb-128);
+	            int R = Y + Cr + (Cr >> 2) + (Cr >> 3) + (Cr >> 5);
+	            if (R < 0) R = 0;
+	            else if (R > 255) R = 255;
+	            int G = Y - (Cb >> 2) + (Cb >> 4) + (Cb >> 5) - (Cr >> 1) + (Cr >> 3) + (Cr >> 4) + (Cr >> 5);
+	            if (G < 0) G = 0;
+	            else if (G > 255) G = 255;
+	            int B = Y + Cb + (Cb >> 1) + (Cb >> 2) + (Cb >> 6);
+	            if (B < 0) B = 0;
+	            else if (B > 255) B = 255;
 	            
 	            out[pixPtr++] = 0xff000000 + (B << 16) + (G << 8) + R;
 	        }
