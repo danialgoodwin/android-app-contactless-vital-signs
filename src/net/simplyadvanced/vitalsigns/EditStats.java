@@ -2,17 +2,13 @@ package net.simplyadvanced.vitalsigns;
 
 import android.os.Bundle;
 import android.app.Activity;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.Menu;
-import android.view.MenuItem;
-import android.view.SurfaceView;
 import android.view.View;
 import android.widget.EditText;
-import android.support.v4.app.NavUtils;
 
 public class EditStats extends Activity {
-	EditText mEditTextAge, editTextSex, editTextWeight, editTextHeight;
+	EditText mEditTextAge, editTextSex, editTextWeight, editTextHeight, editTextPosition;
     public static final String PREFS_NAME = "MyPrefsFile";
 
     @Override
@@ -24,12 +20,14 @@ public class EditStats extends Activity {
         editTextSex = (EditText) findViewById(R.id.editTextSex);
         editTextWeight = (EditText) findViewById(R.id.editTextWeight);
         editTextHeight = (EditText) findViewById(R.id.editTextHeight);
+        editTextPosition = (EditText) findViewById(R.id.editTextPosition);
         
         SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0); // Load saved stats
-        mEditTextAge.setText(settings.getInt("age", 25) + "");
-        editTextSex.setText(settings.getString("sex", "Lala"));
+        mEditTextAge.setText(settings.getInt("age", 23) + "");
+        editTextSex.setText(settings.getString("sex", "Male"));
         editTextWeight.setText(settings.getInt("weight", 160) + "");
-        editTextHeight.setText(settings.getInt("height", 70) + "");
+        editTextHeight.setText(settings.getInt("height", 75) + "");
+        editTextPosition.setText(settings.getString("position", "Sitting"));
     }
 
     
@@ -40,7 +38,8 @@ public class EditStats extends Activity {
     	editor.putString("sex", editTextSex.getText().toString());
     	editor.putInt("weight", Integer.parseInt(editTextWeight.getText().toString()));
     	editor.putInt("height", Integer.parseInt(editTextHeight.getText().toString()));
-    	editor.commit(); // This actually saves the edits
+    	editor.putString("position", editTextPosition.getText().toString());
+    	editor.commit(); // This line saves the edits
 
     	finish(); // Navigate back on stack
 	}
@@ -55,5 +54,4 @@ public class EditStats extends Activity {
         return true;
     }
 
-    
 }

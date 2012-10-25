@@ -40,8 +40,8 @@ import net.simplyadvanced.vitalsigns.heartrate.FastICA_RGB;
 
 public class TestBloodPressure extends Activity {
 	private TestBloodPressure _activity;
-	TextView mTextViewAge, mTextViewSex, mTextViewWeight, mTextViewHeight, mTextViewBloodPressure, mTextViewHeartRateFrequency;
-	TextView mDebug, mRed, mGreen, mBlue;
+	TextView mTextViewAge, mTextViewSex, mTextViewWeight, mTextViewHeight, mTextViewPosition, mTextViewBloodPressure, mTextViewHeartRateFrequency;
+	TextView mRed, mGreen, mBlue;
     public static final String PREFS_NAME = "MyPrefsFile";
     private Camera mCamera;
     private CameraPreview mPreview;
@@ -53,11 +53,10 @@ public class TestBloodPressure extends Activity {
     ArrayList<Double> arrayRed = new ArrayList<Double>();
     ArrayList<Double> arrayGreen = new ArrayList<Double>();
     ArrayList<Double> arrayBlue = new ArrayList<Double>();
-    int heartRateFrameLength = 300;
+    int heartRateFrameLength = 128;
     double[] outRed = new double[heartRateFrameLength];
     double[] outGreen = new double[heartRateFrameLength];
     double[] outBlue = new double[heartRateFrameLength];
-    double heartRateFrequency;
     
     /*Frame Frequency*/
     long samplingFrequency;
@@ -80,9 +79,9 @@ public class TestBloodPressure extends Activity {
         mTextViewSex = (TextView) findViewById(R.id.textViewSex);
         mTextViewWeight = (TextView) findViewById(R.id.textViewWeight);
         mTextViewHeight = (TextView) findViewById(R.id.textViewHeight);
+        mTextViewPosition = (TextView) findViewById(R.id.textViewPosition);
         mTextViewBloodPressure = (TextView) findViewById(R.id.textViewBloodPressure);
         mTextViewHeartRateFrequency = (TextView) findViewById(R.id.textViewHeartRateFrequency);
-        mDebug = (TextView) findViewById(R.id.debug);
         mRed = (TextView) findViewById(R.id.red);
         mGreen = (TextView) findViewById(R.id.green);
         mBlue = (TextView) findViewById(R.id.blue);
@@ -97,14 +96,14 @@ public class TestBloodPressure extends Activity {
         preview.addView(mPreview);
        
         settings = getSharedPreferences(PREFS_NAME, 0); // Load saved stats
-        setBloodPressure(/*first param,*/ settings.getInt("age", 25), settings.getString("sex", "Male"), settings.getInt("weight", 160), settings.getInt("height", 70));
+        //setBloodPressure(/*heartRate,*/ settings.getInt("age", 25), settings.getString("sex", "Male"), settings.getInt("weight", 160), settings.getInt("height", 70), settings.getString("position", "Sitting"));
 
     }
 
     protected void onResume() {
     	super.onResume();
     	loadPatientEditableStats();        
-        setBloodPressure(/*first param,*/ settings.getInt("age", 25), settings.getString("sex", "Male"), settings.getInt("weight", 160), settings.getInt("height", 70));
+        //setBloodPressure(/*heartRate,*/ settings.getInt("age", 25), settings.getString("sex", "Male"), settings.getInt("weight", 160), settings.getInt("height", 70), settings.getString("position", "Sitting"));
     }
     protected void onPause() {
     	super.onPause();
@@ -115,18 +114,17 @@ public class TestBloodPressure extends Activity {
     	//releaseCamera();
     }
     
-    public void setBloodPressure(/*double[][] cameraData OR red[], green[], blue[], time[85123456]*/ int age, String sex, int weight, int height) {
-    	int systolicPressure;
-    	int diastolicPressure;
-    	double bodySurfaceArea, strokeVolume, pulsePressure;
-    	double ejectionTime = .35, heartRate = 60, meanPulsePressure = 100; // TODO calculate each of these with data from camera, except mPP
-    	
-    	bodySurfaceArea = 0.007184*(Math.pow(weight,0.425))*(Math.pow(height,0.725));
-        strokeVolume = -6.6 + 0.25*(ejectionTime-35) - 0.62*heartRate + 40.4*bodySurfaceArea - 0.51*age; // Volume of blood pumped from heart in one beat
-        pulsePressure = strokeVolume / ((0.013*weight - 0.007*age-0.004*heartRate)+1.307);
+    public void setBloodPressure(double heartRate, int age, String sex, int weight, int height, String position) {
+    	double R = 18.31;
+    	double Q = (sex.equalsIgnoreCase("Male") || sex.equalsIgnoreCase("M"))?5:4.5;
+    	double ejectionTime = (position.equalsIgnoreCase("sitting"))?376-1.64*heartRate:354.5-1.23*heartRate; // ()?sitting:supine
+    	double bodySurfaceArea = 0.007184*(Math.pow(weight,0.425))*(Math.pow(height,0.725));
+        double strokeVolume = -6.6 + 0.25*(ejectionTime-35) - 0.62*heartRate + 40.4*bodySurfaceArea - 0.51*age; // Volume of blood pumped from heart in one beat
+        double pulsePressure = strokeVolume / ((0.013*weight - 0.007*age-0.004*heartRate)+1.307);
+    	double meanPulsePressure = Q*R;
         
-        systolicPressure = (int) (meanPulsePressure + 2/3*pulsePressure);
-        diastolicPressure = (int) (meanPulsePressure - pulsePressure/3);
+    	int systolicPressure = (int) (meanPulsePressure + 2/3*pulsePressure);
+    	int diastolicPressure = (int) (meanPulsePressure - pulsePressure/3);
     	
     	mTextViewBloodPressure.setText("Blood Pressure: " + systolicPressure + "/" + diastolicPressure);
     }
@@ -148,8 +146,7 @@ public class TestBloodPressure extends Activity {
 		private SurfaceHolder mHolder;
         private Camera mCamera;
 
-        @SuppressWarnings("deprecation")
-		public CameraPreview(Context context, Camera camera) {
+        public CameraPreview(Context context, Camera camera) {
             super(context);
             mCamera = camera;
 
@@ -210,7 +207,7 @@ public class TestBloodPressure extends Activity {
 //				        }
 //				    }
 					
-					double r = 0, g = 0, b = 0; // Works, good, was int
+					int r = 0, g = 0, b = 0; // Works, good, was int
 					for(int k = 0; k < pixels.length; k++) { // Good, works
 						r += Color.red(pixels[k]);   //1.164(Y-16)                + 2.018(U-128);
 						g += Color.green(pixels[k]); //1.164(Y-16) - 0.813(V-128) - 0.391(U-128);
@@ -224,7 +221,7 @@ public class TestBloodPressure extends Activity {
 //					g = G/previewNumberOfPixels;
 //					b = B/previewNumberOfPixels;
 					
-		            Camera.Parameters parameters = mCamera.getParameters();
+		            //Camera.Parameters parameters = mCamera.getParameters();
 		            //int[] previewFPSRange = new int[2];
 		            //parameters.getPreviewFpsRange(previewFPSRange); // Android API 9+
 					//mRed.setText("Fps: " + previewFPSRange[0] + previewFPSRange[1]);
@@ -235,6 +232,7 @@ public class TestBloodPressure extends Activity {
 			        	samplingFrequency = System.nanoTime(); // Start time
 			        	Log.d("DEBUG Freq", "DEBUG - System.nanoTimeInitial(): " + samplingFrequency);
 			        }
+			        
 			        if(arrayRed.size() < heartRateFrameLength) {
 			        	fileDataRed += r + " "; // a string
 			        	fileDataGreen += g + " "; // a string
@@ -242,38 +240,35 @@ public class TestBloodPressure extends Activity {
 				        arrayRed.add((double) r);
 				        arrayGreen.add((double) g);
 				        arrayBlue.add((double) b);
-				        mTextViewHeartRateFrequency.setText("arrayRed.size() = " + arrayRed.size());
+				        mTextViewBloodPressure.setText("Blood Pressure: in " + (heartRateFrameLength-arrayRed.size()) + ".."); // Shows how long until measurement will display
+				        mTextViewHeartRateFrequency.setText("arrayRed.size() = " + arrayRed.size() + "/" + heartRateFrameLength); // DEBUG to know when recording is finished
 			        }
-			        else if(arrayRed.size() == heartRateFrameLength) { // So that these functions don't run every frame preview, just on the 32nd one
+			        else if(arrayRed.size() == heartRateFrameLength) { // So that these functions don't run every frame preview, just on the 32nd one // TODO add sound when finish
 				        writeToTextFile(fileDataRed, "red"); // file located root/VitalSigns
 				        writeToTextFile(fileDataGreen, "green"); // file located root/VitalSigns
 				        writeToTextFile(fileDataBlue, "blue"); // file located root/VitalSigns
 
 				        samplingFrequency = System.nanoTime() - samplingFrequency; // Minus end time = length of heartRateFrameLength frames
-			        	Log.d("DEBUG Freq", "DEBUG - System.nanoTimeDifference(): " + samplingFrequency);
+			        	//Log.d("DEBUG Freq", "DEBUG - System.nanoTimeDifference(): " + samplingFrequency);
 				        samplingFrequency /= 1000000000; // Length of time to get 600 frames in seconds
 				        samplingFrequency = heartRateFrameLength / samplingFrequency; // Frames per second in seconds
-			        	Log.d("DEBUG Freq", "DEBUG - samplingFrequency: " + samplingFrequency);
+			        	//Log.d("DEBUG Freq", "DEBUG - samplingFrequency: " + samplingFrequency);
 				        
 				        for(int a=0; a<heartRateFrameLength; a++) {
 				        	outRed[a] = (Double) arrayRed.get(a);
 				        	outGreen[a] = (Double) arrayGreen.get(a);
 				        	outBlue[a] = (Double) arrayBlue.get(a);
-				        	Log.d("DEBUG RGB", "DEBUG - outRed: " + outRed[a]);
-				        	Log.d("DEBUG RGB", "DEBUG - outGreen: " + outGreen[a]);
 				        }
 				        
 				        FastICA_RGB.preICA(outRed, outGreen, outBlue, heartRateFrameLength, outRed, outGreen, outBlue); // heartRateFrameLength = 32 for now
-				        
-				        heartRateFrequency = fft.FFT(outGreen, heartRateFrameLength, (double) samplingFrequency);
+				        double heartRateFrequency = fft.FFT(outGreen, heartRateFrameLength, (double) samplingFrequency);
 			        	Log.d("DEBUG RGB", "DEBUG - samplingFrequency: " + samplingFrequency);
+			        	double heartRate = heartRateFrequency * 60;
 
-				        for(int a=0; a<heartRateFrameLength; a++) {
-				        	Log.d("DEBUG RGB", "DEBUG - outRed2: " + outRed[a]);
-				        	Log.d("DEBUG RGB", "DEBUG - outGreen2: " + outGreen[a]);
-				        }
-				        mTextViewHeartRateFrequency.setText("Heart Rate Frequency: " + heartRateFrequency);
-				        mGreen.setText("Heart Rate: " + heartRateFrequency*60);
+			            setBloodPressure(heartRate, settings.getInt("age", 25), settings.getString("sex", "Male"), settings.getInt("weight", 160), settings.getInt("height", 70), settings.getString("position", "Sitting"));
+
+				        mGreen.setText("Heart Rate: " + heartRate);
+				        mTextViewHeartRateFrequency.setText("Heart Rate Freq: " + heartRateFrequency);
 				        
 				        arrayRed.add(1.0); // Ensures this if-statement is only ran once by making arrayRed.size() one bigger than heartRateLength
 			        }
@@ -298,7 +293,6 @@ public class TestBloodPressure extends Activity {
             // Make sure to stop the preview before resizing or reformatting it.
         	previewWidth = w;
         	previewHeight = h;
-        	//mDebug.setText("format: " + Integer.toString(format));
         	
             if(mHolder.getSurface() == null) { // preview surface does not exist
                 return;
@@ -416,7 +410,7 @@ public class TestBloodPressure extends Activity {
         long timeAtEnd = System.currentTimeMillis();
         long totalTime = timeAtEnd - timeAtStart;
         Log.d(TAG, "Fetching the color took " + totalTime + " milliseconds");
-        mDebug.setText("Total Time: " + totalTime + " ms");
+        //mRed.setText("Total Time: " + totalTime + " ms");
         //mRed.setText("RGB: " + red + "," + green + "," + blue);
         //mGreen.setText("Green: " + green);
         //mBlue.setText("Blue: " + blue);
@@ -471,27 +465,25 @@ public class TestBloodPressure extends Activity {
         mTextViewSex.setText("Sex: " + settings.getString("sex", "Male"));
         mTextViewWeight.setText("Weight: " + settings.getInt("weight", 160) + " pounds");
         mTextViewHeight.setText("Height: " + settings.getInt("height", 70) + " inches");
+        mTextViewPosition.setText("Position: " + settings.getString("position", "Sitting"));
 	}
 	
 	private void checkMediaAvailability() {
 		String state = Environment.getExternalStorageState();
 
 		if (Environment.MEDIA_MOUNTED.equals(state)) {
-		    // We can read and write the media
-		    mExternalStorageAvailable = mExternalStorageWriteable = true;
+		    mExternalStorageAvailable = mExternalStorageWriteable = true; // We can read and write the media
 		} else if (Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
 		    // We can only read the media
 		    mExternalStorageAvailable = true;
 		    mExternalStorageWriteable = false;
 		} else {
-		    // Something else is wrong. It may be one of many other states, but all we need
-		    //  to know is we can neither read nor write
+		    // Something else is wrong. It may be one of many other states, but all we need to know is we can neither read nor write
 		    mExternalStorageAvailable = mExternalStorageWriteable = false;
 		}
 	}
 	
 	private void writeToTextFile(String data, String fileName) {
-		//File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
     	File sdCard = Environment.getExternalStorageDirectory();
     	File directory = new File (sdCard.getAbsolutePath() + "/VitalSigns");
     	directory.mkdirs();
