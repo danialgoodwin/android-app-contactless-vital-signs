@@ -562,7 +562,7 @@ public class TestBloodPressure extends Activity {
                 	editor.putBoolean("displayEnglishUnits", displayEnglishUnits);
                 	editor.commit(); // This line saves the edits
             		mTextViewWeight.setText("Weight: " + settings.getInt("weight", 160) + " kg");
-            		mTextViewHeight.setText("Height: " + settings.getInt("height", 75) + " inches");
+            		mTextViewHeight.setText("Height: " + settings.getInt("height", 75) + " cm");
             	}
                 return true;
             case R.id.menu_sendEmail:
