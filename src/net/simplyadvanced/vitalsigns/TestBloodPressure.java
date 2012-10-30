@@ -66,6 +66,8 @@ public class TestBloodPressure extends Activity {
     double[] outRed = new double[heartRateFrameLength];
     double[] outGreen = new double[heartRateFrameLength];
     double[] outBlue = new double[heartRateFrameLength];
+    int systolicPressure = 0, diastolicPressure = 0, temperature = 0;
+    double heartRate = 0;
     
     /*Frame Frequency*/
     long samplingFrequency;
@@ -114,11 +116,13 @@ public class TestBloodPressure extends Activity {
     }
     protected void onPause() {
     	super.onPause();
+    	mCamera.setPreviewCallback(null);
+    	mCamera.stopPreview();
     	//tempReleaseCamera();
     }
     protected void onDestroy() {
     	super.onDestroy();
-    	//releaseCamera();
+    	releaseCamera();
     }
     
     public void setBloodPressure(double heartRate, int age, String sex, int weight, int height, String position) {
@@ -130,10 +134,12 @@ public class TestBloodPressure extends Activity {
         double pulsePressure = strokeVolume / ((0.013*weight - 0.007*age-0.004*heartRate)+1.307);
     	double meanPulsePressure = Q*R;
         
-    	int systolicPressure = (int) (meanPulsePressure + 2/3*pulsePressure);
-    	int diastolicPressure = (int) (meanPulsePressure - pulsePressure/3);
+    	systolicPressure = (int) (meanPulsePressure + 2/3*pulsePressure);
+    	diastolicPressure = (int) (meanPulsePressure - pulsePressure/3);
     	
     	mTextViewBloodPressure.setText("Blood Pressure: " + systolicPressure + "/" + diastolicPressure);
+    	saveSharedPreference("systolicPressure",systolicPressure);
+    	saveSharedPreference("diastolicPressure",diastolicPressure);
     }
 
     public static Camera getCameraInstance() {
@@ -270,13 +276,14 @@ public class TestBloodPressure extends Activity {
 				        FastICA_RGB.preICA(outRed, outGreen, outBlue, heartRateFrameLength, outRed, outGreen, outBlue); // heartRateFrameLength = 32 for now
 				        double heartRateFrequency = fft.FFT(outGreen, heartRateFrameLength, (double) samplingFrequency);
 			        	Log.d("DEBUG RGB", "DEBUG: samplingFrequency: " + samplingFrequency);
-			        	double heartRate = heartRateFrequency * 60;
+			        	heartRate = heartRateFrequency * 60;
 
 			            mTextViewHeartRate.setText("Heart Rate: " + heartRate);
 			        	mTextViewBloodPressure.setText("Blood Pressure: in 0.."); // Just informing the user that BP almost calculated
 			        	mDebug.setText("Fps: " + samplingFrequency);
 			            setBloodPressure(heartRate, settings.getInt("age", 25), settings.getString("sex", "Male"), settings.getInt("weight", 160), settings.getInt("height", 70), settings.getString("position", "Sitting"));
 				        
+			            saveSharedPreference("heartRate",(int)heartRate);
 				        arrayRed.add(1.0); // Ensures this if-statement is only ran once by making arrayRed.size() one bigger than heartRateLength
 			        }
 			        else {
@@ -289,10 +296,9 @@ public class TestBloodPressure extends Activity {
         public void surfaceDestroyed(SurfaceHolder holder) {
         	// Surface will be destroyed when we return, so stop the preview.
             // Because the CameraDevice object is not a shared resource, it's very important to release it when the activity is paused.
-            mCamera.setPreviewCallback(null);
-            mCamera.stopPreview();
-            releaseCamera(); // same as mCamera.release();
-            mCamera = null;
+            //mCamera.setPreviewCallback(null);
+            //mCamera.stopPreview();
+            //releaseCamera(); // same as mCamera.release();
         }
         public void surfaceChanged(SurfaceHolder holder, int format, int w, int h) {
             // If your preview can change or rotate, take care of those events here
@@ -525,6 +531,22 @@ public class TestBloodPressure extends Activity {
 		}
 	}
 	
+	private void saveSharedPreference(String key, int value) {
+    	SharedPreferences.Editor editor = settings.edit(); // Needed to make changes
+    	editor.putInt(key, value);
+    	editor.commit(); // This line saves the edits
+	}
+	private void saveSharedPreference(String key, boolean value) {
+    	SharedPreferences.Editor editor = settings.edit(); // Needed to make changes
+    	editor.putBoolean(key, value);
+    	editor.commit(); // This line saves the edits
+	}
+	private void saveSharedPreference(String key, String value) {
+    	SharedPreferences.Editor editor = settings.edit(); // Needed to make changes
+    	editor.putString(key, value);
+    	editor.commit(); // This line saves the edits
+	}
+	
 	public void playSound() { // TODO play sound when finished calculating heart rate
         new Thread() {
         	public void run() {
@@ -566,10 +588,10 @@ public class TestBloodPressure extends Activity {
             	}
                 return true;
             case R.id.menu_sendEmail:
-            	sendEmail("danialgoodwin@gmail.com", "this is data");
+            	sendEmail("danialgoodwin@gmail.com", "Heart Rate: " + heartRate + " bpm\nBlood Pressure: " + systolicPressure + "/" + diastolicPressure + "\nTemperature: " + temperature + ((displayEnglishUnits==true)?" F":" C"));
                 return true;
             case R.id.menu_sendSMS:
-            	sendSMS("8132859689", "This is the message");
+            	sendSMS("8132859689", "Heart Rate: " + heartRate + " bpm\nBlood Pressure: " + systolicPressure + "/" + diastolicPressure + "\nTemperature: " + temperature + ((displayEnglishUnits==true)?" F":" C"));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
