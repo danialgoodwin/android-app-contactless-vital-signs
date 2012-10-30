@@ -3,6 +3,9 @@
     <string name="app_name">Vital Signs</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
+    <string name="menu_convertUnits">Convert Units</string>
+    <string name="menu_sendEmail">Send Email</string>
+    <string name="menu_sendSMS">Send SMS</string>
     <string name="menu_change_units">Change Units</string>
     <string name="title_activity_main">Vital Signs</string>
     <string name="title_activity_test_vital_signs">Center faces on screen</string>

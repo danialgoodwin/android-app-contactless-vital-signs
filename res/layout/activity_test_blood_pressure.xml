@@ -15,27 +15,15 @@
 	            android:text="Blood Pressure: calculating"
 	            android:layout_weight="1" />
 	        
-	        <TextView android:id="@+id/red" android:layout_width="wrap_content" android:layout_height="wrap_content"
-	            android:text="Red: rValue"
-	            android:layout_weight="1" />
-	        <TextView android:id="@+id/green" android:layout_width="wrap_content" android:layout_height="wrap_content"
-	            android:text="Green: gValue"
+	        <TextView android:id="@+id/textViewHeartRate" android:layout_width="wrap_content" android:layout_height="wrap_content"
+	            android:text="Heart Rate: calculating"
 	            android:layout_weight="1" />
 	        <TextView android:id="@+id/blue" android:layout_width="wrap_content" android:layout_height="wrap_content"
 	            android:text="Blue: bValue"
 	            android:layout_weight="1" />
-	
-	        <TextView
-	            android:id="@+id/textViewHeartRateFrequency"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:layout_weight="1"
-	            android:text="TextView" />
-	        
-	        <Button android:layout_width="wrap_content" android:layout_height="wrap_content"
-	            android:layout_gravity="center"
-	            android:text="get RGB"
-	            android:onClick="getRGB" />
+	        <TextView android:id="@+id/debug" android:layout_width="wrap_content" android:layout_height="wrap_content"
+	            android:text="Debug Line"
+	            android:layout_weight="1" />
 		        
 		</LinearLayout>
        
