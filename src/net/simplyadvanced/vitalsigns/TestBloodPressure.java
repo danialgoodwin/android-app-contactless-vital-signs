@@ -21,6 +21,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.ImageFormat;
@@ -56,18 +57,19 @@ public class TestBloodPressure extends Activity {
     private CameraPreview mPreview;
     SharedPreferences settings;
     FrameLayout preview;
-    int previewWidth = 0, previewHeight = 0;
+    int previewWidth = 0, previewHeight = 0; // Defined in surfaceChanged()
 
     /* Heart Rate Related Variables */
-    ArrayList<Double> arrayRed = new ArrayList<Double>();
-    ArrayList<Double> arrayGreen = new ArrayList<Double>();
-    ArrayList<Double> arrayBlue = new ArrayList<Double>();
     int heartRateFrameLength = 32;
+    double[] arrayRed = new double[heartRateFrameLength]; //ArrayList<Double> arrayRed = new ArrayList<Double>();
+    double[] arrayGreen = new double[heartRateFrameLength]; //ArrayList<Double> arrayGreen = new ArrayList<Double>();
+    double[] arrayBlue = new double[heartRateFrameLength]; //ArrayList<Double> arrayBlue = new ArrayList<Double>();
     double[] outRed = new double[heartRateFrameLength];
     double[] outGreen = new double[heartRateFrameLength];
     double[] outBlue = new double[heartRateFrameLength];
     int systolicPressure = 0, diastolicPressure = 0, temperature = 0;
     double heartRate = 0;
+    short frameNumber = 0;
     
     /*Frame Frequency*/
     long samplingFrequency;
@@ -169,127 +171,152 @@ public class TestBloodPressure extends Activity {
         }
 
         public void surfaceCreated(SurfaceHolder holder) { // The Surface has been created, now tell the camera where to draw the preview
-        	mCamera.setPreviewCallback(new PreviewCallback() { // Gets called for every frame
+        	previewWidth = mCamera.getParameters().getPreviewSize().width;
+        	previewHeight = mCamera.getParameters().getPreviewSize().height;
+
+        	/** Uncomment (and setPreviewCallbackWithBuffer() and uncomment "c.addCallbackBuffer(data)") to get 6 fps instead of 5*/
+        	int dataBufferSize = (int)(previewWidth*previewHeight*(ImageFormat.getBitsPerPixel(mCamera.getParameters().getPreviewFormat())/8.0)); //460800
+        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+        	
+        	
+        	mCamera.setPreviewCallbackWithBuffer(new PreviewCallback() { // Gets called for every frame
         		public void onPreviewFrame(byte[] data, Camera c) {
-//					int centerX = (previewWidth / 2), centerY = (previewHeight / 2);
-//					int sampleWidth = 9, sampleHeight = 9;
-//					
+					//int centerX = (previewWidth / 2), centerY = (previewHeight / 2);
+                	previewWidth = mCamera.getParameters().getPreviewSize().width;
+                	previewHeight = mCamera.getParameters().getPreviewSize().height;
+                	int left = 50, top = 50, right = 100, bottom = 100;
+                	int smallPreviewWidth = right - left;
+                	int smallPreviewHeight = bottom - top;
+                	
+//                	byte[] dataSelection = new byte[smallPreviewWidth*smallPreviewHeight * 8];
+//                	Log.d("DEBUG RGB", "DEBUG: dataSelection.length: " + dataSelection.length);
+//                	
+//                	int dataSelectionCount = 0;
+//                	for(int i = top; i < bottom; i++) {
+//                    	Log.d("DEBUG RGB", "DEBUG: dataSelectionCount: " + dataSelectionCount);
+//                		for(int j = left; j < right; j++) {
+//                			if(i == bottom-1) Log.d("DEBUG RGB", "DEBUG: dataSelectionCount: " + dataSelectionCount);
+//                			dataSelection[dataSelectionCount++] = data[i*smallPreviewWidth+j];
+//                		}
+//                	}
+        			
+        			/** Trying to analyze part of the screen*/
+                	ByteArrayOutputStream outstr = new ByteArrayOutputStream();
+                    Rect rect = new Rect(top, top, right, bottom); 
+                    YuvImage yuvimage = new YuvImage(data,ImageFormat.NV21,previewWidth,previewHeight,null);
+                    yuvimage.compressToJpeg(rect, 100, outstr);
+                    Bitmap bmp = BitmapFactory.decodeByteArray(outstr.toByteArray(), 0, outstr.size());
 					
 					
+        			//int previewNumberOfPixels = smallPreviewWidth * smallPreviewHeight * 8; // RGB requires more pixels
+					//int[] pixels = new int[previewNumberOfPixels];
+					//decodeYUV(pixels, dataSelection, smallPreviewWidth-1, smallPreviewHeight-1); // NOTE: making preview width and height each 10 times smaller did not affect frame rate 
+					                                                                               // NOTE: this function causes fps to go from 30+ down to around 10 fps
 					
-        			//previewWidth = 100;//c.getParameters().getPreviewSize().width;
-        			//previewHeight = 100;//c.getParameters().getPreviewSize().height;
-					
-					//FileOutputStream outStream = null;
-//					try {
-//						YuvImage yuvimage = new YuvImage(data,ImageFormat.NV21,c.getParameters().getPreviewSize().width,c.getParameters().getPreviewSize().height,null);
-//						ByteArrayOutputStream baos = new ByteArrayOutputStream();
-//						yuvimage.compressToJpeg(new Rect(0,0,previewWidth,previewHeight), 80, baos);
-//						
-//						data = baos.toByteArray();
-//						
-//						//outStream = new FileOutputStream(String.format("/sdcard/%d.jpg", System.currentTimeMillis()));	
-//						//outStream.write(baos.toByteArray());
-//						//outStream.close();
-//						
-//						Log.d(TAG, "onPreviewFrame - wrote bytes: " + data.length);
-//					} /*catch (FileNotFoundException e) { e.printStackTrace();
-//					} catch (IOException e) { e.printStackTrace();
-//					}*/ finally { }
-					//Preview.this.invalidate();
-					
-					
-					
-					
-					
-					
-					
-					
-
-        			int previewNumberOfPixels = previewWidth * previewHeight; 
-					int[] pixels = new int[previewNumberOfPixels];
-					
-//					int tempNum, red = 0, green = 0, blue = 0;
-//					for(int i =0; i<81; i++) {
-//			            tempNum = (Integer) pixels[i];
-//			            Log.d("lookingFor", "Pixel Num: " + Color.blue(tempNum));
-//			            red += Color.red(tempNum);
-//			            green += Color.green(tempNum);
-//			            blue += Color.blue(tempNum);
-//			            Log.d("lookingFor", "current Blue: " + Color.blue(tempNum));
-//			            Log.d("lookingFor", "added blue: " + blue);
-//			        }
-//			        red /= 81;
-//			        green /= 81;
-//			        blue /= 81;
-					
-					decodeYUV(pixels, data, previewWidth, previewHeight); // Good, works
-					
-					int r = 0, g = 0, b = 0; // Works, good, was int
-					for(int k = 0; k < pixels.length; k++) { // Good, works
-						r += Color.red(pixels[k]);   //1.164(Y-16)                + 2.018(U-128);
-						g += Color.green(pixels[k]); //1.164(Y-16) - 0.813(V-128) - 0.391(U-128);
-						b += Color.blue(pixels[k]);  //1.164(Y-16) + 1.596(V-128);
-					}
-					r /= pixels.length;
-					g /= pixels.length;
-					b /= pixels.length;
-
-//					r = R/previewNumberOfPixels;
-//					g = G/previewNumberOfPixels;
-//					b = B/previewNumberOfPixels;
+                    int r = 0, g = 0, b = 0;
+                    int[] pix = new int[smallPreviewWidth * smallPreviewHeight];
+                    bmp.getPixels(pix, 0, smallPreviewWidth, 0, 0, smallPreviewWidth, smallPreviewHeight);
+                    
+                	for(int i = 0; i < smallPreviewHeight; i++) {
+	            		for(int j = 0; j < smallPreviewWidth; j++) {
+	                        int index = i * smallPreviewWidth + j;
+	                        r += (pix[index] >> 16) & 0xff;     //bitwise shifting
+	                        g += (pix[index] >> 8) & 0xff;
+	                        b += pix[index] & 0xff;
+	                        //pix[index] = 0xff000000 | (r << 16) | (g << 8) | b; // to restore the values after RGB modification, use this statement, with adjustment above
+	            		}
+	            	}
+                    
+                    
+					int numberOfPixelsToAnalyze = smallPreviewWidth * smallPreviewHeight;
+//					for(int k = 0; k < numberOfPixelsToAnalyze; k++) {
+//						r += Color.red(pixels[k]);   //1.164(Y-16)                + 2.018(U-128);
+//						g += Color.green(pixels[k]); //1.164(Y-16) - 0.813(V-128) - 0.391(U-128);
+//						b += Color.blue(pixels[k]);  //1.164(Y-16) + 1.596(V-128);
+//					}
+					r /= numberOfPixelsToAnalyze;
+					g /= numberOfPixelsToAnalyze;
+					b /= numberOfPixelsToAnalyze;
 					
 		            //Camera.Parameters parameters = mCamera.getParameters();
 		            //int[] previewFPSRange = new int[2];
 		            //parameters.getPreviewFpsRange(previewFPSRange); // Android API 9+
+        			
 			        mBlue.setText("RGB: " + r + "," + g + "," + b); // YCbCr_420_SP (NV21) format
 
-			        if(arrayRed.size() == 0) {
+			        if(frameNumber == 0) {
 			        	samplingFrequency = System.nanoTime(); // Start time
+			        	Log.d("DEBUG RGB", "DEBUG: samplingFrequency: " + samplingFrequency);
 			        }
 			        
-			        if(arrayRed.size() < heartRateFrameLength) {
-			        	fileDataRed += r + " "; // a string
-			        	fileDataGreen += g + " "; // a string
-			        	fileDataBlue += b + " "; // a string
-				        arrayRed.add((double) r);
-				        arrayGreen.add((double) g);
-				        arrayBlue.add((double) b);
-				        mTextViewBloodPressure.setText("Blood Pressure: in " + (heartRateFrameLength-arrayRed.size()+1) + ".."); // Shows how long until measurement will display
-				        mTextViewHeartRate.setText("Heart Rate: in " + (heartRateFrameLength-arrayRed.size()) + "..");
+			        if(frameNumber < heartRateFrameLength) {
+//			        	fileDataRed += r + " "; // a string
+//			        	fileDataGreen += g + " "; // a string
+//			        	fileDataBlue += b + " "; // a string
+//				        arrayRed.add((double) r);
+//				        arrayGreen.add((double) g);
+//				        arrayBlue.add((double) b);
+//				        mTextViewBloodPressure.setText("Blood Pressure: in " + (heartRateFrameLength-arrayRed.size()+1) + ".."); // Shows how long until measurement will display
+//				        mTextViewHeartRate.setText("Heart Rate: in " + (heartRateFrameLength-arrayRed.size()) + "..");
+			        	frameNumber++;
 			        }
-			        else if(arrayRed.size() == heartRateFrameLength) { // So that these functions don't run every frame preview, just on the 32nd one // TODO add sound when finish
-				        writeToTextFile(fileDataRed, "red"); // file located root/VitalSigns
-				        writeToTextFile(fileDataGreen, "green"); // file located root/VitalSigns
-				        writeToTextFile(fileDataBlue, "blue"); // file located root/VitalSigns
+			        else if(frameNumber == heartRateFrameLength) { // So that these functions don't run every frame preview, just on the 32nd one // TODO add sound when finish
+//				        writeToTextFile(fileDataRed, "red"); // file located root/VitalSigns
+//				        writeToTextFile(fileDataGreen, "green"); // file located root/VitalSigns
+//				        writeToTextFile(fileDataBlue, "blue"); // file located root/VitalSigns
 
 				        samplingFrequency = System.nanoTime() - samplingFrequency; // Minus end time = length of heartRateFrameLength frames
-				        samplingFrequency /= 1000000000; // Length of time to get 600 frames in seconds
-				        samplingFrequency = heartRateFrameLength / samplingFrequency; // Frames per second in seconds
+				        double finalSamplingFrequency = samplingFrequency / (double)1000000000; // Length of time to get frames in seconds
+			        	finalSamplingFrequency = heartRateFrameLength / finalSamplingFrequency; // Frames per second in seconds
 				        
-				        for(int a=0; a<heartRateFrameLength; a++) {
-				        	outRed[a] = (Double) arrayRed.get(a);
-				        	outGreen[a] = (Double) arrayGreen.get(a);
-				        	outBlue[a] = (Double) arrayBlue.get(a);
-				        }
+//				        for(int a=0; a<heartRateFrameLength; a++) {
+//				        	outRed[a] = (Double) arrayRed.get(a);
+//				        	outGreen[a] = (Double) arrayGreen.get(a);
+//				        	outBlue[a] = (Double) arrayBlue.get(a);
+//				        }
 				        
-				        FastICA_RGB.preICA(outRed, outGreen, outBlue, heartRateFrameLength, outRed, outGreen, outBlue); // heartRateFrameLength = 32 for now
-				        double heartRateFrequency = fft.FFT(outGreen, heartRateFrameLength, (double) samplingFrequency);
-			        	Log.d("DEBUG RGB", "DEBUG: samplingFrequency: " + samplingFrequency);
-			        	heartRate = heartRateFrequency * 60;
-
-			            mTextViewHeartRate.setText("Heart Rate: " + heartRate);
-			        	mTextViewBloodPressure.setText("Blood Pressure: in 0.."); // Just informing the user that BP almost calculated
-			        	mDebug.setText("Fps: " + samplingFrequency);
-			            setBloodPressure(heartRate, settings.getInt("age", 25), settings.getString("sex", "Male"), settings.getInt("weight", 160), settings.getInt("height", 70), settings.getString("position", "Sitting"));
+//				        FastICA_RGB.preICA(outRed, outGreen, outBlue, heartRateFrameLength, outRed, outGreen, outBlue); // heartRateFrameLength = 32 for now
+//				        double heartRateFrequency = fft.FFT(outGreen, heartRateFrameLength, (double) samplingFrequency);
+//			        	Log.d("DEBUG RGB", "DEBUG: samplingFrequency: " + samplingFrequency);
+//			        	heartRate = heartRateFrequency * 60;
+//
+//			            mTextViewHeartRate.setText("Heart Rate: " + heartRate);
+//			        	mTextViewBloodPressure.setText("Blood Pressure: in 0.."); // Just informing the user that BP almost calculated
+			        	mDebug.setText("Fps: " + finalSamplingFrequency);
+//			            setBloodPressure(heartRate, settings.getInt("age", 25), settings.getString("sex", "Male"), settings.getInt("weight", 160), settings.getInt("height", 70), settings.getString("position", "Sitting"));
 				        
-			            saveSharedPreference("heartRate",(int)heartRate);
-				        arrayRed.add(1.0); // Ensures this if-statement is only ran once by making arrayRed.size() one bigger than heartRateLength
+//			            saveSharedPreference("heartRate",(int)heartRate);
+			        	frameNumber++; // Ensures this if-statement is only ran once by making arrayRed.size() one bigger than heartRateLength
 			        }
 			        else {
 			        	// do nothing
 			        }
-				}
+			        
+			        c.addCallbackBuffer(data);
+				} // END onPreviewFrame()
         	});
         }
 
@@ -323,6 +350,7 @@ public class TestBloodPressure extends Activity {
             List<Size> sizes = parameters.getSupportedPreviewSizes();
             Size optimalSize = getOptimalPreviewSize(sizes, w, h);
             parameters.setPreviewSize(optimalSize.width, optimalSize.height);
+            parameters.setPreviewFrameRate(30); // TODO test
             
             mCamera.setParameters(parameters);
             
@@ -403,6 +431,7 @@ public class TestBloodPressure extends Activity {
 	            if (Y < 0) Y += 255;
 	            if ((i & 0x1) != 1) {
 	                final int cOff = sz + jDiv2 * width + (i >> 1) * 2;
+		        	Log.d("DEBUG RGB", "DEBUG: cOff: " + cOff);
 	                Cb = fg[cOff];
 	                if (Cb < 0) Cb += 127;
 	                else Cb -= 128;
