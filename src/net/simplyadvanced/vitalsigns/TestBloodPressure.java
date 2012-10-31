@@ -60,7 +60,7 @@ public class TestBloodPressure extends Activity {
     int previewWidth = 0, previewHeight = 0; // Defined in surfaceChanged()
 
     /* Heart Rate Related Variables */
-    int heartRateFrameLength = 32;
+    int heartRateFrameLength = 300;
     double[] arrayRed = new double[heartRateFrameLength]; //ArrayList<Double> arrayRed = new ArrayList<Double>();
     double[] arrayGreen = new double[heartRateFrameLength]; //ArrayList<Double> arrayGreen = new ArrayList<Double>();
     double[] arrayBlue = new double[heartRateFrameLength]; //ArrayList<Double> arrayBlue = new ArrayList<Double>();
@@ -171,43 +171,42 @@ public class TestBloodPressure extends Activity {
         }
 
         public void surfaceCreated(SurfaceHolder holder) { // The Surface has been created, now tell the camera where to draw the preview
-        	previewWidth = mCamera.getParameters().getPreviewSize().width;
-        	previewHeight = mCamera.getParameters().getPreviewSize().height;
+        	//previewWidth = mCamera.getParameters().getPreviewSize().width;
+        	//previewHeight = mCamera.getParameters().getPreviewSize().height;
 
-        	/** Uncomment (and setPreviewCallbackWithBuffer() and uncomment "c.addCallbackBuffer(data)") to get 6 fps instead of 5*/
-        	int dataBufferSize = (int)(previewWidth*previewHeight*(ImageFormat.getBitsPerPixel(mCamera.getParameters().getPreviewFormat())/8.0)); //460800
-        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+        	/** Uncomment (and setPreviewCallbackWithBuffer() and uncomment "c.addCallbackBuffer(data)") to get ~30 fps instead of ~15*/
+//        	int dataBufferSize = (int)(previewWidth*previewHeight*(ImageFormat.getBitsPerPixel(mCamera.getParameters().getPreviewFormat())/8.0)); //460800
+//        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+//        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+//        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+//        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+//        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+//        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+//        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+//        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+//        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+//        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+//        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+//        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+//        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+//        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+//        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+//        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+//        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+//        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+//        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+//        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+//        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+//        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+//        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+//        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
         	
-        	
-        	mCamera.setPreviewCallbackWithBuffer(new PreviewCallback() { // Gets called for every frame
+        	mCamera.setPreviewCallback(new PreviewCallback() { // Gets called for every frame
         		public void onPreviewFrame(byte[] data, Camera c) {
 					//int centerX = (previewWidth / 2), centerY = (previewHeight / 2);
                 	previewWidth = mCamera.getParameters().getPreviewSize().width;
                 	previewHeight = mCamera.getParameters().getPreviewSize().height;
-                	int left = 50, top = 50, right = 100, bottom = 100;
+                	int left = 50, top = 50, right = 100, bottom = 100; // Edit wanted coordinates here.
                 	int smallPreviewWidth = right - left;
                 	int smallPreviewHeight = bottom - top;
                 	
@@ -225,16 +224,10 @@ public class TestBloodPressure extends Activity {
         			
         			/** Trying to analyze part of the screen*/
                 	ByteArrayOutputStream outstr = new ByteArrayOutputStream();
-                    Rect rect = new Rect(top, top, right, bottom); 
+                    Rect rect = new Rect(left, top, right, bottom);
                     YuvImage yuvimage = new YuvImage(data,ImageFormat.NV21,previewWidth,previewHeight,null);
                     yuvimage.compressToJpeg(rect, 100, outstr);
                     Bitmap bmp = BitmapFactory.decodeByteArray(outstr.toByteArray(), 0, outstr.size());
-					
-					
-        			//int previewNumberOfPixels = smallPreviewWidth * smallPreviewHeight * 8; // RGB requires more pixels
-					//int[] pixels = new int[previewNumberOfPixels];
-					//decodeYUV(pixels, dataSelection, smallPreviewWidth-1, smallPreviewHeight-1); // NOTE: making preview width and height each 10 times smaller did not affect frame rate 
-					                                                                               // NOTE: this function causes fps to go from 30+ down to around 10 fps
 					
                     int r = 0, g = 0, b = 0;
                     int[] pix = new int[smallPreviewWidth * smallPreviewHeight];
@@ -273,49 +266,42 @@ public class TestBloodPressure extends Activity {
 			        }
 			        
 			        if(frameNumber < heartRateFrameLength) {
-//			        	fileDataRed += r + " "; // a string
-//			        	fileDataGreen += g + " "; // a string
-//			        	fileDataBlue += b + " "; // a string
-//				        arrayRed.add((double) r);
-//				        arrayGreen.add((double) g);
-//				        arrayBlue.add((double) b);
-//				        mTextViewBloodPressure.setText("Blood Pressure: in " + (heartRateFrameLength-arrayRed.size()+1) + ".."); // Shows how long until measurement will display
-//				        mTextViewHeartRate.setText("Heart Rate: in " + (heartRateFrameLength-arrayRed.size()) + "..");
+			        	fileDataRed += r + " "; // a string
+			        	fileDataGreen += g + " "; // a string
+			        	fileDataBlue += b + " "; // a string
+				        arrayRed[frameNumber] = ((double) r);
+				        arrayGreen[frameNumber] = ((double) g);
+				        arrayBlue[frameNumber] = ((double) b);
+				        mTextViewBloodPressure.setText("Blood Pressure: in " + (heartRateFrameLength-frameNumber+1) + ".."); // Shows how long until measurement will display
+				        mTextViewHeartRate.setText("Heart Rate: in " + (heartRateFrameLength-frameNumber) + "..");
 			        	frameNumber++;
 			        }
 			        else if(frameNumber == heartRateFrameLength) { // So that these functions don't run every frame preview, just on the 32nd one // TODO add sound when finish
-//				        writeToTextFile(fileDataRed, "red"); // file located root/VitalSigns
-//				        writeToTextFile(fileDataGreen, "green"); // file located root/VitalSigns
-//				        writeToTextFile(fileDataBlue, "blue"); // file located root/VitalSigns
-
 				        samplingFrequency = System.nanoTime() - samplingFrequency; // Minus end time = length of heartRateFrameLength frames
 				        double finalSamplingFrequency = samplingFrequency / (double)1000000000; // Length of time to get frames in seconds
 			        	finalSamplingFrequency = heartRateFrameLength / finalSamplingFrequency; // Frames per second in seconds
 				        
-//				        for(int a=0; a<heartRateFrameLength; a++) {
-//				        	outRed[a] = (Double) arrayRed.get(a);
-//				        	outGreen[a] = (Double) arrayGreen.get(a);
-//				        	outBlue[a] = (Double) arrayBlue.get(a);
-//				        }
-				        
-//				        FastICA_RGB.preICA(outRed, outGreen, outBlue, heartRateFrameLength, outRed, outGreen, outBlue); // heartRateFrameLength = 32 for now
-//				        double heartRateFrequency = fft.FFT(outGreen, heartRateFrameLength, (double) samplingFrequency);
-//			        	Log.d("DEBUG RGB", "DEBUG: samplingFrequency: " + samplingFrequency);
-//			        	heartRate = heartRateFrequency * 60;
-//
-//			            mTextViewHeartRate.setText("Heart Rate: " + heartRate);
-//			        	mTextViewBloodPressure.setText("Blood Pressure: in 0.."); // Just informing the user that BP almost calculated
+				        FastICA_RGB.preICA(arrayRed, arrayGreen, arrayBlue, heartRateFrameLength, arrayRed, arrayGreen, arrayBlue); // heartRateFrameLength = 300 frames for now
+				        double heartRateFrequency = fft.FFT(arrayGreen, heartRateFrameLength,  finalSamplingFrequency);
+			        	Log.d("DEBUG RGB", "DEBUG: finalSamplingFrequency: " + finalSamplingFrequency);
+			        	heartRate = heartRateFrequency * 60;
+
+			            mTextViewHeartRate.setText("Heart Rate: " + heartRate);
+			        	mTextViewBloodPressure.setText("Blood Pressure: in 0.."); // Just informing the user that BP almost calculated
 			        	mDebug.setText("Fps: " + finalSamplingFrequency);
-//			            setBloodPressure(heartRate, settings.getInt("age", 25), settings.getString("sex", "Male"), settings.getInt("weight", 160), settings.getInt("height", 70), settings.getString("position", "Sitting"));
+			            setBloodPressure(heartRate, settings.getInt("age", 25), settings.getString("sex", "Male"), settings.getInt("weight", 160), settings.getInt("height", 70), settings.getString("position", "Sitting"));
 				        
-//			            saveSharedPreference("heartRate",(int)heartRate);
-			        	frameNumber++; // Ensures this if-statement is only ran once by making arrayRed.size() one bigger than heartRateLength
+			            saveSharedPreference("heartRate",(int)heartRate);
+				        writeToTextFile(fileDataRed, "red"); // file located root/VitalSigns
+				        writeToTextFile(fileDataGreen, "green"); // file located root/VitalSigns
+				        writeToTextFile(fileDataBlue, "blue"); // file located root/VitalSigns
+			        	frameNumber++; // Ensures this if-statement is only ran once by making frameNumber one bigger than heartRateLength
 			        }
 			        else {
 			        	// do nothing
 			        }
 			        
-			        c.addCallbackBuffer(data);
+			        //c.addCallbackBuffer(data);
 				} // END onPreviewFrame()
         	});
         }

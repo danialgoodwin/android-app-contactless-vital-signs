@@ -14,7 +14,7 @@
 	     <Button android:layout_weight="1"
 	         style="@style/ImageButtonWithText"
 	         android:drawableTop="@drawable/logou"
-	         android:text="Heart Rate / Blood Pressure"
+	         android:text="Heart Rate / Blood Pressure / Temp"
 	         android:onClick="goToTestBloodPressure"/>
     </LinearLayout>
     
@@ -22,7 +22,7 @@
 	     <Button android:layout_weight="1"
 	         style="@style/ImageButtonWithText"
 	         android:drawableTop="@drawable/logou"
-	         android:text="Body Temperature"
+	         android:text="[old] Heart Rate / Blood Pressure"
 	         android:onClick="goToTestBodyTemperature"/>
 	     <Button android:layout_weight="1"
 	         style="@style/ImageButtonWithText"
