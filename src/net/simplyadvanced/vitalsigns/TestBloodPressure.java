@@ -50,7 +50,7 @@ import net.simplyadvanced.vitalsigns.heartrate.FastICA_RGB;
 public class TestBloodPressure extends Activity {
 	private TestBloodPressure _activity;
 	TextView mTextViewAge, mTextViewSex, mTextViewWeight, mTextViewHeight, mTextViewPosition;
-	TextView mTextViewBloodPressure, mTextViewHeartRate;
+	TextView mTextViewBloodPressure, mTextViewHeartRate, mTextViewTemperature;
 	TextView mBlue, mDebug;
     public static final String PREFS_NAME = "MyPrefsFile";
     private Camera mCamera;
@@ -98,6 +98,7 @@ public class TestBloodPressure extends Activity {
         mTextViewPosition = (TextView) findViewById(R.id.textViewPosition);
         mTextViewBloodPressure = (TextView) findViewById(R.id.textViewBloodPressure);
         mTextViewHeartRate = (TextView) findViewById(R.id.textViewHeartRate);
+        mTextViewTemperature = (TextView) findViewById(R.id.textViewTemperature);
         mBlue = (TextView) findViewById(R.id.blue);
         mDebug = (TextView) findViewById(R.id.debug);
 
@@ -171,37 +172,37 @@ public class TestBloodPressure extends Activity {
         }
 
         public void surfaceCreated(SurfaceHolder holder) { // The Surface has been created, now tell the camera where to draw the preview
-        	//previewWidth = mCamera.getParameters().getPreviewSize().width;
-        	//previewHeight = mCamera.getParameters().getPreviewSize().height;
+        	previewWidth = mCamera.getParameters().getPreviewSize().width;
+        	previewHeight = mCamera.getParameters().getPreviewSize().height;
 
         	/** Uncomment (and setPreviewCallbackWithBuffer() and uncomment "c.addCallbackBuffer(data)") to get ~30 fps instead of ~15*/
-//        	int dataBufferSize = (int)(previewWidth*previewHeight*(ImageFormat.getBitsPerPixel(mCamera.getParameters().getPreviewFormat())/8.0)); //460800
-//        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-//        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-//        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-//        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-//        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-//        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-//        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-//        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-//        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-//        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-//        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-//        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-//        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-//        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-//        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-//        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-//        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-//        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-//        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-//        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-//        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-//        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-//        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-//        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+        	int dataBufferSize = (int)(previewWidth*previewHeight*(ImageFormat.getBitsPerPixel(mCamera.getParameters().getPreviewFormat())/8.0)); //460800
+        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
         	
-        	mCamera.setPreviewCallback(new PreviewCallback() { // Gets called for every frame
+        	mCamera.setPreviewCallbackWithBuffer(new PreviewCallback() { // Gets called for every frame
         		public void onPreviewFrame(byte[] data, Camera c) {
 					//int centerX = (previewWidth / 2), centerY = (previewHeight / 2);
                 	previewWidth = mCamera.getParameters().getPreviewSize().width;
@@ -301,7 +302,7 @@ public class TestBloodPressure extends Activity {
 			        	// do nothing
 			        }
 			        
-			        //c.addCallbackBuffer(data);
+			        c.addCallbackBuffer(data);
 				} // END onPreviewFrame()
         	});
         }
@@ -399,6 +400,9 @@ public class TestBloodPressure extends Activity {
 	public void goToEditStats(View v) {
     	startActivity(new Intent(_activity, EditStats.class));
 	}
+	public void addTemperature(View v) {
+    	startActivity(new Intent(_activity, AddTemperature.class));
+	}
 	
 	// The one we have been using for a long time, but just not right now
 	public void decodeYUV(int[] out, byte[] fg, int width, int height) throws NullPointerException, IllegalArgumentException {
@@ -477,12 +481,14 @@ public class TestBloodPressure extends Activity {
 	        mTextViewWeight.setText("Weight: " + settings.getInt("weight", 160) + " pounds");
 	        mTextViewHeight.setText("Height: " + settings.getInt("height", 75) + " inches");
 	        mTextViewPosition.setText("Position: " + settings.getString("position", "Sitting"));
+	        mTextViewTemperature.setText("Temperature: " + settings.getString("temperature", " Click to add.."));
         } else {
 	        mTextViewAge.setText("Age: " + settings.getInt("age", 23));
 	        mTextViewSex.setText("Sex: " + settings.getString("sex", "Male"));
 	        mTextViewWeight.setText("Weight: " + settings.getInt("weight", 73) + " kg");
 	        mTextViewHeight.setText("Height: " + settings.getInt("height", 75) + " cm");
 	        mTextViewPosition.setText("Position: " + settings.getString("position", "Sitting"));
+	        mTextViewTemperature.setText("Temperature: " + settings.getString("temperature", " Click to add.."));
         }
 	}
 	

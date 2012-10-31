@@ -19,5 +19,6 @@
     <string name="title_activity_test_pupil_dilation">TestPupilDilation</string>
     <string name="title_activity_test_eye_saccades">TestEyeSaccades</string>
     <string name="title_activity_edit_stats">EditStats</string>
+    <string name="title_activity_add_temperature">AddTemperature</string>
 
 </resources>

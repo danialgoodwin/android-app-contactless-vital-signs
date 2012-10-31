@@ -14,9 +14,11 @@
 	        <TextView android:id="@+id/textViewBloodPressure" android:layout_width="wrap_content" android:layout_height="wrap_content"
 	            android:text="Blood Pressure: calculating"
 	            android:layout_weight="1" />
-	        
 	        <TextView android:id="@+id/textViewHeartRate" android:layout_width="wrap_content" android:layout_height="wrap_content"
 	            android:text="Heart Rate: calculating"
+	            android:layout_weight="1" />
+	        <TextView android:id="@+id/textViewTemperature" android:layout_width="wrap_content" android:layout_height="wrap_content"
+	            android:text="Temperature: Click to add.." android:onClick="addTemperature" android:clickable="true"
 	            android:layout_weight="1" />
 	        <TextView android:id="@+id/blue" android:layout_width="wrap_content" android:layout_height="wrap_content"
 	            android:text="Blue: bValue"
