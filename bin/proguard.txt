@@ -1,0 +1,69 @@
+# view AndroidManifest.xml #generated:84
+-keep class net.simplyadvanced.vitalsigns.AddTemperature { <init>(...); }
+
+# view AndroidManifest.xml #generated:77
+-keep class net.simplyadvanced.vitalsigns.EditStats { <init>(...); }
+
+# view AndroidManifest.xml #generated:22
+-keep class net.simplyadvanced.vitalsigns.MainActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:42
+-keep class net.simplyadvanced.vitalsigns.TestBloodPressure { <init>(...); }
+
+# view AndroidManifest.xml #generated:52
+-keep class net.simplyadvanced.vitalsigns.TestBodyTemperature { <init>(...); }
+
+# view AndroidManifest.xml #generated:72
+-keep class net.simplyadvanced.vitalsigns.TestEyeSaccades { <init>(...); }
+
+# view AndroidManifest.xml #generated:37
+-keep class net.simplyadvanced.vitalsigns.TestFacialGestures { <init>(...); }
+
+# view AndroidManifest.xml #generated:47
+-keep class net.simplyadvanced.vitalsigns.TestHeartRate { <init>(...); }
+
+# view AndroidManifest.xml #generated:62
+-keep class net.simplyadvanced.vitalsigns.TestOxygenSaturation { <init>(...); }
+
+# view AndroidManifest.xml #generated:67
+-keep class net.simplyadvanced.vitalsigns.TestPupilDilation { <init>(...); }
+
+# view AndroidManifest.xml #generated:57
+-keep class net.simplyadvanced.vitalsigns.TestRespiratoryRate { <init>(...); }
+
+# view AndroidManifest.xml #generated:32
+-keep class net.simplyadvanced.vitalsigns.TestVitalSigns { <init>(...); }
+
+# onClick res/layout/activity_add_temperature.xml #generated:38
+# onClick res/layout/activity_edit_stats.xml #generated:105
+-keepclassmembers class * { *** Cancel(...); }
+
+# onClick res/layout/activity_add_temperature.xml #generated:33
+# onClick res/layout/activity_edit_stats.xml #generated:100
+-keepclassmembers class * { *** Save(...); }
+
+# onClick res/layout/activity_test_blood_pressure.xml #generated:20
+-keepclassmembers class * { *** addTemperature(...); }
+
+# onClick res/layout/activity_test_blood_pressure.xml #generated:53
+# onClick res/layout/activity_test_body_temperature.xml #generated:51
+-keepclassmembers class * { *** goToEditStats(...); }
+
+# onClick res/layout/activity_main.xml #generated:14
+-keepclassmembers class * { *** goToTestBloodPressure(...); }
+
+# onClick res/layout/activity_main.xml #generated:22
+-keepclassmembers class * { *** goToTestBodyTemperature(...); }
+
+# onClick res/layout/activity_main.xml #generated:40
+-keepclassmembers class * { *** goToTestFacialGestures(...); }
+
+# onClick res/layout/activity_main.xml #generated:35
+-keepclassmembers class * { *** goToTestOxygenSaturation(...); }
+
+# onClick res/layout/activity_main.xml #generated:27
+-keepclassmembers class * { *** goToTestRespiratoryRate(...); }
+
+# onClick res/layout/activity_main.xml #generated:9
+-keepclassmembers class * { *** goToTestVitalSigns(...); }
+

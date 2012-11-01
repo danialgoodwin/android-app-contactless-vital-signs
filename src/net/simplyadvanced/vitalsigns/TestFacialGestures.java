@@ -3,27 +3,40 @@ package net.simplyadvanced.vitalsigns;
 import java.io.IOException;
 
 import android.hardware.Camera;
+import android.hardware.Camera.Face;
 import android.os.Bundle;
+import android.annotation.TargetApi;
 import android.app.Activity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.widget.TextView;
+import android.widget.Toast;
 import android.support.v4.app.NavUtils;
 
+@TargetApi(14)
 public class TestFacialGestures extends Activity implements SurfaceHolder.Callback {
+	private TestFacialGestures _activity;
+	private static final String TAG = "DEBUG";
+	TextView mTextViewFace0Coordinates, mTextViewFace1Coordinates, mTextViewFace2Coordinates;
 	SurfaceView surfaceView1;
 	SurfaceHolder surfaceHolder;
-	Camera camera;
+	Camera mCamera;
 	//CameraView v;
 	boolean isPreviewing = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        _activity = this;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_facial_gestures);
         
-        //getWindow().setFormat(PixelFormat.UNKNOWN); // What does it do?
+        mTextViewFace0Coordinates = (TextView) findViewById(R.id.textViewFace0Coordinates);
+        mTextViewFace1Coordinates = (TextView) findViewById(R.id.textViewFace1Coordinates);
+        mTextViewFace2Coordinates = (TextView) findViewById(R.id.textViewFace2Coordinates);
+        
         surfaceView1 = (SurfaceView) findViewById(R.id.surfaceView1);
         surfaceHolder = surfaceView1.getHolder();
         surfaceHolder.addCallback(this);
@@ -32,39 +45,88 @@ public class TestFacialGestures extends Activity implements SurfaceHolder.Callba
     
     
     
-    public void surfaceChanged(SurfaceHolder holder, int format, int width,
-			int height) {
-		// TODO Auto-generated method stub
-		camera.stopPreview();
+    public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+		mCamera.stopPreview();
 		isPreviewing = false;
 		
-		if(camera != null) {
+		// Make any parameter changes here, while camera is not previewing
+		
+		if(mCamera != null) {
     		try {
-    			camera.setPreviewDisplay(surfaceHolder);
-    			camera.setDisplayOrientation(90); // Needed to have camera in correct orientation
-    		    camera.startPreview();
+    			mCamera.setPreviewDisplay(surfaceHolder);
+    			mCamera.setDisplayOrientation(90); // Needed to have camera in correct orientation
+    			mCamera.setFaceDetectionListener(new MyFaceDetectionListener());
+    		    mCamera.startPreview();
     		    isPreviewing = true;
+    		    startFaceDetection();
     		} catch (IOException e) {
     		    e.printStackTrace();
     		}
     	}
 	}
 	public void surfaceCreated(SurfaceHolder holder) {
-		// TODO Auto-generated method stub
-		camera = Camera.open();
+		mCamera = Camera.open();
+	    try {
+	        mCamera.setPreviewDisplay(holder);
+	        mCamera.startPreview();
+
+	        startFaceDetection(); // start face detection feature
+
+	    } catch (IOException e) {
+	        Log.d(TAG, "Error setting camera preview: " + e.getMessage());
+	    }
 	}
 	public void surfaceDestroyed(SurfaceHolder holder) {
-		// TODO Auto-generated method stub
-		camera.stopPreview();
-		camera.release();
-		camera = null;
+		mCamera.stopPreview();
+		mCamera.release();
+		mCamera = null;
 	    isPreviewing = false;
 	}
 	
 	
-    
-    
+	
+	
+	
+	
+	class MyFaceDetectionListener implements Camera.FaceDetectionListener {
+	    public void onFaceDetection(Face[] faces, Camera camera) {
+	        if (faces.length > 0) {
+	            Log.d("FaceDetection", "face detected: "+ faces.length + " Face 1 Location X: " + faces[0].rect.centerX() + "Y: " + faces[0].rect.centerY());
+	            int left0   = faces[0].rect.left;
+	            int top0    = faces[0].rect.top;
+	            int right0  = faces[0].rect.right;
+	            int bottom0 = faces[0].rect.bottom;
+	            int left1   = faces[1].rect.left;
+	            int top1    = faces[1].rect.top;
+	            int right1  = faces[1].rect.right;
+	            int bottom1 = faces[1].rect.bottom;
+	            int left2   = faces[2].rect.left;
+	            int top2    = faces[2].rect.top;
+	            int right2  = faces[2].rect.right;
+	            int bottom2 = faces[2].rect.bottom;
+		    	//Toast.makeText(_activity, "Face[0] center: " + faces[0].rect + "," + faces[0].rect.centerY(), Toast.LENGTH_SHORT).show();
+		    	mTextViewFace0Coordinates.setText("Face Rectangle: (" + left0 + "," + top0 + "), (" + right0 + "," + bottom0 + ")");
+		    	mTextViewFace1Coordinates.setText("Face Rectangle: (" + left1 + "," + top1 + "), (" + right1 + "," + bottom1 + ")");
+		    	mTextViewFace2Coordinates.setText("Face Rectangle: (" + left2 + "," + top2 + "), (" + right2 + "," + bottom2 + ")");
+	        }
+	    }
+	}
+	public void startFaceDetection() {
+	    // Try starting Face Detection
+	    Camera.Parameters params = mCamera.getParameters();
 
+	    // start face detection only *after* preview has started
+	    if (params.getMaxNumDetectedFaces() > 0) {
+	    	Toast.makeText(_activity, "Max Num Faces Allows: " + params.getMaxNumDetectedFaces(), Toast.LENGTH_LONG).show();
+	        // camera supports face detection, so can start it:
+	        mCamera.startFaceDetection();
+	    }
+	}
+	
+	
+	
+	
+	
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_test_facial_gestures, menu);
