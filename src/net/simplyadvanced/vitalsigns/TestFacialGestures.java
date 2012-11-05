@@ -2,6 +2,9 @@ package net.simplyadvanced.vitalsigns;
 
 import java.io.IOException;
 
+import android.graphics.Color;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.RectShape;
 import android.hardware.Camera;
 import android.hardware.Camera.Face;
 import android.os.Bundle;
@@ -12,6 +15,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v4.app.NavUtils;
@@ -21,11 +26,13 @@ public class TestFacialGestures extends Activity implements SurfaceHolder.Callba
 	private TestFacialGestures _activity;
 	private static final String TAG = "DEBUG";
 	TextView mTextViewFace0Coordinates, mTextViewFace1Coordinates, mTextViewFace2Coordinates;
+	ImageView mRectImage0, mRectImage1, mRectImage2;
 	SurfaceView surfaceView1;
 	SurfaceHolder surfaceHolder;
 	Camera mCamera;
 	//CameraView v;
 	boolean isPreviewing = false;
+	int previewWidth, previewHeight;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -36,6 +43,8 @@ public class TestFacialGestures extends Activity implements SurfaceHolder.Callba
         mTextViewFace0Coordinates = (TextView) findViewById(R.id.textViewFace0Coordinates);
         mTextViewFace1Coordinates = (TextView) findViewById(R.id.textViewFace1Coordinates);
         mTextViewFace2Coordinates = (TextView) findViewById(R.id.textViewFace2Coordinates);
+        mRectImage0 = (ImageView) findViewById(R.id.rectImage0);
+        
         
         surfaceView1 = (SurfaceView) findViewById(R.id.surfaceView1);
         surfaceHolder = surfaceView1.getHolder();
@@ -48,6 +57,8 @@ public class TestFacialGestures extends Activity implements SurfaceHolder.Callba
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
 		mCamera.stopPreview();
 		isPreviewing = false;
+		previewWidth = width;
+		previewHeight = height;
 		
 		// Make any parameter changes here, while camera is not previewing
 		
@@ -58,7 +69,7 @@ public class TestFacialGestures extends Activity implements SurfaceHolder.Callba
     			mCamera.setFaceDetectionListener(new MyFaceDetectionListener());
     		    mCamera.startPreview();
     		    isPreviewing = true;
-    		    startFaceDetection();
+    		    startFaceDetection(); // start face detection feature
     		} catch (IOException e) {
     		    e.printStackTrace();
     		}
@@ -77,10 +88,12 @@ public class TestFacialGestures extends Activity implements SurfaceHolder.Callba
 	    }
 	}
 	public void surfaceDestroyed(SurfaceHolder holder) {
-		mCamera.stopPreview();
-		mCamera.release();
-		mCamera = null;
-	    isPreviewing = false;
+        if (mCamera != null) {
+			mCamera.stopPreview();
+			mCamera.release();
+			mCamera = null;
+		    isPreviewing = false;
+        }
 	}
 	
 	
@@ -96,17 +109,37 @@ public class TestFacialGestures extends Activity implements SurfaceHolder.Callba
 	            int top0    = faces[0].rect.top;
 	            int right0  = faces[0].rect.right;
 	            int bottom0 = faces[0].rect.bottom;
+		    	mTextViewFace0Coordinates.setText("Face Rectangle: (" + left0 + "," + top0 + "), (" + right0 + "," + bottom0 + ")");
+		    	
+		    	mRectImage0.setPadding(left0, top0, previewWidth-right0, previewHeight-bottom0);
+		    	mRectImage0.bringToFront();
+		    	
+		    	
+		    	// Try 2
+//		    	ShapeDrawable rect = new ShapeDrawable(new RectShape());
+//		        rect.getPaint().setColor(Color.GREEN);
+//		        rect.setBounds(left0, top0, right0, bottom0);
+//		        ImageView view1 = new ImageView(_activity);
+//		        view1.setImageDrawable(rect);
+//		        LinearLayout frame = (LinearLayout)findViewById(R.id.linearLayout1);
+//		        frame.addView(view1);
+		        
+		        // Try 1
+		    	//DrawRect drawRect = new DrawRect(_activity, faces);
+		    	//setContentView(drawRect);
+	        }
+	        if (faces.length > 1) {
 	            int left1   = faces[1].rect.left;
 	            int top1    = faces[1].rect.top;
 	            int right1  = faces[1].rect.right;
 	            int bottom1 = faces[1].rect.bottom;
+		    	mTextViewFace1Coordinates.setText("Face Rectangle: (" + left1 + "," + top1 + "), (" + right1 + "," + bottom1 + ")");
+	        }
+	        if (faces.length > 2) {
 	            int left2   = faces[2].rect.left;
 	            int top2    = faces[2].rect.top;
 	            int right2  = faces[2].rect.right;
 	            int bottom2 = faces[2].rect.bottom;
-		    	//Toast.makeText(_activity, "Face[0] center: " + faces[0].rect + "," + faces[0].rect.centerY(), Toast.LENGTH_SHORT).show();
-		    	mTextViewFace0Coordinates.setText("Face Rectangle: (" + left0 + "," + top0 + "), (" + right0 + "," + bottom0 + ")");
-		    	mTextViewFace1Coordinates.setText("Face Rectangle: (" + left1 + "," + top1 + "), (" + right1 + "," + bottom1 + ")");
 		    	mTextViewFace2Coordinates.setText("Face Rectangle: (" + left2 + "," + top2 + "), (" + right2 + "," + bottom2 + ")");
 	        }
 	    }

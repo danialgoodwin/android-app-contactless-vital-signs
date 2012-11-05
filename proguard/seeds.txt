@@ -68,6 +68,7 @@ net.simplyadvanced.vitalsigns.R$drawable: int ic_action_search
 net.simplyadvanced.vitalsigns.R$drawable: int ic_launcher
 net.simplyadvanced.vitalsigns.R$drawable: int logoman
 net.simplyadvanced.vitalsigns.R$drawable: int logou
+net.simplyadvanced.vitalsigns.R$drawable: int rectangle
 net.simplyadvanced.vitalsigns.R$id: int blue
 net.simplyadvanced.vitalsigns.R$id: int camera_preview
 net.simplyadvanced.vitalsigns.R$id: int debug
@@ -77,12 +78,14 @@ net.simplyadvanced.vitalsigns.R$id: int editTextPosition
 net.simplyadvanced.vitalsigns.R$id: int editTextSex
 net.simplyadvanced.vitalsigns.R$id: int editTextTemperature
 net.simplyadvanced.vitalsigns.R$id: int editTextWeight
+net.simplyadvanced.vitalsigns.R$id: int imageViewRectangle0
 net.simplyadvanced.vitalsigns.R$id: int linearLayout1
 net.simplyadvanced.vitalsigns.R$id: int menu_change_units
 net.simplyadvanced.vitalsigns.R$id: int menu_convertUnits
 net.simplyadvanced.vitalsigns.R$id: int menu_sendEmail
 net.simplyadvanced.vitalsigns.R$id: int menu_sendSMS
 net.simplyadvanced.vitalsigns.R$id: int menu_settings
+net.simplyadvanced.vitalsigns.R$id: int rectImage0
 net.simplyadvanced.vitalsigns.R$id: int surfaceView1
 net.simplyadvanced.vitalsigns.R$id: int textView1
 net.simplyadvanced.vitalsigns.R$id: int textView2

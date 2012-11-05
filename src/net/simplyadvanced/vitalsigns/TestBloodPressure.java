@@ -15,6 +15,7 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -27,7 +28,10 @@ import android.graphics.Color;
 import android.graphics.ImageFormat;
 import android.graphics.Rect;
 import android.graphics.YuvImage;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.RectShape;
 import android.hardware.Camera;
+import android.hardware.Camera.Face;
 import android.hardware.Camera.PreviewCallback;
 import android.hardware.Camera.Size;
 import android.telephony.SmsManager;
@@ -40,6 +44,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v4.app.NavUtils;
@@ -47,11 +52,13 @@ import android.support.v4.app.NavUtils;
 import net.simplyadvanced.vitalsigns.heartrate.fft;
 import net.simplyadvanced.vitalsigns.heartrate.FastICA_RGB;
 
+@TargetApi(14)
 public class TestBloodPressure extends Activity {
 	private TestBloodPressure _activity;
 	TextView mTextViewAge, mTextViewSex, mTextViewWeight, mTextViewHeight, mTextViewPosition;
 	TextView mTextViewBloodPressure, mTextViewHeartRate, mTextViewTemperature;
-	TextView mBlue, mDebug;
+	TextView mBlue, mDebug, mTextViewFace0Coordinates;
+	ImageView mImageViewRectangle0;
     public static final String PREFS_NAME = "MyPrefsFile";
     private Camera mCamera;
     private CameraPreview mPreview;
@@ -101,12 +108,13 @@ public class TestBloodPressure extends Activity {
         mTextViewTemperature = (TextView) findViewById(R.id.textViewTemperature);
         mBlue = (TextView) findViewById(R.id.blue);
         mDebug = (TextView) findViewById(R.id.debug);
+        mTextViewFace0Coordinates = (TextView) findViewById(R.id.textViewFace0Coordinates);
+
+        mImageViewRectangle0 = (ImageView) findViewById(R.id.imageViewRectangle0);
 
         settings = getSharedPreferences(PREFS_NAME, 0); // Load saved stats // Only done once while app is running
         loadPatientEditableStats(); // Show saved patient stats: age, sex, weight, height, position
         checkMediaAvailability(); // Check to see if sd card is available to write, using mExternalStorageAvailable and mExternalStorageWriteable
-
-    	mCamera = getCameraInstance(); // Create an instance of Camera
     	
         mPreview = new CameraPreview(this, mCamera); // Create our Preview view and set it as the content of our activity
         preview = (FrameLayout) findViewById(R.id.camera_preview);
@@ -119,17 +127,13 @@ public class TestBloodPressure extends Activity {
     }
     protected void onPause() {
     	super.onPause();
-    	mCamera.setPreviewCallback(null);
-    	mCamera.stopPreview();
-    	//tempReleaseCamera();
     }
     protected void onDestroy() {
     	super.onDestroy();
-    	releaseCamera();
     }
     
     public void setBloodPressure(double heartRate, int age, String sex, int weight, int height, String position) {
-    	double R = 17.6; // Dan's R // Average R = 18.31; // Vascular resistance // Very hard to calculate from person to person
+    	double R = 18.31; // Dan's R = 17.6 // Average R = 18.31; // Vascular resistance // Very hard to calculate from person to person
     	double Q = (sex.equalsIgnoreCase("Male") || sex.equalsIgnoreCase("M"))?5:4.5; // Liters per minute of blood through heart
     	double ejectionTime = (position.equalsIgnoreCase("sitting"))?376-1.64*heartRate:354.5-1.23*heartRate; // ()?sitting:supine
     	double bodySurfaceArea = 0.007184*(Math.pow(weight,0.425))*(Math.pow(height,0.725));
@@ -144,17 +148,6 @@ public class TestBloodPressure extends Activity {
     	saveSharedPreference("systolicPressure",systolicPressure);
     	saveSharedPreference("diastolicPressure",diastolicPressure);
     }
-
-    public static Camera getCameraInstance() {
-        Camera c = null;
-        try {
-            c = Camera.open(); // attempt to get a Camera instance
-        }
-        catch (Exception e) {
-            // Camera is not available (in use or does not exist)
-        }
-        return c; // returns null if camera is unavailable
-    }
     
     /** A basic Camera preview class */
     public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback {
@@ -168,10 +161,13 @@ public class TestBloodPressure extends Activity {
 
             mHolder = getHolder(); // Install a SurfaceHolder.Callback so we get notified when the underlying surface is created and destroyed
             mHolder.addCallback(this);
-            mHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS); // deprecated setting, but required on Android versions prior to 3.0
+            //mHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS); // deprecated setting, but required on Android versions prior to 3.0
         }
 
         public void surfaceCreated(SurfaceHolder holder) { // The Surface has been created, now tell the camera where to draw the preview
+            try { mCamera = Camera.open(); } // attempt to get a Camera instance
+            catch (Exception e) { mCamera = null; } // Camera is not available (in use or does not exist)
+    		
         	previewWidth = mCamera.getParameters().getPreviewSize().width;
         	previewHeight = mCamera.getParameters().getPreviewSize().height;
 
@@ -310,44 +306,35 @@ public class TestBloodPressure extends Activity {
         public void surfaceDestroyed(SurfaceHolder holder) {
         	// Surface will be destroyed when we return, so stop the preview.
             // Because the CameraDevice object is not a shared resource, it's very important to release it when the activity is paused.
-            //mCamera.setPreviewCallback(null);
-            //mCamera.stopPreview();
-            //releaseCamera(); // same as mCamera.release();
+            if (mCamera != null) {
+                mCamera.setPreviewCallback(null);
+                mCamera.stopPreview();
+                mCamera.release(); // release the camera for other applications
+                mCamera = null;
+            }
         }
         public void surfaceChanged(SurfaceHolder holder, int format, int w, int h) {
-            // If your preview can change or rotate, take care of those events here
-            // Make sure to stop the preview before resizing or reformatting it.
+            if(mHolder.getSurface() == null) { return; } // preview surface does not exist
+            mCamera.stopPreview(); // stop preview before making changes
         	previewWidth = w;
         	previewHeight = h;
-        	
-            if(mHolder.getSurface() == null) { // preview surface does not exist
-                return;
-            }
 
-            // stop preview before making changes
-            try {
-                mCamera.stopPreview();
-            } catch (Exception e) {
-                // ignore: tried to stop a non-existent preview
-            }
-
-            // set preview size and make any resize, rotate or reformatting changes here
-            Camera.Parameters parameters = mCamera.getParameters();
-
-            List<Size> sizes = parameters.getSupportedPreviewSizes();
-            Size optimalSize = getOptimalPreviewSize(sizes, w, h);
-            parameters.setPreviewSize(optimalSize.width, optimalSize.height);
-            parameters.setPreviewFrameRate(30); // TODO test
-            
-            mCamera.setParameters(parameters);
-            
-            try { // start preview with new settings
-                mCamera.setDisplayOrientation(90);
-                mCamera.setPreviewDisplay(mHolder);
-                mCamera.startPreview();
-            } catch (Exception e) {
-                Log.d(TAG, "Error starting camera preview: " + e.getMessage());
-            }
+        	if(mCamera != null) {
+        		Camera.Parameters parameters = mCamera.getParameters();
+                //List<Size> sizes = parameters.getSupportedPreviewSizes();
+                //Size optimalSize = getOptimalPreviewSize(sizes, w, h);
+                //parameters.setPreviewSize(optimalSize.width, optimalSize.height);
+                
+                mCamera.setParameters(parameters);
+                try {
+                    mCamera.setDisplayOrientation(90); // TODO add code that is in javadoc
+                    mCamera.setPreviewDisplay(mHolder);
+                    mCamera.startPreview();
+        		    startFaceDetection(); // start face detection feature, only do after startPreview
+                } catch (Exception e) {
+                    Log.d(TAG, "Error starting camera preview: " + e.getMessage());
+                }
+        	}
         }
 
         private Size getOptimalPreviewSize(List<Size> sizes, int w, int h) {
@@ -384,18 +371,69 @@ public class TestBloodPressure extends Activity {
         }
     }
     
-    private void releaseCamera() {
-        if (mCamera != null) {
-            mCamera.release(); // release the camera for other applications
-            mCamera = null;
-        }
-    }
-    private void tempReleaseCamera() {
-        if (mCamera != null) {
-            mCamera.lock(); // lock camera for later use
-            mCamera = null;
-        }
-    }
+    /** Face Detection */
+	class MyFaceDetectionListener implements Camera.FaceDetectionListener {
+	    public void onFaceDetection(Face[] faces, Camera camera) {
+	        if (faces.length > 0) {
+	            Log.d("FaceDetection", "face detected: "+ faces.length + " Face 1 Location X: " + faces[0].rect.centerX() + "Y: " + faces[0].rect.centerY());
+	            int left0   = faces[0].rect.left;
+	            int top0    = faces[0].rect.top;
+	            int right0  = faces[0].rect.right;
+	            int bottom0 = faces[0].rect.bottom;
+		    	mTextViewFace0Coordinates.setText("Face Rectangle: (" + left0 + "," + top0 + "), (" + right0 + "," + bottom0 + ")");
+		    	Toast.makeText(_activity, "Face Rectangle: (" + left0 + "," + top0 + "), (" + right0 + "," + bottom0 + ")", Toast.LENGTH_SHORT).show();
+		    	
+		    	// Try 4
+		    	ShapeDrawable rect = new ShapeDrawable(new RectShape());
+		        rect.setIntrinsicHeight(20);
+		        rect.setIntrinsicWidth(100);
+		        rect.getPaint().setColor(Color.MAGENTA);
+		        mImageViewRectangle0.setImageDrawable(rect);
+		    	
+		    	// Try 3
+		    	//mRectImage0.setPadding(left0, top0, previewWidth-right0, previewHeight-bottom0);
+		    	//mRectImage0.bringToFront();
+		    	
+		    	// Try 2
+//		    	ShapeDrawable rect = new ShapeDrawable(new RectShape());
+//		        rect.getPaint().setColor(Color.GREEN);
+//		        rect.setBounds(left0, top0, right0, bottom0);
+//		        ImageView view1 = new ImageView(_activity);
+//		        view1.setImageDrawable(rect);
+//		        LinearLayout frame = (LinearLayout)findViewById(R.id.linearLayout1);
+//		        frame.addView(view1);
+		        
+		        // Try 1
+		    	//DrawRect drawRect = new DrawRect(_activity, faces);
+		    	//setContentView(drawRect);
+	        }
+//	        if (faces.length > 1) { // For two faces
+//	            int left1   = faces[1].rect.left;
+//	            int top1    = faces[1].rect.top;
+//	            int right1  = faces[1].rect.right;
+//	            int bottom1 = faces[1].rect.bottom;
+//		    	mTextViewFace1Coordinates.setText("Face Rectangle: (" + left1 + "," + top1 + "), (" + right1 + "," + bottom1 + ")");
+//	        }
+//	        if (faces.length > 2) { // For three faces
+//	            int left2   = faces[2].rect.left;
+//	            int top2    = faces[2].rect.top;
+//	            int right2  = faces[2].rect.right;
+//	            int bottom2 = faces[2].rect.bottom;
+//		    	mTextViewFace2Coordinates.setText("Face Rectangle: (" + left2 + "," + top2 + "), (" + right2 + "," + bottom2 + ")");
+//	        }
+	    }
+	}
+	public void startFaceDetection() {
+	    // Try starting Face Detection
+	    Camera.Parameters params = mCamera.getParameters();
+
+	    // start face detection only *after* preview has started
+	    if (params.getMaxNumDetectedFaces() > 0) {
+	    	Toast.makeText(_activity, "Max Num Faces Allows: " + params.getMaxNumDetectedFaces(), Toast.LENGTH_LONG).show();
+	        // camera supports face detection, so can start it:
+	        mCamera.startFaceDetection();
+	    }
+	}
 
 	public void goToEditStats(View v) {
     	startActivity(new Intent(_activity, EditStats.class));

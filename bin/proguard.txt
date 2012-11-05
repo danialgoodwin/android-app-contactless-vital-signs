@@ -42,10 +42,10 @@
 # onClick res/layout/activity_edit_stats.xml #generated:100
 -keepclassmembers class * { *** Save(...); }
 
-# onClick res/layout/activity_test_blood_pressure.xml #generated:20
+# onClick res/layout/activity_test_blood_pressure.xml #generated:27
 -keepclassmembers class * { *** addTemperature(...); }
 
-# onClick res/layout/activity_test_blood_pressure.xml #generated:53
+# onClick res/layout/activity_test_blood_pressure.xml #generated:62
 # onClick res/layout/activity_test_body_temperature.xml #generated:51
 -keepclassmembers class * { *** goToEditStats(...); }
 
