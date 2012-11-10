@@ -1,23 +1,11 @@
 package net.simplyadvanced.vitalsigns;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.lang.Math;
+import java.util.List;
 
-import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.annotation.TargetApi;
 import android.app.Activity;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -26,60 +14,62 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.ImageFormat;
+import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.YuvImage;
-import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.shapes.RectShape;
 import android.hardware.Camera;
+import android.hardware.Camera.CameraInfo;
 import android.hardware.Camera.Face;
 import android.hardware.Camera.PreviewCallback;
 import android.hardware.Camera.Size;
-import android.telephony.SmsManager;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.support.v4.app.NavUtils;
 
 import net.simplyadvanced.vitalsigns.heartrate.fft;
 import net.simplyadvanced.vitalsigns.heartrate.FastICA_RGB;
 
-@TargetApi(14)
 public class TestBloodPressure extends Activity {
 	private TestBloodPressure _activity;
-	TextView mTextViewAge, mTextViewSex, mTextViewWeight, mTextViewHeight, mTextViewPosition;
-	TextView mTextViewBloodPressure, mTextViewHeartRate, mTextViewTemperature;
-	TextView mBlue, mDebug, mTextViewFace0Coordinates;
-	ImageView mImageViewRectangle0;
-    public static final String PREFS_NAME = "MyPrefsFile";
+    private static final String PREFS_NAME = "MyPrefsFile";
+    private SharedPreferences settings;
+
+    private RelativeLayout mRelativeLayoutRoot;
+    private FrameLayout mFrameLayoutCameraPreview;
+    private SurfaceView mSurfaceViewCameraPreview;
+    private ImageView mImageViewRectangle0;
     private Camera mCamera;
-    private CameraPreview mPreview;
-    SharedPreferences settings;
-    FrameLayout preview;
-    int previewWidth = 0, previewHeight = 0; // Defined in surfaceChanged()
+    static int defaultCameraId = 0;
+    
+    private TextView mTextViewHeartRate, mTextViewBloodPressure, mTextViewTemperature, mTextViewFace0Coordinates, mTextViewDebug, mTextViewAge, mTextViewSex, mTextViewHeight, mTextViewWeight, mTextViewPosition;
+    
+    private int previewWidth = 0, previewHeight = 0; // Defined in surfaceChanged()
 
     /* Heart Rate Related Variables */
-    int heartRateFrameLength = 300;
+    int heartRateFrameLength = 256;
     double[] arrayRed = new double[heartRateFrameLength]; //ArrayList<Double> arrayRed = new ArrayList<Double>();
     double[] arrayGreen = new double[heartRateFrameLength]; //ArrayList<Double> arrayGreen = new ArrayList<Double>();
     double[] arrayBlue = new double[heartRateFrameLength]; //ArrayList<Double> arrayBlue = new ArrayList<Double>();
-    double[] outRed = new double[heartRateFrameLength];
-    double[] outGreen = new double[heartRateFrameLength];
-    double[] outBlue = new double[heartRateFrameLength];
     int systolicPressure = 0, diastolicPressure = 0, temperature = 0;
     double heartRate = 0;
-    short frameNumber = 0;
+    int frameNumber = 0;
     
-    /*Frame Frequency*/
+    /* Frame Frequency */
     long samplingFrequency;
+    
+    /* Face Detection Variables */
+    int numberOfFacesCurrentlyDetected = 0;
+    int faceLeft0 = 0, faceTop0 = 0, faceRight0 = 0, faceBottom0 = 0;
+    int faceLeft1 = 0, faceTop1 = 0, faceRight1 = 0, faceBottom1 = 0;
+    int faceLeft2 = 0, faceTop2 = 0, faceRight2 = 0, faceBottom2 = 0;
     
     /* Writing to SD card */
 	boolean mExternalStorageAvailable = false;
@@ -98,27 +88,26 @@ public class TestBloodPressure extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE); // Hide the window title
         setContentView(R.layout.activity_test_blood_pressure);
 
-        mTextViewAge = (TextView) findViewById(R.id.textViewAge); // Connects variables here to id's in xml, must be done in order to access id's in the layout (xml)
-        mTextViewSex = (TextView) findViewById(R.id.textViewSex);
-        mTextViewWeight = (TextView) findViewById(R.id.textViewWeight);
-        mTextViewHeight = (TextView) findViewById(R.id.textViewHeight);
-        mTextViewPosition = (TextView) findViewById(R.id.textViewPosition);
-        mTextViewBloodPressure = (TextView) findViewById(R.id.textViewBloodPressure);
-        mTextViewHeartRate = (TextView) findViewById(R.id.textViewHeartRate);
-        mTextViewTemperature = (TextView) findViewById(R.id.textViewTemperature);
-        mBlue = (TextView) findViewById(R.id.blue);
-        mDebug = (TextView) findViewById(R.id.debug);
-        mTextViewFace0Coordinates = (TextView) findViewById(R.id.textViewFace0Coordinates);
-
-        mImageViewRectangle0 = (ImageView) findViewById(R.id.imageViewRectangle0);
-
         settings = getSharedPreferences(PREFS_NAME, 0); // Load saved stats // Only done once while app is running
-        loadPatientEditableStats(); // Show saved patient stats: age, sex, weight, height, position
-        checkMediaAvailability(); // Check to see if sd card is available to write, using mExternalStorageAvailable and mExternalStorageWriteable
-    	
-        mPreview = new CameraPreview(this, mCamera); // Create our Preview view and set it as the content of our activity
-        preview = (FrameLayout) findViewById(R.id.camera_preview);
-        preview.addView(mPreview);
+
+        mTextViewHeartRate        = (TextView) findViewById(R.id.textView0);
+        mTextViewBloodPressure    = (TextView) findViewById(R.id.textView1);
+        mTextViewTemperature      = (TextView) findViewById(R.id.textView2);
+        mTextViewFace0Coordinates = (TextView) findViewById(R.id.textView3);
+        mTextViewDebug            = (TextView) findViewById(R.id.textView4);
+        mTextViewAge              = (TextView) findViewById(R.id.textViewRightSide0);
+        mTextViewSex              = (TextView) findViewById(R.id.textViewRightSide1);
+        mTextViewHeight           = (TextView) findViewById(R.id.textViewRightSide2);
+        mTextViewWeight           = (TextView) findViewById(R.id.textViewRightSide3);
+        mTextViewPosition         = (TextView) findViewById(R.id.textViewRightSide4);
+
+        mRelativeLayoutRoot       = (RelativeLayout) findViewById(R.id.relativeLayoutRoot);
+        mFrameLayoutCameraPreview = (FrameLayout) findViewById(R.id.frameLayoutCameraPreview);
+        mSurfaceViewCameraPreview = (SurfaceView) findViewById(R.id.surfaceViewCameraPreview);
+        mImageViewRectangle0      = (ImageView) findViewById(R.id.imageViewRectangle0);
+
+        mCamera = getCameraInstance();
+        mFrameLayoutCameraPreview.addView(new CameraPreview(_activity, mCamera)); // Create and add camera preview to screen
     }
 
     protected void onResume() {
@@ -131,7 +120,7 @@ public class TestBloodPressure extends Activity {
     protected void onDestroy() {
     	super.onDestroy();
     }
-    
+
     public void setBloodPressure(double heartRate, int age, String sex, int weight, int height, String position) {
     	double R = 18.31; // Dan's R = 17.6 // Average R = 18.31; // Vascular resistance // Very hard to calculate from person to person
     	double Q = (sex.equalsIgnoreCase("Male") || sex.equalsIgnoreCase("M"))?5:4.5; // Liters per minute of blood through heart
@@ -151,244 +140,299 @@ public class TestBloodPressure extends Activity {
     
     /** A basic Camera preview class */
     public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback {
-        private static final String TAG = "Exception";
-		private SurfaceHolder mHolder;
-        private Camera mCamera;
-
+        Size mPreviewSize;
+        List<Size> mSupportedPreviewSizes;
+        
         public CameraPreview(Context context, Camera camera) {
             super(context);
+            SurfaceHolder mHolder;
             mCamera = camera;
-
+            
             mHolder = getHolder(); // Install a SurfaceHolder.Callback so we get notified when the underlying surface is created and destroyed
             mHolder.addCallback(this);
-            //mHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS); // deprecated setting, but required on Android versions prior to 3.0
+            mHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS); // deprecated, but required on Android versions prior to 3.0
+	        
+            mSupportedPreviewSizes = mCamera.getParameters().getSupportedPreviewSizes();
         }
 
         public void surfaceCreated(SurfaceHolder holder) { // The Surface has been created, now tell the camera where to draw the preview
-            try { mCamera = Camera.open(); } // attempt to get a Camera instance
-            catch (Exception e) { mCamera = null; } // Camera is not available (in use or does not exist)
-    		
-        	previewWidth = mCamera.getParameters().getPreviewSize().width;
-        	previewHeight = mCamera.getParameters().getPreviewSize().height;
-
-        	/** Uncomment (and setPreviewCallbackWithBuffer() and uncomment "c.addCallbackBuffer(data)") to get ~30 fps instead of ~15*/
-        	int dataBufferSize = (int)(previewWidth*previewHeight*(ImageFormat.getBitsPerPixel(mCamera.getParameters().getPreviewFormat())/8.0)); //460800
-        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-        	mCamera.addCallbackBuffer(new byte[dataBufferSize]);
-        	
-        	mCamera.setPreviewCallbackWithBuffer(new PreviewCallback() { // Gets called for every frame
-        		public void onPreviewFrame(byte[] data, Camera c) {
-					//int centerX = (previewWidth / 2), centerY = (previewHeight / 2);
-                	previewWidth = mCamera.getParameters().getPreviewSize().width;
-                	previewHeight = mCamera.getParameters().getPreviewSize().height;
-                	int left = 50, top = 50, right = 100, bottom = 100; // Edit wanted coordinates here.
-                	int smallPreviewWidth = right - left;
-                	int smallPreviewHeight = bottom - top;
-                	
-//                	byte[] dataSelection = new byte[smallPreviewWidth*smallPreviewHeight * 8];
-//                	Log.d("DEBUG RGB", "DEBUG: dataSelection.length: " + dataSelection.length);
-//                	
-//                	int dataSelectionCount = 0;
-//                	for(int i = top; i < bottom; i++) {
-//                    	Log.d("DEBUG RGB", "DEBUG: dataSelectionCount: " + dataSelectionCount);
-//                		for(int j = left; j < right; j++) {
-//                			if(i == bottom-1) Log.d("DEBUG RGB", "DEBUG: dataSelectionCount: " + dataSelectionCount);
-//                			dataSelection[dataSelectionCount++] = data[i*smallPreviewWidth+j];
-//                		}
-//                	}
-        			
-        			/** Trying to analyze part of the screen*/
-                	ByteArrayOutputStream outstr = new ByteArrayOutputStream();
-                    Rect rect = new Rect(left, top, right, bottom);
-                    YuvImage yuvimage = new YuvImage(data,ImageFormat.NV21,previewWidth,previewHeight,null);
-                    yuvimage.compressToJpeg(rect, 100, outstr);
-                    Bitmap bmp = BitmapFactory.decodeByteArray(outstr.toByteArray(), 0, outstr.size());
-					
-                    int r = 0, g = 0, b = 0;
-                    int[] pix = new int[smallPreviewWidth * smallPreviewHeight];
-                    bmp.getPixels(pix, 0, smallPreviewWidth, 0, 0, smallPreviewWidth, smallPreviewHeight);
-                    
-                	for(int i = 0; i < smallPreviewHeight; i++) {
-	            		for(int j = 0; j < smallPreviewWidth; j++) {
-	                        int index = i * smallPreviewWidth + j;
-	                        r += (pix[index] >> 16) & 0xff;     //bitwise shifting
-	                        g += (pix[index] >> 8) & 0xff;
-	                        b += pix[index] & 0xff;
-	                        //pix[index] = 0xff000000 | (r << 16) | (g << 8) | b; // to restore the values after RGB modification, use this statement, with adjustment above
-	            		}
-	            	}
-                    
-                    
-					int numberOfPixelsToAnalyze = smallPreviewWidth * smallPreviewHeight;
-//					for(int k = 0; k < numberOfPixelsToAnalyze; k++) {
-//						r += Color.red(pixels[k]);   //1.164(Y-16)                + 2.018(U-128);
-//						g += Color.green(pixels[k]); //1.164(Y-16) - 0.813(V-128) - 0.391(U-128);
-//						b += Color.blue(pixels[k]);  //1.164(Y-16) + 1.596(V-128);
-//					}
-					r /= numberOfPixelsToAnalyze;
-					g /= numberOfPixelsToAnalyze;
-					b /= numberOfPixelsToAnalyze;
-					
-		            //Camera.Parameters parameters = mCamera.getParameters();
-		            //int[] previewFPSRange = new int[2];
-		            //parameters.getPreviewFpsRange(previewFPSRange); // Android API 9+
-        			
-			        mBlue.setText("RGB: " + r + "," + g + "," + b); // YCbCr_420_SP (NV21) format
-
-			        if(frameNumber == 0) {
-			        	samplingFrequency = System.nanoTime(); // Start time
-			        	Log.d("DEBUG RGB", "DEBUG: samplingFrequency: " + samplingFrequency);
-			        }
-			        
-			        if(frameNumber < heartRateFrameLength) {
-			        	fileDataRed += r + " "; // a string
-			        	fileDataGreen += g + " "; // a string
-			        	fileDataBlue += b + " "; // a string
-				        arrayRed[frameNumber] = ((double) r);
-				        arrayGreen[frameNumber] = ((double) g);
-				        arrayBlue[frameNumber] = ((double) b);
-				        mTextViewBloodPressure.setText("Blood Pressure: in " + (heartRateFrameLength-frameNumber+1) + ".."); // Shows how long until measurement will display
-				        mTextViewHeartRate.setText("Heart Rate: in " + (heartRateFrameLength-frameNumber) + "..");
-			        	frameNumber++;
-			        }
-			        else if(frameNumber == heartRateFrameLength) { // So that these functions don't run every frame preview, just on the 32nd one // TODO add sound when finish
-				        samplingFrequency = System.nanoTime() - samplingFrequency; // Minus end time = length of heartRateFrameLength frames
-				        double finalSamplingFrequency = samplingFrequency / (double)1000000000; // Length of time to get frames in seconds
-			        	finalSamplingFrequency = heartRateFrameLength / finalSamplingFrequency; // Frames per second in seconds
-				        
-				        FastICA_RGB.preICA(arrayRed, arrayGreen, arrayBlue, heartRateFrameLength, arrayRed, arrayGreen, arrayBlue); // heartRateFrameLength = 300 frames for now
-				        double heartRateFrequency = fft.FFT(arrayGreen, heartRateFrameLength,  finalSamplingFrequency);
-			        	Log.d("DEBUG RGB", "DEBUG: finalSamplingFrequency: " + finalSamplingFrequency);
-			        	heartRate = heartRateFrequency * 60;
-
-			            mTextViewHeartRate.setText("Heart Rate: " + heartRate);
-			        	mTextViewBloodPressure.setText("Blood Pressure: in 0.."); // Just informing the user that BP almost calculated
-			        	mDebug.setText("Fps: " + finalSamplingFrequency);
-			            setBloodPressure(heartRate, settings.getInt("age", 25), settings.getString("sex", "Male"), settings.getInt("weight", 160), settings.getInt("height", 70), settings.getString("position", "Sitting"));
-				        
-			            saveSharedPreference("heartRate",(int)heartRate);
-				        writeToTextFile(fileDataRed, "red"); // file located root/VitalSigns
-				        writeToTextFile(fileDataGreen, "green"); // file located root/VitalSigns
-				        writeToTextFile(fileDataBlue, "blue"); // file located root/VitalSigns
-			        	frameNumber++; // Ensures this if-statement is only ran once by making frameNumber one bigger than heartRateLength
-			        }
-			        else {
-			        	// do nothing
-			        }
-			        
-			        c.addCallbackBuffer(data);
-				} // END onPreviewFrame()
-        	});
-        }
-
-        public void surfaceDestroyed(SurfaceHolder holder) {
-        	// Surface will be destroyed when we return, so stop the preview.
+            try {
+            	mCamera.setPreviewDisplay(holder);
+    	        mCamera.startPreview();
+            }
+            catch (Exception e) { } // Camera is not available (in use or does not exist)
+        } // END surfaceCreated()
+        public void surfaceDestroyed(SurfaceHolder holder) { // Called right before surface is destroyed
             // Because the CameraDevice object is not a shared resource, it's very important to release it when the activity is paused.
             if (mCamera != null) {
-                mCamera.setPreviewCallback(null);
+                mCamera.setPreviewCallback(null); // This is for manually added buffers/threads // Use setPreviewCallback() for automatic buffers
                 mCamera.stopPreview();
                 mCamera.release(); // release the camera for other applications
                 mCamera = null;
             }
+            Toast.makeText(_activity, "surfaceDestroyed()", Toast.LENGTH_SHORT).show();
         }
         public void surfaceChanged(SurfaceHolder holder, int format, int w, int h) {
-            if(mHolder.getSurface() == null) { return; } // preview surface does not exist
+            if(holder.getSurface() == null) { return; } // preview surface does not exist // WAS mHolder
             mCamera.stopPreview(); // stop preview before making changes
         	previewWidth = w;
         	previewHeight = h;
+        	
+        	mPreviewSize = getOptimalPreviewSize(mSupportedPreviewSizes, w, h);
+        	Camera.Parameters parameters = mCamera.getParameters();
+            parameters.setPreviewSize(mPreviewSize.width, mPreviewSize.height);
+            mCamera.setParameters(parameters);
+            requestLayout();
+            
 
-        	if(mCamera != null) {
-        		Camera.Parameters parameters = mCamera.getParameters();
-                //List<Size> sizes = parameters.getSupportedPreviewSizes();
-                //Size optimalSize = getOptimalPreviewSize(sizes, w, h);
-                //parameters.setPreviewSize(optimalSize.width, optimalSize.height);
+        	previewWidth = mPreviewSize.width;
+        	previewHeight = mPreviewSize.height;
+
+            try {
+            	setCameraDisplayOrientation(_activity, defaultCameraId, mCamera);
+    			mCamera.setFaceDetectionListener(new MyFaceDetectionListener());
+                mCamera.setPreviewDisplay(holder); // WAS mHolder
+                mCamera.startPreview();
                 
-                mCamera.setParameters(parameters);
-                try {
-                    mCamera.setDisplayOrientation(90); // TODO add code that is in javadoc
-                    mCamera.setPreviewDisplay(mHolder);
-                    mCamera.startPreview();
-        		    startFaceDetection(); // start face detection feature, only do after startPreview
-                } catch (Exception e) {
-                    Log.d(TAG, "Error starting camera preview: " + e.getMessage());
-                }
-        	}
+    		    startFaceDetection(); // start face detection feature
+            } catch (Exception e) { } // Error starting camera preview
+            
+            
+            
+            
+            /* Uncomment below to manually add buffers, aka get ~30 fps */
+//          int dataBufferSize= previewHeight * previewWidth * (ImageFormat.getBitsPerPixel(mCamera.getParameters().getPreviewFormat()) / 8);
+//          mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+//          mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+//          mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+//          mCamera.addCallbackBuffer(new byte[dataBufferSize]);
+            mCamera.setPreviewCallback(new PreviewCallback() { // Gets called for every frame  // For manually added buffers/threads // Use setPreviewCallback() for automatic buffers
+        		public void onPreviewFrame(byte[] data, Camera c) { // NOTE: not ran if buffer isn't big enough for data // NOTE: not all devices have cameras that support preview sizes at the same aspect ratio as the device's display
+	        		if(numberOfFacesCurrentlyDetected == 0) {
+	        			mTextViewFace0Coordinates.setText("Face Rectangle: No Face Detected");
+	        			frameNumber = 0;
+//				    	mImageViewRectangle0.bringToFront();
+//				    	mImageViewRectangle0.setPadding(300, 400, 0, 0);
+				    	//mImageViewRectangle0.setPadding(c.getParameters().getPictureSize().width/2-75, c.getParameters().getPictureSize().height/2-100, 0, 0);
+	        		} else {
+	        			//int top = faceLeft0, right = faceTop0, bottom = faceRight0, left = faceBottom0; // because coordinate systems are different
+	        			//int top = faceLeft0+1000, right = faceTop0+1000, bottom = faceRight0+1000, left = faceBottom0+1000; // because coordinate systems are different
+	        			//int top = faceLeft0+1000, left = faceTop0+1000, bottom = faceRight0+1000, right = faceBottom0+1000; // because coordinate systems are different and backwards
+	        			int left = faceLeft0+1000, top = faceTop0+1000, right = faceRight0+1000, bottom = faceBottom0+1000;
+	        			//int left = 50, top = 50, right = 100, bottom = 100; // NOTE: Negative values not accepted
+			        	Log.d("DEBUG", "DEBUG: Actual Rect left,top,right,bottom = " + left + "," + top + "," + right + "," + bottom); //
+	                	//int smallPreviewWidth = right - left;
+	        			//int smallPreviewWidth = left - right; // because coordinate system is different
+	        			int smallPreviewWidth = right - left+1; // because coordinate system is different and backwards // 731
+	                	int smallPreviewHeight = bottom - top+1; // 1300
+						int numberOfPixelsToAnalyze = smallPreviewWidth * smallPreviewHeight; // The number of pixels in the Face Rect
+						
+						smallPreviewHeight =  smallPreviewHeight * previewHeight / 2000 ;// because backwards // 468
+						smallPreviewWidth = smallPreviewWidth * previewWidth / 2000 ; // because backwards // 467
+						
+						top = top * previewHeight / 2000; // 
+						left = left * previewWidth / 2000; // 
+						int topEnd = top+smallPreviewHeight; // 
+						int leftEnd = left+smallPreviewWidth; // 
+						
+//				    	mImageViewRectangle0.bringToFront();
+				    	mImageViewRectangle0.setPadding(left, top, 0, 0);
+				    	mImageViewRectangle0.forceLayout();
+				    	//mImageViewRectangle0.invalidate();
+						
+	        			/** Trying to analyze part of the screen*/
+	                	ByteArrayOutputStream outstr = new ByteArrayOutputStream();
+			        	Log.d("DEBUG", "DEBUG: PreviewWidth,Height = " + previewWidth + "," + previewHeight); // 540,922
+			        	Log.d("DEBUG", "DEBUG: smallPreviewWidth,Height = " + smallPreviewWidth + "," + smallPreviewHeight); // 540,922
+			        	Log.d("DEBUG", "DEBUG: Rect left, top, right, bottom = " + top + "," + left + "," + topEnd + "," + leftEnd); // 0,0, 772,1372
+	                    Rect rect = new Rect(left, top, leftEnd, topEnd);
+	                    YuvImage yuvimage = new YuvImage(data,ImageFormat.NV21,previewWidth,previewHeight,null); // Create YUV image from byte[]
+	                    yuvimage.compressToJpeg(rect, 100, outstr);                                              // Convert YUV image to Jpeg // NOTE: changes Rect's size
+	                    Bitmap bmp = BitmapFactory.decodeByteArray(outstr.toByteArray(), 0, outstr.size());      // Convert Jpeg to Bitmap
+
+			        	smallPreviewWidth = bmp.getWidth();
+			        	smallPreviewHeight = bmp.getHeight();
+			        	Log.d("DEBUG", "DEBUG: Bitmap Width,Height = " + smallPreviewWidth + "," + smallPreviewHeight);
+			        	
+	                    int r = 0, g = 0, b = 0;
+	                    int[] pix = new int[numberOfPixelsToAnalyze];
+	                    bmp.getPixels(pix, 0, smallPreviewWidth, 0, 0, smallPreviewWidth, smallPreviewHeight);
+	                    
+	                	for(int i = 0; i < smallPreviewHeight; i++) {
+		            		for(int j = 0; j < smallPreviewWidth; j++) {
+		                        int index = i * smallPreviewWidth + j;
+		                        r += (pix[index] >> 16) & 0xff; //bitwise shifting
+		                        g += (pix[index] >> 8) & 0xff;
+		                        b += pix[index] & 0xff;
+		                        //pix[index] = 0xff000000 | (r << 16) | (g << 8) | b; // to restore the values after RGB modification, use this statement, with adjustment above
+		            		}
+		            	}
+	                    
+						r /= numberOfPixelsToAnalyze;
+						g /= numberOfPixelsToAnalyze;
+						b /= numberOfPixelsToAnalyze;
+	        			
+				        if(frameNumber < heartRateFrameLength) {
+					        mTextViewDebug.setText("RGB: " + r + "," + g + "," + b);
+					        if(frameNumber == 0) {
+					        	samplingFrequency = System.nanoTime(); // Start time
+					        	//Log.d("DEBUG RGB", "DEBUG: samplingFrequency: " + samplingFrequency);
+					        }
+					        
+				        	fileDataRed += r + " "; // a string to be saved on SD card
+				        	fileDataGreen += g + " "; // a string to be saved on SD card
+				        	fileDataBlue += b + " "; // a string to be saved on SD card
+				        	
+					        arrayRed[frameNumber] = ((double) r);
+					        arrayGreen[frameNumber] = ((double) g);
+					        arrayBlue[frameNumber] = ((double) b);
+	
+					        mTextViewHeartRate.setText("Heart Rate: in " + (heartRateFrameLength-frameNumber) + "..");
+					        mTextViewBloodPressure.setText("Blood Pressure: in " + (heartRateFrameLength-frameNumber+1) + ".."); // Shows how long until measurement will display
+				        	frameNumber++;
+				        }
+				        else if(frameNumber == heartRateFrameLength) { // So that these functions don't run every frame preview, just on the 32nd one // TODO add sound when finish
+					        samplingFrequency = System.nanoTime() - samplingFrequency; // Minus end time = length of heartRateFrameLength frames
+					        double finalSamplingFrequency = samplingFrequency / (double)1000000000; // Length of time to get frames in seconds
+				        	finalSamplingFrequency = heartRateFrameLength / finalSamplingFrequency; // Frames per second in seconds
+					        
+					        FastICA_RGB.preICA(arrayRed, arrayGreen, arrayBlue, heartRateFrameLength, arrayRed, arrayGreen, arrayBlue); // heartRateFrameLength = 300 frames for now
+					        double heartRateFrequency = fft.FFT(arrayGreen, heartRateFrameLength,  finalSamplingFrequency);
+				        	heartRate = heartRateFrequency * 60;
+	
+				            mTextViewHeartRate.setText("Heart Rate: " + heartRate);
+				        	mTextViewBloodPressure.setText("Blood Pressure: in 0.."); // Just informing the user that BP almost calculated
+				        	mTextViewDebug.setText("Fps: " + finalSamplingFrequency);
+				            setBloodPressure(heartRate, settings.getInt("age", 25), settings.getString("sex", "Male"), settings.getInt("weight", 160), settings.getInt("height", 70), settings.getString("position", "Sitting"));
+					        
+				            saveSharedPreference("heartRate",(int)heartRate);
+				        	frameNumber++; // Ensures this if-statement is only ran once by making frameNumber one bigger than heartRateLength
+				        }
+				        else {
+				        	// do nothing
+				        }
+	        		}
+			        //mCamera.addCallbackBuffer(data); // "mCamera.addCallbackBuffer(data);" For manually added buffers/threads, aka ~18 fps
+				} // END onPreviewFrame()
+        	}); // END mCamera.setPreviewCallback()
+            
+            
+            
+            
+            
+            
+        } // END surfaceChanged
+        
+        @Override
+        protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+            // We purposely disregard child measurements because act as a
+            // wrapper to a SurfaceView that centers the camera preview instead
+            // of stretching it.
+            final int width = resolveSize(getSuggestedMinimumWidth(), widthMeasureSpec);
+            final int height = resolveSize(getSuggestedMinimumHeight(), heightMeasureSpec);
+            setMeasuredDimension(width, height);
+
+            if (mSupportedPreviewSizes != null) {
+                mPreviewSize = getOptimalPreviewSize(mSupportedPreviewSizes, width, height);
+            }
         }
 
-        private Size getOptimalPreviewSize(List<Size> sizes, int w, int h) {
-            final double ASPECT_TOLERANCE = 0.05;
-            double targetRatio = (double) w / h;
-            if (sizes == null) return null;
+		
 
-            Size optimalSize = null;
-            double minDiff = Double.MAX_VALUE;
+//        @Override
+//        protected void onLayout(boolean changed, int l, int t, int r, int b) {
+//            if (changed && getChildCount() > 0) {
+//                final View child = getChildAt(0);
+//
+//                final int width = r - l;
+//                final int height = b - t;
+//
+//                int previewWidth = width;
+//                int previewHeight = height;
+//                if (mPreviewSize != null) {
+//                    previewWidth = mPreviewSize.width;
+//                    previewHeight = mPreviewSize.height;
+//                }
+//
+//                // Center the child SurfaceView within the parent.
+//                if (width * previewHeight > height * previewWidth) {
+//                    final int scaledChildWidth = previewWidth * height / previewHeight;
+//                    child.layout((width - scaledChildWidth) / 2, 0,
+//                            (width + scaledChildWidth) / 2, height);
+//                } else {
+//                    final int scaledChildHeight = previewHeight * width / previewWidth;
+//                    child.layout(0, (height - scaledChildHeight) / 2,
+//                            width, (height + scaledChildHeight) / 2);
+//                }
+//            }
+//        }
+        
+    } // END class CameraPreview
 
-            int targetHeight = h;
+    /** A safe way to get an instance of the Camera object. Call in onCreate() */
+    public static Camera getCameraInstance() {
+        int numberOfCameras = Camera.getNumberOfCameras();
 
-            // Try to find an size match aspect ratio and size
-            for (Size size : sizes) {
-                double ratio = (double) size.width / size.height;
-                if (Math.abs(ratio - targetRatio) > ASPECT_TOLERANCE) continue;
-                if (Math.abs(size.height - targetHeight) < minDiff) {
-                    optimalSize = size;
-                    minDiff = Math.abs(size.height - targetHeight);
-                }
+        // Find the ID of the default camera
+        CameraInfo cameraInfo = new CameraInfo();
+        for (int i = 0; i < numberOfCameras; i++) {
+            Camera.getCameraInfo(i, cameraInfo);
+            if (cameraInfo.facing == CameraInfo.CAMERA_FACING_FRONT) {
+                defaultCameraId = i;
             }
-
-            // Cannot find the match of aspect ratio, ignore the requirement
-            if (optimalSize == null) {
-                minDiff = Double.MAX_VALUE;
-                for (Size size : sizes) {
-                    if (Math.abs(size.height - targetHeight) < minDiff) {
-                        optimalSize = size;
-                        minDiff = Math.abs(size.height - targetHeight);
-                    }
-                }
-            }
-            return optimalSize;
         }
+    	
+        Camera c = null;
+        try {
+            c = Camera.open(defaultCameraId); // attempt to get a Camera instance
+        }
+        catch (Exception e) { } // Camera is not available (in use or does not exist)
+        return c; // returns null if camera is unavailable
     }
-    
-    /** Face Detection */
-	class MyFaceDetectionListener implements Camera.FaceDetectionListener {
+
+    public static void setCameraDisplayOrientation(Activity activity, int cameraId, android.hardware.Camera camera) {
+        android.hardware.Camera.CameraInfo info = new android.hardware.Camera.CameraInfo();
+        android.hardware.Camera.getCameraInfo(cameraId, info);
+        int rotation = activity.getWindowManager().getDefaultDisplay().getRotation();
+        int degrees = 0;
+        switch (rotation) {
+            case Surface.ROTATION_0: degrees = 0; break;
+            case Surface.ROTATION_90: degrees = 90; break;
+            case Surface.ROTATION_180: degrees = 180; break;
+            case Surface.ROTATION_270: degrees = 270; break;
+        }
+
+        int result;
+        if (info.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
+            result = (info.orientation + degrees) % 360;
+            result = (360 - result) % 360;  // compensate the mirror
+        } else {  // back-facing
+            result = (info.orientation - degrees + 360) % 360;
+        }
+        camera.setDisplayOrientation(result);
+    }
+
+    class MyFaceDetectionListener implements Camera.FaceDetectionListener {
 	    public void onFaceDetection(Face[] faces, Camera camera) {
-	        if (faces.length > 0) {
-	            Log.d("FaceDetection", "face detected: "+ faces.length + " Face 1 Location X: " + faces[0].rect.centerX() + "Y: " + faces[0].rect.centerY());
-	            int left0   = faces[0].rect.left;
-	            int top0    = faces[0].rect.top;
-	            int right0  = faces[0].rect.right;
-	            int bottom0 = faces[0].rect.bottom;
-		    	mTextViewFace0Coordinates.setText("Face Rectangle: (" + left0 + "," + top0 + "), (" + right0 + "," + bottom0 + ")");
-		    	Toast.makeText(_activity, "Face Rectangle: (" + left0 + "," + top0 + "), (" + right0 + "," + bottom0 + ")", Toast.LENGTH_SHORT).show();
+	    	numberOfFacesCurrentlyDetected = faces.length;
+	        if (numberOfFacesCurrentlyDetected > 0) {
+	            faceLeft0   = faces[0].rect.left;
+	            faceTop0    = faces[0].rect.top;
+	            faceRight0  = faces[0].rect.right;
+	            faceBottom0 = faces[0].rect.bottom;
+		    	mTextViewFace0Coordinates.setText("Face Rectangle: (" + faceLeft0 + "," + faceTop0 + "), (" + faceRight0 + "," + faceBottom0 + ")");
+		    	
+		    	mImageViewRectangle0.bringToFront();
+		    	mImageViewRectangle0.setPadding(100, 100, 0, 0);
 		    	
 		    	// Try 4
-		    	ShapeDrawable rect = new ShapeDrawable(new RectShape());
-		        rect.setIntrinsicHeight(20);
-		        rect.setIntrinsicWidth(100);
-		        rect.getPaint().setColor(Color.MAGENTA);
-		        mImageViewRectangle0.setImageDrawable(rect);
+//		    	Bitmap bitmap = Bitmap.createBitmap(previewWidth, previewHeight, Bitmap.Config.RGB_565);
+//		        Paint paint = new Paint();
+//		        paint.setColor(Color.BLUE);
+//		        Canvas canvas = new Canvas(bitmap);
+//		        canvas.drawColor(Color.TRANSPARENT);
+//		        canvas.drawRect(25, 50, 75, 150, paint);
+//		        mImageViewRectangle0.setImageBitmap(bitmap);
 		    	
 		    	// Try 3
 		    	//mRectImage0.setPadding(left0, top0, previewWidth-right0, previewHeight-bottom0);
@@ -407,14 +451,14 @@ public class TestBloodPressure extends Activity {
 		    	//DrawRect drawRect = new DrawRect(_activity, faces);
 		    	//setContentView(drawRect);
 	        }
-//	        if (faces.length > 1) { // For two faces
+//	        if (numberOfFacesCurrentlyDetected > 1) {
 //	            int left1   = faces[1].rect.left;
 //	            int top1    = faces[1].rect.top;
 //	            int right1  = faces[1].rect.right;
 //	            int bottom1 = faces[1].rect.bottom;
 //		    	mTextViewFace1Coordinates.setText("Face Rectangle: (" + left1 + "," + top1 + "), (" + right1 + "," + bottom1 + ")");
 //	        }
-//	        if (faces.length > 2) { // For three faces
+//	        if (numberOfFacesCurrentlyDetected > 2) {
 //	            int left2   = faces[2].rect.left;
 //	            int top2    = faces[2].rect.top;
 //	            int right2  = faces[2].rect.right;
@@ -429,86 +473,61 @@ public class TestBloodPressure extends Activity {
 
 	    // start face detection only *after* preview has started
 	    if (params.getMaxNumDetectedFaces() > 0) {
-	    	Toast.makeText(_activity, "Max Num Faces Allows: " + params.getMaxNumDetectedFaces(), Toast.LENGTH_LONG).show();
+	    	//Toast.makeText(_activity, "Max Num Faces Allows: " + params.getMaxNumDetectedFaces(), Toast.LENGTH_LONG).show();
 	        // camera supports face detection, so can start it:
 	        mCamera.startFaceDetection();
 	    }
 	}
+    
+	private Size getOptimalPreviewSize(List<Size> sizes, int w, int h) {
+        final double ASPECT_TOLERANCE = 0.2;
+        double targetRatio = (double) w / h;
+        if (sizes == null) return null;
 
-	public void goToEditStats(View v) {
+        Size optimalSize = null;
+        double minDiff = Double.MAX_VALUE;
+
+        int targetHeight = h;
+
+        // Try to find an size match aspect ratio and size
+        for (Size size : sizes) {
+            double ratio = (double) size.width / size.height;
+            if (Math.abs(ratio - targetRatio) > ASPECT_TOLERANCE) continue;
+            if (Math.abs(size.height - targetHeight) < minDiff) {
+                optimalSize = size;
+                minDiff = Math.abs(size.height - targetHeight);
+            }
+        }
+
+        // Cannot find the one match the aspect ratio, ignore the requirement
+        if (optimalSize == null) {
+            minDiff = Double.MAX_VALUE;
+            for (Size size : sizes) {
+                if (Math.abs(size.height - targetHeight) < minDiff) {
+                    optimalSize = size;
+                    minDiff = Math.abs(size.height - targetHeight);
+                }
+            }
+        }
+        return optimalSize;
+    }
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+    public void onClickGoToEditStats(View v) {
     	startActivity(new Intent(_activity, EditStats.class));
 	}
-	public void addTemperature(View v) {
+	public void onClickGoToTemperature(View v) {
     	startActivity(new Intent(_activity, AddTemperature.class));
-	}
-	
-	// The one we have been using for a long time, but just not right now
-	public void decodeYUV(int[] out, byte[] fg, int width, int height) throws NullPointerException, IllegalArgumentException {
-	    int sz = width * height;
-	    if (out == null) throw new NullPointerException("buffer out is null");
-	    if (out.length < sz) throw new IllegalArgumentException("buffer out size " + out.length + " < minimum " + sz);
-	    if (fg == null) throw new NullPointerException("buffer 'fg' is null");
-	    if (fg.length < sz) throw new IllegalArgumentException("buffer fg size " + fg.length + " < minimum " + sz * 3 / 2);
-	    int i, j;
-	    int Y, Cr = 0, Cb = 0;
-	    for (j = 0; j < height; j++) {
-	        int pixPtr = j * width;
-	        final int jDiv2 = j >> 1;
-	        for (i = 0; i < width; i++) {
-	            Y = fg[pixPtr];
-	            if (Y < 0) Y += 255;
-	            if ((i & 0x1) != 1) {
-	                final int cOff = sz + jDiv2 * width + (i >> 1) * 2;
-		        	Log.d("DEBUG RGB", "DEBUG: cOff: " + cOff);
-	                Cb = fg[cOff];
-	                if (Cb < 0) Cb += 127;
-	                else Cb -= 128;
-	                Cr = fg[cOff + 1];
-	                if (Cr < 0) Cr += 127;
-	                else Cr -= 128;
-	            }
-	            
-	            int R = Y + Cr + (Cr >> 2) + (Cr >> 3) + (Cr >> 5);
-	            if (R < 0) R = 0;
-	            else if (R > 255) R = 255;
-	            int G = Y - (Cb >> 2) + (Cb >> 4) + (Cb >> 5) - (Cr >> 1) + (Cr >> 3) + (Cr >> 4) + (Cr >> 5);
-	            if (G < 0) G = 0;
-	            else if (G > 255) G = 255;
-	            int B = Y + Cb + (Cb >> 1) + (Cb >> 2) + (Cb >> 6);
-	            if (B < 0) B = 0;
-	            else if (B > 255) B = 255;
-	            
-	            out[pixPtr++] = 0xff000000 + (B << 16) + (G << 8) + R;
-	        }
-	    }
-	}
-	static public void decodeYUV2(int[] rgb, byte[] yuv420sp, int width, int height) { // Just another possible way of decoding
-	    final int frameSize = width * height;
-
-	    for (int j = 0, yp = 0; j < height; j++) {
-	        int uvp = frameSize + (j >> 1) * width, u = 0, v = 0;
-	        for (int i = 0; i < width; i++, yp++) {
-	            int y = (0xff & ((int) yuv420sp[yp])) - 16;
-	            if (y < 0) y = 0;
-	            if ((i & 1) == 0) {
-	                v = (0xff & yuv420sp[uvp++]) - 128;
-	                u = (0xff & yuv420sp[uvp++]) - 128;
-	            }
-	            int y1192 = 1192 * y;
-	            int r = (y1192 + 1634 * v);
-	            int g = (y1192 - 833 * v - 400 * u);
-	            int b = (y1192 + 2066 * u);
-//				R += 1.164*(Y-16)                  + 2.018*(Cr-128);
-//				G += 1.164*(Y-16) - 0.813*(Cb-128) - 0.391*(Cr-128);
-//				B += 1.164*(Y-16) + 1.596*(Cb-128);
-
-	            if (r < 0) r = 0; else if (r > 262143) r = 262143;
-	            if (g < 0) g = 0; else if (g > 262143) g = 262143;
-	            if (b < 0) b = 0; else if (b > 262143) b = 262143;
-
-	            rgb[yp] = 0xff000000 | ((r << 6) & 0xff0000) | ((g >> 2) & 0xff00) | ((b >> 10) & 0xff);
-	        }
-	    }
 	}
 	
 	private void loadPatientEditableStats() {
@@ -529,132 +548,12 @@ public class TestBloodPressure extends Activity {
 	        mTextViewTemperature.setText("Temperature: " + settings.getString("temperature", " Click to add.."));
         }
 	}
-	
-	private void sendEmail(String to, String message) {
-		try {
-			Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
-			emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{to});
-			emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Vital Signs");
-			emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, message);
-			//emailIntent.setType("text/plain");
-			emailIntent.setType("vnd.android.cursor.dir/email"); // Or "text/plain" "text/html" "plain/text"
-			//startActivity(emailIntent);
-			startActivity(Intent.createChooser(emailIntent, "Send email:"));
-			//finish();
-		} catch (ActivityNotFoundException e) {
-            Log.e("Emailing contact", "Email failed", e);
-		}
-	}
-	private void sendSMS(String phoneNumber, String message) {
-//		Uri smsUri = Uri.parse("sms:" + phoneNumber);
-//		Intent intent = new Intent(Intent.ACTION_VIEW, smsUri);
-//		intent.putExtra("sms_body", message);
-//		intent.setType("vnd.android-dir/mms-sms"); 
-//		startActivity(intent);
-		SmsManager sms = SmsManager.getDefault();
-	    sms.sendTextMessage(phoneNumber, null, message, null, null);
-	}
-	
-	private void checkMediaAvailability() {
-		String state = Environment.getExternalStorageState();
-
-		if (Environment.MEDIA_MOUNTED.equals(state)) {
-		    mExternalStorageAvailable = mExternalStorageWriteable = true; // We can read and write the media
-		} else if (Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
-		    // We can only read the media
-		    mExternalStorageAvailable = true;
-		    mExternalStorageWriteable = false;
-		} else {
-		    // Something else is wrong. It may be one of many other states, but all we need to know is we can neither read nor write
-		    mExternalStorageAvailable = mExternalStorageWriteable = false;
-		}
-	}
-	
-	private void writeToTextFile(String data, String fileName) {
-    	File sdCard = Environment.getExternalStorageDirectory();
-    	File directory = new File (sdCard.getAbsolutePath() + "/VitalSigns");
-    	directory.mkdirs();
-    	File file = new File(directory, fileName + ".txt");
-
-    	FileOutputStream fOut;
-		try {
-			fOut = new FileOutputStream(file);
-	    	OutputStreamWriter osw = new OutputStreamWriter(fOut);
-	    	osw.write(data);
-	    	osw.flush();
-	    	osw.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
+    
 	private void saveSharedPreference(String key, int value) {
     	SharedPreferences.Editor editor = settings.edit(); // Needed to make changes
     	editor.putInt(key, value);
     	editor.commit(); // This line saves the edits
 	}
-	private void saveSharedPreference(String key, boolean value) {
-    	SharedPreferences.Editor editor = settings.edit(); // Needed to make changes
-    	editor.putBoolean(key, value);
-    	editor.commit(); // This line saves the edits
-	}
-	private void saveSharedPreference(String key, String value) {
-    	SharedPreferences.Editor editor = settings.edit(); // Needed to make changes
-    	editor.putString(key, value);
-    	editor.commit(); // This line saves the edits
-	}
 	
-	public void playSound() { // TODO play sound when finished calculating heart rate
-        new Thread() {
-        	public void run() {
-                //MediaPlayer mp = MediaPlayer.create(_activity, R.raw.mysound);   
-                //mp.start();
-            }
-        }.start();
-    }
-	
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_test_blood_pressure, menu);
-        return true;
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle item selection
-        switch (item.getItemId()) {
-            case R.id.menu_settings:
-            	// Do nothing
-                return true;
-            case R.id.menu_convertUnits:
-            	displayEnglishUnits = (displayEnglishUnits==false)?true:false; // Switch between English and Metric
-            	SharedPreferences.Editor editor = settings.edit(); // Needed to make changes
-            	if(displayEnglishUnits) {
-                	editor.putInt("weight", (int)(settings.getInt("weight", 73)*2.20462));
-                	editor.putInt("height", (int)(settings.getInt("height", 190)/2.54));
-                	editor.putBoolean("displayEnglishUnits", displayEnglishUnits);
-                	editor.commit(); // This line saves the edits
-        	        mTextViewWeight.setText("Weight: " + settings.getInt("weight", 73) + " pounds");
-        	        mTextViewHeight.setText("Height: " + settings.getInt("height", 190) + " inches");
-            	} else { // Metric
-                	editor.putInt("weight", (int)(settings.getInt("weight", 160)/2.20462));
-                	editor.putInt("height", (int)(settings.getInt("height", 75)*2.54));
-                	editor.putBoolean("displayEnglishUnits", displayEnglishUnits);
-                	editor.commit(); // This line saves the edits
-            		mTextViewWeight.setText("Weight: " + settings.getInt("weight", 160) + " kg");
-            		mTextViewHeight.setText("Height: " + settings.getInt("height", 75) + " cm");
-            	}
-                return true;
-            case R.id.menu_sendEmail:
-            	sendEmail("danialgoodwin@gmail.com", "Heart Rate: " + heartRate + " bpm\nBlood Pressure: " + systolicPressure + "/" + diastolicPressure + "\nTemperature: " + temperature + ((displayEnglishUnits==true)?" F":" C"));
-                return true;
-            case R.id.menu_sendSMS:
-            	sendSMS("8132859689", "Heart Rate: " + heartRate + " bpm\nBlood Pressure: " + systolicPressure + "/" + diastolicPressure + "\nTemperature: " + temperature + ((displayEnglishUnits==true)?" F":" C"));
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
     
-}
+} // END class TestBloodPressure

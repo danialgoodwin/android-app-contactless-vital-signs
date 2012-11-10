@@ -78,6 +78,7 @@ net.simplyadvanced.vitalsigns.R$id: int editTextPosition
 net.simplyadvanced.vitalsigns.R$id: int editTextSex
 net.simplyadvanced.vitalsigns.R$id: int editTextTemperature
 net.simplyadvanced.vitalsigns.R$id: int editTextWeight
+net.simplyadvanced.vitalsigns.R$id: int frameLayoutCameraPreview
 net.simplyadvanced.vitalsigns.R$id: int imageViewRectangle0
 net.simplyadvanced.vitalsigns.R$id: int linearLayout1
 net.simplyadvanced.vitalsigns.R$id: int menu_change_units
@@ -86,9 +87,14 @@ net.simplyadvanced.vitalsigns.R$id: int menu_sendEmail
 net.simplyadvanced.vitalsigns.R$id: int menu_sendSMS
 net.simplyadvanced.vitalsigns.R$id: int menu_settings
 net.simplyadvanced.vitalsigns.R$id: int rectImage0
+net.simplyadvanced.vitalsigns.R$id: int relativeLayoutRoot
 net.simplyadvanced.vitalsigns.R$id: int surfaceView1
+net.simplyadvanced.vitalsigns.R$id: int surfaceViewCameraPreview
+net.simplyadvanced.vitalsigns.R$id: int textView0
 net.simplyadvanced.vitalsigns.R$id: int textView1
 net.simplyadvanced.vitalsigns.R$id: int textView2
+net.simplyadvanced.vitalsigns.R$id: int textView3
+net.simplyadvanced.vitalsigns.R$id: int textView4
 net.simplyadvanced.vitalsigns.R$id: int textViewAge
 net.simplyadvanced.vitalsigns.R$id: int textViewBloodPressure
 net.simplyadvanced.vitalsigns.R$id: int textViewFace0Coordinates
@@ -97,8 +103,12 @@ net.simplyadvanced.vitalsigns.R$id: int textViewFace2Coordinates
 net.simplyadvanced.vitalsigns.R$id: int textViewHeartRate
 net.simplyadvanced.vitalsigns.R$id: int textViewHeight
 net.simplyadvanced.vitalsigns.R$id: int textViewPosition
+net.simplyadvanced.vitalsigns.R$id: int textViewRightSide0
+net.simplyadvanced.vitalsigns.R$id: int textViewRightSide1
+net.simplyadvanced.vitalsigns.R$id: int textViewRightSide2
+net.simplyadvanced.vitalsigns.R$id: int textViewRightSide3
+net.simplyadvanced.vitalsigns.R$id: int textViewRightSide4
 net.simplyadvanced.vitalsigns.R$id: int textViewSex
-net.simplyadvanced.vitalsigns.R$id: int textViewTemperature
 net.simplyadvanced.vitalsigns.R$id: int textViewWeight
 net.simplyadvanced.vitalsigns.R$layout: int activity_add_temperature
 net.simplyadvanced.vitalsigns.R$layout: int activity_edit_stats
@@ -145,11 +155,13 @@ net.simplyadvanced.vitalsigns.R$string: int title_activity_test_pupil_dilation
 net.simplyadvanced.vitalsigns.R$string: int title_activity_test_respiratory_rate
 net.simplyadvanced.vitalsigns.R$string: int title_activity_test_vital_signs
 net.simplyadvanced.vitalsigns.R$style: int AppTheme
+net.simplyadvanced.vitalsigns.R$style: int DefaultTextViewLeftSide
+net.simplyadvanced.vitalsigns.R$style: int DefaultTextViewRightSide
 net.simplyadvanced.vitalsigns.R$style: int ImageButtonWithText
 net.simplyadvanced.vitalsigns.TestBloodPressure
 net.simplyadvanced.vitalsigns.TestBloodPressure: TestBloodPressure()
-net.simplyadvanced.vitalsigns.TestBloodPressure: void goToEditStats(android.view.View)
-net.simplyadvanced.vitalsigns.TestBloodPressure: void addTemperature(android.view.View)
+net.simplyadvanced.vitalsigns.TestBloodPressure: void onClickGoToEditStats(android.view.View)
+net.simplyadvanced.vitalsigns.TestBloodPressure: void onClickGoToTemperature(android.view.View)
 net.simplyadvanced.vitalsigns.TestBodyTemperature
 net.simplyadvanced.vitalsigns.TestBodyTemperature: TestBodyTemperature()
 net.simplyadvanced.vitalsigns.TestBodyTemperature: void goToEditStats(android.view.View)

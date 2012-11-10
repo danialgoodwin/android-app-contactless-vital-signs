@@ -627,18 +627,7 @@ net.simplyadvanced.vitalsigns.R$menu
 net.simplyadvanced.vitalsigns.R$string
 net.simplyadvanced.vitalsigns.R$style
 net.simplyadvanced.vitalsigns.TestBloodPressure:
-    public static final java.lang.String PREFS_NAME
-    447:484:public void decodeYUV(int[],byte[],int,int)
-    486:512:public static void decodeYUV2(int[],byte[],int,int)
-    599:602:private void saveSharedPreference(java.lang.String,boolean)
-    604:607:private void saveSharedPreference(java.lang.String,java.lang.String)
-    610:616:public void playSound()
-    57:57:static synthetic net.simplyadvanced.vitalsigns.TestBloodPressure access$2(net.simplyadvanced.vitalsigns.TestBloodPressure)
-net.simplyadvanced.vitalsigns.TestBloodPressure$1
-net.simplyadvanced.vitalsigns.TestBloodPressure$CameraPreview:
-    private static final java.lang.String TAG
-    341:370:private android.hardware.Camera$Size getOptimalPreviewSize(java.util.List,int,int)
-net.simplyadvanced.vitalsigns.TestBloodPressure$MyFaceDetectionListener
+    private static final java.lang.String PREFS_NAME
 net.simplyadvanced.vitalsigns.TestBodyTemperature:
     public static final java.lang.String PREFS_NAME
     379:383:private void tempReleaseCamera()

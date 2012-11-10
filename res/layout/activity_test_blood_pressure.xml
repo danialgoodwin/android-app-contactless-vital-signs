@@ -1,70 +1,26 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" >
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
+     android:id="@+id/relativeLayoutRoot" android:layout_width="match_parent" android:layout_height="match_parent">
 
-	<FrameLayout android:id="@+id/camera_preview" android:layout_width="match_parent" android:layout_height="0dip"
-	    android:layout_weight="1" android:foreground="@drawable/rectangle">
-        <ImageView 
-			android:id="@+id/imageViewRectangle0" 
-			android:layout_height="match_parent" 
-			android:layout_width="match_parent"	> <!-- android:src="@drawable/rectangle" -->
-		</ImageView>
-		
+	<FrameLayout android:id="@+id/frameLayoutCameraPreview" android:layout_width="match_parent" android:layout_height="match_parent"> <!-- android:foreground="@drawable/rectangle" -->
+	
 	</FrameLayout>
-
-    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-        android:orientation="horizontal" >
-      
-        <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
-	        android:orientation="vertical">
-       
-	        <TextView android:id="@+id/textViewBloodPressure" android:layout_width="wrap_content" android:layout_height="wrap_content"
-	            android:text="Blood Pressure: calculating"
-	            android:layout_weight="1" />
-	        <TextView android:id="@+id/textViewHeartRate" android:layout_width="wrap_content" android:layout_height="wrap_content"
-	            android:text="Heart Rate: calculating"
-	            android:layout_weight="1" />
-	        <TextView android:id="@+id/textViewTemperature" android:layout_width="wrap_content" android:layout_height="wrap_content"
-	            android:text="Temperature: Click to add.." android:onClick="addTemperature" android:clickable="true"
-	            android:layout_weight="1" />
-	        <TextView android:id="@+id/blue" android:layout_width="wrap_content" android:layout_height="wrap_content"
-	            android:text="Blue: bValue"
-	            android:layout_weight="1" />
-	        <TextView android:id="@+id/debug" android:layout_width="wrap_content" android:layout_height="wrap_content"
-	            android:text="Debug Line"
-	            android:layout_weight="1" />
-	        <TextView android:id="@+id/textViewFace0Coordinates" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1"
-		        android:text="This is where we test for facial gestures"/>
-		        
-		</LinearLayout>
-       
-		<TextView android:layout_width="0dp" android:layout_height="wrap_content"
-           android:text="" android:layout_weight="1" />
-       
-		<LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
-	        android:orientation="vertical">
-	       
-	        <TextView android:id="@+id/textViewAge" android:layout_width="wrap_content" android:layout_height="wrap_content"
-	            android:text="Age: 22" />
-	       
-	        <TextView android:id="@+id/textViewSex" android:layout_width="wrap_content" android:layout_height="wrap_content"
-	            android:text="Sex: Male" />
-	       
-	        <TextView android:id="@+id/textViewWeight" android:layout_width="wrap_content" android:layout_height="wrap_content"
-	            android:text="Weight: 160 lbs" />
-	       
-	        <TextView android:id="@+id/textViewHeight" android:layout_width="wrap_content" android:layout_height="wrap_content"
-	            android:text="Height: 75 inches" />
 	
-	        <TextView android:id="@+id/textViewPosition" android:layout_width="wrap_content" android:layout_height="wrap_content"
-	            android:text="Position: Sitting" />
-	        
- 	        <Button android:layout_width="wrap_content" android:layout_height="wrap_content"
-	            android:layout_gravity="center"
-	            android:text="Edit"
-	            android:onClick="goToEditStats" />
+	<SurfaceView android:id="@+id/surfaceViewCameraPreview" android:layout_width="match_parent" android:layout_height="match_parent"></SurfaceView>
 	
-		</LinearLayout>
-	</LinearLayout>
-</LinearLayout>
-
+	<!-- The TextViews on the left side, written from bottom to top -->
+    <TextView android:id="@+id/textView4" style="@style/DefaultTextViewLeftSide" android:layout_alignParentBottom="true" android:text="Debug: .."/>
+    <TextView android:id="@+id/textView3" style="@style/DefaultTextViewLeftSide" android:layout_above="@id/textView4"    android:text="Face Detection: (x,y), (x,y)" />
+	<TextView android:id="@+id/textView2" style="@style/DefaultTextViewLeftSide" android:layout_above="@id/textView3"    android:text="Temperature: Soon.." android:onClick="onClickGoToTemperature" android:clickable="true" />	
+	<TextView android:id="@+id/textView1" style="@style/DefaultTextViewLeftSide" android:layout_above="@id/textView2"    android:text="Blood Pressure: Soon.."  />	
+	<TextView android:id="@+id/textView0" style="@style/DefaultTextViewLeftSide" android:layout_above="@id/textView1"    android:text="Heart Rate: Soon.."  />	
+    
+	<!-- The TextViews on the right side, written from bottom to top -->
+    <TextView android:id="@+id/textViewRightSide4" style="@style/DefaultTextViewRightSide" android:text="Weight: 160"       android:layout_alignParentBottom="true"       />
+    <TextView android:id="@+id/textViewRightSide3" style="@style/DefaultTextViewRightSide" android:text="Height: 75"        android:layout_above="@id/textViewRightSide4" />
+    <TextView android:id="@+id/textViewRightSide2" style="@style/DefaultTextViewRightSide" android:text="Sex: Male"         android:layout_above="@id/textViewRightSide3" />
+    <TextView android:id="@+id/textViewRightSide1" style="@style/DefaultTextViewRightSide" android:text="Age: 23"           android:layout_above="@id/textViewRightSide2" />
+    <TextView android:id="@+id/textViewRightSide0" style="@style/DefaultTextViewRightSide" android:text="Position: Sitting" android:layout_above="@id/textViewRightSide1" />
+    
+    <ImageView android:id="@+id/imageViewRectangle0" android:layout_width="300dp" android:layout_height="400dp" android:src="@drawable/rectangle" android:paddingLeft="150px" android:paddingTop="200px" />
+        
+</RelativeLayout>

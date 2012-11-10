@@ -9,12 +9,12 @@
 	     <Button android:layout_weight="1"
 	         style="@style/ImageButtonWithText"
 	         android:drawableTop="@drawable/logoman"
-	         android:text="All Vital Signs"
+	         android:text="Final Prototype UI"
 	         android:onClick="goToTestVitalSigns"/>
 	     <Button android:layout_weight="1"
 	         style="@style/ImageButtonWithText"
 	         android:drawableTop="@drawable/logou"
-	         android:text="Heart Rate / Blood Pressure / Temp"
+	         android:text="HR/BP/Temp at 30fps"
 	         android:onClick="goToTestBloodPressure"/>
     </LinearLayout>
     
@@ -22,12 +22,12 @@
 	     <Button android:layout_weight="1"
 	         style="@style/ImageButtonWithText"
 	         android:drawableTop="@drawable/logou"
-	         android:text="[old] Heart Rate / Blood Pressure"
+	         android:text="HR/BP at 5fps"
 	         android:onClick="goToTestBodyTemperature"/>
 	     <Button android:layout_weight="1"
 	         style="@style/ImageButtonWithText"
 	         android:drawableTop="@drawable/logou"
-	         android:text="@string/resp_rate"
+	         android:text="[N/A] Respiratory Rate"
 	         android:onClick="goToTestRespiratoryRate"/>
     </LinearLayout>
 
@@ -35,12 +35,12 @@
         <Button android:layout_weight="1"
             style="@style/ImageButtonWithText"
             android:drawableTop="@drawable/logou"
-            android:text="Oxygen Saturation"
+            android:text="[N/A] Oxygen Saturation"
             android:onClick="goToTestOxygenSaturation"/>
         <Button android:layout_weight="1"
             style="@style/ImageButtonWithText"
             android:drawableTop="@drawable/logou"
-            android:text="Facial Features"
+            android:text="Facial Detection"
             android:onClick="goToTestFacialGestures"/>
     </LinearLayout>
     
