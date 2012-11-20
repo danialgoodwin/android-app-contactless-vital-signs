@@ -70,10 +70,10 @@ public class AddTemperature extends Activity {
     	editor.commit(); // This line saves the edits
 
     	float ambientTemp;
-    	if (mEditTextIndoorTemperature.toString().equalsIgnoreCase("")) {
+    	if (mEditTextIndoorTemperature.getText().toString().equals("")) {
     		ambientTemp = outdoorTemperature;
     	} else {
-    		ambientTemp = 72; // TODO: Actually calculate indoor temperature on phones that have that ability 
+    		ambientTemp = Float.parseFloat(mEditTextIndoorTemperature.getText().toString()); // TODO: Actually calculate indoor temperature on smartphones that have that ability 
     	}
     	
     	float measurement = settings.getFloat("skinTemperature", 88);
@@ -88,10 +88,9 @@ public class AddTemperature extends Activity {
     	finish(); // Navigate back on stack
 	}
 
-
 	public double convertTemp(double measuredSkinTemperature, double atmosphericTemperature) {
-		double factor = 3; //approximate constant factor irregardless of C/F
-		double itemp = 1/(factor-1)*(factor*measuredSkinTemperature - atmosphericTemperature);
+		double factor = 3; //approximate constant factor regardless of C/F
+		double itemp = (factor*measuredSkinTemperature - atmosphericTemperature)/(factor-1);
 		return itemp;
 	}
 	

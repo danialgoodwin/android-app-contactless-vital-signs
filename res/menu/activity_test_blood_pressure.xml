@@ -10,9 +10,9 @@
     <item android:id="@+id/menu_sendEmail"
         android:title="@string/menu_sendEmail"
         android:orderInCategory="100"
-        android:showAsAction="never" />
+        android:showAsAction="ifRoom" />
     <item android:id="@+id/menu_sendSMS"
         android:title="@string/menu_sendSMS"
         android:orderInCategory="100"
-        android:showAsAction="never" />
+        android:showAsAction="ifRoom" />
 </menu>

@@ -14,7 +14,7 @@
 	     <Button android:layout_weight="1"
 	         style="@style/ImageButtonWithText"
 	         android:drawableTop="@drawable/logou"
-	         android:text="HR/BP/Temp at 15fps"
+	         android:text="HR/BP/Temp at 15fps (TestBloodPres.java)"
 	         android:onClick="goToTestBloodPressure"/>
     </LinearLayout>
     
@@ -22,7 +22,7 @@
 	     <Button android:layout_weight="1"
 	         style="@style/ImageButtonWithText"
 	         android:drawableTop="@drawable/logou"
-	         android:text="HR/BP at 5fps"
+	         android:text="HR/BP at 5fps (TestBodyTemp.java)"
 	         android:onClick="goToTestBodyTemperature"/>
 	     <Button android:layout_weight="1"
 	         style="@style/ImageButtonWithText"

@@ -1,12 +1,21 @@
 package net.simplyadvanced.vitalsigns;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.lang.Math;
 import java.util.List;
 
 import android.os.Bundle;
+import android.os.Environment;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -22,12 +31,17 @@ import android.hardware.Camera.CameraInfo;
 import android.hardware.Camera.Face;
 import android.hardware.Camera.PreviewCallback;
 import android.hardware.Camera.Size;
+import android.telephony.SmsManager;
+import android.text.Editable;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.Window;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -49,7 +63,8 @@ public class TestBloodPressure extends Activity {
     private Camera mCamera;
     static int defaultCameraId = 0;
     
-    private TextView mTextViewHeartRate, mTextViewBloodPressure, mTextViewTemperature, mTextViewFace0Coordinates, mTextViewDebug, mTextViewAge, mTextViewSex, mTextViewHeight, mTextViewWeight, mTextViewPosition;
+    private TextView mTextViewHeartRate, mTextViewBloodPressure, mTextViewTemperature, mTextViewFace0Coordinates, mTextViewDebug;
+    private TextView mTextViewAge, mTextViewSex, mTextViewHeight, mTextViewWeight, mTextViewPosition;
     
     private int previewWidth = 0, previewHeight = 0; // Defined in surfaceChanged()
 
@@ -85,7 +100,7 @@ public class TestBloodPressure extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         _activity = this;
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE); // Hide the window title
+        //requestWindowFeature(Window.FEATURE_NO_TITLE); // Hide the window title
         setContentView(R.layout.activity_test_blood_pressure);
 
         settings = getSharedPreferences(PREFS_NAME, 0); // Load saved stats // Only done once while app is running
@@ -554,6 +569,175 @@ public class TestBloodPressure extends Activity {
     	editor.putInt(key, value);
     	editor.commit(); // This line saves the edits
 	}
+	private void saveSharedPreference(String key, String value) {
+    	SharedPreferences.Editor editor = settings.edit(); // Needed to make changes
+    	editor.putString(key, value);
+    	editor.commit(); // This line saves the edits
+	}
 	
     
+	
+	
+	
+	
+	
+	
+	/** Menu Related Items */
+	@Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.activity_test_blood_pressure, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.menu_settings:
+            	// Do nothing
+            	Toast.makeText(_activity, "You clicked settings", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.menu_convertUnits:
+            	onMenuClickConvertUnits();
+                return true;
+            case R.id.menu_sendEmail:
+            	if (settings.getString("userInputForEmail", "@gmail.com").equals("@gmail.com")) {
+                	promptUserInputForEmail(); // Basically runs just one time
+            	} else {
+            		sendEmail(settings.getString("userInputForEmail", "@gmail.com"), "Heart Rate: " + heartRate + " bpm\nBlood Pressure: " + systolicPressure + "/" + diastolicPressure + "\nTemperature: " + temperature + ((displayEnglishUnits==true)?" F":" C"));
+            	}
+                return true;
+            case R.id.menu_sendSMS:
+            	if (settings.getString("userInputForPhoneNumber", "").equals("")) {
+            		promptUserInputForPhoneNumber(); // Basically runs just one time
+            	} else {
+            		sendSMS(settings.getString("userInputForPhoneNumber", ""), "Heart Rate: " + heartRate + " bpm\nBlood Pressure: " + systolicPressure + "/" + diastolicPressure + "\nTemperature: " + temperature + ((displayEnglishUnits==true)?" F":" C"));
+            	}
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }  
+    } // END onOptionsItemSelected()
+    
+    private void onMenuClickConvertUnits() {
+    	displayEnglishUnits = (displayEnglishUnits==false)?true:false; // Switch between English and Metric
+    	SharedPreferences.Editor editor = settings.edit(); // Needed to make changes
+    	if (displayEnglishUnits) {
+        	editor.putInt("weight", (int)(settings.getInt("weight", 73)*2.20462));
+        	editor.putInt("height", (int)(settings.getInt("height", 190)/2.54));
+        	editor.putBoolean("displayEnglishUnits", displayEnglishUnits);
+        	editor.commit(); // This line saves the edits
+	        mTextViewWeight.setText("Weight: " + settings.getInt("weight", 73) + " pounds");
+	        mTextViewHeight.setText("Height: " + settings.getInt("height", 190) + " inches");
+    	} else { // Metric
+        	editor.putInt("weight", (int)(settings.getInt("weight", 160)/2.20462));
+        	editor.putInt("height", (int)(settings.getInt("height", 75)*2.54));
+        	editor.putBoolean("displayEnglishUnits", displayEnglishUnits);
+        	editor.commit(); // This line saves the edits
+    		mTextViewWeight.setText("Weight: " + settings.getInt("weight", 160) + " kg");
+    		mTextViewHeight.setText("Height: " + settings.getInt("height", 75) + " cm");
+    	}
+    }
+	
+    private void promptUserInputForEmail() {
+    	final EditText input = new EditText(_activity);
+    	input.setText(settings.getString("userInputForEmail", "@gmail.com"));
+    	new AlertDialog.Builder(_activity)
+                .setTitle("Enter Email")
+                .setMessage("Where would you like to email the data?")
+                .setView(input)
+                .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        //Editable value = input.getText();
+                    	saveSharedPreference("userInputForEmail", input.getText().toString());
+                    	sendEmail(settings.getString("userInputForEmail", "@gmail.com"), "Heart Rate: " + heartRate + " bpm\nBlood Pressure: " + systolicPressure + "/" + diastolicPressure + "\nTemperature: " + temperature + ((displayEnglishUnits==true)?" F":" C"));
+                    }
+                }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        // Do nothing.
+                    }
+                }).show();
+    }
+    private void sendEmail(String to, String message) {
+		try {
+			Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+			emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{to});
+			emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Vital Signs");
+			emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, message);
+			emailIntent.setType("vnd.android.cursor.dir/email"); // Or "text/plain" "text/html" "plain/text"
+			startActivity(emailIntent); // Use if you want the choice the automatically use the same option
+			//startActivity(Intent.createChooser(emailIntent, "Send email:")); // Use if you want options every time
+		} catch (ActivityNotFoundException e) {
+            Log.e("Emailing contact", "Email failed", e);
+		}
+	}
+	private void promptUserInputForPhoneNumber() {
+    	final EditText input = new EditText(_activity);
+    	input.setText(settings.getString("userInputForPhoneNumber", ""));
+    	new AlertDialog.Builder(_activity)
+                .setTitle("Enter Phone Number")
+                .setMessage("Where would you like to text the data?")
+                .setView(input)
+                .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        //Editable value = input.getText();
+                    	saveSharedPreference("userInputForPhoneNumber", input.getText().toString());
+                    	sendSMS(settings.getString("userInputForPhoneNumber", ""), "Heart Rate: " + heartRate + " bpm\nBlood Pressure: " + systolicPressure + "/" + diastolicPressure + "\nTemperature: " + temperature + ((displayEnglishUnits==true)?" F":" C"));
+                    	Toast.makeText(_activity, "Text sent", Toast.LENGTH_LONG).show();
+                    }
+                }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        // Do nothing.
+                    }
+                }).show();
+	}
+    private void sendSMS(String phoneNumber, String message) {
+//		Uri smsUri = Uri.parse("sms:" + phoneNumber);
+//		Intent intent = new Intent(Intent.ACTION_VIEW, smsUri);
+//		intent.putExtra("sms_body", message);
+//		intent.setType("vnd.android-dir/mms-sms"); 
+//		startActivity(intent);
+		SmsManager sms = SmsManager.getDefault();
+	    sms.sendTextMessage(phoneNumber, null, message, null, null);
+	}
+	
+	private void checkMediaAvailability() {
+		String state = Environment.getExternalStorageState();
+
+		if (Environment.MEDIA_MOUNTED.equals(state)) {
+		    mExternalStorageAvailable = mExternalStorageWriteable = true; // We can read and write the media
+		} else if (Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
+		    // We can only read the media
+		    mExternalStorageAvailable = true;
+		    mExternalStorageWriteable = false;
+		} else {
+		    // Something else is wrong. It may be one of many other states, but all we need to know is we can neither read nor write
+		    mExternalStorageAvailable = mExternalStorageWriteable = false;
+		}
+	}
+	
+	private void writeToTextFile(String data, String fileName) {
+    	File sdCard = Environment.getExternalStorageDirectory();
+    	File directory = new File (sdCard.getAbsolutePath() + "/VitalSigns");
+    	directory.mkdirs();
+    	File file = new File(directory, fileName + ".txt");
+
+    	FileOutputStream fOut;
+		try {
+			fOut = new FileOutputStream(file);
+	    	OutputStreamWriter osw = new OutputStreamWriter(fOut);
+	    	osw.write(data);
+	    	osw.flush();
+	    	osw.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
+	
+	
+	
 } // END class TestBloodPressure

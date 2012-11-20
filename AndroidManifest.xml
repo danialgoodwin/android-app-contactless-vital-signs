@@ -31,26 +31,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".TestVitalSigns"
-            android:label="@string/title_activity_test_vital_signs"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
-            android:name=".TestFacialGestures"
-            android:label="@string/title_activity_test_facial_gestures"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
-            android:name=".TestBloodPressure"
-            android:label="@string/title_activity_test_blood_pressure"
-             > <!-- android:screenOrientation="nosensor" -->
-        </activity>
-        <activity
-            android:name=".TestHeartRate"
-            android:label="@string/title_activity_test_heart_rate"
-            android:screenOrientation="portrait" >
-        </activity>
+        <activity android:name=".TestVitalSigns"     android:label="@string/title_activity_test_vital_signs"     android:screenOrientation="portrait" ></activity>
+        <activity android:name=".TestFacialGestures" android:label="@string/title_activity_test_facial_gestures" android:screenOrientation="portrait" ></activity>
+        <activity android:name=".TestBloodPressure"  android:label="@string/title_activity_test_blood_pressure" ><!-- android:screenOrientation="nosensor" --></activity>
+        <activity android:name=".TestHeartRate"      android:label="@string/title_activity_test_heart_rate"      android:screenOrientation="portrait" ></activity>
         <activity
             android:name=".TestBodyTemperature"
             android:label="@string/title_activity_test_body_temperature"
