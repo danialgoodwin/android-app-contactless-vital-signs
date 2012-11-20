@@ -642,6 +642,8 @@ net.simplyadvanced.vitalsigns.TestFacialGestures:
     private static final java.lang.String TAG
     android.widget.ImageView mRectImage1
     android.widget.ImageView mRectImage2
+net.simplyadvanced.vitalsigns.TestOxygenSaturation:
+    public static final java.lang.String PREFS_NAME
 net.simplyadvanced.vitalsigns.heartrate.ConcurrencyUtils:
     63:65:private ConcurrencyUtils()
     115:116:public static void setNumberOfThreads(int)

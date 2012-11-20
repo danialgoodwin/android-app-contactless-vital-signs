@@ -1,44 +1,44 @@
-# view AndroidManifest.xml #generated:85
+# view AndroidManifest.xml #generated:86
 -keep class net.simplyadvanced.vitalsigns.AddTemperature { <init>(...); }
 
-# view AndroidManifest.xml #generated:78
+# view AndroidManifest.xml #generated:79
 -keep class net.simplyadvanced.vitalsigns.EditStats { <init>(...); }
 
-# view AndroidManifest.xml #generated:23
+# view AndroidManifest.xml #generated:24
 -keep class net.simplyadvanced.vitalsigns.MainActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:43
+# view AndroidManifest.xml #generated:44
 -keep class net.simplyadvanced.vitalsigns.TestBloodPressure { <init>(...); }
 
-# view AndroidManifest.xml #generated:53
+# view AndroidManifest.xml #generated:54
 -keep class net.simplyadvanced.vitalsigns.TestBodyTemperature { <init>(...); }
 
-# view AndroidManifest.xml #generated:73
+# view AndroidManifest.xml #generated:74
 -keep class net.simplyadvanced.vitalsigns.TestEyeSaccades { <init>(...); }
 
-# view AndroidManifest.xml #generated:38
+# view AndroidManifest.xml #generated:39
 -keep class net.simplyadvanced.vitalsigns.TestFacialGestures { <init>(...); }
 
-# view AndroidManifest.xml #generated:48
+# view AndroidManifest.xml #generated:49
 -keep class net.simplyadvanced.vitalsigns.TestHeartRate { <init>(...); }
 
-# view AndroidManifest.xml #generated:63
+# view AndroidManifest.xml #generated:64
 -keep class net.simplyadvanced.vitalsigns.TestOxygenSaturation { <init>(...); }
 
-# view AndroidManifest.xml #generated:68
+# view AndroidManifest.xml #generated:69
 -keep class net.simplyadvanced.vitalsigns.TestPupilDilation { <init>(...); }
 
-# view AndroidManifest.xml #generated:58
+# view AndroidManifest.xml #generated:59
 -keep class net.simplyadvanced.vitalsigns.TestRespiratoryRate { <init>(...); }
 
-# view AndroidManifest.xml #generated:33
+# view AndroidManifest.xml #generated:34
 -keep class net.simplyadvanced.vitalsigns.TestVitalSigns { <init>(...); }
 
 # onClick res/layout/activity_add_temperature.xml #generated:38
 # onClick res/layout/activity_edit_stats.xml #generated:105
 -keepclassmembers class * { *** Cancel(...); }
 
-# onClick res/layout/activity_add_temperature.xml #generated:33
+# onClick res/layout/activity_add_temperature.xml #generated:40
 # onClick res/layout/activity_edit_stats.xml #generated:100
 -keepclassmembers class * { *** Save(...); }
 

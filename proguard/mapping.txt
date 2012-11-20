@@ -746,11 +746,13 @@ android.support.v4.widget.EdgeEffectCompatIcs -> android.support.v4.d.e:
     boolean onRelease(java.lang.Object) -> c
     boolean draw(java.lang.Object,android.graphics.Canvas) -> a
 net.simplyadvanced.vitalsigns.AddTemperature -> net.simplyadvanced.vitalsigns.AddTemperature:
-    android.widget.EditText mEditTextTemperature -> a
-    android.content.SharedPreferences settings -> b
+    android.widget.EditText mEditTextInputTemperature -> a
+    android.widget.TextView mTextViewOutputTemperature -> b
+    android.content.SharedPreferences settings -> c
     void onCreate(android.os.Bundle) -> onCreate
     void Save(android.view.View) -> Save
     void Cancel(android.view.View) -> Cancel
+    double convertTemp(double,double) -> a
     boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
 net.simplyadvanced.vitalsigns.EditStats -> net.simplyadvanced.vitalsigns.EditStats:
     android.widget.EditText mEditTextAge -> a
@@ -850,14 +852,14 @@ net.simplyadvanced.vitalsigns.TestBloodPressure -> net.simplyadvanced.vitalsigns
     void access$4(net.simplyadvanced.vitalsigns.TestBloodPressure,int) -> b
     android.hardware.Camera$Size access$5(net.simplyadvanced.vitalsigns.TestBloodPressure,java.util.List,int,int) -> a
     android.widget.TextView access$6(net.simplyadvanced.vitalsigns.TestBloodPressure) -> c
-    android.widget.ImageView access$7(net.simplyadvanced.vitalsigns.TestBloodPressure) -> d
+    int access$7(net.simplyadvanced.vitalsigns.TestBloodPressure) -> d
     int access$8(net.simplyadvanced.vitalsigns.TestBloodPressure) -> e
-    int access$9(net.simplyadvanced.vitalsigns.TestBloodPressure) -> f
+    android.widget.TextView access$9(net.simplyadvanced.vitalsigns.TestBloodPressure) -> f
     android.widget.TextView access$10(net.simplyadvanced.vitalsigns.TestBloodPressure) -> g
     android.widget.TextView access$11(net.simplyadvanced.vitalsigns.TestBloodPressure) -> h
-    android.widget.TextView access$12(net.simplyadvanced.vitalsigns.TestBloodPressure) -> i
-    android.content.SharedPreferences access$13(net.simplyadvanced.vitalsigns.TestBloodPressure) -> j
-    void access$14(net.simplyadvanced.vitalsigns.TestBloodPressure,java.lang.String,int) -> a
+    android.content.SharedPreferences access$12(net.simplyadvanced.vitalsigns.TestBloodPressure) -> i
+    void access$13(net.simplyadvanced.vitalsigns.TestBloodPressure,java.lang.String,int) -> a
+    android.widget.ImageView access$14(net.simplyadvanced.vitalsigns.TestBloodPressure) -> j
 net.simplyadvanced.vitalsigns.TestBloodPressure$CameraPreview -> net.simplyadvanced.vitalsigns.b:
     android.hardware.Camera$Size mPreviewSize -> a
     java.util.List mSupportedPreviewSizes -> b
@@ -967,7 +969,13 @@ net.simplyadvanced.vitalsigns.TestHeartRate -> net.simplyadvanced.vitalsigns.Tes
     void onCreate(android.os.Bundle) -> onCreate
     boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
 net.simplyadvanced.vitalsigns.TestOxygenSaturation -> net.simplyadvanced.vitalsigns.TestOxygenSaturation:
+    android.widget.EditText mEditTextInputTemperature -> a
+    android.widget.TextView mTextViewOutputTemperature -> b
+    android.content.SharedPreferences settings -> c
     void onCreate(android.os.Bundle) -> onCreate
+    void Save(android.view.View) -> Save
+    void Cancel(android.view.View) -> Cancel
+    double convertTemp(double,double) -> a
     boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
 net.simplyadvanced.vitalsigns.TestPupilDilation -> net.simplyadvanced.vitalsigns.TestPupilDilation:
     void onCreate(android.os.Bundle) -> onCreate

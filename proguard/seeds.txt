@@ -74,6 +74,7 @@ net.simplyadvanced.vitalsigns.R$id: int camera_preview
 net.simplyadvanced.vitalsigns.R$id: int debug
 net.simplyadvanced.vitalsigns.R$id: int editTextAge
 net.simplyadvanced.vitalsigns.R$id: int editTextHeight
+net.simplyadvanced.vitalsigns.R$id: int editTextInputTemperature
 net.simplyadvanced.vitalsigns.R$id: int editTextPosition
 net.simplyadvanced.vitalsigns.R$id: int editTextSex
 net.simplyadvanced.vitalsigns.R$id: int editTextTemperature
@@ -102,6 +103,7 @@ net.simplyadvanced.vitalsigns.R$id: int textViewFace1Coordinates
 net.simplyadvanced.vitalsigns.R$id: int textViewFace2Coordinates
 net.simplyadvanced.vitalsigns.R$id: int textViewHeartRate
 net.simplyadvanced.vitalsigns.R$id: int textViewHeight
+net.simplyadvanced.vitalsigns.R$id: int textViewOutputTemperature
 net.simplyadvanced.vitalsigns.R$id: int textViewPosition
 net.simplyadvanced.vitalsigns.R$id: int textViewRightSide0
 net.simplyadvanced.vitalsigns.R$id: int textViewRightSide1
@@ -173,6 +175,8 @@ net.simplyadvanced.vitalsigns.TestHeartRate
 net.simplyadvanced.vitalsigns.TestHeartRate: TestHeartRate()
 net.simplyadvanced.vitalsigns.TestOxygenSaturation
 net.simplyadvanced.vitalsigns.TestOxygenSaturation: TestOxygenSaturation()
+net.simplyadvanced.vitalsigns.TestOxygenSaturation: void Save(android.view.View)
+net.simplyadvanced.vitalsigns.TestOxygenSaturation: void Cancel(android.view.View)
 net.simplyadvanced.vitalsigns.TestPupilDilation
 net.simplyadvanced.vitalsigns.TestPupilDilation: TestPupilDilation()
 net.simplyadvanced.vitalsigns.TestRespiratoryRate

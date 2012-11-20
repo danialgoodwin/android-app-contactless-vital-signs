@@ -14,7 +14,7 @@
 	     <Button android:layout_weight="1"
 	         style="@style/ImageButtonWithText"
 	         android:drawableTop="@drawable/logou"
-	         android:text="HR/BP/Temp at 30fps"
+	         android:text="HR/BP/Temp at 15fps"
 	         android:onClick="goToTestBloodPressure"/>
     </LinearLayout>
     

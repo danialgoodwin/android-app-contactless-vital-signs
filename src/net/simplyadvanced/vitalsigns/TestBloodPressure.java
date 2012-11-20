@@ -236,8 +236,8 @@ public class TestBloodPressure extends Activity {
 						int leftEnd = left+smallPreviewWidth; // 
 						
 //				    	mImageViewRectangle0.bringToFront();
-				    	mImageViewRectangle0.setPadding(left, top, 0, 0);
-				    	mImageViewRectangle0.forceLayout();
+				    	//mImageViewRectangle0.setPadding(left, top, 0, 0);
+				    	//mImageViewRectangle0.forceLayout();
 				    	//mImageViewRectangle0.invalidate();
 						
 	        			/** Trying to analyze part of the screen*/
@@ -538,14 +538,14 @@ public class TestBloodPressure extends Activity {
 	        mTextViewWeight.setText("Weight: " + settings.getInt("weight", 160) + " pounds");
 	        mTextViewHeight.setText("Height: " + settings.getInt("height", 75) + " inches");
 	        mTextViewPosition.setText("Position: " + settings.getString("position", "Sitting"));
-	        mTextViewTemperature.setText("Temperature: " + settings.getString("temperature", " Click to add.."));
+	        mTextViewTemperature.setText("Temperature: " + settings.getFloat("internalTemperature", 0)); // TODO: Add Click to add..
         } else {
 	        mTextViewAge.setText("Age: " + settings.getInt("age", 23));
 	        mTextViewSex.setText("Sex: " + settings.getString("sex", "Male"));
 	        mTextViewWeight.setText("Weight: " + settings.getInt("weight", 73) + " kg");
 	        mTextViewHeight.setText("Height: " + settings.getInt("height", 75) + " cm");
 	        mTextViewPosition.setText("Position: " + settings.getString("position", "Sitting"));
-	        mTextViewTemperature.setText("Temperature: " + settings.getString("temperature", " Click to add.."));
+	        mTextViewTemperature.setText("Temperature: " + settings.getFloat("internalTemperature", 0)); // TODO: Add Click to add..
         }
 	}
     
