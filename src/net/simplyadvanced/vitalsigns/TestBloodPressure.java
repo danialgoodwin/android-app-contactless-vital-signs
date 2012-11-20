@@ -69,7 +69,7 @@ public class TestBloodPressure extends Activity {
     private int previewWidth = 0, previewHeight = 0; // Defined in surfaceChanged()
 
     /* Heart Rate Related Variables */
-    int heartRateFrameLength = 256;
+    int heartRateFrameLength = 100; //256;
     double[] arrayRed = new double[heartRateFrameLength]; //ArrayList<Double> arrayRed = new ArrayList<Double>();
     double[] arrayGreen = new double[heartRateFrameLength]; //ArrayList<Double> arrayGreen = new ArrayList<Double>();
     double[] arrayBlue = new double[heartRateFrameLength]; //ArrayList<Double> arrayBlue = new ArrayList<Double>();
@@ -123,7 +123,9 @@ public class TestBloodPressure extends Activity {
 
         mCamera = getCameraInstance();
         mFrameLayoutCameraPreview.addView(new CameraPreview(_activity, mCamera)); // Create and add camera preview to screen
-    }
+        
+        checkMediaAvailability();
+    } // END onCreate()
 
     protected void onResume() {
     	super.onResume();
@@ -322,6 +324,9 @@ public class TestBloodPressure extends Activity {
 					        
 				            saveSharedPreference("heartRate",(int)heartRate);
 				        	frameNumber++; // Ensures this if-statement is only ran once by making frameNumber one bigger than heartRateLength
+				        	
+				        	
+				        	promptUserToSaveData(); // Ask user if they would like to save this data
 				        }
 				        else {
 				        	// do nothing
@@ -330,12 +335,6 @@ public class TestBloodPressure extends Activity {
 			        //mCamera.addCallbackBuffer(data); // "mCamera.addCallbackBuffer(data);" For manually added buffers/threads, aka ~18 fps
 				} // END onPreviewFrame()
         	}); // END mCamera.setPreviewCallback()
-            
-            
-            
-            
-            
-            
         } // END surfaceChanged
         
         @Override
@@ -351,8 +350,6 @@ public class TestBloodPressure extends Activity {
                 mPreviewSize = getOptimalPreviewSize(mSupportedPreviewSizes, width, height);
             }
         }
-
-		
 
 //        @Override
 //        protected void onLayout(boolean changed, int l, int t, int r, int b) {
@@ -527,7 +524,29 @@ public class TestBloodPressure extends Activity {
         return optimalSize;
     }
 
-	
+	private void promptUserToSaveData() {
+    	final EditText input = new EditText(_activity);
+    	new AlertDialog.Builder(_activity)
+                .setTitle("Save Data?")
+                .setMessage("Would you like to save the data?")
+                .setView(input)
+                .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        //Editable value = input.getText();
+                    	if (mExternalStorageAvailable == true && mExternalStorageWriteable == true) {
+                    		int saveDataCount = settings.getInt("saveDataCount", 0) + 1;
+                    		writeToTextFile("Heart Rate: " + heartRate + " bpm\nBlood Pressure: " + systolicPressure + "/" + diastolicPressure + "\nTemperature: " + temperature + ((displayEnglishUnits==true)?" F":" C"), "data" + saveDataCount);
+                    		saveSharedPreference("saveDataCount", saveDataCount);
+                    	} else {
+                    		Toast.makeText(_activity, "SD card storage not available", Toast.LENGTH_SHORT).show();
+                    	}
+                    }
+                }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        // Do nothing.
+                    }
+                }).show();
+	}
 	
 	
 	
@@ -728,6 +747,7 @@ public class TestBloodPressure extends Activity {
 	    	osw.write(data);
 	    	osw.flush();
 	    	osw.close();
+    		Toast.makeText(_activity, "Data successfully save in " + file.toString(), Toast.LENGTH_LONG).show();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

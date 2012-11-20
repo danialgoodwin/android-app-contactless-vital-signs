@@ -74,10 +74,11 @@ net.simplyadvanced.vitalsigns.R$id: int camera_preview
 net.simplyadvanced.vitalsigns.R$id: int debug
 net.simplyadvanced.vitalsigns.R$id: int editTextAge
 net.simplyadvanced.vitalsigns.R$id: int editTextHeight
+net.simplyadvanced.vitalsigns.R$id: int editTextIndoorTemperature
 net.simplyadvanced.vitalsigns.R$id: int editTextInputTemperature
 net.simplyadvanced.vitalsigns.R$id: int editTextPosition
 net.simplyadvanced.vitalsigns.R$id: int editTextSex
-net.simplyadvanced.vitalsigns.R$id: int editTextTemperature
+net.simplyadvanced.vitalsigns.R$id: int editTextSkinTemperature
 net.simplyadvanced.vitalsigns.R$id: int editTextWeight
 net.simplyadvanced.vitalsigns.R$id: int frameLayoutCameraPreview
 net.simplyadvanced.vitalsigns.R$id: int imageViewRectangle0
@@ -103,6 +104,8 @@ net.simplyadvanced.vitalsigns.R$id: int textViewFace1Coordinates
 net.simplyadvanced.vitalsigns.R$id: int textViewFace2Coordinates
 net.simplyadvanced.vitalsigns.R$id: int textViewHeartRate
 net.simplyadvanced.vitalsigns.R$id: int textViewHeight
+net.simplyadvanced.vitalsigns.R$id: int textViewIndoorTemperature
+net.simplyadvanced.vitalsigns.R$id: int textViewOutdoorTemperature
 net.simplyadvanced.vitalsigns.R$id: int textViewOutputTemperature
 net.simplyadvanced.vitalsigns.R$id: int textViewPosition
 net.simplyadvanced.vitalsigns.R$id: int textViewRightSide0
@@ -111,6 +114,8 @@ net.simplyadvanced.vitalsigns.R$id: int textViewRightSide2
 net.simplyadvanced.vitalsigns.R$id: int textViewRightSide3
 net.simplyadvanced.vitalsigns.R$id: int textViewRightSide4
 net.simplyadvanced.vitalsigns.R$id: int textViewSex
+net.simplyadvanced.vitalsigns.R$id: int textViewSkinTemperature
+net.simplyadvanced.vitalsigns.R$id: int textViewWeatherTemperature
 net.simplyadvanced.vitalsigns.R$id: int textViewWeight
 net.simplyadvanced.vitalsigns.R$layout: int activity_add_temperature
 net.simplyadvanced.vitalsigns.R$layout: int activity_edit_stats

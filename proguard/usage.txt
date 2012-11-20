@@ -628,6 +628,8 @@ net.simplyadvanced.vitalsigns.R$string
 net.simplyadvanced.vitalsigns.R$style
 net.simplyadvanced.vitalsigns.TestBloodPressure:
     private static final java.lang.String PREFS_NAME
+    704:716:private void checkMediaAvailability()
+    719:736:private void writeToTextFile(java.lang.String,java.lang.String)
 net.simplyadvanced.vitalsigns.TestBodyTemperature:
     public static final java.lang.String PREFS_NAME
     379:383:private void tempReleaseCamera()
