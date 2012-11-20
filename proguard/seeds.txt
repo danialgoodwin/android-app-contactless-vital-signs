@@ -70,6 +70,9 @@ net.simplyadvanced.vitalsigns.R$drawable: int logoman
 net.simplyadvanced.vitalsigns.R$drawable: int logou
 net.simplyadvanced.vitalsigns.R$drawable: int rectangle
 net.simplyadvanced.vitalsigns.R$id: int blue
+net.simplyadvanced.vitalsigns.R$id: int buttonPlayback
+net.simplyadvanced.vitalsigns.R$id: int buttonRecordStart
+net.simplyadvanced.vitalsigns.R$id: int buttonRecordStop
 net.simplyadvanced.vitalsigns.R$id: int camera_preview
 net.simplyadvanced.vitalsigns.R$id: int debug
 net.simplyadvanced.vitalsigns.R$id: int editTextAge
@@ -186,6 +189,9 @@ net.simplyadvanced.vitalsigns.TestPupilDilation
 net.simplyadvanced.vitalsigns.TestPupilDilation: TestPupilDilation()
 net.simplyadvanced.vitalsigns.TestRespiratoryRate
 net.simplyadvanced.vitalsigns.TestRespiratoryRate: TestRespiratoryRate()
+net.simplyadvanced.vitalsigns.TestRespiratoryRate: void onClickRecordStart(android.view.View)
+net.simplyadvanced.vitalsigns.TestRespiratoryRate: void onClickRecordStop(android.view.View)
+net.simplyadvanced.vitalsigns.TestRespiratoryRate: void onClickPlayback(android.view.View)
 net.simplyadvanced.vitalsigns.TestVitalSigns
 net.simplyadvanced.vitalsigns.TestVitalSigns: TestVitalSigns()
 net.simplyadvanced.vitalsigns.heartrate.DoubleFFT_1D$Plans: net.simplyadvanced.vitalsigns.heartrate.DoubleFFT_1D$Plans[] values()

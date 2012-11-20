@@ -24,6 +24,9 @@ public final class R {
     }
     public static final class id {
         public static final int blue=0x7f080021;
+        public static final int buttonPlayback=0x7f08002d;
+        public static final int buttonRecordStart=0x7f08002b;
+        public static final int buttonRecordStop=0x7f08002c;
         public static final int camera_preview=0x7f08001e;
         public static final int debug=0x7f080022;
         public static final int editTextAge=0x7f080007;
@@ -37,11 +40,11 @@ public final class R {
         public static final int frameLayoutCameraPreview=0x7f080011;
         public static final int imageViewRectangle0=0x7f08001d;
         public static final int linearLayout1=0x7f080000;
-        public static final int menu_change_units=0x7f08002f;
-        public static final int menu_convertUnits=0x7f08002c;
-        public static final int menu_sendEmail=0x7f08002d;
-        public static final int menu_sendSMS=0x7f08002e;
-        public static final int menu_settings=0x7f08002b;
+        public static final int menu_change_units=0x7f080032;
+        public static final int menu_convertUnits=0x7f08002f;
+        public static final int menu_sendEmail=0x7f080030;
+        public static final int menu_sendSMS=0x7f080031;
+        public static final int menu_settings=0x7f08002e;
         public static final int rectImage0=0x7f080027;
         public static final int relativeLayoutRoot=0x7f080010;
         public static final int surfaceView1=0x7f080023;

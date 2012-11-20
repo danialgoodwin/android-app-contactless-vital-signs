@@ -66,3 +66,12 @@
 # onClick res/layout/activity_test_blood_pressure.xml #generated:13
 -keepclassmembers class * { *** onClickGoToTemperature(...); }
 
+# onClick res/layout/activity_test_respiratory_rate.xml #generated:38
+-keepclassmembers class * { *** onClickPlayback(...); }
+
+# onClick res/layout/activity_test_respiratory_rate.xml #generated:16
+-keepclassmembers class * { *** onClickRecordStart(...); }
+
+# onClick res/layout/activity_test_respiratory_rate.xml #generated:27
+-keepclassmembers class * { *** onClickRecordStop(...); }
+

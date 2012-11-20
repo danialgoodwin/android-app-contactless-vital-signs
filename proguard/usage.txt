@@ -628,8 +628,6 @@ net.simplyadvanced.vitalsigns.R$string
 net.simplyadvanced.vitalsigns.R$style
 net.simplyadvanced.vitalsigns.TestBloodPressure:
     private static final java.lang.String PREFS_NAME
-    704:716:private void checkMediaAvailability()
-    719:736:private void writeToTextFile(java.lang.String,java.lang.String)
 net.simplyadvanced.vitalsigns.TestBodyTemperature:
     public static final java.lang.String PREFS_NAME
     379:383:private void tempReleaseCamera()
@@ -646,6 +644,8 @@ net.simplyadvanced.vitalsigns.TestFacialGestures:
     android.widget.ImageView mRectImage2
 net.simplyadvanced.vitalsigns.TestOxygenSaturation:
     public static final java.lang.String PREFS_NAME
+net.simplyadvanced.vitalsigns.TestRespiratoryRate:
+    private static final java.lang.String LOG_TAG
 net.simplyadvanced.vitalsigns.heartrate.ConcurrencyUtils:
     63:65:private ConcurrencyUtils()
     115:116:public static void setNumberOfThreads(int)
