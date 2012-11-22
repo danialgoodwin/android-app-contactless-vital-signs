@@ -22,12 +22,12 @@
 	     <Button android:layout_weight="1"
 	         style="@style/ImageButtonWithText"
 	         android:drawableTop="@drawable/logou"
-	         android:text="HR/BP at 5fps (TestBodyTemp.java)"
+	         android:text="[N/A] HR/BP at 5fps (TestBodyTemp.java)"
 	         android:onClick="goToTestBodyTemperature"/>
 	     <Button android:layout_weight="1"
 	         style="@style/ImageButtonWithText"
 	         android:drawableTop="@drawable/logou"
-	         android:text="[N/A] Respiratory Rate"
+	         android:text="Respiratory Rate"
 	         android:onClick="goToTestRespiratoryRate"/>
     </LinearLayout>
 

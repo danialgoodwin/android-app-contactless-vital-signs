@@ -60,7 +60,6 @@ public class TestRespiratoryRate extends Activity {
         	mButtonPlayback.setText("Start playing");
         }
         mStartPlaying = !mStartPlaying;
-    	
     }
     
     
@@ -145,9 +144,6 @@ public class TestRespiratoryRate extends Activity {
             mPlayer = null;
         }
     }
-    
-    
-    
     
     
     
