@@ -1,13 +1,19 @@
 package net.simplyadvanced.vitalsigns;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
+import java.util.Locale;
+
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
 
+import android.location.Address;
+import android.location.Geocoder;
 import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -18,6 +24,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class AddTemperature extends Activity {
 	AddTemperature _activity;
@@ -38,28 +45,23 @@ public class AddTemperature extends Activity {
         mTextViewSkinTemperature = (TextView) findViewById(R.id.textViewSkinTemperature);
         mTextViewIndoorTemperature = (TextView) findViewById(R.id.textViewIndoorTemperature);
         mTextViewOutdoorTemperature = (TextView) findViewById(R.id.textViewOutdoorTemperature);
+        // TODO: settings.getBoolean("displayEnglishUnits", true);
 
     	settings = getSharedPreferences(PREFS_NAME, 0);
 
         //mEditTextInputTemperature.setText("" + settings.getFloat("skinTemperature", 0));
         mEditTextSkinTemperature.setText( String.format("%.2f",settings.getFloat("skinTemperature", (float) 88.666)) );
         
-        //mTextViewOutdoorTemperature.setText("Outdoor Temperature: " + getOutdoorTemperature("12772416")); // For Tampa
-        getOutdoorTemperature("12772416"); // Eventually, add ability to insert location instead of woeid: http://code.google.com/p/yahooweatherandroid/source/browse/trunk/WeatherYahoo/src/com/exoplatform/weather/model/WeatherDataModel.java
+
+        getOutdoorTemperature();
     }
     
-    public void getOutdoorTemperature(String woeid) { // TODO: Return a String eventually
+    public void getOutdoorTemperature() {
     	if (!checkInternetConnection(_activity)) {
     		mTextViewOutdoorTemperature.setText("Outdoor Temperature: No Internet!");
-    		return; // "No Internet!";
+    		return;
     	} else {
-    		URL url;
-			try {
-				url = new URL("http://weather.yahooapis.com/forecastrss?w=" + woeid);
-	    		new DownloadUrlStream().execute(url);
-			} catch (MalformedURLException e) {
-				e.printStackTrace();
-			}
+	    	new DownloadUrlStream().execute();
     	}
     }
 
@@ -110,18 +112,33 @@ public class AddTemperature extends Activity {
         return true;
     }
 
-    private class DownloadUrlStream extends AsyncTask<URL, Integer, String> { // Getting outdoorTemperature in a different thread than the main thread // Needed for APIs 3.0+(?)
-        protected String doInBackground(URL... urls) { // Do the long-running work in here
+    private class DownloadUrlStream extends AsyncTask<Void, Integer, String> { // Getting outdoorTemperature in a different thread than the main thread // Needed for APIs 3.0+(?)
+        protected String doInBackground(Void... params) { // Do the long-running work in here
+        	int lat = settings.getInt("currentLatitude", 0);
+        	int lon = settings.getInt("currentLongitude", 0);
+        	
+        	if (lat == 0 || lon == 0) {
+        		return "Not available";
+        	}
+        	
+        	String zipCode = convertCoordinatesToZipCode(lat/(double)1000000,lon/(double)1000000);
+    		Toast.makeText(_activity, "zip code = " + zipCode, Toast.LENGTH_SHORT).show(); // DEBUG
+            
+        	URL url;        	
         	try {
+				url = new URL("http://api.wunderground.com/api/9db19bdec18308cd/conditions/q/CA/" + zipCode + ".xml");
+				
 	            SAXParserFactory factory = SAXParserFactory.newInstance(); // create the factory
 	            SAXParser parser = factory.newSAXParser();                 // create a parser
 	            XMLReader xmlreader = parser.getXMLReader();               // create the reader (scanner)
 	            RSSHandler theRssHandler = new RSSHandler();               // instantiate our handler
 	            xmlreader.setContentHandler(theRssHandler);                // assign our handler
-	            InputSource is = new InputSource(urls[0].openStream());    // get our data via the url class
+	            InputSource is = new InputSource(url.openStream());        // get our data via the url class
 	            xmlreader.parse(is);                                       // perform the synchronous parse
 	            return theRssHandler.getFeed(); // get the results - should be a fully populated RSSFeed instance, or null on error
-	        } catch (Exception e) {
+	        } catch (MalformedURLException e1) {
+	    		return "Not available";
+			} catch (Exception e) {
 	    		return "Not available";
 	    	}
         }
@@ -132,10 +149,33 @@ public class AddTemperature extends Activity {
 
         protected void onPostExecute(String result) { // This is called when doInBackground() is finished
             //showNotification("Downloaded " + result + " bytes");
-        	outdoorTemperature = Integer.parseInt(result);
-        	mTextViewOutdoorTemperature.setText("Outdoor Temperature: " + outdoorTemperature);
+        	try {
+        		mTextViewOutdoorTemperature.setText("Outdoor Temperature: " + Integer.parseInt(result));
+			} catch (NumberFormatException e) {
+	        	mTextViewOutdoorTemperature.setText("Outdoor Temperature: " + result);
+			}
         }
-    }
+    } // END DownloadUrlStream()
+    
+	public String convertCoordinatesToZipCode(double lat, double lon) {
+		Toast.makeText(_activity, "lat,lon = " + lat + "," + lon, Toast.LENGTH_SHORT).show(); // DEBUG
+		Geocoder geocoder = new Geocoder(this, Locale.ENGLISH);
 
+		List<Address> addresses = null;
 
-}
+		try {
+		    addresses = geocoder.getFromLocation(lat, lon, 3);
+		} catch (IOException ex) { }
+
+		String zipCode = null;
+		for (int i = 0; i < addresses.size(); i++) {
+		    Address address = addresses.get(i);
+		    if (address.getPostalCode() != null) {
+		        zipCode = address.getPostalCode();
+		        return zipCode;
+		    }
+		}
+		return null;
+	} // END convertCoordinatesToZipCode()
+
+} // END AddTemperature.java

@@ -5,6 +5,7 @@ import org.xml.sax.*;
 
 public class RSSHandler extends DefaultHandler {
 	private String _feed; // For outdoorTemperature
+	int currentstate = 0;
 
 	RSSHandler() {} // Empty constructor
 	
@@ -23,8 +24,9 @@ public class RSSHandler extends DefaultHandler {
 	public void endDocument() throws SAXException {}
 	public void startElement(String namespaceURI, String localName,String qName, Attributes atts) throws SAXException {
 //		depth++;
-		if (localName.equals("condition")) {
-			_feed = atts.getValue("temp");
+		if (localName.equals("temperature_string")) {
+			//_feed = atts.getValue("temp");
+			currentstate = 1;
 			return;
 		}
 		
@@ -38,7 +40,7 @@ public class RSSHandler extends DefaultHandler {
 //		}
 //		// if we don't explicitly handle the element, make sure we don't wind up erroneously 
 //		// storing a newline or other bogus data into one of our existing elements
-//		currentstate = 0;
+		currentstate = 0;
 	}
 	
 	public void endElement(String namespaceURI, String localName, String qName) throws SAXException {
@@ -49,7 +51,7 @@ public class RSSHandler extends DefaultHandler {
 //		}
 	}
 	 
-//	public void characters(char ch[], int start, int length) {
+	public void characters(char ch[], int start, int length) {
 //		int realLength = 0;
 //		for(int i=0;i<ch.length;i++) {
 //			if((ch[i] == '<') && (ch[i+1] == '/')) {
@@ -57,11 +59,14 @@ public class RSSHandler extends DefaultHandler {
 //				break;
 //			}
 //		}
-//		
-//		String theString = new String(ch,start,length);
+		
+		String theString = new String(ch,start,length);
 //		Log.i("RSSReader","characters[" + theString + "]");
-//		
-//		switch (currentstate) {
+		
+		switch (currentstate) {
+			case 1: // "temperature_string"
+				_feed = ch.toString();
+				break;
 //			case RSS_ID: // 1
 //				_item.setId(theString);
 //				currentstate = 0;
@@ -70,9 +75,9 @@ public class RSSHandler extends DefaultHandler {
 //				_item.setTweet(theString);
 //				currentstate = 0;
 //				break;
-//			default:
-//				return;
-//		}
-//	}
+			default:
+				return;
+		}
+	}
 
 }

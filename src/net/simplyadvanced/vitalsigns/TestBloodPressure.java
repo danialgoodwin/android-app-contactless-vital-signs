@@ -4,11 +4,17 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.lang.Math;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.app.Activity;
@@ -33,6 +39,7 @@ import android.hardware.Camera.PreviewCallback;
 import android.hardware.Camera.Size;
 import android.telephony.SmsManager;
 import android.text.Editable;
+import android.text.format.Time;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -69,7 +76,7 @@ public class TestBloodPressure extends Activity {
     private int previewWidth = 0, previewHeight = 0; // Defined in surfaceChanged()
 
     /* Heart Rate Related Variables */
-    int heartRateFrameLength = 100; //256;
+    int heartRateFrameLength = 100; // WAS 256;
     double[] arrayRed = new double[heartRateFrameLength]; //ArrayList<Double> arrayRed = new ArrayList<Double>();
     double[] arrayGreen = new double[heartRateFrameLength]; //ArrayList<Double> arrayGreen = new ArrayList<Double>();
     double[] arrayBlue = new double[heartRateFrameLength]; //ArrayList<Double> arrayBlue = new ArrayList<Double>();
@@ -95,6 +102,10 @@ public class TestBloodPressure extends Activity {
 	
 	/* Settings */
 	boolean displayEnglishUnits = true;
+	
+	/* GPS */
+	LocationManager locationManager;
+	LocationListener locationListener;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -130,11 +141,13 @@ public class TestBloodPressure extends Activity {
     protected void onResume() {
     	super.onResume();
     	loadPatientEditableStats();
+    	activateGps();
     }
     protected void onPause() {
     	super.onPause();
     }
     protected void onDestroy() {
+    	deactivateGps();
     	super.onDestroy();
     }
 
@@ -525,18 +538,19 @@ public class TestBloodPressure extends Activity {
     }
 
 	private void promptUserToSaveData() {
-    	final EditText input = new EditText(_activity);
+    	//final EditText input = new EditText(_activity);
     	new AlertDialog.Builder(_activity)
                 .setTitle("Save Data?")
                 .setMessage("Would you like to save the data?")
-                .setView(input)
+                //.setView(input)
                 .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         //Editable value = input.getText();
                     	if (mExternalStorageAvailable == true && mExternalStorageWriteable == true) {
-                    		int saveDataCount = settings.getInt("saveDataCount", 0) + 1;
-                    		writeToTextFile("Heart Rate: " + heartRate + " bpm\nBlood Pressure: " + systolicPressure + "/" + diastolicPressure + "\nTemperature: " + temperature + ((displayEnglishUnits==true)?" F":" C"), "data" + saveDataCount);
-                    		saveSharedPreference("saveDataCount", saveDataCount);
+                    		Time timeNow = new Time(Time.getCurrentTimezone());
+                    		timeNow.setToNow();
+                    		writeToTextFile("Heart Rate: " + heartRate + " bpm\nBlood Pressure: " + systolicPressure + "/" + diastolicPressure + "\nTemperature: " + temperature + ((displayEnglishUnits==true)?" F":" C"), "data-LastMeasurement");
+                    		writeToTextFile2(heartRate + "," + systolicPressure + "," + diastolicPressure + "," + temperature + "," + ((displayEnglishUnits==true)?"F":"C") + "," + timeNow.format2445() + "\n");
                     	} else {
                     		Toast.makeText(_activity, "SD card storage not available", Toast.LENGTH_SHORT).show();
                     	}
@@ -747,6 +761,25 @@ public class TestBloodPressure extends Activity {
 	    	osw.write(data);
 	    	osw.flush();
 	    	osw.close();
+    		//Toast.makeText(_activity, "Data successfully save in " + file.toString(), Toast.LENGTH_LONG).show();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	private void writeToTextFile2(String data) {
+    	File sdCard = Environment.getExternalStorageDirectory();
+    	File directory = new File (sdCard.getAbsolutePath() + "/VitalSigns");
+    	directory.mkdirs();
+    	File file = new File(directory, "data.csv");
+    	FileOutputStream fOut;
+		try {
+			fOut = new FileOutputStream(file, true);
+	    	OutputStreamWriter osw = new OutputStreamWriter(fOut);
+	    	osw.write(data);
+	    	osw.flush();
+	    	osw.close();
     		Toast.makeText(_activity, "Data successfully save in " + file.toString(), Toast.LENGTH_LONG).show();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -758,6 +791,40 @@ public class TestBloodPressure extends Activity {
 	
 	
 	
+	
+	
+	
+	
+	/** GPS Related Code */
+	public void activateGps() {
+		// Acquire a reference to the system Location Manager
+		locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+
+		// Define a listener that responds to location updates
+		locationListener = new LocationListener() {
+		    public void onLocationChanged(Location location) { // Called when a new location is found by the network location provider.
+		    	saveSharedPreference("currentLatitude", (int) (location.getLatitude()*1000000));
+		    	saveSharedPreference("currentLongitude", (int) (location.getLongitude()*1000000));
+		    	deactivateGps();
+		    }
+
+		    public void onStatusChanged(String provider, int status, Bundle extras) {}
+
+		    public void onProviderEnabled(String provider) {}
+
+		    public void onProviderDisabled(String provider) {}
+		};
+
+		// Register the listener with the Location Manager to receive location updates
+		locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+	}
+	public void deactivateGps() { // Remove the listener you previously added
+    	try {
+			locationManager.removeUpdates(locationListener);
+		} catch (IllegalArgumentException e) { // intent is null
+			e.printStackTrace();
+		}
+	}
 	
 	
 } // END class TestBloodPressure
