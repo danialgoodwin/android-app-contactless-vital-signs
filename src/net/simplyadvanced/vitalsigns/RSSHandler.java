@@ -3,6 +3,8 @@ package net.simplyadvanced.vitalsigns;
 import org.xml.sax.helpers.DefaultHandler;
 import org.xml.sax.*;
 
+import android.util.Log;
+
 public class RSSHandler extends DefaultHandler {
 	private String _feed; // For outdoorTemperature
 	int currentstate = 0;
@@ -24,11 +26,33 @@ public class RSSHandler extends DefaultHandler {
 	public void endDocument() throws SAXException {}
 	public void startElement(String namespaceURI, String localName,String qName, Attributes atts) throws SAXException {
 //		depth++;
-		if (localName.equals("temperature_string")) {
-			//_feed = atts.getValue("temp");
+		
+		/** Use this set for the wunderground api */
+//		if (localName.equals("temperature_string")) {
+//			Log.d("DEBUG", "Found temperature_string tag from xml parsing");
+//			//_feed = atts.getValue("temp");
+//			currentstate = 1;
+//			return;
+//		}
+
+		/** Use this set for the weather.com api */
+//		if (localName.equals("span")) {
+//			Log.d("DEBUG", "Found span tag from xml parsing");
+//			//if (atts.getLocalName(1).equals("itemprop")) {
+//				if (atts.getValue("itemprop").equals("temperature-fahrenheit")) {
+//					//_feed = atts.getValue("itemprop");
+//					currentstate = 1;
+//				}
+//			//}
+//		return;
+		
+		/** Use this set for the accu-weather.com api */
+		if (localName.equals("temperature")) { // could also use "realfeel" for what temperature it feels like
+		    Log.d("DEBUG", "Found temperature tag from xml parsing");
 			currentstate = 1;
 			return;
 		}
+		
 		
 //		if (localName.equals("id")) {
 //			currentstate = RSS_ID;
@@ -65,7 +89,9 @@ public class RSSHandler extends DefaultHandler {
 		
 		switch (currentstate) {
 			case 1: // "temperature_string"
-				_feed = ch.toString();
+				_feed = theString;
+				Log.d("DEBUG", "ch.toString() = " + _feed);
+				currentstate = 2;
 				break;
 //			case RSS_ID: // 1
 //				_item.setId(theString);

@@ -870,18 +870,20 @@ net.simplyadvanced.vitalsigns.TestBloodPressure -> net.simplyadvanced.vitalsigns
     void onClickGoToEditStats(android.view.View) -> onClickGoToEditStats
     void onClickGoToTemperature(android.view.View) -> onClickGoToTemperature
     void loadPatientEditableStats() -> f
+    java.lang.String getFormattedVitalSigns() -> g
     void saveSharedPreference(java.lang.String,int) -> a
     void saveSharedPreference(java.lang.String,java.lang.String) -> a
     boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
     boolean onOptionsItemSelected(android.view.MenuItem) -> onOptionsItemSelected
-    void onMenuClickConvertUnits() -> g
-    void promptUserInputForEmail() -> h
+    void onMenuClickConvertUnits() -> h
+    void promptUserInputForEmail() -> i
     void sendEmail(java.lang.String,java.lang.String) -> b
-    void promptUserInputForPhoneNumber() -> i
+    void promptUserInputForPhoneNumber() -> j
     void sendSMS(java.lang.String,java.lang.String) -> c
-    void checkMediaAvailability() -> j
+    void checkMediaAvailability() -> k
     void writeToTextFile(java.lang.String,java.lang.String) -> d
     void writeToTextFile2(java.lang.String) -> a
+    void onActivityResult(int,int,android.content.Intent) -> onActivityResult
     void activateGps() -> c
     void deactivateGps() -> d
     void access$0(net.simplyadvanced.vitalsigns.TestBloodPressure,android.hardware.Camera) -> a
@@ -903,8 +905,9 @@ net.simplyadvanced.vitalsigns.TestBloodPressure -> net.simplyadvanced.vitalsigns
     void access$16(net.simplyadvanced.vitalsigns.TestBloodPressure,java.lang.String,java.lang.String) -> a
     void access$17(net.simplyadvanced.vitalsigns.TestBloodPressure,java.lang.String) -> a
     void access$18(net.simplyadvanced.vitalsigns.TestBloodPressure,java.lang.String,java.lang.String) -> b
-    void access$19(net.simplyadvanced.vitalsigns.TestBloodPressure,java.lang.String,java.lang.String) -> c
-    void access$20(net.simplyadvanced.vitalsigns.TestBloodPressure,java.lang.String,java.lang.String) -> d
+    java.lang.String access$19(net.simplyadvanced.vitalsigns.TestBloodPressure) -> l
+    void access$20(net.simplyadvanced.vitalsigns.TestBloodPressure,java.lang.String,java.lang.String) -> c
+    void access$21(net.simplyadvanced.vitalsigns.TestBloodPressure,java.lang.String,java.lang.String) -> d
 net.simplyadvanced.vitalsigns.TestBloodPressure$1 -> net.simplyadvanced.vitalsigns.d:
     net.simplyadvanced.vitalsigns.TestBloodPressure this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick

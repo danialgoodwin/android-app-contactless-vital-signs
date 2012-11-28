@@ -880,4 +880,4 @@ public class TestBloodPressure extends Activity {
 	}
 	
 	
-} // END class TestBloodPressure
+} // END class TestBloodPressure extends Activity { }

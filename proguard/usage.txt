@@ -628,6 +628,8 @@ net.simplyadvanced.vitalsigns.R$string
 net.simplyadvanced.vitalsigns.R$style
 net.simplyadvanced.vitalsigns.TestBloodPressure:
     private static final java.lang.String PREFS_NAME
+    static final int CONTACT_PICKER_EMAIL_RESULT
+    static final int CONTACT_PICKER_PHONE_NUMBER_RESULT
 net.simplyadvanced.vitalsigns.TestBodyTemperature:
     public static final java.lang.String PREFS_NAME
     379:383:private void tempReleaseCamera()

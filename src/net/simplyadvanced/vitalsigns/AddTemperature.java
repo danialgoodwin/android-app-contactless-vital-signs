@@ -10,6 +10,7 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
 import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
 import android.location.Address;
@@ -20,6 +21,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
@@ -51,6 +53,22 @@ public class AddTemperature extends Activity {
 
         //mEditTextInputTemperature.setText("" + settings.getFloat("skinTemperature", 0));
         mEditTextSkinTemperature.setText( String.format("%.2f",settings.getFloat("skinTemperature", (float) 88.666)) );
+        
+        
+        
+        
+        
+        // DEBUG
+    	int lat = settings.getInt("currentLatitude", 0); // Gets coordinates that were saved from TestBloodPressure.java
+    	int lon = settings.getInt("currentLongitude", 0);
+        
+    	Toast.makeText(_activity, "lat,long = " + lat + "," + lon, Toast.LENGTH_LONG).show(); // DEBUG
+        
+        
+        
+        
+        
+        
         
 
         getOutdoorTemperature();
@@ -112,9 +130,9 @@ public class AddTemperature extends Activity {
         return true;
     }
 
-    private class DownloadUrlStream extends AsyncTask<Void, Integer, String> { // Getting outdoorTemperature in a different thread than the main thread // Needed for APIs 3.0+(?)
+    private class DownloadUrlStream extends AsyncTask<Void, Integer, String> { // Gets outdoorTemperature in a different thread than the main thread // Needed for APIs 3.0+(?)
         protected String doInBackground(Void... params) { // Do the long-running work in here
-        	int lat = settings.getInt("currentLatitude", 0);
+        	int lat = settings.getInt("currentLatitude", 0); // Gets coordinates that were saved from TestBloodPressure.java
         	int lon = settings.getInt("currentLongitude", 0);
         	
         	if (lat == 0 || lon == 0) {
@@ -122,24 +140,31 @@ public class AddTemperature extends Activity {
         	}
         	
         	String zipCode = convertCoordinatesToZipCode(lat/(double)1000000,lon/(double)1000000);
-    		Toast.makeText(_activity, "zip code = " + zipCode, Toast.LENGTH_SHORT).show(); // DEBUG
+        	Log.d("DEBUG", "zipCode: " + zipCode); // Works
+    		//Toast.makeText(_activity, "zip code = " + zipCode, Toast.LENGTH_SHORT).show(); // DEBUG // Can't call in AsyncTask (because it is not on the UI thread?)
             
         	URL url;        	
         	try {
-				url = new URL("http://api.wunderground.com/api/9db19bdec18308cd/conditions/q/CA/" + zipCode + ".xml");
+				// url = new URL("http://api.wunderground.com/api/9db19bdec18308cd/conditions/q/CA/" + zipCode + ".xml"); // Doesn't work right now. But, code is fine with this url
+        		// url = new URL("http://www.weather.com/weather/right-now/" + zipCode); // There is a IOException with this // Could be parsing error because it isn't xml
+        		url = new URL("http://thale.accu-weather.com/widget/thale/weather-data.asp?location=" + zipCode);
 				
-	            SAXParserFactory factory = SAXParserFactory.newInstance(); // create the factory
-	            SAXParser parser = factory.newSAXParser();                 // create a parser
-	            XMLReader xmlreader = parser.getXMLReader();               // create the reader (scanner)
-	            RSSHandler theRssHandler = new RSSHandler();               // instantiate our handler
-	            xmlreader.setContentHandler(theRssHandler);                // assign our handler
-	            InputSource is = new InputSource(url.openStream());        // get our data via the url class
-	            xmlreader.parse(is);                                       // perform the synchronous parse
+	            SAXParserFactory factory = SAXParserFactory.newInstance(); // creates the factory
+	            SAXParser parser = factory.newSAXParser();                 // creates a parser
+	            XMLReader xmlreader = parser.getXMLReader();               // creates the reader (scanner)
+	            RSSHandler theRssHandler = new RSSHandler();               // creates and instantiates our handler
+	            xmlreader.setContentHandler(theRssHandler);                // assigns our handler to the reader (scanner)
+	            InputSource is = new InputSource(url.openStream());        // gets data via the url class
+	            xmlreader.parse(is);                                       // performs the synchronous parse
 	            return theRssHandler.getFeed(); // get the results - should be a fully populated RSSFeed instance, or null on error
-	        } catch (MalformedURLException e1) {
-	    		return "Not available";
-			} catch (Exception e) {
-	    		return "Not available";
+	        } catch (MalformedURLException e) { // from URL()
+	    		return "Not available - bad url";
+	        } catch (IOException e1) { // from openStream() and parse()
+	    		return "Not available - bad io";
+	        } catch (SAXException e2) { // from parse()
+	    		return "Not available - bad sax";
+			} catch (Exception e3) {
+	    		return "Not available - other error";
 	    	}
         }
     
@@ -150,7 +175,7 @@ public class AddTemperature extends Activity {
         protected void onPostExecute(String result) { // This is called when doInBackground() is finished
             //showNotification("Downloaded " + result + " bytes");
         	try {
-        		mTextViewOutdoorTemperature.setText("Outdoor Temperature: " + Integer.parseInt(result));
+        		mTextViewOutdoorTemperature.setText("Outdoor Temperature: " + result); // WAS: parseInt(), but I don't know why. It is not needed
 			} catch (NumberFormatException e) {
 	        	mTextViewOutdoorTemperature.setText("Outdoor Temperature: " + result);
 			}
@@ -158,7 +183,7 @@ public class AddTemperature extends Activity {
     } // END DownloadUrlStream()
     
 	public String convertCoordinatesToZipCode(double lat, double lon) {
-		Toast.makeText(_activity, "lat,lon = " + lat + "," + lon, Toast.LENGTH_SHORT).show(); // DEBUG
+		//Toast.makeText(_activity, "lat,lon = " + lat + "," + lon, Toast.LENGTH_SHORT).show(); // DEBUG
 		Geocoder geocoder = new Geocoder(this, Locale.ENGLISH);
 
 		List<Address> addresses = null;
