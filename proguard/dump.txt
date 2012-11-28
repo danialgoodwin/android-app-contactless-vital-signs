@@ -33930,7 +33930,7 @@ _____________________________________________________________________
 
 Interfaces (count = 0):
 
-Constant Pool (count = 822):
+Constant Pool (count = 820):
   + Integer [2130903043]
   + Integer [2131165187]
   + Integer [2131230736]
@@ -33961,7 +33961,6 @@ Blood Pressure: ]
   + String [.txt]
   + String [/]
   + String [/VitalSigns]
-  + String [@gmail.com]
   + String [Age: ]
   + String [Blood Pressure: ]
   + String [Cancel]
@@ -33978,6 +33977,7 @@ Blood Pressure: ]
   + String [Okay]
   + String [Position: ]
   + String [Save Data?]
+  + String [Settings returned to default]
   + String [Sex: ]
   + String [Sitting]
   + String [Temperature: ]
@@ -33986,7 +33986,6 @@ Blood Pressure: ]
   + String [Where would you like to email the data?]
   + String [Where would you like to text the data?]
   + String [Would you like to save the data?]
-  + String [You clicked settings]
   + String [age]
   + String [android.intent.action.SEND]
   + String [android.intent.extra.EMAIL]
@@ -34500,7 +34499,6 @@ Blood Pressure: ]
   + Utf8 [/VitalSigns]
   + Utf8 [<clinit>]
   + Utf8 [<init>]
-  + Utf8 [@gmail.com]
   + Utf8 [A]
   + Utf8 [Age: ]
   + Utf8 [B]
@@ -34547,6 +34545,7 @@ Blood Pressure: ]
   + Utf8 [R]
   + Utf8 [S]
   + Utf8 [Save Data?]
+  + Utf8 [Settings returned to default]
   + Utf8 [Sex: ]
   + Utf8 [Sitting]
   + Utf8 [T]
@@ -34561,7 +34560,6 @@ Blood Pressure: ]
   + Utf8 [Would you like to save the data?]
   + Utf8 [X]
   + Utf8 [Y]
-  + Utf8 [You clicked settings]
   + Utf8 [Z]
   + Utf8 [[D]
   + Utf8 [a]
@@ -34894,7 +34892,7 @@ Methods (count = 50):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 5, locals = 0, stack = 1):
       [0] iconst_0
-      [1] putstatic #204
+      [1] putstatic #203
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.a I]
       [4] return
       Code attribute exceptions (count = 0):
@@ -34905,139 +34903,139 @@ Methods (count = 50):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 174, locals = 1, stack = 3):
       [0] aload_0 v0
-      [1] invokespecial #229
+      [1] invokespecial #228
         + Methodref [android/app/Activity.<init> ()V]
       [4] aload_0 v0
       [5] iconst_0
-      [6] putfield #202
+      [6] putfield #201
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.X I]
       [9] aload_0 v0
       [10] iconst_0
-      [11] putfield #203
+      [11] putfield #202
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.Y I]
       [14] aload_0 v0
       [15] bipush 100
-      [17] putfield #205
+      [17] putfield #204
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.b I]
       [20] aload_0 v0
       [21] aload_0 v0
-      [22] getfield #205
+      [22] getfield #204
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.b I]
       [25] newarray 7
-      [27] putfield #206
+      [27] putfield #205
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.c [D]
       [30] aload_0 v0
       [31] aload_0 v0
-      [32] getfield #205
+      [32] getfield #204
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.b I]
       [35] newarray 7
-      [37] putfield #207
+      [37] putfield #206
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.d [D]
       [40] aload_0 v0
       [41] aload_0 v0
-      [42] getfield #205
+      [42] getfield #204
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.b I]
       [45] newarray 7
-      [47] putfield #208
+      [47] putfield #207
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.e [D]
       [50] aload_0 v0
       [51] iconst_0
-      [52] putfield #209
+      [52] putfield #208
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.f I]
       [55] aload_0 v0
       [56] iconst_0
-      [57] putfield #210
+      [57] putfield #209
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.g I]
       [60] aload_0 v0
       [61] iconst_0
-      [62] putfield #211
+      [62] putfield #210
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.h I]
       [65] aload_0 v0
       [66] dconst_0
-      [67] putfield #212
+      [67] putfield #211
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.i D]
       [70] aload_0 v0
       [71] iconst_0
-      [72] putfield #213
+      [72] putfield #212
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.j I]
       [75] aload_0 v0
       [76] iconst_0
-      [77] putfield #214
+      [77] putfield #213
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.l I]
       [80] aload_0 v0
       [81] iconst_0
-      [82] putfield #215
+      [82] putfield #214
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.m I]
       [85] aload_0 v0
       [86] iconst_0
-      [87] putfield #216
+      [87] putfield #215
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.n I]
       [90] aload_0 v0
       [91] iconst_0
-      [92] putfield #217
+      [92] putfield #216
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.o I]
       [95] aload_0 v0
       [96] iconst_0
-      [97] putfield #218
+      [97] putfield #217
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.p I]
       [100] aload_0 v0
       [101] iconst_0
-      [102] putfield #219
+      [102] putfield #218
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.q I]
       [105] aload_0 v0
       [106] iconst_0
-      [107] putfield #220
+      [107] putfield #219
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.r I]
       [110] aload_0 v0
       [111] iconst_0
-      [112] putfield #221
+      [112] putfield #220
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.s I]
       [115] aload_0 v0
       [116] iconst_0
-      [117] putfield #222
+      [117] putfield #221
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.t I]
       [120] aload_0 v0
       [121] iconst_0
-      [122] putfield #223
+      [122] putfield #222
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.u I]
       [125] aload_0 v0
       [126] iconst_0
-      [127] putfield #224
+      [127] putfield #223
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.v I]
       [130] aload_0 v0
       [131] iconst_0
-      [132] putfield #225
+      [132] putfield #224
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.w I]
       [135] aload_0 v0
       [136] iconst_0
-      [137] putfield #226
+      [137] putfield #225
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.x I]
       [140] aload_0 v0
       [141] iconst_0
-      [142] putfield #227
+      [142] putfield #226
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.y Z]
       [145] aload_0 v0
       [146] iconst_0
-      [147] putfield #228
+      [147] putfield #227
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.z Z]
       [150] aload_0 v0
       [151] ldc #17
         + String []
-      [153] putfield #179
+      [153] putfield #178
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.A Ljava/lang/String;]
       [156] aload_0 v0
       [157] ldc #17
         + String []
-      [159] putfield #180
+      [159] putfield #179
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.B Ljava/lang/String;]
       [162] aload_0 v0
       [163] ldc #17
         + String []
-      [165] putfield #181
+      [165] putfield #180
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.C Ljava/lang/String;]
       [168] aload_0 v0
       [169] iconst_1
-      [170] putfield #182
+      [170] putfield #181
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.D Z]
       [173] return
       Code attribute exceptions (count = 0):
@@ -35049,190 +35047,190 @@ Methods (count = 50):
     + Code attribute instructions (code length = 244, locals = 2, stack = 6):
       [0] aload_0 v0
       [1] aload_0 v0
-      [2] putfield #185
+      [2] putfield #184
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.G Lnet/simplyadvanced/vitalsigns/TestBloodPressure;]
       [5] aload_0 v0
       [6] aload_1 v1
-      [7] invokespecial #231
+      [7] invokespecial #230
         + Methodref [android/app/Activity.onCreate (Landroid/os/Bundle;)V]
       [10] aload_0 v0
       [11] ldc #1
         + Integer [2130903043]
-      [13] invokevirtual #317
+      [13] invokevirtual #316
         + Methodref [net/simplyadvanced/vitalsigns/TestBloodPressure.setContentView (I)V]
       [16] aload_0 v0
       [17] aload_0 v0
-      [18] ldc #42
+      [18] ldc #41
         + String [MyPrefsFile]
       [20] iconst_0
-      [21] invokevirtual #312
+      [21] invokevirtual #311
         + Methodref [net/simplyadvanced/vitalsigns/TestBloodPressure.getSharedPreferences (Ljava/lang/String;I)Landroid/content/SharedPreferences;]
-      [24] putfield #186
+      [24] putfield #185
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.H Landroid/content/SharedPreferences;]
       [27] aload_0 v0
       [28] aload_0 v0
       [29] ldc #10
         + Integer [2131230743]
-      [31] invokevirtual #309
+      [31] invokevirtual #308
         + Methodref [net/simplyadvanced/vitalsigns/TestBloodPressure.findViewById (I)Landroid/view/View;]
-      [34] checkcast #100
+      [34] checkcast #99
         + Class [android/widget/TextView]
-      [37] putfield #192
+      [37] putfield #191
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.N Landroid/widget/TextView;]
       [40] aload_0 v0
       [41] aload_0 v0
       [42] ldc #9
         + Integer [2131230742]
-      [44] invokevirtual #309
+      [44] invokevirtual #308
         + Methodref [net/simplyadvanced/vitalsigns/TestBloodPressure.findViewById (I)Landroid/view/View;]
-      [47] checkcast #100
+      [47] checkcast #99
         + Class [android/widget/TextView]
-      [50] putfield #193
+      [50] putfield #192
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.O Landroid/widget/TextView;]
       [53] aload_0 v0
       [54] aload_0 v0
       [55] ldc #8
         + Integer [2131230741]
-      [57] invokevirtual #309
+      [57] invokevirtual #308
         + Methodref [net/simplyadvanced/vitalsigns/TestBloodPressure.findViewById (I)Landroid/view/View;]
-      [60] checkcast #100
+      [60] checkcast #99
         + Class [android/widget/TextView]
-      [63] putfield #194
+      [63] putfield #193
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.P Landroid/widget/TextView;]
       [66] aload_0 v0
       [67] aload_0 v0
       [68] ldc #7
         + Integer [2131230740]
-      [70] invokevirtual #309
+      [70] invokevirtual #308
         + Methodref [net/simplyadvanced/vitalsigns/TestBloodPressure.findViewById (I)Landroid/view/View;]
-      [73] checkcast #100
+      [73] checkcast #99
         + Class [android/widget/TextView]
-      [76] putfield #195
+      [76] putfield #194
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.Q Landroid/widget/TextView;]
       [79] aload_0 v0
       [80] aload_0 v0
       [81] ldc #6
         + Integer [2131230739]
-      [83] invokevirtual #309
+      [83] invokevirtual #308
         + Methodref [net/simplyadvanced/vitalsigns/TestBloodPressure.findViewById (I)Landroid/view/View;]
-      [86] checkcast #100
+      [86] checkcast #99
         + Class [android/widget/TextView]
-      [89] putfield #196
+      [89] putfield #195
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.R Landroid/widget/TextView;]
       [92] aload_0 v0
       [93] aload_0 v0
       [94] ldc #15
         + Integer [2131230748]
-      [96] invokevirtual #309
+      [96] invokevirtual #308
         + Methodref [net/simplyadvanced/vitalsigns/TestBloodPressure.findViewById (I)Landroid/view/View;]
-      [99] checkcast #100
+      [99] checkcast #99
         + Class [android/widget/TextView]
-      [102] putfield #197
+      [102] putfield #196
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.S Landroid/widget/TextView;]
       [105] aload_0 v0
       [106] aload_0 v0
       [107] ldc #14
         + Integer [2131230747]
-      [109] invokevirtual #309
+      [109] invokevirtual #308
         + Methodref [net/simplyadvanced/vitalsigns/TestBloodPressure.findViewById (I)Landroid/view/View;]
-      [112] checkcast #100
+      [112] checkcast #99
         + Class [android/widget/TextView]
-      [115] putfield #198
+      [115] putfield #197
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.T Landroid/widget/TextView;]
       [118] aload_0 v0
       [119] aload_0 v0
       [120] ldc #13
         + Integer [2131230746]
-      [122] invokevirtual #309
+      [122] invokevirtual #308
         + Methodref [net/simplyadvanced/vitalsigns/TestBloodPressure.findViewById (I)Landroid/view/View;]
-      [125] checkcast #100
+      [125] checkcast #99
         + Class [android/widget/TextView]
-      [128] putfield #199
+      [128] putfield #198
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.U Landroid/widget/TextView;]
       [131] aload_0 v0
       [132] aload_0 v0
       [133] ldc #12
         + Integer [2131230745]
-      [135] invokevirtual #309
+      [135] invokevirtual #308
         + Methodref [net/simplyadvanced/vitalsigns/TestBloodPressure.findViewById (I)Landroid/view/View;]
-      [138] checkcast #100
+      [138] checkcast #99
         + Class [android/widget/TextView]
-      [141] putfield #200
+      [141] putfield #199
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.V Landroid/widget/TextView;]
       [144] aload_0 v0
       [145] aload_0 v0
       [146] ldc #11
         + Integer [2131230744]
-      [148] invokevirtual #309
+      [148] invokevirtual #308
         + Methodref [net/simplyadvanced/vitalsigns/TestBloodPressure.findViewById (I)Landroid/view/View;]
-      [151] checkcast #100
+      [151] checkcast #99
         + Class [android/widget/TextView]
-      [154] putfield #201
+      [154] putfield #200
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.W Landroid/widget/TextView;]
       [157] aload_0 v0
       [158] aload_0 v0
       [159] ldc #3
         + Integer [2131230736]
-      [161] invokevirtual #309
+      [161] invokevirtual #308
         + Methodref [net/simplyadvanced/vitalsigns/TestBloodPressure.findViewById (I)Landroid/view/View;]
-      [164] checkcast #99
+      [164] checkcast #98
         + Class [android/widget/RelativeLayout]
-      [167] putfield #187
+      [167] putfield #186
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.I Landroid/widget/RelativeLayout;]
       [170] aload_0 v0
       [171] aload_0 v0
       [172] ldc #4
         + Integer [2131230737]
-      [174] invokevirtual #309
+      [174] invokevirtual #308
         + Methodref [net/simplyadvanced/vitalsigns/TestBloodPressure.findViewById (I)Landroid/view/View;]
-      [177] checkcast #97
+      [177] checkcast #96
         + Class [android/widget/FrameLayout]
-      [180] putfield #188
+      [180] putfield #187
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.J Landroid/widget/FrameLayout;]
       [183] aload_0 v0
       [184] aload_0 v0
       [185] ldc #5
         + Integer [2131230738]
-      [187] invokevirtual #309
+      [187] invokevirtual #308
         + Methodref [net/simplyadvanced/vitalsigns/TestBloodPressure.findViewById (I)Landroid/view/View;]
-      [190] checkcast #94
+      [190] checkcast #93
         + Class [android/view/SurfaceView]
-      [193] putfield #189
+      [193] putfield #188
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.K Landroid/view/SurfaceView;]
       [196] aload_0 v0
       [197] aload_0 v0
       [198] ldc #16
         + Integer [2131230749]
-      [200] invokevirtual #309
+      [200] invokevirtual #308
         + Methodref [net/simplyadvanced/vitalsigns/TestBloodPressure.findViewById (I)Landroid/view/View;]
-      [203] checkcast #98
+      [203] checkcast #97
         + Class [android/widget/ImageView]
-      [206] putfield #190
+      [206] putfield #189
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.L Landroid/widget/ImageView;]
       [209] aload_0 v0
-      [210] invokestatic #297
+      [210] invokestatic #296
         + Methodref [net/simplyadvanced/vitalsigns/TestBloodPressure.a ()Landroid/hardware/Camera;]
-      [213] putfield #191
+      [213] putfield #190
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.M Landroid/hardware/Camera;]
       [216] aload_0 v0
-      [217] getfield #188
+      [217] getfield #187
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.J Landroid/widget/FrameLayout;]
-      [220] new #124
+      [220] new #123
         + Class [net/simplyadvanced/vitalsigns/k]
       [223] dup
       [224] aload_0 v0
       [225] aload_0 v0
-      [226] getfield #185
+      [226] getfield #184
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.G Lnet/simplyadvanced/vitalsigns/TestBloodPressure;]
       [229] aload_0 v0
-      [230] getfield #191
+      [230] getfield #190
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.M Landroid/hardware/Camera;]
-      [233] invokespecial #326
+      [233] invokespecial #325
         + Methodref [net/simplyadvanced/vitalsigns/k.<init> (Lnet/simplyadvanced/vitalsigns/TestBloodPressure;Landroid/content/Context;Landroid/hardware/Camera;)V]
-      [236] invokevirtual #267
+      [236] invokevirtual #266
         + Methodref [android/widget/FrameLayout.addView (Landroid/view/View;)V]
       [239] aload_0 v0
-      [240] invokespecial #316
+      [240] invokespecial #315
         + Methodref [net/simplyadvanced/vitalsigns/TestBloodPressure.j ()V]
       [243] return
       Code attribute exceptions (count = 0):
@@ -35243,13 +35241,13 @@ Methods (count = 50):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 13, locals = 1, stack = 1):
       [0] aload_0 v0
-      [1] invokespecial #235
+      [1] invokespecial #234
         + Methodref [android/app/Activity.onResume ()V]
       [4] aload_0 v0
-      [5] invokespecial #308
+      [5] invokespecial #307
         + Methodref [net/simplyadvanced/vitalsigns/TestBloodPressure.f ()V]
       [8] aload_0 v0
-      [9] invokevirtual #303
+      [9] invokevirtual #302
         + Methodref [net/simplyadvanced/vitalsigns/TestBloodPressure.c ()V]
       [12] return
       Code attribute exceptions (count = 0):
@@ -35260,7 +35258,7 @@ Methods (count = 50):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 5, locals = 1, stack = 1):
       [0] aload_0 v0
-      [1] invokespecial #234
+      [1] invokespecial #233
         + Methodref [android/app/Activity.onPause ()V]
       [4] return
       Code attribute exceptions (count = 0):
@@ -35271,10 +35269,10 @@ Methods (count = 50):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 9, locals = 1, stack = 1):
       [0] aload_0 v0
-      [1] invokevirtual #305
+      [1] invokevirtual #304
         + Methodref [net/simplyadvanced/vitalsigns/TestBloodPressure.d ()V]
       [4] aload_0 v0
-      [5] invokespecial #232
+      [5] invokespecial #231
         + Methodref [android/app/Activity.onDestroy ()V]
       [8] return
       Code attribute exceptions (count = 0):
@@ -35284,87 +35282,87 @@ Methods (count = 50):
       = public void a(double,int,java.lang.String,int,int,java.lang.String)
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 251, locals = 22, stack = 8):
-      [0] ldc2_w #163
+      [0] ldc2_w #162
         + Double [18.31]
       [3] dstore v8
       [5] aload v4
-      [7] ldc #41
+      [7] ldc #40
         + String [Male]
-      [9] invokevirtual #289
+      [9] invokevirtual #288
         + Methodref [java/lang/String.equalsIgnoreCase (Ljava/lang/String;)Z]
       [12] ifne +13 (target=25)
       [15] aload v4
-      [17] ldc #40
+      [17] ldc #39
         + String [M]
-      [19] invokevirtual #289
+      [19] invokevirtual #288
         + Methodref [java/lang/String.equalsIgnoreCase (Ljava/lang/String;)Z]
       [22] ifeq +9 (target=31)
-      [25] ldc2_w #161
+      [25] ldc2_w #160
         + Double [5.0]
       [28] goto +6 (target=34)
-      [31] ldc2_w #159
+      [31] ldc2_w #158
         + Double [4.5]
       [34] dstore v10
       [36] aload v7
-      [38] ldc #71
+      [38] ldc #70
         + String [sitting]
-      [40] invokevirtual #289
+      [40] invokevirtual #288
         + Methodref [java/lang/String.equalsIgnoreCase (Ljava/lang/String;)Z]
       [43] ifeq +15 (target=58)
-      [46] ldc2_w #171
+      [46] ldc2_w #170
         + Double [376.0]
-      [49] ldc2_w #151
+      [49] ldc2_w #150
         + Double [1.64]
       [52] dload_1 v1
       [53] dmul
       [54] dsub
       [55] goto +12 (target=67)
-      [58] ldc2_w #169
+      [58] ldc2_w #168
         + Double [354.5]
-      [61] ldc2_w #147
+      [61] ldc2_w #146
         + Double [1.23]
       [64] dload_1 v1
       [65] dmul
       [66] dsub
       [67] dstore v12
-      [69] ldc2_w #131
+      [69] ldc2_w #130
         + Double [0.007184]
       [72] iload v5
       [74] i2d
-      [75] ldc2_w #139
+      [75] ldc2_w #138
         + Double [0.425]
-      [78] invokestatic #287
+      [78] invokestatic #286
         + Methodref [java/lang/Math.pow (DD)D]
       [81] dmul
       [82] iload v6
       [84] i2d
-      [85] ldc2_w #145
+      [85] ldc2_w #144
         + Double [0.725]
-      [88] invokestatic #287
+      [88] invokestatic #286
         + Methodref [java/lang/Math.pow (DD)D]
       [91] dmul
       [92] dstore v14
-      [94] ldc2_w #125
+      [94] ldc2_w #124
         + Double [-6.6]
-      [97] ldc2_w #137
+      [97] ldc2_w #136
         + Double [0.25]
       [100] dload v12
-      [102] ldc2_w #165
+      [102] ldc2_w #164
         + Double [35.0]
       [105] dsub
       [106] dmul
       [107] dadd
-      [108] ldc2_w #143
+      [108] ldc2_w #142
         + Double [0.62]
       [111] dload_1 v1
       [112] dmul
       [113] dsub
-      [114] ldc2_w #167
+      [114] ldc2_w #166
         + Double [40.4]
       [117] dload v14
       [119] dmul
       [120] dadd
-      [121] ldc2_w #141
+      [121] ldc2_w #140
         + Double [0.51]
       [124] iload_3 v3
       [125] i2d
@@ -35372,23 +35370,23 @@ Methods (count = 50):
       [127] dsub
       [128] dstore v16
       [130] dload v16
-      [132] ldc2_w #133
+      [132] ldc2_w #132
         + Double [0.013]
       [135] iload v5
       [137] i2d
       [138] dmul
-      [139] ldc2_w #129
+      [139] ldc2_w #128
         + Double [0.007]
       [142] iload_3 v3
       [143] i2d
       [144] dmul
       [145] dsub
-      [146] ldc2_w #127
+      [146] ldc2_w #126
         + Double [0.004]
       [149] dload_1 v1
       [150] dmul
       [151] dsub
-      [152] ldc2_w #149
+      [152] ldc2_w #148
         + Double [1.307]
       [155] dadd
       [156] ddiv
@@ -35404,61 +35402,61 @@ Methods (count = 50):
       [172] dmul
       [173] dadd
       [174] d2i
-      [175] putfield #209
+      [175] putfield #208
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.f I]
       [178] aload_0 v0
       [179] dload v20
       [181] dload v18
-      [183] ldc2_w #157
+      [183] ldc2_w #156
         + Double [3.0]
       [186] ddiv
       [187] dsub
       [188] d2i
-      [189] putfield #210
+      [189] putfield #209
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.g I]
       [192] aload_0 v0
-      [193] getfield #193
+      [193] getfield #192
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.O Landroid/widget/TextView;]
-      [196] new #111
+      [196] new #110
         + Class [java/lang/StringBuilder]
       [199] dup
-      [200] ldc #31
+      [200] ldc #30
         + String [Blood Pressure: ]
-      [202] invokespecial #291
+      [202] invokespecial #290
         + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
       [205] aload_0 v0
-      [206] getfield #209
+      [206] getfield #208
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.f I]
-      [209] invokevirtual #294
+      [209] invokevirtual #293
         + Methodref [java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;]
       [212] ldc #27
         + String [/]
-      [214] invokevirtual #295
+      [214] invokevirtual #294
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
       [217] aload_0 v0
-      [218] getfield #210
+      [218] getfield #209
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.g I]
-      [221] invokevirtual #294
+      [221] invokevirtual #293
         + Methodref [java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;]
-      [224] invokevirtual #296
+      [224] invokevirtual #295
         + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
-      [227] invokevirtual #268
+      [227] invokevirtual #267
         + Methodref [android/widget/TextView.setText (Ljava/lang/CharSequence;)V]
       [230] aload_0 v0
-      [231] ldc #72
+      [231] ldc #71
         + String [systolicPressure]
       [233] aload_0 v0
-      [234] getfield #209
+      [234] getfield #208
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.f I]
-      [237] invokespecial #299
+      [237] invokespecial #298
         + Methodref [net/simplyadvanced/vitalsigns/TestBloodPressure.a (Ljava/lang/String;I)V]
       [240] aload_0 v0
-      [241] ldc #61
+      [241] ldc #60
         + String [diastolicPressure]
       [243] aload_0 v0
-      [244] getfield #210
+      [244] getfield #209
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.g I]
-      [247] invokespecial #299
+      [247] invokespecial #298
         + Methodref [net/simplyadvanced/vitalsigns/TestBloodPressure.a (Ljava/lang/String;I)V]
       [250] return
       Code attribute exceptions (count = 0):
@@ -35468,13 +35466,13 @@ Methods (count = 50):
       = public static android.hardware.Camera a()
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 57, locals = 4, stack = 2):
-      [0] invokestatic #249
+      [0] invokestatic #248
         + Methodref [android/hardware/Camera.getNumberOfCameras ()I]
       [3] istore_0 v0
-      [4] new #84
+      [4] new #83
         + Class [android/hardware/Camera$CameraInfo]
       [7] dup
-      [8] invokespecial #254
+      [8] invokespecial #253
         + Methodref [android/hardware/Camera$CameraInfo.<init> ()V]
       [11] astore_1 v1
       [12] iconst_0
@@ -35482,15 +35480,15 @@ Methods (count = 50):
       [14] goto +23 (target=37)
       [17] iload_2 v2
       [18] aload_1 v1
-      [19] invokestatic #248
+      [19] invokestatic #247
         + Methodref [android/hardware/Camera.getCameraInfo (ILandroid/hardware/Camera$CameraInfo;)V]
       [22] aload_1 v1
-      [23] getfield #175
+      [23] getfield #174
         + Fieldref [android/hardware/Camera$CameraInfo.facing I]
       [26] iconst_1
       [27] ificmpne +7 (target=34)
       [30] iload_2 v2
-      [31] putstatic #204
+      [31] putstatic #203
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.a I]
       [34] iinc v2, 1
       [37] iload_2 v2
@@ -35498,9 +35496,9 @@ Methods (count = 50):
       [39] ificmplt -22 (target=17)
       [42] aconst_null
       [43] astore_2 v2
-      [44] getstatic #204
+      [44] getstatic #203
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.a I]
-      [47] invokestatic #251
+      [47] invokestatic #250
         + Methodref [android/hardware/Camera.open (I)Landroid/hardware/Camera;]
       [50] astore_2 v2
       [51] goto +4 (target=55)
@@ -35516,22 +35514,22 @@ Methods (count = 50):
       = public static void a(android.app.Activity,int,android.hardware.Camera)
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 150, locals = 7, stack = 2):
-      [0] new #84
+      [0] new #83
         + Class [android/hardware/Camera$CameraInfo]
       [3] dup
-      [4] invokespecial #254
+      [4] invokespecial #253
         + Methodref [android/hardware/Camera$CameraInfo.<init> ()V]
       [7] astore_3 v3
       [8] iload_1 v1
       [9] aload_3 v3
-      [10] invokestatic #248
+      [10] invokestatic #247
         + Methodref [android/hardware/Camera.getCameraInfo (ILandroid/hardware/Camera$CameraInfo;)V]
       [13] aload_0 v0
-      [14] invokevirtual #230
+      [14] invokevirtual #229
         + Methodref [android/app/Activity.getWindowManager ()Landroid/view/WindowManager;]
-      [17] invokeinterface #337
+      [17] invokeinterface #336
         + InterfaceMethodref [android/view/WindowManager.getDefaultDisplay ()Landroid/view/Display;]
-      [22] invokevirtual #263
+      [22] invokevirtual #262
         + Methodref [android/view/Display.getRotation ()I]
       [25] istore v4
       [27] iconst_0
@@ -35555,12 +35553,12 @@ Methods (count = 50):
       [85] sipush 270
       [88] istore v5
       [90] aload_3 v3
-      [91] getfield #175
+      [91] getfield #174
         + Fieldref [android/hardware/Camera$CameraInfo.facing I]
       [94] iconst_1
       [95] ificmpne +31 (target=126)
       [98] aload_3 v3
-      [99] getfield #176
+      [99] getfield #175
         + Fieldref [android/hardware/Camera$CameraInfo.orientation I]
       [102] iload v5
       [104] iadd
@@ -35575,7 +35573,7 @@ Methods (count = 50):
       [121] istore v6
       [123] goto +20 (target=143)
       [126] aload_3 v3
-      [127] getfield #176
+      [127] getfield #175
         + Fieldref [android/hardware/Camera$CameraInfo.orientation I]
       [130] iload v5
       [132] isub
@@ -35586,7 +35584,7 @@ Methods (count = 50):
       [141] istore v6
       [143] aload_2 v2
       [144] iload v6
-      [146] invokevirtual #252
+      [146] invokevirtual #251
         + Methodref [android/hardware/Camera.setDisplayOrientation (I)V]
       [149] return
       Code attribute exceptions (count = 0):
@@ -35597,19 +35595,19 @@ Methods (count = 50):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 23, locals = 2, stack = 1):
       [0] aload_0 v0
-      [1] getfield #191
+      [1] getfield #190
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.M Landroid/hardware/Camera;]
-      [4] invokevirtual #250
+      [4] invokevirtual #249
         + Methodref [android/hardware/Camera.getParameters ()Landroid/hardware/Camera$Parameters;]
       [7] astore_1 v1
       [8] aload_1 v1
-      [9] invokevirtual #255
+      [9] invokevirtual #254
         + Methodref [android/hardware/Camera$Parameters.getMaxNumDetectedFaces ()I]
       [12] ifle +10 (target=22)
       [15] aload_0 v0
-      [16] getfield #191
+      [16] getfield #190
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.M Landroid/hardware/Camera;]
-      [19] invokevirtual #253
+      [19] invokevirtual #252
         + Methodref [android/hardware/Camera.startFaceDetection ()V]
       [22] return
       Code attribute exceptions (count = 0):
@@ -35619,7 +35617,7 @@ Methods (count = 50):
       = private android.hardware.Camera$Size a(java.util.List,int,int)
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 213, locals = 16, stack = 4):
-      [0] ldc2_w #135
+      [0] ldc2_w #134
         + Double [0.2]
       [3] dstore v4
       [5] iload_2 v2
@@ -35634,28 +35632,28 @@ Methods (count = 50):
       [17] areturn
       [18] aconst_null
       [19] astore v8
-      [21] ldc2_w #173
+      [21] ldc2_w #172
         + Double [1.7976931348623157E308]
       [24] dstore v9
       [26] iload_3 v3
       [27] istore v11
       [29] aload_1 v1
-      [30] invokeinterface #340
+      [30] invokeinterface #339
         + InterfaceMethodref [java/util/List.iterator ()Ljava/util/Iterator;]
       [35] astore v13
       [37] goto +84 (target=121)
       [40] aload v13
-      [42] invokeinterface #339
+      [42] invokeinterface #338
         + InterfaceMethodref [java/util/Iterator.next ()Ljava/lang/Object;]
-      [47] checkcast #86
+      [47] checkcast #85
         + Class [android/hardware/Camera$Size]
       [50] astore v12
       [52] aload v12
-      [54] getfield #178
+      [54] getfield #177
         + Fieldref [android/hardware/Camera$Size.width I]
       [57] i2d
       [58] aload v12
-      [60] getfield #177
+      [60] getfield #176
         + Fieldref [android/hardware/Camera$Size.height I]
       [63] i2d
       [64] ddiv
@@ -35663,19 +35661,19 @@ Methods (count = 50):
       [67] dload v14
       [69] dload v6
       [71] dsub
-      [72] invokestatic #285
+      [72] invokestatic #284
         + Methodref [java/lang/Math.abs (D)D]
-      [75] ldc2_w #135
+      [75] ldc2_w #134
         + Double [0.2]
       [78] dcmpl
       [79] ifle +6 (target=85)
       [82] goto +39 (target=121)
       [85] aload v12
-      [87] getfield #177
+      [87] getfield #176
         + Fieldref [android/hardware/Camera$Size.height I]
       [90] iload v11
       [92] isub
-      [93] invokestatic #286
+      [93] invokestatic #285
         + Methodref [java/lang/Math.abs (I)I]
       [96] i2d
       [97] dload v9
@@ -35684,40 +35682,40 @@ Methods (count = 50):
       [103] aload v12
       [105] astore v8
       [107] aload v12
-      [109] getfield #177
+      [109] getfield #176
         + Fieldref [android/hardware/Camera$Size.height I]
       [112] iload v11
       [114] isub
-      [115] invokestatic #286
+      [115] invokestatic #285
         + Methodref [java/lang/Math.abs (I)I]
       [118] i2d
       [119] dstore v9
       [121] aload v13
-      [123] invokeinterface #338
+      [123] invokeinterface #337
         + InterfaceMethodref [java/util/Iterator.hasNext ()Z]
       [128] ifne -88 (target=40)
       [131] aload v8
       [133] ifnonnull +77 (target=210)
-      [136] ldc2_w #173
+      [136] ldc2_w #172
         + Double [1.7976931348623157E308]
       [139] dstore v9
       [141] aload_1 v1
-      [142] invokeinterface #340
+      [142] invokeinterface #339
         + InterfaceMethodref [java/util/List.iterator ()Ljava/util/Iterator;]
       [147] astore v13
       [149] goto +51 (target=200)
       [152] aload v13
-      [154] invokeinterface #339
+      [154] invokeinterface #338
         + InterfaceMethodref [java/util/Iterator.next ()Ljava/lang/Object;]
-      [159] checkcast #86
+      [159] checkcast #85
         + Class [android/hardware/Camera$Size]
       [162] astore v12
       [164] aload v12
-      [166] getfield #177
+      [166] getfield #176
         + Fieldref [android/hardware/Camera$Size.height I]
       [169] iload v11
       [171] isub
-      [172] invokestatic #286
+      [172] invokestatic #285
         + Methodref [java/lang/Math.abs (I)I]
       [175] i2d
       [176] dload v9
@@ -35726,16 +35724,16 @@ Methods (count = 50):
       [182] aload v12
       [184] astore v8
       [186] aload v12
-      [188] getfield #177
+      [188] getfield #176
         + Fieldref [android/hardware/Camera$Size.height I]
       [191] iload v11
       [193] isub
-      [194] invokestatic #286
+      [194] invokestatic #285
         + Methodref [java/lang/Math.abs (I)I]
       [197] i2d
       [198] dstore v9
       [200] aload v13
-      [202] invokeinterface #338
+      [202] invokeinterface #337
         + InterfaceMethodref [java/util/Iterator.hasNext ()Z]
       [207] ifne -55 (target=152)
       [210] aload v8
@@ -35747,43 +35745,43 @@ Methods (count = 50):
       = private void e()
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 52, locals = 1, stack = 5):
-      [0] new #78
+      [0] new #77
         + Class [android/app/AlertDialog$Builder]
       [3] dup
       [4] aload_0 v0
-      [5] getfield #185
+      [5] getfield #184
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.G Lnet/simplyadvanced/vitalsigns/TestBloodPressure;]
-      [8] invokespecial #236
+      [8] invokespecial #235
         + Methodref [android/app/AlertDialog$Builder.<init> (Landroid/content/Context;)V]
-      [11] ldc #45
+      [11] ldc #44
         + String [Save Data?]
-      [13] invokevirtual #240
+      [13] invokevirtual #239
         + Methodref [android/app/AlertDialog$Builder.setTitle (Ljava/lang/CharSequence;)Landroid/app/AlertDialog$Builder;]
       [16] ldc #53
         + String [Would you like to save the data?]
-      [18] invokevirtual #237
+      [18] invokevirtual #236
         + Methodref [android/app/AlertDialog$Builder.setMessage (Ljava/lang/CharSequence;)Landroid/app/AlertDialog$Builder;]
-      [21] ldc #43
+      [21] ldc #42
         + String [Okay]
-      [23] new #117
+      [23] new #116
         + Class [net/simplyadvanced/vitalsigns/d]
       [26] dup
       [27] aload_0 v0
-      [28] invokespecial #319
+      [28] invokespecial #318
         + Methodref [net/simplyadvanced/vitalsigns/d.<init> (Lnet/simplyadvanced/vitalsigns/TestBloodPressure;)V]
-      [31] invokevirtual #239
+      [31] invokevirtual #238
         + Methodref [android/app/AlertDialog$Builder.setPositiveButton (Ljava/lang/CharSequence;Landroid/content/DialogInterface$OnClickListener;)Landroid/app/AlertDialog$Builder;]
-      [34] ldc #32
+      [34] ldc #31
         + String [Cancel]
-      [36] new #118
+      [36] new #117
         + Class [net/simplyadvanced/vitalsigns/e]
       [39] dup
       [40] aload_0 v0
-      [41] invokespecial #320
+      [41] invokespecial #319
         + Methodref [net/simplyadvanced/vitalsigns/e.<init> (Lnet/simplyadvanced/vitalsigns/TestBloodPressure;)V]
-      [44] invokevirtual #238
+      [44] invokevirtual #237
         + Methodref [android/app/AlertDialog$Builder.setNegativeButton (Ljava/lang/CharSequence;Landroid/content/DialogInterface$OnClickListener;)Landroid/app/AlertDialog$Builder;]
-      [47] invokevirtual #242
+      [47] invokevirtual #241
         + Methodref [android/app/AlertDialog$Builder.show ()Landroid/app/AlertDialog;]
       [50] pop
       [51] return
@@ -35795,17 +35793,17 @@ Methods (count = 50):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 18, locals = 2, stack = 5):
       [0] aload_0 v0
-      [1] new #80
+      [1] new #79
         + Class [android/content/Intent]
       [4] dup
       [5] aload_0 v0
-      [6] getfield #185
+      [6] getfield #184
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.G Lnet/simplyadvanced/vitalsigns/TestBloodPressure;]
-      [9] ldc #115
+      [9] ldc #114
         + Class [net/simplyadvanced/vitalsigns/EditStats]
-      [11] invokespecial #243
+      [11] invokespecial #242
         + Methodref [android/content/Intent.<init> (Landroid/content/Context;Ljava/lang/Class;)V]
-      [14] invokevirtual #318
+      [14] invokevirtual #317
         + Methodref [net/simplyadvanced/vitalsigns/TestBloodPressure.startActivity (Landroid/content/Intent;)V]
       [17] return
       Code attribute exceptions (count = 0):
@@ -35816,17 +35814,17 @@ Methods (count = 50):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 18, locals = 2, stack = 5):
       [0] aload_0 v0
-      [1] new #80
+      [1] new #79
         + Class [android/content/Intent]
       [4] dup
       [5] aload_0 v0
-      [6] getfield #185
+      [6] getfield #184
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.G Lnet/simplyadvanced/vitalsigns/TestBloodPressure;]
-      [9] ldc #114
+      [9] ldc #113
         + Class [net/simplyadvanced/vitalsigns/AddTemperature]
-      [11] invokespecial #243
+      [11] invokespecial #242
         + Methodref [android/content/Intent.<init> (Landroid/content/Context;Ljava/lang/Class;)V]
-      [14] invokevirtual #318
+      [14] invokevirtual #317
         + Methodref [net/simplyadvanced/vitalsigns/TestBloodPressure.startActivity (Landroid/content/Intent;)V]
       [17] return
       Code attribute exceptions (count = 0):
@@ -35838,327 +35836,327 @@ Methods (count = 50):
     + Code attribute instructions (code length = 466, locals = 1, stack = 5):
       [0] aload_0 v0
       [1] aload_0 v0
-      [2] getfield #186
+      [2] getfield #185
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.H Landroid/content/SharedPreferences;]
-      [5] ldc #62
+      [5] ldc #61
         + String [displayEnglishUnits]
       [7] iconst_1
-      [8] invokeinterface #328
+      [8] invokeinterface #327
         + InterfaceMethodref [android/content/SharedPreferences.getBoolean (Ljava/lang/String;Z)Z]
-      [13] putfield #182
+      [13] putfield #181
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.D Z]
       [16] aload_0 v0
-      [17] getfield #182
+      [17] getfield #181
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.D Z]
       [20] ifeq +226 (target=246)
       [23] aload_0 v0
-      [24] getfield #197
+      [24] getfield #196
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.S Landroid/widget/TextView;]
-      [27] new #111
+      [27] new #110
         + Class [java/lang/StringBuilder]
       [30] dup
-      [31] ldc #30
+      [31] ldc #29
         + String [Age: ]
-      [33] invokespecial #291
+      [33] invokespecial #290
         + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
       [36] aload_0 v0
-      [37] getfield #186
+      [37] getfield #185
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.H Landroid/content/SharedPreferences;]
-      [40] ldc #55
+      [40] ldc #54
         + String [age]
       [42] bipush 23
-      [44] invokeinterface #330
+      [44] invokeinterface #329
         + InterfaceMethodref [android/content/SharedPreferences.getInt (Ljava/lang/String;I)I]
-      [49] invokevirtual #294
+      [49] invokevirtual #293
         + Methodref [java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;]
-      [52] invokevirtual #296
+      [52] invokevirtual #295
         + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
-      [55] invokevirtual #268
+      [55] invokevirtual #267
         + Methodref [android/widget/TextView.setText (Ljava/lang/CharSequence;)V]
       [58] aload_0 v0
-      [59] getfield #198
+      [59] getfield #197
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.T Landroid/widget/TextView;]
-      [62] new #111
+      [62] new #110
         + Class [java/lang/StringBuilder]
       [65] dup
       [66] ldc #46
         + String [Sex: ]
-      [68] invokespecial #291
+      [68] invokespecial #290
         + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
       [71] aload_0 v0
-      [72] getfield #186
+      [72] getfield #185
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.H Landroid/content/SharedPreferences;]
-      [75] ldc #70
+      [75] ldc #69
         + String [sex]
-      [77] ldc #41
+      [77] ldc #40
         + String [Male]
-      [79] invokeinterface #331
+      [79] invokeinterface #330
         + InterfaceMethodref [android/content/SharedPreferences.getString (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;]
-      [84] invokevirtual #295
+      [84] invokevirtual #294
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [87] invokevirtual #296
+      [87] invokevirtual #295
         + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
-      [90] invokevirtual #268
+      [90] invokevirtual #267
         + Methodref [android/widget/TextView.setText (Ljava/lang/CharSequence;)V]
       [93] aload_0 v0
-      [94] getfield #200
+      [94] getfield #199
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.V Landroid/widget/TextView;]
-      [97] new #111
+      [97] new #110
         + Class [java/lang/StringBuilder]
       [100] dup
       [101] ldc #50
         + String [Weight: ]
-      [103] invokespecial #291
+      [103] invokespecial #290
         + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
       [106] aload_0 v0
-      [107] getfield #186
+      [107] getfield #185
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.H Landroid/content/SharedPreferences;]
-      [110] ldc #76
+      [110] ldc #75
         + String [weight]
       [112] sipush 160
-      [115] invokeinterface #330
+      [115] invokeinterface #329
         + InterfaceMethodref [android/content/SharedPreferences.getInt (Ljava/lang/String;I)I]
-      [120] invokevirtual #294
+      [120] invokevirtual #293
         + Methodref [java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;]
       [123] ldc #25
         + String [ pounds]
-      [125] invokevirtual #295
+      [125] invokevirtual #294
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [128] invokevirtual #296
+      [128] invokevirtual #295
         + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
-      [131] invokevirtual #268
+      [131] invokevirtual #267
         + Methodref [android/widget/TextView.setText (Ljava/lang/CharSequence;)V]
       [134] aload_0 v0
-      [135] getfield #199
+      [135] getfield #198
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.U Landroid/widget/TextView;]
-      [138] new #111
+      [138] new #110
         + Class [java/lang/StringBuilder]
       [141] dup
-      [142] ldc #39
+      [142] ldc #38
         + String [Height: ]
-      [144] invokespecial #291
+      [144] invokespecial #290
         + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
       [147] aload_0 v0
-      [148] getfield #186
+      [148] getfield #185
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.H Landroid/content/SharedPreferences;]
-      [151] ldc #63
+      [151] ldc #62
         + String [height]
       [153] bipush 75
-      [155] invokeinterface #330
+      [155] invokeinterface #329
         + InterfaceMethodref [android/content/SharedPreferences.getInt (Ljava/lang/String;I)I]
-      [160] invokevirtual #294
+      [160] invokevirtual #293
         + Methodref [java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;]
       [163] ldc #23
         + String [ inches]
-      [165] invokevirtual #295
+      [165] invokevirtual #294
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [168] invokevirtual #296
+      [168] invokevirtual #295
         + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
-      [171] invokevirtual #268
+      [171] invokevirtual #267
         + Methodref [android/widget/TextView.setText (Ljava/lang/CharSequence;)V]
       [174] aload_0 v0
-      [175] getfield #201
+      [175] getfield #200
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.W Landroid/widget/TextView;]
-      [178] new #111
+      [178] new #110
         + Class [java/lang/StringBuilder]
       [181] dup
-      [182] ldc #44
+      [182] ldc #43
         + String [Position: ]
-      [184] invokespecial #291
+      [184] invokespecial #290
         + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
       [187] aload_0 v0
-      [188] getfield #186
+      [188] getfield #185
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.H Landroid/content/SharedPreferences;]
-      [191] ldc #69
+      [191] ldc #68
         + String [position]
       [193] ldc #47
         + String [Sitting]
-      [195] invokeinterface #331
+      [195] invokeinterface #330
         + InterfaceMethodref [android/content/SharedPreferences.getString (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;]
-      [200] invokevirtual #295
+      [200] invokevirtual #294
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [203] invokevirtual #296
+      [203] invokevirtual #295
         + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
-      [206] invokevirtual #268
+      [206] invokevirtual #267
         + Methodref [android/widget/TextView.setText (Ljava/lang/CharSequence;)V]
       [209] aload_0 v0
-      [210] getfield #194
+      [210] getfield #193
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.P Landroid/widget/TextView;]
-      [213] new #111
+      [213] new #110
         + Class [java/lang/StringBuilder]
       [216] dup
       [217] ldc #48
         + String [Temperature: ]
-      [219] invokespecial #291
+      [219] invokespecial #290
         + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
       [222] aload_0 v0
-      [223] getfield #186
+      [223] getfield #185
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.H Landroid/content/SharedPreferences;]
-      [226] ldc #64
+      [226] ldc #63
         + String [internalTemperature]
       [228] fconst_0
-      [229] invokeinterface #329
+      [229] invokeinterface #328
         + InterfaceMethodref [android/content/SharedPreferences.getFloat (Ljava/lang/String;F)F]
-      [234] invokevirtual #293
+      [234] invokevirtual #292
         + Methodref [java/lang/StringBuilder.append (F)Ljava/lang/StringBuilder;]
-      [237] invokevirtual #296
+      [237] invokevirtual #295
         + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
-      [240] invokevirtual #268
+      [240] invokevirtual #267
         + Methodref [android/widget/TextView.setText (Ljava/lang/CharSequence;)V]
       [243] goto +222 (target=465)
       [246] aload_0 v0
-      [247] getfield #197
+      [247] getfield #196
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.S Landroid/widget/TextView;]
-      [250] new #111
+      [250] new #110
         + Class [java/lang/StringBuilder]
       [253] dup
-      [254] ldc #30
+      [254] ldc #29
         + String [Age: ]
-      [256] invokespecial #291
+      [256] invokespecial #290
         + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
       [259] aload_0 v0
-      [260] getfield #186
+      [260] getfield #185
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.H Landroid/content/SharedPreferences;]
-      [263] ldc #55
+      [263] ldc #54
         + String [age]
       [265] bipush 23
-      [267] invokeinterface #330
+      [267] invokeinterface #329
         + InterfaceMethodref [android/content/SharedPreferences.getInt (Ljava/lang/String;I)I]
-      [272] invokevirtual #294
+      [272] invokevirtual #293
         + Methodref [java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;]
-      [275] invokevirtual #296
+      [275] invokevirtual #295
         + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
-      [278] invokevirtual #268
+      [278] invokevirtual #267
         + Methodref [android/widget/TextView.setText (Ljava/lang/CharSequence;)V]
       [281] aload_0 v0
-      [282] getfield #198
+      [282] getfield #197
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.T Landroid/widget/TextView;]
-      [285] new #111
+      [285] new #110
         + Class [java/lang/StringBuilder]
       [288] dup
       [289] ldc #46
         + String [Sex: ]
-      [291] invokespecial #291
+      [291] invokespecial #290
         + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
       [294] aload_0 v0
-      [295] getfield #186
+      [295] getfield #185
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.H Landroid/content/SharedPreferences;]
-      [298] ldc #70
+      [298] ldc #69
         + String [sex]
-      [300] ldc #41
+      [300] ldc #40
         + String [Male]
-      [302] invokeinterface #331
+      [302] invokeinterface #330
         + InterfaceMethodref [android/content/SharedPreferences.getString (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;]
-      [307] invokevirtual #295
+      [307] invokevirtual #294
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [310] invokevirtual #296
+      [310] invokevirtual #295
         + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
-      [313] invokevirtual #268
+      [313] invokevirtual #267
         + Methodref [android/widget/TextView.setText (Ljava/lang/CharSequence;)V]
       [316] aload_0 v0
-      [317] getfield #200
+      [317] getfield #199
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.V Landroid/widget/TextView;]
-      [320] new #111
+      [320] new #110
         + Class [java/lang/StringBuilder]
       [323] dup
       [324] ldc #50
         + String [Weight: ]
-      [326] invokespecial #291
+      [326] invokespecial #290
         + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
       [329] aload_0 v0
-      [330] getfield #186
+      [330] getfield #185
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.H Landroid/content/SharedPreferences;]
-      [333] ldc #76
+      [333] ldc #75
         + String [weight]
       [335] bipush 73
-      [337] invokeinterface #330
+      [337] invokeinterface #329
         + InterfaceMethodref [android/content/SharedPreferences.getInt (Ljava/lang/String;I)I]
-      [342] invokevirtual #294
+      [342] invokevirtual #293
         + Methodref [java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;]
       [345] ldc #24
         + String [ kg]
-      [347] invokevirtual #295
+      [347] invokevirtual #294
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [350] invokevirtual #296
+      [350] invokevirtual #295
         + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
-      [353] invokevirtual #268
+      [353] invokevirtual #267
         + Methodref [android/widget/TextView.setText (Ljava/lang/CharSequence;)V]
       [356] aload_0 v0
-      [357] getfield #199
+      [357] getfield #198
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.U Landroid/widget/TextView;]
-      [360] new #111
+      [360] new #110
         + Class [java/lang/StringBuilder]
       [363] dup
-      [364] ldc #39
+      [364] ldc #38
         + String [Height: ]
-      [366] invokespecial #291
+      [366] invokespecial #290
         + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
       [369] aload_0 v0
-      [370] getfield #186
+      [370] getfield #185
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.H Landroid/content/SharedPreferences;]
-      [373] ldc #63
+      [373] ldc #62
         + String [height]
       [375] bipush 75
-      [377] invokeinterface #330
+      [377] invokeinterface #329
         + InterfaceMethodref [android/content/SharedPreferences.getInt (Ljava/lang/String;I)I]
-      [382] invokevirtual #294
+      [382] invokevirtual #293
         + Methodref [java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;]
       [385] ldc #22
         + String [ cm]
-      [387] invokevirtual #295
+      [387] invokevirtual #294
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [390] invokevirtual #296
+      [390] invokevirtual #295
         + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
-      [393] invokevirtual #268
+      [393] invokevirtual #267
         + Methodref [android/widget/TextView.setText (Ljava/lang/CharSequence;)V]
       [396] aload_0 v0
-      [397] getfield #201
+      [397] getfield #200
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.W Landroid/widget/TextView;]
-      [400] new #111
+      [400] new #110
         + Class [java/lang/StringBuilder]
       [403] dup
-      [404] ldc #44
+      [404] ldc #43
         + String [Position: ]
-      [406] invokespecial #291
+      [406] invokespecial #290
         + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
       [409] aload_0 v0
-      [410] getfield #186
+      [410] getfield #185
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.H Landroid/content/SharedPreferences;]
-      [413] ldc #69
+      [413] ldc #68
         + String [position]
       [415] ldc #47
         + String [Sitting]
-      [417] invokeinterface #331
+      [417] invokeinterface #330
         + InterfaceMethodref [android/content/SharedPreferences.getString (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;]
-      [422] invokevirtual #295
+      [422] invokevirtual #294
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [425] invokevirtual #296
+      [425] invokevirtual #295
         + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
-      [428] invokevirtual #268
+      [428] invokevirtual #267
         + Methodref [android/widget/TextView.setText (Ljava/lang/CharSequence;)V]
       [431] aload_0 v0
-      [432] getfield #194
+      [432] getfield #193
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.P Landroid/widget/TextView;]
-      [435] new #111
+      [435] new #110
         + Class [java/lang/StringBuilder]
       [438] dup
       [439] ldc #48
         + String [Temperature: ]
-      [441] invokespecial #291
+      [441] invokespecial #290
         + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
       [444] aload_0 v0
-      [445] getfield #186
+      [445] getfield #185
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.H Landroid/content/SharedPreferences;]
-      [448] ldc #64
+      [448] ldc #63
         + String [internalTemperature]
       [450] fconst_0
-      [451] invokeinterface #329
+      [451] invokeinterface #328
         + InterfaceMethodref [android/content/SharedPreferences.getFloat (Ljava/lang/String;F)F]
-      [456] invokevirtual #293
+      [456] invokevirtual #292
         + Methodref [java/lang/StringBuilder.append (F)Ljava/lang/StringBuilder;]
-      [459] invokevirtual #296
+      [459] invokevirtual #295
         + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
-      [462] invokevirtual #268
+      [462] invokevirtual #267
         + Methodref [android/widget/TextView.setText (Ljava/lang/CharSequence;)V]
       [465] return
       Code attribute exceptions (count = 0):
@@ -36169,19 +36167,19 @@ Methods (count = 50):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 27, locals = 4, stack = 3):
       [0] aload_0 v0
-      [1] getfield #186
+      [1] getfield #185
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.H Landroid/content/SharedPreferences;]
-      [4] invokeinterface #327
+      [4] invokeinterface #326
         + InterfaceMethodref [android/content/SharedPreferences.edit ()Landroid/content/SharedPreferences$Editor;]
       [9] astore_3 v3
       [10] aload_3 v3
       [11] aload_1 v1
       [12] iload_2 v2
-      [13] invokeinterface #334
+      [13] invokeinterface #333
         + InterfaceMethodref [android/content/SharedPreferences$Editor.putInt (Ljava/lang/String;I)Landroid/content/SharedPreferences$Editor;]
       [18] pop
       [19] aload_3 v3
-      [20] invokeinterface #332
+      [20] invokeinterface #331
         + InterfaceMethodref [android/content/SharedPreferences$Editor.commit ()Z]
       [25] pop
       [26] return
@@ -36193,19 +36191,19 @@ Methods (count = 50):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 27, locals = 4, stack = 3):
       [0] aload_0 v0
-      [1] getfield #186
+      [1] getfield #185
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.H Landroid/content/SharedPreferences;]
-      [4] invokeinterface #327
+      [4] invokeinterface #326
         + InterfaceMethodref [android/content/SharedPreferences.edit ()Landroid/content/SharedPreferences$Editor;]
       [9] astore_3 v3
       [10] aload_3 v3
       [11] aload_1 v1
       [12] aload_2 v2
-      [13] invokeinterface #335
+      [13] invokeinterface #334
         + InterfaceMethodref [android/content/SharedPreferences$Editor.putString (Ljava/lang/String;Ljava/lang/String;)Landroid/content/SharedPreferences$Editor;]
       [18] pop
       [19] aload_3 v3
-      [20] invokeinterface #332
+      [20] invokeinterface #331
         + InterfaceMethodref [android/content/SharedPreferences$Editor.commit ()Z]
       [25] pop
       [26] return
@@ -36217,12 +36215,12 @@ Methods (count = 50):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 12, locals = 2, stack = 3):
       [0] aload_0 v0
-      [1] invokevirtual #311
+      [1] invokevirtual #310
         + Methodref [net/simplyadvanced/vitalsigns/TestBloodPressure.getMenuInflater ()Landroid/view/MenuInflater;]
       [4] ldc #2
         + Integer [2131165187]
       [6] aload_1 v1
-      [7] invokevirtual #264
+      [7] invokevirtual #263
         + Methodref [android/view/MenuInflater.inflate (ILandroid/view/Menu;)V]
       [10] iconst_1
       [11] ireturn
@@ -36232,210 +36230,224 @@ Methods (count = 50):
     Access flags: 0x1
       = public boolean onOptionsItemSelected(android.view.MenuItem)
     Class member attributes (count = 1):
-    + Code attribute instructions (code length = 301, locals = 2, stack = 5):
+    + Code attribute instructions (code length = 317, locals = 2, stack = 5):
       [0] aload_1 v1
-      [1] invokeinterface #336
+      [1] invokeinterface #335
         + InterfaceMethodref [android/view/MenuItem.getItemId ()I]
-      [6] tableswitch (4 offsets, default=289) (target=295)
+      [6] tableswitch (4 offsets, default=305) (target=311)
         2131230766: offset = 30, target = 36
-        2131230767: offset = 45, target = 51
-        2131230768: offset = 51, target = 57
-        2131230769: offset = 170, target = 176
-        default: offset = 289, target = 295
+        2131230767: offset = 61, target = 67
+        2131230768: offset = 67, target = 73
+        2131230769: offset = 186, target = 192
+        default: offset = 305, target = 311
       [36] aload_0 v0
-      [37] getfield #185
+      [37] ldc #72
+        + String [userInputForEmail]
+      [39] ldc #17
+        + String []
+      [41] invokespecial #299
+        + Methodref [net/simplyadvanced/vitalsigns/TestBloodPressure.a (Ljava/lang/String;Ljava/lang/String;)V]
+      [44] aload_0 v0
+      [45] ldc #73
+        + String [userInputForPhoneNumber]
+      [47] ldc #17
+        + String []
+      [49] invokespecial #299
+        + Methodref [net/simplyadvanced/vitalsigns/TestBloodPressure.a (Ljava/lang/String;Ljava/lang/String;)V]
+      [52] aload_0 v0
+      [53] getfield #184
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.G Lnet/simplyadvanced/vitalsigns/TestBloodPressure;]
-      [40] ldc #54
-        + String [You clicked settings]
-      [42] iconst_0
-      [43] invokestatic #269
+      [56] ldc #45
+        + String [Settings returned to default]
+      [58] iconst_0
+      [59] invokestatic #268
         + Methodref [android/widget/Toast.makeText (Landroid/content/Context;Ljava/lang/CharSequence;I)Landroid/widget/Toast;]
-      [46] invokevirtual #270
+      [62] invokevirtual #269
         + Methodref [android/widget/Toast.show ()V]
-      [49] iconst_1
-      [50] ireturn
-      [51] aload_0 v0
-      [52] invokespecial #310
+      [65] iconst_1
+      [66] ireturn
+      [67] aload_0 v0
+      [68] invokespecial #309
         + Methodref [net/simplyadvanced/vitalsigns/TestBloodPressure.g ()V]
-      [55] iconst_1
-      [56] ireturn
-      [57] aload_0 v0
-      [58] getfield #186
+      [71] iconst_1
+      [72] ireturn
+      [73] aload_0 v0
+      [74] getfield #185
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.H Landroid/content/SharedPreferences;]
-      [61] ldc #73
+      [77] ldc #72
         + String [userInputForEmail]
-      [63] ldc #29
-        + String [@gmail.com]
-      [65] invokeinterface #331
+      [79] ldc #17
+        + String []
+      [81] invokeinterface #330
         + InterfaceMethodref [android/content/SharedPreferences.getString (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;]
-      [70] ldc #29
-        + String [@gmail.com]
-      [72] invokevirtual #288
+      [86] ldc #17
+        + String []
+      [88] invokevirtual #287
         + Methodref [java/lang/String.equals (Ljava/lang/Object;)Z]
-      [75] ifeq +10 (target=85)
-      [78] aload_0 v0
-      [79] invokespecial #314
+      [91] ifeq +10 (target=101)
+      [94] aload_0 v0
+      [95] invokespecial #313
         + Methodref [net/simplyadvanced/vitalsigns/TestBloodPressure.h ()V]
-      [82] goto +92 (target=174)
-      [85] aload_0 v0
-      [86] aload_0 v0
-      [87] getfield #186
+      [98] goto +92 (target=190)
+      [101] aload_0 v0
+      [102] aload_0 v0
+      [103] getfield #185
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.H Landroid/content/SharedPreferences;]
-      [90] ldc #73
+      [106] ldc #72
         + String [userInputForEmail]
-      [92] ldc #29
-        + String [@gmail.com]
-      [94] invokeinterface #331
+      [108] ldc #17
+        + String []
+      [110] invokeinterface #330
         + InterfaceMethodref [android/content/SharedPreferences.getString (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;]
-      [99] new #111
+      [115] new #110
         + Class [java/lang/StringBuilder]
-      [102] dup
-      [103] ldc #38
+      [118] dup
+      [119] ldc #37
         + String [Heart Rate: ]
-      [105] invokespecial #291
+      [121] invokespecial #290
         + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
-      [108] aload_0 v0
-      [109] getfield #212
+      [124] aload_0 v0
+      [125] getfield #211
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.i D]
-      [112] invokevirtual #292
+      [128] invokevirtual #291
         + Methodref [java/lang/StringBuilder.append (D)Ljava/lang/StringBuilder;]
-      [115] ldc #21
+      [131] ldc #21
         + String [ bpm
 Blood Pressure: ]
-      [117] invokevirtual #295
+      [133] invokevirtual #294
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [120] aload_0 v0
-      [121] getfield #209
+      [136] aload_0 v0
+      [137] getfield #208
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.f I]
-      [124] invokevirtual #294
+      [140] invokevirtual #293
         + Methodref [java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;]
-      [127] ldc #27
+      [143] ldc #27
         + String [/]
-      [129] invokevirtual #295
+      [145] invokevirtual #294
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [132] aload_0 v0
-      [133] getfield #210
+      [148] aload_0 v0
+      [149] getfield #209
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.g I]
-      [136] invokevirtual #294
+      [152] invokevirtual #293
         + Methodref [java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;]
-      [139] ldc #18
+      [155] ldc #18
         + String [
 Temperature: ]
-      [141] invokevirtual #295
+      [157] invokevirtual #294
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [144] aload_0 v0
-      [145] getfield #211
+      [160] aload_0 v0
+      [161] getfield #210
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.h I]
-      [148] invokevirtual #294
+      [164] invokevirtual #293
         + Methodref [java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;]
-      [151] aload_0 v0
-      [152] getfield #182
+      [167] aload_0 v0
+      [168] getfield #181
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.D Z]
-      [155] ifeq +8 (target=163)
-      [158] ldc #20
+      [171] ifeq +8 (target=179)
+      [174] ldc #20
         + String [ F]
-      [160] goto +5 (target=165)
-      [163] ldc #19
+      [176] goto +5 (target=181)
+      [179] ldc #19
         + String [ C]
-      [165] invokevirtual #295
+      [181] invokevirtual #294
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [168] invokevirtual #296
+      [184] invokevirtual #295
         + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
-      [171] invokespecial #302
+      [187] invokespecial #301
         + Methodref [net/simplyadvanced/vitalsigns/TestBloodPressure.b (Ljava/lang/String;Ljava/lang/String;)V]
-      [174] iconst_1
-      [175] ireturn
-      [176] aload_0 v0
-      [177] getfield #186
+      [190] iconst_1
+      [191] ireturn
+      [192] aload_0 v0
+      [193] getfield #185
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.H Landroid/content/SharedPreferences;]
-      [180] ldc #74
+      [196] ldc #73
         + String [userInputForPhoneNumber]
-      [182] ldc #17
+      [198] ldc #17
         + String []
-      [184] invokeinterface #331
+      [200] invokeinterface #330
         + InterfaceMethodref [android/content/SharedPreferences.getString (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;]
-      [189] ldc #17
+      [205] ldc #17
         + String []
-      [191] invokevirtual #288
+      [207] invokevirtual #287
         + Methodref [java/lang/String.equals (Ljava/lang/Object;)Z]
-      [194] ifeq +10 (target=204)
-      [197] aload_0 v0
-      [198] invokespecial #315
+      [210] ifeq +10 (target=220)
+      [213] aload_0 v0
+      [214] invokespecial #314
         + Methodref [net/simplyadvanced/vitalsigns/TestBloodPressure.i ()V]
-      [201] goto +92 (target=293)
-      [204] aload_0 v0
-      [205] aload_0 v0
-      [206] getfield #186
+      [217] goto +92 (target=309)
+      [220] aload_0 v0
+      [221] aload_0 v0
+      [222] getfield #185
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.H Landroid/content/SharedPreferences;]
-      [209] ldc #74
+      [225] ldc #73
         + String [userInputForPhoneNumber]
-      [211] ldc #17
+      [227] ldc #17
         + String []
-      [213] invokeinterface #331
+      [229] invokeinterface #330
         + InterfaceMethodref [android/content/SharedPreferences.getString (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;]
-      [218] new #111
+      [234] new #110
         + Class [java/lang/StringBuilder]
-      [221] dup
-      [222] ldc #38
+      [237] dup
+      [238] ldc #37
         + String [Heart Rate: ]
-      [224] invokespecial #291
+      [240] invokespecial #290
         + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
-      [227] aload_0 v0
-      [228] getfield #212
+      [243] aload_0 v0
+      [244] getfield #211
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.i D]
-      [231] invokevirtual #292
+      [247] invokevirtual #291
         + Methodref [java/lang/StringBuilder.append (D)Ljava/lang/StringBuilder;]
-      [234] ldc #21
+      [250] ldc #21
         + String [ bpm
 Blood Pressure: ]
-      [236] invokevirtual #295
+      [252] invokevirtual #294
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [239] aload_0 v0
-      [240] getfield #209
+      [255] aload_0 v0
+      [256] getfield #208
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.f I]
-      [243] invokevirtual #294
+      [259] invokevirtual #293
         + Methodref [java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;]
-      [246] ldc #27
+      [262] ldc #27
         + String [/]
-      [248] invokevirtual #295
+      [264] invokevirtual #294
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [251] aload_0 v0
-      [252] getfield #210
+      [267] aload_0 v0
+      [268] getfield #209
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.g I]
-      [255] invokevirtual #294
+      [271] invokevirtual #293
         + Methodref [java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;]
-      [258] ldc #18
+      [274] ldc #18
         + String [
 Temperature: ]
-      [260] invokevirtual #295
+      [276] invokevirtual #294
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [263] aload_0 v0
-      [264] getfield #211
+      [279] aload_0 v0
+      [280] getfield #210
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.h I]
-      [267] invokevirtual #294
+      [283] invokevirtual #293
         + Methodref [java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;]
-      [270] aload_0 v0
-      [271] getfield #182
+      [286] aload_0 v0
+      [287] getfield #181
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.D Z]
-      [274] ifeq +8 (target=282)
-      [277] ldc #20
+      [290] ifeq +8 (target=298)
+      [293] ldc #20
         + String [ F]
-      [279] goto +5 (target=284)
-      [282] ldc #19
+      [295] goto +5 (target=300)
+      [298] ldc #19
         + String [ C]
-      [284] invokevirtual #295
+      [300] invokevirtual #294
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [287] invokevirtual #296
+      [303] invokevirtual #295
         + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
-      [290] invokespecial #304
+      [306] invokespecial #303
         + Methodref [net/simplyadvanced/vitalsigns/TestBloodPressure.c (Ljava/lang/String;Ljava/lang/String;)V]
-      [293] iconst_1
-      [294] ireturn
-      [295] aload_0 v0
-      [296] aload_1 v1
-      [297] invokespecial #233
+      [309] iconst_1
+      [310] ireturn
+      [311] aload_0 v0
+      [312] aload_1 v1
+      [313] invokespecial #232
         + Methodref [android/app/Activity.onOptionsItemSelected (Landroid/view/MenuItem;)Z]
-      [300] ireturn
+      [316] ireturn
       Code attribute exceptions (count = 0):
       Code attribute attributes (attribute count = 0):
   + Method:       g()V
@@ -36445,238 +36457,238 @@ Temperature: ]
     + Code attribute instructions (code length = 353, locals = 2, stack = 6):
       [0] aload_0 v0
       [1] aload_0 v0
-      [2] getfield #182
+      [2] getfield #181
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.D Z]
       [5] ifne +7 (target=12)
       [8] iconst_1
       [9] goto +4 (target=13)
       [12] iconst_0
-      [13] putfield #182
+      [13] putfield #181
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.D Z]
       [16] aload_0 v0
-      [17] getfield #186
+      [17] getfield #185
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.H Landroid/content/SharedPreferences;]
-      [20] invokeinterface #327
+      [20] invokeinterface #326
         + InterfaceMethodref [android/content/SharedPreferences.edit ()Landroid/content/SharedPreferences$Editor;]
       [25] astore_1 v1
       [26] aload_0 v0
-      [27] getfield #182
+      [27] getfield #181
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.D Z]
       [30] ifeq +164 (target=194)
       [33] aload_1 v1
-      [34] ldc #76
+      [34] ldc #75
         + String [weight]
       [36] aload_0 v0
-      [37] getfield #186
+      [37] getfield #185
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.H Landroid/content/SharedPreferences;]
-      [40] ldc #76
+      [40] ldc #75
         + String [weight]
       [42] bipush 73
-      [44] invokeinterface #330
+      [44] invokeinterface #329
         + InterfaceMethodref [android/content/SharedPreferences.getInt (Ljava/lang/String;I)I]
       [49] i2d
-      [50] ldc2_w #153
+      [50] ldc2_w #152
         + Double [2.20462]
       [53] dmul
       [54] d2i
-      [55] invokeinterface #334
+      [55] invokeinterface #333
         + InterfaceMethodref [android/content/SharedPreferences$Editor.putInt (Ljava/lang/String;I)Landroid/content/SharedPreferences$Editor;]
       [60] pop
       [61] aload_1 v1
-      [62] ldc #63
+      [62] ldc #62
         + String [height]
       [64] aload_0 v0
-      [65] getfield #186
+      [65] getfield #185
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.H Landroid/content/SharedPreferences;]
-      [68] ldc #63
+      [68] ldc #62
         + String [height]
       [70] sipush 190
-      [73] invokeinterface #330
+      [73] invokeinterface #329
         + InterfaceMethodref [android/content/SharedPreferences.getInt (Ljava/lang/String;I)I]
       [78] i2d
-      [79] ldc2_w #155
+      [79] ldc2_w #154
         + Double [2.54]
       [82] ddiv
       [83] d2i
-      [84] invokeinterface #334
+      [84] invokeinterface #333
         + InterfaceMethodref [android/content/SharedPreferences$Editor.putInt (Ljava/lang/String;I)Landroid/content/SharedPreferences$Editor;]
       [89] pop
       [90] aload_1 v1
-      [91] ldc #62
+      [91] ldc #61
         + String [displayEnglishUnits]
       [93] aload_0 v0
-      [94] getfield #182
+      [94] getfield #181
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.D Z]
-      [97] invokeinterface #333
+      [97] invokeinterface #332
         + InterfaceMethodref [android/content/SharedPreferences$Editor.putBoolean (Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;]
       [102] pop
       [103] aload_1 v1
-      [104] invokeinterface #332
+      [104] invokeinterface #331
         + InterfaceMethodref [android/content/SharedPreferences$Editor.commit ()Z]
       [109] pop
       [110] aload_0 v0
-      [111] getfield #200
+      [111] getfield #199
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.V Landroid/widget/TextView;]
-      [114] new #111
+      [114] new #110
         + Class [java/lang/StringBuilder]
       [117] dup
       [118] ldc #50
         + String [Weight: ]
-      [120] invokespecial #291
+      [120] invokespecial #290
         + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
       [123] aload_0 v0
-      [124] getfield #186
+      [124] getfield #185
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.H Landroid/content/SharedPreferences;]
-      [127] ldc #76
+      [127] ldc #75
         + String [weight]
       [129] bipush 73
-      [131] invokeinterface #330
+      [131] invokeinterface #329
         + InterfaceMethodref [android/content/SharedPreferences.getInt (Ljava/lang/String;I)I]
-      [136] invokevirtual #294
+      [136] invokevirtual #293
         + Methodref [java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;]
       [139] ldc #25
         + String [ pounds]
-      [141] invokevirtual #295
+      [141] invokevirtual #294
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [144] invokevirtual #296
+      [144] invokevirtual #295
         + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
-      [147] invokevirtual #268
+      [147] invokevirtual #267
         + Methodref [android/widget/TextView.setText (Ljava/lang/CharSequence;)V]
       [150] aload_0 v0
-      [151] getfield #199
+      [151] getfield #198
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.U Landroid/widget/TextView;]
-      [154] new #111
+      [154] new #110
         + Class [java/lang/StringBuilder]
       [157] dup
-      [158] ldc #39
+      [158] ldc #38
         + String [Height: ]
-      [160] invokespecial #291
+      [160] invokespecial #290
         + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
       [163] aload_0 v0
-      [164] getfield #186
+      [164] getfield #185
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.H Landroid/content/SharedPreferences;]
-      [167] ldc #63
+      [167] ldc #62
         + String [height]
       [169] sipush 190
-      [172] invokeinterface #330
+      [172] invokeinterface #329
         + InterfaceMethodref [android/content/SharedPreferences.getInt (Ljava/lang/String;I)I]
-      [177] invokevirtual #294
+      [177] invokevirtual #293
         + Methodref [java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;]
       [180] ldc #23
         + String [ inches]
-      [182] invokevirtual #295
+      [182] invokevirtual #294
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [185] invokevirtual #296
+      [185] invokevirtual #295
         + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
-      [188] invokevirtual #268
+      [188] invokevirtual #267
         + Methodref [android/widget/TextView.setText (Ljava/lang/CharSequence;)V]
       [191] goto +161 (target=352)
       [194] aload_1 v1
-      [195] ldc #76
+      [195] ldc #75
         + String [weight]
       [197] aload_0 v0
-      [198] getfield #186
+      [198] getfield #185
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.H Landroid/content/SharedPreferences;]
-      [201] ldc #76
+      [201] ldc #75
         + String [weight]
       [203] sipush 160
-      [206] invokeinterface #330
+      [206] invokeinterface #329
         + InterfaceMethodref [android/content/SharedPreferences.getInt (Ljava/lang/String;I)I]
       [211] i2d
-      [212] ldc2_w #153
+      [212] ldc2_w #152
         + Double [2.20462]
       [215] ddiv
       [216] d2i
-      [217] invokeinterface #334
+      [217] invokeinterface #333
         + InterfaceMethodref [android/content/SharedPreferences$Editor.putInt (Ljava/lang/String;I)Landroid/content/SharedPreferences$Editor;]
       [222] pop
       [223] aload_1 v1
-      [224] ldc #63
+      [224] ldc #62
         + String [height]
       [226] aload_0 v0
-      [227] getfield #186
+      [227] getfield #185
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.H Landroid/content/SharedPreferences;]
-      [230] ldc #63
+      [230] ldc #62
         + String [height]
       [232] bipush 75
-      [234] invokeinterface #330
+      [234] invokeinterface #329
         + InterfaceMethodref [android/content/SharedPreferences.getInt (Ljava/lang/String;I)I]
       [239] i2d
-      [240] ldc2_w #155
+      [240] ldc2_w #154
         + Double [2.54]
       [243] dmul
       [244] d2i
-      [245] invokeinterface #334
+      [245] invokeinterface #333
         + InterfaceMethodref [android/content/SharedPreferences$Editor.putInt (Ljava/lang/String;I)Landroid/content/SharedPreferences$Editor;]
       [250] pop
       [251] aload_1 v1
-      [252] ldc #62
+      [252] ldc #61
         + String [displayEnglishUnits]
       [254] aload_0 v0
-      [255] getfield #182
+      [255] getfield #181
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.D Z]
-      [258] invokeinterface #333
+      [258] invokeinterface #332
         + InterfaceMethodref [android/content/SharedPreferences$Editor.putBoolean (Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;]
       [263] pop
       [264] aload_1 v1
-      [265] invokeinterface #332
+      [265] invokeinterface #331
         + InterfaceMethodref [android/content/SharedPreferences$Editor.commit ()Z]
       [270] pop
       [271] aload_0 v0
-      [272] getfield #200
+      [272] getfield #199
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.V Landroid/widget/TextView;]
-      [275] new #111
+      [275] new #110
         + Class [java/lang/StringBuilder]
       [278] dup
       [279] ldc #50
         + String [Weight: ]
-      [281] invokespecial #291
+      [281] invokespecial #290
         + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
       [284] aload_0 v0
-      [285] getfield #186
+      [285] getfield #185
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.H Landroid/content/SharedPreferences;]
-      [288] ldc #76
+      [288] ldc #75
         + String [weight]
       [290] sipush 160
-      [293] invokeinterface #330
+      [293] invokeinterface #329
         + InterfaceMethodref [android/content/SharedPreferences.getInt (Ljava/lang/String;I)I]
-      [298] invokevirtual #294
+      [298] invokevirtual #293
         + Methodref [java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;]
       [301] ldc #24
         + String [ kg]
-      [303] invokevirtual #295
+      [303] invokevirtual #294
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [306] invokevirtual #296
+      [306] invokevirtual #295
         + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
-      [309] invokevirtual #268
+      [309] invokevirtual #267
         + Methodref [android/widget/TextView.setText (Ljava/lang/CharSequence;)V]
       [312] aload_0 v0
-      [313] getfield #199
+      [313] getfield #198
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.U Landroid/widget/TextView;]
-      [316] new #111
+      [316] new #110
         + Class [java/lang/StringBuilder]
       [319] dup
-      [320] ldc #39
+      [320] ldc #38
         + String [Height: ]
-      [322] invokespecial #291
+      [322] invokespecial #290
         + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
       [325] aload_0 v0
-      [326] getfield #186
+      [326] getfield #185
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.H Landroid/content/SharedPreferences;]
-      [329] ldc #63
+      [329] ldc #62
         + String [height]
       [331] bipush 75
-      [333] invokeinterface #330
+      [333] invokeinterface #329
         + InterfaceMethodref [android/content/SharedPreferences.getInt (Ljava/lang/String;I)I]
-      [338] invokevirtual #294
+      [338] invokevirtual #293
         + Methodref [java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;]
       [341] ldc #22
         + String [ cm]
-      [343] invokevirtual #295
+      [343] invokevirtual #294
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [346] invokevirtual #296
+      [346] invokevirtual #295
         + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
-      [349] invokevirtual #268
+      [349] invokevirtual #267
         + Methodref [android/widget/TextView.setText (Ljava/lang/CharSequence;)V]
       [352] return
       Code attribute exceptions (count = 0):
@@ -36686,68 +36698,68 @@ Temperature: ]
       = private void h()
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 86, locals = 2, stack = 6):
-      [0] new #96
+      [0] new #95
         + Class [android/widget/EditText]
       [3] dup
       [4] aload_0 v0
-      [5] getfield #185
+      [5] getfield #184
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.G Lnet/simplyadvanced/vitalsigns/TestBloodPressure;]
-      [8] invokespecial #265
+      [8] invokespecial #264
         + Methodref [android/widget/EditText.<init> (Landroid/content/Context;)V]
       [11] astore_1 v1
       [12] aload_1 v1
       [13] aload_0 v0
-      [14] getfield #186
+      [14] getfield #185
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.H Landroid/content/SharedPreferences;]
-      [17] ldc #73
+      [17] ldc #72
         + String [userInputForEmail]
-      [19] ldc #29
-        + String [@gmail.com]
-      [21] invokeinterface #331
+      [19] ldc #17
+        + String []
+      [21] invokeinterface #330
         + InterfaceMethodref [android/content/SharedPreferences.getString (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;]
-      [26] invokevirtual #266
+      [26] invokevirtual #265
         + Methodref [android/widget/EditText.setText (Ljava/lang/CharSequence;)V]
-      [29] new #78
+      [29] new #77
         + Class [android/app/AlertDialog$Builder]
       [32] dup
       [33] aload_0 v0
-      [34] getfield #185
+      [34] getfield #184
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.G Lnet/simplyadvanced/vitalsigns/TestBloodPressure;]
-      [37] invokespecial #236
+      [37] invokespecial #235
         + Methodref [android/app/AlertDialog$Builder.<init> (Landroid/content/Context;)V]
-      [40] ldc #36
+      [40] ldc #35
         + String [Enter Email]
-      [42] invokevirtual #240
+      [42] invokevirtual #239
         + Methodref [android/app/AlertDialog$Builder.setTitle (Ljava/lang/CharSequence;)Landroid/app/AlertDialog$Builder;]
       [45] ldc #51
         + String [Where would you like to email the data?]
-      [47] invokevirtual #237
+      [47] invokevirtual #236
         + Methodref [android/app/AlertDialog$Builder.setMessage (Ljava/lang/CharSequence;)Landroid/app/AlertDialog$Builder;]
       [50] aload_1 v1
-      [51] invokevirtual #241
+      [51] invokevirtual #240
         + Methodref [android/app/AlertDialog$Builder.setView (Landroid/view/View;)Landroid/app/AlertDialog$Builder;]
-      [54] ldc #43
+      [54] ldc #42
         + String [Okay]
-      [56] new #119
+      [56] new #118
         + Class [net/simplyadvanced/vitalsigns/f]
       [59] dup
       [60] aload_0 v0
       [61] aload_1 v1
-      [62] invokespecial #321
+      [62] invokespecial #320
         + Methodref [net/simplyadvanced/vitalsigns/f.<init> (Lnet/simplyadvanced/vitalsigns/TestBloodPressure;Landroid/widget/EditText;)V]
-      [65] invokevirtual #239
+      [65] invokevirtual #238
         + Methodref [android/app/AlertDialog$Builder.setPositiveButton (Ljava/lang/CharSequence;Landroid/content/DialogInterface$OnClickListener;)Landroid/app/AlertDialog$Builder;]
-      [68] ldc #32
+      [68] ldc #31
         + String [Cancel]
-      [70] new #120
+      [70] new #119
         + Class [net/simplyadvanced/vitalsigns/g]
       [73] dup
       [74] aload_0 v0
-      [75] invokespecial #322
+      [75] invokespecial #321
         + Methodref [net/simplyadvanced/vitalsigns/g.<init> (Lnet/simplyadvanced/vitalsigns/TestBloodPressure;)V]
-      [78] invokevirtual #238
+      [78] invokevirtual #237
         + Methodref [android/app/AlertDialog$Builder.setNegativeButton (Ljava/lang/CharSequence;Landroid/content/DialogInterface$OnClickListener;)Landroid/app/AlertDialog$Builder;]
-      [81] invokevirtual #242
+      [81] invokevirtual #241
         + Methodref [android/app/AlertDialog$Builder.show ()Landroid/app/AlertDialog;]
       [84] pop
       [85] return
@@ -36758,60 +36770,60 @@ Temperature: ]
       = private void b(java.lang.String,java.lang.String)
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 68, locals = 4, stack = 6):
-      [0] new #80
+      [0] new #79
         + Class [android/content/Intent]
       [3] dup
-      [4] ldc #56
+      [4] ldc #55
         + String [android.intent.action.SEND]
-      [6] invokespecial #244
+      [6] invokespecial #243
         + Methodref [android/content/Intent.<init> (Ljava/lang/String;)V]
       [9] astore_3 v3
       [10] aload_3 v3
-      [11] ldc #57
+      [11] ldc #56
         + String [android.intent.extra.EMAIL]
       [13] iconst_1
-      [14] anewarray #110
+      [14] anewarray #109
         + Class [java/lang/String]
       [17] dup
       [18] iconst_0
       [19] aload_1 v1
       [20] aastore
-      [21] invokevirtual #246
+      [21] invokevirtual #245
         + Methodref [android/content/Intent.putExtra (Ljava/lang/String;[Ljava/lang/String;)Landroid/content/Intent;]
       [24] pop
       [25] aload_3 v3
-      [26] ldc #58
+      [26] ldc #57
         + String [android.intent.extra.SUBJECT]
       [28] ldc #49
         + String [Vital Signs]
-      [30] invokevirtual #245
+      [30] invokevirtual #244
         + Methodref [android/content/Intent.putExtra (Ljava/lang/String;Ljava/lang/String;)Landroid/content/Intent;]
       [33] pop
       [34] aload_3 v3
-      [35] ldc #59
+      [35] ldc #58
         + String [android.intent.extra.TEXT]
       [37] aload_2 v2
-      [38] invokevirtual #245
+      [38] invokevirtual #244
         + Methodref [android/content/Intent.putExtra (Ljava/lang/String;Ljava/lang/String;)Landroid/content/Intent;]
       [41] pop
       [42] aload_3 v3
-      [43] ldc #75
+      [43] ldc #74
         + String [vnd.android.cursor.dir/email]
-      [45] invokevirtual #247
+      [45] invokevirtual #246
         + Methodref [android/content/Intent.setType (Ljava/lang/String;)Landroid/content/Intent;]
       [48] pop
       [49] aload_0 v0
       [50] aload_3 v3
-      [51] invokevirtual #318
+      [51] invokevirtual #317
         + Methodref [net/simplyadvanced/vitalsigns/TestBloodPressure.startActivity (Landroid/content/Intent;)V]
       [54] goto +13 (target=67)
       [57] astore_3 v3
-      [58] ldc #35
+      [58] ldc #34
         + String [Emailing contact]
-      [60] ldc #34
+      [60] ldc #33
         + String [Email failed]
       [62] aload_3 v3
-      [63] invokestatic #262
+      [63] invokestatic #261
         + Methodref [android/util/Log.e (Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I]
       [66] pop
       [67] return
@@ -36824,68 +36836,68 @@ Temperature: ]
       = private void i()
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 86, locals = 2, stack = 6):
-      [0] new #96
+      [0] new #95
         + Class [android/widget/EditText]
       [3] dup
       [4] aload_0 v0
-      [5] getfield #185
+      [5] getfield #184
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.G Lnet/simplyadvanced/vitalsigns/TestBloodPressure;]
-      [8] invokespecial #265
+      [8] invokespecial #264
         + Methodref [android/widget/EditText.<init> (Landroid/content/Context;)V]
       [11] astore_1 v1
       [12] aload_1 v1
       [13] aload_0 v0
-      [14] getfield #186
+      [14] getfield #185
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.H Landroid/content/SharedPreferences;]
-      [17] ldc #74
+      [17] ldc #73
         + String [userInputForPhoneNumber]
       [19] ldc #17
         + String []
-      [21] invokeinterface #331
+      [21] invokeinterface #330
         + InterfaceMethodref [android/content/SharedPreferences.getString (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;]
-      [26] invokevirtual #266
+      [26] invokevirtual #265
         + Methodref [android/widget/EditText.setText (Ljava/lang/CharSequence;)V]
-      [29] new #78
+      [29] new #77
         + Class [android/app/AlertDialog$Builder]
       [32] dup
       [33] aload_0 v0
-      [34] getfield #185
+      [34] getfield #184
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.G Lnet/simplyadvanced/vitalsigns/TestBloodPressure;]
-      [37] invokespecial #236
+      [37] invokespecial #235
         + Methodref [android/app/AlertDialog$Builder.<init> (Landroid/content/Context;)V]
-      [40] ldc #37
+      [40] ldc #36
         + String [Enter Phone Number]
-      [42] invokevirtual #240
+      [42] invokevirtual #239
         + Methodref [android/app/AlertDialog$Builder.setTitle (Ljava/lang/CharSequence;)Landroid/app/AlertDialog$Builder;]
       [45] ldc #52
         + String [Where would you like to text the data?]
-      [47] invokevirtual #237
+      [47] invokevirtual #236
         + Methodref [android/app/AlertDialog$Builder.setMessage (Ljava/lang/CharSequence;)Landroid/app/AlertDialog$Builder;]
       [50] aload_1 v1
-      [51] invokevirtual #241
+      [51] invokevirtual #240
         + Methodref [android/app/AlertDialog$Builder.setView (Landroid/view/View;)Landroid/app/AlertDialog$Builder;]
-      [54] ldc #43
+      [54] ldc #42
         + String [Okay]
-      [56] new #121
+      [56] new #120
         + Class [net/simplyadvanced/vitalsigns/h]
       [59] dup
       [60] aload_0 v0
       [61] aload_1 v1
-      [62] invokespecial #323
+      [62] invokespecial #322
         + Methodref [net/simplyadvanced/vitalsigns/h.<init> (Lnet/simplyadvanced/vitalsigns/TestBloodPressure;Landroid/widget/EditText;)V]
-      [65] invokevirtual #239
+      [65] invokevirtual #238
         + Methodref [android/app/AlertDialog$Builder.setPositiveButton (Ljava/lang/CharSequence;Landroid/content/DialogInterface$OnClickListener;)Landroid/app/AlertDialog$Builder;]
-      [68] ldc #32
+      [68] ldc #31
         + String [Cancel]
-      [70] new #122
+      [70] new #121
         + Class [net/simplyadvanced/vitalsigns/i]
       [73] dup
       [74] aload_0 v0
-      [75] invokespecial #324
+      [75] invokespecial #323
         + Methodref [net/simplyadvanced/vitalsigns/i.<init> (Lnet/simplyadvanced/vitalsigns/TestBloodPressure;)V]
-      [78] invokevirtual #238
+      [78] invokevirtual #237
         + Methodref [android/app/AlertDialog$Builder.setNegativeButton (Ljava/lang/CharSequence;Landroid/content/DialogInterface$OnClickListener;)Landroid/app/AlertDialog$Builder;]
-      [81] invokevirtual #242
+      [81] invokevirtual #241
         + Methodref [android/app/AlertDialog$Builder.show ()Landroid/app/AlertDialog;]
       [84] pop
       [85] return
@@ -36896,7 +36908,7 @@ Temperature: ]
       = private void c(java.lang.String,java.lang.String)
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 14, locals = 4, stack = 6):
-      [0] invokestatic #260
+      [0] invokestatic #259
         + Methodref [android/telephony/SmsManager.getDefault ()Landroid/telephony/SmsManager;]
       [3] astore_3 v3
       [4] aload_3 v3
@@ -36905,7 +36917,7 @@ Temperature: ]
       [7] aload_2 v2
       [8] aconst_null
       [9] aconst_null
-      [10] invokevirtual #261
+      [10] invokevirtual #260
         + Methodref [android/telephony/SmsManager.sendTextMessage (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Landroid/app/PendingIntent;Landroid/app/PendingIntent;)V]
       [13] return
       Code attribute exceptions (count = 0):
@@ -36915,46 +36927,46 @@ Temperature: ]
       = private void j()
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 59, locals = 2, stack = 4):
-      [0] invokestatic #259
+      [0] invokestatic #258
         + Methodref [android/os/Environment.getExternalStorageState ()Ljava/lang/String;]
       [3] astore_1 v1
-      [4] ldc #66
+      [4] ldc #65
         + String [mounted]
       [6] aload_1 v1
-      [7] invokevirtual #288
+      [7] invokevirtual #287
         + Methodref [java/lang/String.equals (Ljava/lang/Object;)Z]
       [10] ifeq +16 (target=26)
       [13] aload_0 v0
       [14] aload_0 v0
       [15] iconst_1
       [16] dup_x1
-      [17] putfield #228
+      [17] putfield #227
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.z Z]
-      [20] putfield #227
+      [20] putfield #226
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.y Z]
       [23] goto +35 (target=58)
-      [26] ldc #67
+      [26] ldc #66
         + String [mounted_ro]
       [28] aload_1 v1
-      [29] invokevirtual #288
+      [29] invokevirtual #287
         + Methodref [java/lang/String.equals (Ljava/lang/Object;)Z]
       [32] ifeq +16 (target=48)
       [35] aload_0 v0
       [36] iconst_1
-      [37] putfield #227
+      [37] putfield #226
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.y Z]
       [40] aload_0 v0
       [41] iconst_0
-      [42] putfield #228
+      [42] putfield #227
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.z Z]
       [45] goto +13 (target=58)
       [48] aload_0 v0
       [49] aload_0 v0
       [50] iconst_0
       [51] dup_x1
-      [52] putfield #228
+      [52] putfield #227
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.z Z]
-      [55] putfield #227
+      [55] putfield #226
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.y Z]
       [58] return
       Code attribute exceptions (count = 0):
@@ -36964,89 +36976,89 @@ Temperature: ]
       = private void d(java.lang.String,java.lang.String)
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 130, locals = 8, stack = 6):
-      [0] invokestatic #258
+      [0] invokestatic #257
         + Methodref [android/os/Environment.getExternalStorageDirectory ()Ljava/io/File;]
       [3] astore_3 v3
-      [4] new #102
+      [4] new #101
         + Class [java/io/File]
       [7] dup
-      [8] new #111
+      [8] new #110
         + Class [java/lang/StringBuilder]
       [11] dup
       [12] aload_3 v3
-      [13] invokevirtual #273
+      [13] invokevirtual #272
         + Methodref [java/io/File.getAbsolutePath ()Ljava/lang/String;]
-      [16] invokestatic #290
+      [16] invokestatic #289
         + Methodref [java/lang/String.valueOf (Ljava/lang/Object;)Ljava/lang/String;]
-      [19] invokespecial #291
+      [19] invokespecial #290
         + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
       [22] ldc #28
         + String [/VitalSigns]
-      [24] invokevirtual #295
+      [24] invokevirtual #294
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [27] invokevirtual #296
+      [27] invokevirtual #295
         + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
-      [30] invokespecial #272
+      [30] invokespecial #271
         + Methodref [java/io/File.<init> (Ljava/lang/String;)V]
       [33] astore v4
       [35] aload v4
-      [37] invokevirtual #274
+      [37] invokevirtual #273
         + Methodref [java/io/File.mkdirs ()Z]
       [40] pop
-      [41] new #102
+      [41] new #101
         + Class [java/io/File]
       [44] dup
       [45] aload v4
-      [47] new #111
+      [47] new #110
         + Class [java/lang/StringBuilder]
       [50] dup
       [51] aload_2 v2
-      [52] invokestatic #290
+      [52] invokestatic #289
         + Methodref [java/lang/String.valueOf (Ljava/lang/Object;)Ljava/lang/String;]
-      [55] invokespecial #291
+      [55] invokespecial #290
         + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
       [58] ldc #26
         + String [.txt]
-      [60] invokevirtual #295
+      [60] invokevirtual #294
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [63] invokevirtual #296
+      [63] invokevirtual #295
         + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
-      [66] invokespecial #271
+      [66] invokespecial #270
         + Methodref [java/io/File.<init> (Ljava/io/File;Ljava/lang/String;)V]
       [69] astore v5
-      [71] new #104
+      [71] new #103
         + Class [java/io/FileOutputStream]
       [74] dup
       [75] aload v5
-      [77] invokespecial #277
+      [77] invokespecial #276
         + Methodref [java/io/FileOutputStream.<init> (Ljava/io/File;)V]
       [80] astore v6
-      [82] new #106
+      [82] new #105
         + Class [java/io/OutputStreamWriter]
       [85] dup
       [86] aload v6
-      [88] invokespecial #280
+      [88] invokespecial #279
         + Methodref [java/io/OutputStreamWriter.<init> (Ljava/io/OutputStream;)V]
       [91] astore v7
       [93] aload v7
       [95] aload_1 v1
-      [96] invokevirtual #283
+      [96] invokevirtual #282
         + Methodref [java/io/OutputStreamWriter.write (Ljava/lang/String;)V]
       [99] aload v7
-      [101] invokevirtual #282
+      [101] invokevirtual #281
         + Methodref [java/io/OutputStreamWriter.flush ()V]
       [104] aload v7
-      [106] invokevirtual #281
+      [106] invokevirtual #280
         + Methodref [java/io/OutputStreamWriter.close ()V]
       [109] goto +20 (target=129)
       [112] astore v7
       [114] aload v7
-      [116] invokevirtual #276
+      [116] invokevirtual #275
         + Methodref [java/io/FileNotFoundException.printStackTrace ()V]
       [119] goto +10 (target=129)
       [122] astore v7
       [124] aload v7
-      [126] invokevirtual #279
+      [126] invokevirtual #278
         + Methodref [java/io/IOException.printStackTrace ()V]
       [129] return
       Code attribute exceptions (count = 2):
@@ -37060,100 +37072,100 @@ Temperature: ]
       = private void a(java.lang.String)
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 142, locals = 7, stack = 5):
-      [0] invokestatic #258
+      [0] invokestatic #257
         + Methodref [android/os/Environment.getExternalStorageDirectory ()Ljava/io/File;]
       [3] astore_2 v2
-      [4] new #102
+      [4] new #101
         + Class [java/io/File]
       [7] dup
-      [8] new #111
+      [8] new #110
         + Class [java/lang/StringBuilder]
       [11] dup
       [12] aload_2 v2
-      [13] invokevirtual #273
+      [13] invokevirtual #272
         + Methodref [java/io/File.getAbsolutePath ()Ljava/lang/String;]
-      [16] invokestatic #290
+      [16] invokestatic #289
         + Methodref [java/lang/String.valueOf (Ljava/lang/Object;)Ljava/lang/String;]
-      [19] invokespecial #291
+      [19] invokespecial #290
         + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
       [22] ldc #28
         + String [/VitalSigns]
-      [24] invokevirtual #295
+      [24] invokevirtual #294
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [27] invokevirtual #296
+      [27] invokevirtual #295
         + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
-      [30] invokespecial #272
+      [30] invokespecial #271
         + Methodref [java/io/File.<init> (Ljava/lang/String;)V]
       [33] astore_3 v3
       [34] aload_3 v3
-      [35] invokevirtual #274
+      [35] invokevirtual #273
         + Methodref [java/io/File.mkdirs ()Z]
       [38] pop
-      [39] new #102
+      [39] new #101
         + Class [java/io/File]
       [42] dup
       [43] aload_3 v3
-      [44] ldc #60
+      [44] ldc #59
         + String [data.csv]
-      [46] invokespecial #271
+      [46] invokespecial #270
         + Methodref [java/io/File.<init> (Ljava/io/File;Ljava/lang/String;)V]
       [49] astore v4
-      [51] new #104
+      [51] new #103
         + Class [java/io/FileOutputStream]
       [54] dup
       [55] aload v4
       [57] iconst_1
-      [58] invokespecial #278
+      [58] invokespecial #277
         + Methodref [java/io/FileOutputStream.<init> (Ljava/io/File;Z)V]
       [61] astore v5
-      [63] new #106
+      [63] new #105
         + Class [java/io/OutputStreamWriter]
       [66] dup
       [67] aload v5
-      [69] invokespecial #280
+      [69] invokespecial #279
         + Methodref [java/io/OutputStreamWriter.<init> (Ljava/io/OutputStream;)V]
       [72] astore v6
       [74] aload v6
       [76] aload_1 v1
-      [77] invokevirtual #283
+      [77] invokevirtual #282
         + Methodref [java/io/OutputStreamWriter.write (Ljava/lang/String;)V]
       [80] aload v6
-      [82] invokevirtual #282
+      [82] invokevirtual #281
         + Methodref [java/io/OutputStreamWriter.flush ()V]
       [85] aload v6
-      [87] invokevirtual #281
+      [87] invokevirtual #280
         + Methodref [java/io/OutputStreamWriter.close ()V]
       [90] aload_0 v0
-      [91] getfield #185
+      [91] getfield #184
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.G Lnet/simplyadvanced/vitalsigns/TestBloodPressure;]
-      [94] new #111
+      [94] new #110
         + Class [java/lang/StringBuilder]
       [97] dup
-      [98] ldc #33
+      [98] ldc #32
         + String [Data successfully save in ]
-      [100] invokespecial #291
+      [100] invokespecial #290
         + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
       [103] aload v4
-      [105] invokevirtual #275
+      [105] invokevirtual #274
         + Methodref [java/io/File.toString ()Ljava/lang/String;]
-      [108] invokevirtual #295
+      [108] invokevirtual #294
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [111] invokevirtual #296
+      [111] invokevirtual #295
         + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
       [114] iconst_1
-      [115] invokestatic #269
+      [115] invokestatic #268
         + Methodref [android/widget/Toast.makeText (Landroid/content/Context;Ljava/lang/CharSequence;I)Landroid/widget/Toast;]
-      [118] invokevirtual #270
+      [118] invokevirtual #269
         + Methodref [android/widget/Toast.show ()V]
       [121] goto +20 (target=141)
       [124] astore v6
       [126] aload v6
-      [128] invokevirtual #276
+      [128] invokevirtual #275
         + Methodref [java/io/FileNotFoundException.printStackTrace ()V]
       [131] goto +10 (target=141)
       [134] astore v6
       [136] aload v6
-      [138] invokevirtual #279
+      [138] invokevirtual #278
         + Methodref [java/io/IOException.printStackTrace ()V]
       [141] return
       Code attribute exceptions (count = 2):
@@ -37169,34 +37181,34 @@ Temperature: ]
     + Code attribute instructions (code length = 41, locals = 1, stack = 6):
       [0] aload_0 v0
       [1] aload_0 v0
-      [2] ldc #65
+      [2] ldc #64
         + String [location]
-      [4] invokevirtual #313
+      [4] invokevirtual #312
         + Methodref [net/simplyadvanced/vitalsigns/TestBloodPressure.getSystemService (Ljava/lang/String;)Ljava/lang/Object;]
-      [7] checkcast #87
+      [7] checkcast #86
         + Class [android/location/LocationManager]
-      [10] putfield #183
+      [10] putfield #182
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.E Landroid/location/LocationManager;]
       [13] aload_0 v0
-      [14] new #123
+      [14] new #122
         + Class [net/simplyadvanced/vitalsigns/j]
       [17] dup
       [18] aload_0 v0
-      [19] invokespecial #325
+      [19] invokespecial #324
         + Methodref [net/simplyadvanced/vitalsigns/j.<init> (Lnet/simplyadvanced/vitalsigns/TestBloodPressure;)V]
-      [22] putfield #184
+      [22] putfield #183
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.F Landroid/location/LocationListener;]
       [25] aload_0 v0
-      [26] getfield #183
+      [26] getfield #182
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.E Landroid/location/LocationManager;]
-      [29] ldc #68
+      [29] ldc #67
         + String [network]
       [31] lconst_0
       [32] fconst_0
       [33] aload_0 v0
-      [34] getfield #184
+      [34] getfield #183
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.F Landroid/location/LocationListener;]
-      [37] invokevirtual #257
+      [37] invokevirtual #256
         + Methodref [android/location/LocationManager.requestLocationUpdates (Ljava/lang/String;JFLandroid/location/LocationListener;)V]
       [40] return
       Code attribute exceptions (count = 0):
@@ -37207,17 +37219,17 @@ Temperature: ]
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 20, locals = 2, stack = 2):
       [0] aload_0 v0
-      [1] getfield #183
+      [1] getfield #182
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.E Landroid/location/LocationManager;]
       [4] aload_0 v0
-      [5] getfield #184
+      [5] getfield #183
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.F Landroid/location/LocationListener;]
-      [8] invokevirtual #256
+      [8] invokevirtual #255
         + Methodref [android/location/LocationManager.removeUpdates (Landroid/location/LocationListener;)V]
       [11] goto +8 (target=19)
       [14] astore_1 v1
       [15] aload_1 v1
-      [16] invokevirtual #284
+      [16] invokevirtual #283
         + Methodref [java/lang/IllegalArgumentException.printStackTrace ()V]
       [19] return
       Code attribute exceptions (count = 1):
@@ -37231,7 +37243,7 @@ Temperature: ]
     + Code attribute instructions (code length = 6, locals = 2, stack = 2):
       [0] aload_0 v0
       [1] aload_1 v1
-      [2] putfield #191
+      [2] putfield #190
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.M Landroid/hardware/Camera;]
       [5] return
       Code attribute exceptions (count = 0):
@@ -37242,7 +37254,7 @@ Temperature: ]
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 5, locals = 1, stack = 1):
       [0] aload_0 v0
-      [1] getfield #191
+      [1] getfield #190
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.M Landroid/hardware/Camera;]
       [4] areturn
       Code attribute exceptions (count = 0):
@@ -37253,7 +37265,7 @@ Temperature: ]
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 5, locals = 1, stack = 1):
       [0] aload_0 v0
-      [1] getfield #185
+      [1] getfield #184
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.G Lnet/simplyadvanced/vitalsigns/TestBloodPressure;]
       [4] areturn
       Code attribute exceptions (count = 0):
@@ -37265,7 +37277,7 @@ Temperature: ]
     + Code attribute instructions (code length = 6, locals = 2, stack = 2):
       [0] aload_0 v0
       [1] iload_1 v1
-      [2] putfield #202
+      [2] putfield #201
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.X I]
       [5] return
       Code attribute exceptions (count = 0):
@@ -37277,7 +37289,7 @@ Temperature: ]
     + Code attribute instructions (code length = 6, locals = 2, stack = 2):
       [0] aload_0 v0
       [1] iload_1 v1
-      [2] putfield #203
+      [2] putfield #202
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.Y I]
       [5] return
       Code attribute exceptions (count = 0):
@@ -37291,7 +37303,7 @@ Temperature: ]
       [1] aload_1 v1
       [2] iload_2 v2
       [3] iload_3 v3
-      [4] invokespecial #301
+      [4] invokespecial #300
         + Methodref [net/simplyadvanced/vitalsigns/TestBloodPressure.a (Ljava/util/List;II)Landroid/hardware/Camera$Size;]
       [7] areturn
       Code attribute exceptions (count = 0):
@@ -37302,7 +37314,7 @@ Temperature: ]
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 5, locals = 1, stack = 1):
       [0] aload_0 v0
-      [1] getfield #195
+      [1] getfield #194
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.Q Landroid/widget/TextView;]
       [4] areturn
       Code attribute exceptions (count = 0):
@@ -37313,7 +37325,7 @@ Temperature: ]
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 5, locals = 1, stack = 1):
       [0] aload_0 v0
-      [1] getfield #203
+      [1] getfield #202
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.Y I]
       [4] ireturn
       Code attribute exceptions (count = 0):
@@ -37324,7 +37336,7 @@ Temperature: ]
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 5, locals = 1, stack = 1):
       [0] aload_0 v0
-      [1] getfield #202
+      [1] getfield #201
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.X I]
       [4] ireturn
       Code attribute exceptions (count = 0):
@@ -37335,7 +37347,7 @@ Temperature: ]
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 5, locals = 1, stack = 1):
       [0] aload_0 v0
-      [1] getfield #196
+      [1] getfield #195
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.R Landroid/widget/TextView;]
       [4] areturn
       Code attribute exceptions (count = 0):
@@ -37346,7 +37358,7 @@ Temperature: ]
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 5, locals = 1, stack = 1):
       [0] aload_0 v0
-      [1] getfield #192
+      [1] getfield #191
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.N Landroid/widget/TextView;]
       [4] areturn
       Code attribute exceptions (count = 0):
@@ -37357,7 +37369,7 @@ Temperature: ]
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 5, locals = 1, stack = 1):
       [0] aload_0 v0
-      [1] getfield #193
+      [1] getfield #192
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.O Landroid/widget/TextView;]
       [4] areturn
       Code attribute exceptions (count = 0):
@@ -37368,7 +37380,7 @@ Temperature: ]
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 5, locals = 1, stack = 1):
       [0] aload_0 v0
-      [1] getfield #186
+      [1] getfield #185
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.H Landroid/content/SharedPreferences;]
       [4] areturn
       Code attribute exceptions (count = 0):
@@ -37381,7 +37393,7 @@ Temperature: ]
       [0] aload_0 v0
       [1] aload_1 v1
       [2] iload_2 v2
-      [3] invokespecial #299
+      [3] invokespecial #298
         + Methodref [net/simplyadvanced/vitalsigns/TestBloodPressure.a (Ljava/lang/String;I)V]
       [6] return
       Code attribute exceptions (count = 0):
@@ -37392,7 +37404,7 @@ Temperature: ]
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 5, locals = 1, stack = 1):
       [0] aload_0 v0
-      [1] invokespecial #307
+      [1] invokespecial #306
         + Methodref [net/simplyadvanced/vitalsigns/TestBloodPressure.e ()V]
       [4] return
       Code attribute exceptions (count = 0):
@@ -37403,7 +37415,7 @@ Temperature: ]
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 5, locals = 1, stack = 1):
       [0] aload_0 v0
-      [1] getfield #190
+      [1] getfield #189
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.L Landroid/widget/ImageView;]
       [4] areturn
       Code attribute exceptions (count = 0):
@@ -37416,7 +37428,7 @@ Temperature: ]
       [0] aload_0 v0
       [1] aload_1 v1
       [2] aload_2 v2
-      [3] invokespecial #306
+      [3] invokespecial #305
         + Methodref [net/simplyadvanced/vitalsigns/TestBloodPressure.d (Ljava/lang/String;Ljava/lang/String;)V]
       [6] return
       Code attribute exceptions (count = 0):
@@ -37428,7 +37440,7 @@ Temperature: ]
     + Code attribute instructions (code length = 6, locals = 2, stack = 2):
       [0] aload_0 v0
       [1] aload_1 v1
-      [2] invokespecial #298
+      [2] invokespecial #297
         + Methodref [net/simplyadvanced/vitalsigns/TestBloodPressure.a (Ljava/lang/String;)V]
       [5] return
       Code attribute exceptions (count = 0):
@@ -37441,7 +37453,7 @@ Temperature: ]
       [0] aload_0 v0
       [1] aload_1 v1
       [2] aload_2 v2
-      [3] invokespecial #300
+      [3] invokespecial #299
         + Methodref [net/simplyadvanced/vitalsigns/TestBloodPressure.a (Ljava/lang/String;Ljava/lang/String;)V]
       [6] return
       Code attribute exceptions (count = 0):
@@ -37454,7 +37466,7 @@ Temperature: ]
       [0] aload_0 v0
       [1] aload_1 v1
       [2] aload_2 v2
-      [3] invokespecial #302
+      [3] invokespecial #301
         + Methodref [net/simplyadvanced/vitalsigns/TestBloodPressure.b (Ljava/lang/String;Ljava/lang/String;)V]
       [6] return
       Code attribute exceptions (count = 0):
@@ -37467,7 +37479,7 @@ Temperature: ]
       [0] aload_0 v0
       [1] aload_1 v1
       [2] aload_2 v2
-      [3] invokespecial #304
+      [3] invokespecial #303
         + Methodref [net/simplyadvanced/vitalsigns/TestBloodPressure.c (Ljava/lang/String;Ljava/lang/String;)V]
       [6] return
       Code attribute exceptions (count = 0):
@@ -37486,11 +37498,13 @@ _____________________________________________________________________
 Interfaces (count = 1):
   + Class [android/content/DialogInterface$OnClickListener]
 
-Constant Pool (count = 124):
+Constant Pool (count = 126):
   + String [
 ]
   + String [
 Temperature: ]
+  + String [
+Time: ]
   + String [ C]
   + String [ F]
   + String [ bpm
@@ -37561,6 +37575,8 @@ Blood Pressure: ]
 ]
   + Utf8 [
 Temperature: ]
+  + Utf8 [
+Time: ]
   + Utf8 [ C]
   + Utf8 [ F]
   + Utf8 [ bpm
@@ -37630,10 +37646,10 @@ Methods (count = 2):
     + Code attribute instructions (code length = 10, locals = 2, stack = 2):
       [0] aload_0 v0
       [1] aload_1 v1
-      [2] putfield #28
+      [2] putfield #29
         + Fieldref [net/simplyadvanced/vitalsigns/d.a Lnet/simplyadvanced/vitalsigns/TestBloodPressure;]
       [5] aload_0 v0
-      [6] invokespecial #35
+      [6] invokespecial #36
         + Methodref [java/lang/Object.<init> ()V]
       [9] return
       Code attribute exceptions (count = 0):
@@ -37642,198 +37658,208 @@ Methods (count = 2):
     Access flags: 0x1
       = public void onClick(android.content.DialogInterface,int)
     Class member attributes (count = 1):
-    + Code attribute instructions (code length = 265, locals = 4, stack = 5):
+    + Code attribute instructions (code length = 277, locals = 4, stack = 5):
       [0] aload_0 v0
-      [1] getfield #28
+      [1] getfield #29
         + Fieldref [net/simplyadvanced/vitalsigns/d.a Lnet/simplyadvanced/vitalsigns/TestBloodPressure;]
-      [4] getfield #26
+      [4] getfield #27
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.y Z]
-      [7] ifeq +241 (target=248)
+      [7] ifeq +253 (target=260)
       [10] aload_0 v0
-      [11] getfield #28
+      [11] getfield #29
         + Fieldref [net/simplyadvanced/vitalsigns/d.a Lnet/simplyadvanced/vitalsigns/TestBloodPressure;]
-      [14] getfield #27
+      [14] getfield #28
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.z Z]
-      [17] ifeq +231 (target=248)
-      [20] new #14
+      [17] ifeq +243 (target=260)
+      [20] new #15
         + Class [android/text/format/Time]
       [23] dup
-      [24] invokestatic #31
+      [24] invokestatic #32
         + Methodref [android/text/format/Time.getCurrentTimezone ()Ljava/lang/String;]
-      [27] invokespecial #29
+      [27] invokespecial #30
         + Methodref [android/text/format/Time.<init> (Ljava/lang/String;)V]
       [30] astore_3 v3
       [31] aload_3 v3
-      [32] invokevirtual #32
+      [32] invokevirtual #33
         + Methodref [android/text/format/Time.setToNow ()V]
       [35] aload_0 v0
-      [36] getfield #28
+      [36] getfield #29
         + Fieldref [net/simplyadvanced/vitalsigns/d.a Lnet/simplyadvanced/vitalsigns/TestBloodPressure;]
-      [39] new #18
+      [39] new #19
         + Class [java/lang/StringBuilder]
       [42] dup
-      [43] ldc #10
+      [43] ldc #11
         + String [Heart Rate: ]
-      [45] invokespecial #37
+      [45] invokespecial #38
         + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
       [48] aload_0 v0
-      [49] getfield #28
+      [49] getfield #29
         + Fieldref [net/simplyadvanced/vitalsigns/d.a Lnet/simplyadvanced/vitalsigns/TestBloodPressure;]
-      [52] getfield #25
+      [52] getfield #26
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.i D]
-      [55] invokevirtual #38
+      [55] invokevirtual #39
         + Methodref [java/lang/StringBuilder.append (D)Ljava/lang/StringBuilder;]
-      [58] ldc #5
+      [58] ldc #6
         + String [ bpm
 Blood Pressure: ]
-      [60] invokevirtual #40
+      [60] invokevirtual #41
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
       [63] aload_0 v0
-      [64] getfield #28
+      [64] getfield #29
         + Fieldref [net/simplyadvanced/vitalsigns/d.a Lnet/simplyadvanced/vitalsigns/TestBloodPressure;]
-      [67] getfield #22
+      [67] getfield #23
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.f I]
-      [70] invokevirtual #39
+      [70] invokevirtual #40
         + Methodref [java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;]
-      [73] ldc #7
+      [73] ldc #8
         + String [/]
-      [75] invokevirtual #40
+      [75] invokevirtual #41
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
       [78] aload_0 v0
-      [79] getfield #28
+      [79] getfield #29
         + Fieldref [net/simplyadvanced/vitalsigns/d.a Lnet/simplyadvanced/vitalsigns/TestBloodPressure;]
-      [82] getfield #23
+      [82] getfield #24
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.g I]
-      [85] invokevirtual #39
+      [85] invokevirtual #40
         + Methodref [java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;]
       [88] ldc #2
         + String [
 Temperature: ]
-      [90] invokevirtual #40
+      [90] invokevirtual #41
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
       [93] aload_0 v0
-      [94] getfield #28
+      [94] getfield #29
         + Fieldref [net/simplyadvanced/vitalsigns/d.a Lnet/simplyadvanced/vitalsigns/TestBloodPressure;]
-      [97] getfield #24
+      [97] getfield #25
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.h I]
-      [100] invokevirtual #39
+      [100] invokevirtual #40
         + Methodref [java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;]
       [103] aload_0 v0
-      [104] getfield #28
+      [104] getfield #29
         + Fieldref [net/simplyadvanced/vitalsigns/d.a Lnet/simplyadvanced/vitalsigns/TestBloodPressure;]
-      [107] getfield #21
+      [107] getfield #22
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.D Z]
       [110] ifeq +8 (target=118)
-      [113] ldc #4
+      [113] ldc #5
         + String [ F]
       [115] goto +5 (target=120)
-      [118] ldc #3
+      [118] ldc #4
         + String [ C]
-      [120] invokevirtual #40
+      [120] invokevirtual #41
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [123] invokevirtual #41
-        + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
-      [126] ldc #12
-        + String [data-LastMeasurement]
-      [128] invokestatic #43
-        + Methodref [net/simplyadvanced/vitalsigns/TestBloodPressure.a (Lnet/simplyadvanced/vitalsigns/TestBloodPressure;Ljava/lang/String;Ljava/lang/String;)V]
-      [131] aload_0 v0
-      [132] getfield #28
-        + Fieldref [net/simplyadvanced/vitalsigns/d.a Lnet/simplyadvanced/vitalsigns/TestBloodPressure;]
-      [135] new #18
-        + Class [java/lang/StringBuilder]
-      [138] dup
-      [139] aload_0 v0
-      [140] getfield #28
-        + Fieldref [net/simplyadvanced/vitalsigns/d.a Lnet/simplyadvanced/vitalsigns/TestBloodPressure;]
-      [143] getfield #25
-        + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.i D]
-      [146] invokestatic #36
-        + Methodref [java/lang/String.valueOf (D)Ljava/lang/String;]
-      [149] invokespecial #37
-        + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
-      [152] ldc #6
-        + String [,]
-      [154] invokevirtual #40
+      [123] ldc #3
+        + String [
+Time: ]
+      [125] invokevirtual #41
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [157] aload_0 v0
-      [158] getfield #28
-        + Fieldref [net/simplyadvanced/vitalsigns/d.a Lnet/simplyadvanced/vitalsigns/TestBloodPressure;]
-      [161] getfield #22
-        + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.f I]
-      [164] invokevirtual #39
-        + Methodref [java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;]
-      [167] ldc #6
-        + String [,]
-      [169] invokevirtual #40
-        + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [172] aload_0 v0
-      [173] getfield #28
-        + Fieldref [net/simplyadvanced/vitalsigns/d.a Lnet/simplyadvanced/vitalsigns/TestBloodPressure;]
-      [176] getfield #23
-        + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.g I]
-      [179] invokevirtual #39
-        + Methodref [java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;]
-      [182] ldc #6
-        + String [,]
-      [184] invokevirtual #40
-        + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [187] aload_0 v0
-      [188] getfield #28
-        + Fieldref [net/simplyadvanced/vitalsigns/d.a Lnet/simplyadvanced/vitalsigns/TestBloodPressure;]
-      [191] getfield #24
-        + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.h I]
-      [194] invokevirtual #39
-        + Methodref [java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;]
-      [197] ldc #6
-        + String [,]
-      [199] invokevirtual #40
-        + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [202] aload_0 v0
-      [203] getfield #28
-        + Fieldref [net/simplyadvanced/vitalsigns/d.a Lnet/simplyadvanced/vitalsigns/TestBloodPressure;]
-      [206] getfield #21
-        + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.D Z]
-      [209] ifeq +8 (target=217)
-      [212] ldc #9
-        + String [F]
-      [214] goto +5 (target=219)
-      [217] ldc #8
-        + String [C]
-      [219] invokevirtual #40
-        + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [222] ldc #6
-        + String [,]
-      [224] invokevirtual #40
-        + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [227] aload_3 v3
-      [228] invokevirtual #30
+      [128] aload_3 v3
+      [129] invokevirtual #31
         + Methodref [android/text/format/Time.format2445 ()Ljava/lang/String;]
-      [231] invokevirtual #40
+      [132] invokevirtual #41
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [234] ldc #1
+      [135] invokevirtual #42
+        + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
+      [138] ldc #13
+        + String [data-LastMeasurement]
+      [140] invokestatic #44
+        + Methodref [net/simplyadvanced/vitalsigns/TestBloodPressure.a (Lnet/simplyadvanced/vitalsigns/TestBloodPressure;Ljava/lang/String;Ljava/lang/String;)V]
+      [143] aload_0 v0
+      [144] getfield #29
+        + Fieldref [net/simplyadvanced/vitalsigns/d.a Lnet/simplyadvanced/vitalsigns/TestBloodPressure;]
+      [147] new #19
+        + Class [java/lang/StringBuilder]
+      [150] dup
+      [151] aload_0 v0
+      [152] getfield #29
+        + Fieldref [net/simplyadvanced/vitalsigns/d.a Lnet/simplyadvanced/vitalsigns/TestBloodPressure;]
+      [155] getfield #26
+        + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.i D]
+      [158] invokestatic #37
+        + Methodref [java/lang/String.valueOf (D)Ljava/lang/String;]
+      [161] invokespecial #38
+        + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
+      [164] ldc #7
+        + String [,]
+      [166] invokevirtual #41
+        + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
+      [169] aload_0 v0
+      [170] getfield #29
+        + Fieldref [net/simplyadvanced/vitalsigns/d.a Lnet/simplyadvanced/vitalsigns/TestBloodPressure;]
+      [173] getfield #23
+        + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.f I]
+      [176] invokevirtual #40
+        + Methodref [java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;]
+      [179] ldc #7
+        + String [,]
+      [181] invokevirtual #41
+        + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
+      [184] aload_0 v0
+      [185] getfield #29
+        + Fieldref [net/simplyadvanced/vitalsigns/d.a Lnet/simplyadvanced/vitalsigns/TestBloodPressure;]
+      [188] getfield #24
+        + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.g I]
+      [191] invokevirtual #40
+        + Methodref [java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;]
+      [194] ldc #7
+        + String [,]
+      [196] invokevirtual #41
+        + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
+      [199] aload_0 v0
+      [200] getfield #29
+        + Fieldref [net/simplyadvanced/vitalsigns/d.a Lnet/simplyadvanced/vitalsigns/TestBloodPressure;]
+      [203] getfield #25
+        + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.h I]
+      [206] invokevirtual #40
+        + Methodref [java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;]
+      [209] ldc #7
+        + String [,]
+      [211] invokevirtual #41
+        + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
+      [214] aload_0 v0
+      [215] getfield #29
+        + Fieldref [net/simplyadvanced/vitalsigns/d.a Lnet/simplyadvanced/vitalsigns/TestBloodPressure;]
+      [218] getfield #22
+        + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.D Z]
+      [221] ifeq +8 (target=229)
+      [224] ldc #10
+        + String [F]
+      [226] goto +5 (target=231)
+      [229] ldc #9
+        + String [C]
+      [231] invokevirtual #41
+        + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
+      [234] ldc #7
+        + String [,]
+      [236] invokevirtual #41
+        + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
+      [239] aload_3 v3
+      [240] invokevirtual #31
+        + Methodref [android/text/format/Time.format2445 ()Ljava/lang/String;]
+      [243] invokevirtual #41
+        + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
+      [246] ldc #1
         + String [
 ]
-      [236] invokevirtual #40
+      [248] invokevirtual #41
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [239] invokevirtual #41
+      [251] invokevirtual #42
         + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
-      [242] invokestatic #42
+      [254] invokestatic #43
         + Methodref [net/simplyadvanced/vitalsigns/TestBloodPressure.a (Lnet/simplyadvanced/vitalsigns/TestBloodPressure;Ljava/lang/String;)V]
-      [245] goto +19 (target=264)
-      [248] aload_0 v0
-      [249] getfield #28
+      [257] goto +19 (target=276)
+      [260] aload_0 v0
+      [261] getfield #29
         + Fieldref [net/simplyadvanced/vitalsigns/d.a Lnet/simplyadvanced/vitalsigns/TestBloodPressure;]
-      [252] invokestatic #44
+      [264] invokestatic #45
         + Methodref [net/simplyadvanced/vitalsigns/TestBloodPressure.b (Lnet/simplyadvanced/vitalsigns/TestBloodPressure;)Lnet/simplyadvanced/vitalsigns/TestBloodPressure;]
-      [255] ldc #11
+      [267] ldc #12
         + String [SD card storage not available]
-      [257] iconst_0
-      [258] invokestatic #33
+      [269] iconst_0
+      [270] invokestatic #34
         + Methodref [android/widget/Toast.makeText (Landroid/content/Context;Ljava/lang/CharSequence;I)Landroid/widget/Toast;]
-      [261] invokevirtual #34
+      [273] invokevirtual #35
         + Methodref [android/widget/Toast.show ()V]
-      [264] return
+      [276] return
       Code attribute exceptions (count = 0):
       Code attribute attributes (attribute count = 0):
 
@@ -37914,6 +37940,7 @@ Interfaces (count = 1):
   + Class [android/content/DialogInterface$OnClickListener]
 
 Constant Pool (count = 101):
+  + String []
   + String [
 Temperature: ]
   + String [ C]
@@ -37921,7 +37948,6 @@ Temperature: ]
   + String [ bpm
 Blood Pressure: ]
   + String [/]
-  + String [@gmail.com]
   + String [Heart Rate: ]
   + String [userInputForEmail]
   + Class [android/content/DialogInterface$OnClickListener]
@@ -37969,6 +37995,7 @@ Blood Pressure: ]
   + NameAndType [i (Lnet/simplyadvanced/vitalsigns/TestBloodPressure;)Landroid/content/SharedPreferences;]
   + NameAndType [i D]
   + NameAndType [toString ()Ljava/lang/String;]
+  + Utf8 []
   + Utf8 [
 Temperature: ]
   + Utf8 [ C]
@@ -37989,7 +38016,6 @@ Blood Pressure: ]
   + Utf8 [(Lnet/simplyadvanced/vitalsigns/TestBloodPressure;Ljava/lang/String;Ljava/lang/String;)V]
   + Utf8 [/]
   + Utf8 [<init>]
-  + Utf8 [@gmail.com]
   + Utf8 [Code]
   + Utf8 [D]
   + Utf8 [Heart Rate: ]
@@ -38076,8 +38102,8 @@ Methods (count = 2):
         + Methodref [net/simplyadvanced/vitalsigns/TestBloodPressure.i (Lnet/simplyadvanced/vitalsigns/TestBloodPressure;)Landroid/content/SharedPreferences;]
       [32] ldc #8
         + String [userInputForEmail]
-      [34] ldc #6
-        + String [@gmail.com]
+      [34] ldc #1
+        + String []
       [36] invokeinterface #34
         + InterfaceMethodref [android/content/SharedPreferences.getString (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;]
       [41] new #14
@@ -38094,7 +38120,7 @@ Methods (count = 2):
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.i D]
       [57] invokevirtual #27
         + Methodref [java/lang/StringBuilder.append (D)Ljava/lang/StringBuilder;]
-      [60] ldc #4
+      [60] ldc #5
         + String [ bpm
 Blood Pressure: ]
       [62] invokevirtual #29
@@ -38106,7 +38132,7 @@ Blood Pressure: ]
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.f I]
       [72] invokevirtual #28
         + Methodref [java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;]
-      [75] ldc #5
+      [75] ldc #6
         + String [/]
       [77] invokevirtual #29
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
@@ -38117,7 +38143,7 @@ Blood Pressure: ]
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.g I]
       [87] invokevirtual #28
         + Methodref [java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;]
-      [90] ldc #1
+      [90] ldc #2
         + String [
 Temperature: ]
       [92] invokevirtual #29
@@ -38135,10 +38161,10 @@ Temperature: ]
       [109] getfield #17
         + Fieldref [net/simplyadvanced/vitalsigns/TestBloodPressure.D Z]
       [112] ifeq +8 (target=120)
-      [115] ldc #3
+      [115] ldc #4
         + String [ F]
       [117] goto +5 (target=122)
-      [120] ldc #2
+      [120] ldc #3
         + String [ C]
       [122] invokevirtual #29
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]

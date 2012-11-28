@@ -1,3 +1,9 @@
+//TODO:
+ - Fix bug when emailing and going back to screen with camera preview.
+ - 
+
+
+/***********************************************************************/
 Weather - wunderground.com
  - Free account limited to 500 calls per day, or 10 calls per minute.
 

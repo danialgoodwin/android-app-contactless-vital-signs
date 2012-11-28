@@ -17,6 +17,9 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.Contacts;
+import android.provider.ContactsContract.CommonDataKinds.Email;
+import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
@@ -106,6 +109,10 @@ public class TestBloodPressure extends Activity {
 	/* GPS */
 	LocationManager locationManager;
 	LocationListener locationListener;
+	
+	/* For Intents' onActivityResults() */
+	final static int CONTACT_PICKER_EMAIL_RESULT = 100;
+	final static int CONTACT_PICKER_PHONE_NUMBER_RESULT = 200;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -549,7 +556,7 @@ public class TestBloodPressure extends Activity {
                     	if (mExternalStorageAvailable == true && mExternalStorageWriteable == true) {
                     		Time timeNow = new Time(Time.getCurrentTimezone());
                     		timeNow.setToNow();
-                    		writeToTextFile("Heart Rate: " + heartRate + " bpm\nBlood Pressure: " + systolicPressure + "/" + diastolicPressure + "\nTemperature: " + temperature + ((displayEnglishUnits==true)?" F":" C"), "data-LastMeasurement");
+                    		writeToTextFile("Heart Rate: " + heartRate + " bpm\nBlood Pressure: " + systolicPressure + "/" + diastolicPressure + "\nTemperature: " + temperature + ((displayEnglishUnits==true)?" F":" C") + "\nTime: " + timeNow.format2445(), "data-LastMeasurement");
                     		writeToTextFile2(heartRate + "," + systolicPressure + "," + diastolicPressure + "," + temperature + "," + ((displayEnglishUnits==true)?"F":"C") + "," + timeNow.format2445() + "\n");
                     	} else {
                     		Toast.makeText(_activity, "SD card storage not available", Toast.LENGTH_SHORT).show();
@@ -596,6 +603,10 @@ public class TestBloodPressure extends Activity {
 	        mTextViewTemperature.setText("Temperature: " + settings.getFloat("internalTemperature", 0)); // TODO: Add Click to add..
         }
 	}
+	
+	private String getFormattedVitalSigns() {
+		return "Heart Rate: " + heartRate + " bpm\nBlood Pressure: " + systolicPressure + "/" + diastolicPressure + "\nTemperature: " + temperature + ((displayEnglishUnits==true)?" F":" C");
+	}
     
 	private void saveSharedPreference(String key, int value) {
     	SharedPreferences.Editor editor = settings.edit(); // Needed to make changes
@@ -625,25 +636,29 @@ public class TestBloodPressure extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
         switch (item.getItemId()) {
-            case R.id.menu_settings:
+            case R.id.menu_settings: // TODO: Change to Reset Default, or set default.
             	// Do nothing
-            	Toast.makeText(_activity, "You clicked settings", Toast.LENGTH_SHORT).show();
+            	
+            	saveSharedPreference("userInputForEmail", ""); // This is done so that the one-time popup will show again
+            	saveSharedPreference("userInputForPhoneNumber", "");
+            	
+            	Toast.makeText(_activity, "Settings returned to default", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.menu_convertUnits:
             	onMenuClickConvertUnits();
                 return true;
             case R.id.menu_sendEmail:
-            	if (settings.getString("userInputForEmail", "@gmail.com").equals("@gmail.com")) {
+            	if (settings.getString("userInputForEmail", "").equals("")) {
                 	promptUserInputForEmail(); // Basically runs just one time
             	} else {
-            		sendEmail(settings.getString("userInputForEmail", "@gmail.com"), "Heart Rate: " + heartRate + " bpm\nBlood Pressure: " + systolicPressure + "/" + diastolicPressure + "\nTemperature: " + temperature + ((displayEnglishUnits==true)?" F":" C"));
+            		sendEmail(settings.getString("userInputForEmail", ""), getFormattedVitalSigns());
             	}
                 return true;
             case R.id.menu_sendSMS:
             	if (settings.getString("userInputForPhoneNumber", "").equals("")) {
             		promptUserInputForPhoneNumber(); // Basically runs just one time
             	} else {
-            		sendSMS(settings.getString("userInputForPhoneNumber", ""), "Heart Rate: " + heartRate + " bpm\nBlood Pressure: " + systolicPressure + "/" + diastolicPressure + "\nTemperature: " + temperature + ((displayEnglishUnits==true)?" F":" C"));
+            		sendSMS(settings.getString("userInputForPhoneNumber", ""), getFormattedVitalSigns());
             	}
                 return true;
             default:
@@ -673,7 +688,7 @@ public class TestBloodPressure extends Activity {
 	
     private void promptUserInputForEmail() {
     	final EditText input = new EditText(_activity);
-    	input.setText(settings.getString("userInputForEmail", "@gmail.com"));
+    	input.setText(settings.getString("userInputForEmail", ""));
     	new AlertDialog.Builder(_activity)
                 .setTitle("Enter Email")
                 .setMessage("Where would you like to email the data?")
@@ -682,11 +697,13 @@ public class TestBloodPressure extends Activity {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         //Editable value = input.getText();
                     	saveSharedPreference("userInputForEmail", input.getText().toString());
-                    	sendEmail(settings.getString("userInputForEmail", "@gmail.com"), "Heart Rate: " + heartRate + " bpm\nBlood Pressure: " + systolicPressure + "/" + diastolicPressure + "\nTemperature: " + temperature + ((displayEnglishUnits==true)?" F":" C"));
+                    	sendEmail(settings.getString("userInputForEmail", ""), getFormattedVitalSigns());
                     }
-                }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                }).setNegativeButton("Contacts", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        // Do nothing.
+                    	Intent contactPickerIntent = new Intent(Intent.ACTION_PICK, Email.CONTENT_URI);
+                    	contactPickerIntent.setType("vnd.android.cursor.dir/email"); // ContactsContract.CommonDataKinds.Email
+                        startActivityForResult(contactPickerIntent, CONTACT_PICKER_EMAIL_RESULT);
                     }
                 }).show();
     }
@@ -697,8 +714,8 @@ public class TestBloodPressure extends Activity {
 			emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Vital Signs");
 			emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, message);
 			emailIntent.setType("vnd.android.cursor.dir/email"); // Or "text/plain" "text/html" "plain/text"
-			startActivity(emailIntent); // Use if you want the choice the automatically use the same option
-			//startActivity(Intent.createChooser(emailIntent, "Send email:")); // Use if you want options every time
+			startActivity(emailIntent); // Use if you want the choice to automatically use the same option every time
+			//startActivity(Intent.createChooser(emailIntent, "Send email:")); // Use if you want available options to appear every time
 		} catch (ActivityNotFoundException e) {
             Log.e("Emailing contact", "Email failed", e);
 		}
@@ -714,12 +731,14 @@ public class TestBloodPressure extends Activity {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         //Editable value = input.getText();
                     	saveSharedPreference("userInputForPhoneNumber", input.getText().toString());
-                    	sendSMS(settings.getString("userInputForPhoneNumber", ""), "Heart Rate: " + heartRate + " bpm\nBlood Pressure: " + systolicPressure + "/" + diastolicPressure + "\nTemperature: " + temperature + ((displayEnglishUnits==true)?" F":" C"));
+                    	sendSMS(settings.getString("userInputForPhoneNumber", ""), getFormattedVitalSigns());
                     	Toast.makeText(_activity, "Text sent", Toast.LENGTH_LONG).show();
                     }
-                }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                }).setNegativeButton("Contacts", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        // Do nothing.
+                    	Intent contactPickerIntent = new Intent(Intent.ACTION_PICK, Phone.CONTENT_URI);
+                    	contactPickerIntent.setType("vnd.android.cursor.dir/phone");
+                        startActivityForResult(contactPickerIntent, CONTACT_PICKER_PHONE_NUMBER_RESULT);
                     }
                 }).show();
 	}
@@ -775,7 +794,7 @@ public class TestBloodPressure extends Activity {
     	File file = new File(directory, "data.csv");
     	FileOutputStream fOut;
 		try {
-			fOut = new FileOutputStream(file, true);
+			fOut = new FileOutputStream(file, true); // NOTE: This (", true") is the key to not overwriting everything
 	    	OutputStreamWriter osw = new OutputStreamWriter(fOut);
 	    	osw.write(data);
 	    	osw.flush();
@@ -795,8 +814,42 @@ public class TestBloodPressure extends Activity {
 	
 	
 	
+	/** For Intents that return a value */
+	@Override
+	public void onActivityResult(int reqCode, int resultCode, Intent data) {
+	    super.onActivityResult(reqCode, resultCode, data);
+
+	    switch (reqCode) {
+	        case (CONTACT_PICKER_EMAIL_RESULT):
+	            if (resultCode == Activity.RESULT_OK) {
+	    	        Toast.makeText(_activity, "Email: " + data.toString(), Toast.LENGTH_LONG).show();
+	    	        sendEmail(data.toString(), getFormattedVitalSigns());
+	            }
+	            break;
+	        case (CONTACT_PICKER_PHONE_NUMBER_RESULT):
+		        if (resultCode == Activity.RESULT_OK) {
+		            Toast.makeText(_activity, "Phone Number: " + data.toString(), Toast.LENGTH_LONG).show();
+              	    sendSMS(data.toString(), getFormattedVitalSigns());
+		        }
+	    	    break;
+	        default:
+	    	    // Code should never get here
+	            Toast.makeText(_activity, "Something wrong with code. Data: " + data.toString(), Toast.LENGTH_LONG).show();
+	    	    break;
+	    }
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	/** GPS Related Code */
-	public void activateGps() {
+	public void activateGps() { // TODO: Fix soon
 		// Acquire a reference to the system Location Manager
 		locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
 
