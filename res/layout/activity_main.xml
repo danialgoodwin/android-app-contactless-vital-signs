@@ -40,6 +40,19 @@
         <Button android:layout_weight="1"
             style="@style/ImageButtonWithText"
             android:drawableTop="@drawable/logou"
+            android:text="[N/A] TODO"
+            android:onClick="goToTestFacialGestures"/>
+    </LinearLayout>
+    
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_weight="1">
+        <Button android:layout_weight="1"
+            style="@style/ImageButtonWithText"
+            android:drawableTop="@drawable/logou"
+            android:text="[SIM] Pupils"
+            android:onClick="goToTestPupilDilation"/>
+        <Button android:layout_weight="1"
+            style="@style/ImageButtonWithText"
+            android:drawableTop="@drawable/logou"
             android:text="Facial Detection"
             android:onClick="goToTestFacialGestures"/>
     </LinearLayout>

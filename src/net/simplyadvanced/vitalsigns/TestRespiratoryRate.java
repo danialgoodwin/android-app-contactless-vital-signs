@@ -69,6 +69,25 @@ public class TestRespiratoryRate extends Activity {
     
     
     
+    /** Audio Filter Stuff */
+    private double[] source = null;
+    private int count = (Integer) null;
+    private int sampleRate = (Integer) null;
+    
+    
+    //AudioFilter mAudioFilter = new AudioFilter();
+    //mAudioFilter.calculate(/*double[]*/ source, /*int*/ count, /*int*/ samplerate); // Edits the audio file passed in
+    
+    // I should uncomment this
+    //AudioFilter.calculate(/*double[]*/source, /*int*/ count, /*int*/ sampleRate); // Edits the audio file passed in
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     

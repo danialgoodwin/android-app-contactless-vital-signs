@@ -137,7 +137,7 @@ public class TestBloodPressure extends Activity {
         mRelativeLayoutRoot       = (RelativeLayout) findViewById(R.id.relativeLayoutRoot);
         mFrameLayoutCameraPreview = (FrameLayout) findViewById(R.id.frameLayoutCameraPreview);
         mSurfaceViewCameraPreview = (SurfaceView) findViewById(R.id.surfaceViewCameraPreview);
-        mImageViewRectangle0      = (ImageView) findViewById(R.id.imageViewRectangle0);
+        //mImageViewRectangle0      = (ImageView) findViewById(R.id.imageViewRectangle0); // TODO: Add back after taking pictures without rectangle
 
         mCamera = getCameraInstance();
         mFrameLayoutCameraPreview.addView(new CameraPreview(_activity, mCamera)); // Create and add camera preview to screen
@@ -454,8 +454,10 @@ public class TestBloodPressure extends Activity {
 	            faceBottom0 = faces[0].rect.bottom;
 		    	mTextViewFace0Coordinates.setText("Face Rectangle: (" + faceLeft0 + "," + faceTop0 + "), (" + faceRight0 + "," + faceBottom0 + ")");
 		    	
-		    	mImageViewRectangle0.bringToFront();
-		    	mImageViewRectangle0.setPadding(100, 100, 0, 0);
+		    	//mImageViewRectangle0.bringToFront(); // TODO: Add back after taking pictures without rectangle
+		    	//mImageViewRectangle0.setPadding(100, 100, 0, 0);
+//		    	mImageViewRectangle0.setPadding(faceLeft0, faceTop0, 0, 0);  // TODO: Add back after taking pictures without rectangle // TODO: change coordinate system for left and top
+//		    	mImageViewRectangle0.postInvalidate();  // TODO: Add back after taking pictures without rectangle
 		    	
 		    	// Try 4
 //		    	Bitmap bitmap = Bitmap.createBitmap(previewWidth, previewHeight, Bitmap.Config.RGB_565);

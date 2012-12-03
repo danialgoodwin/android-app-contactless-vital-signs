@@ -811,21 +811,20 @@ net.simplyadvanced.vitalsigns.TestBloodPressure -> net.simplyadvanced.vitalsigns
     android.widget.RelativeLayout mRelativeLayoutRoot -> I
     android.widget.FrameLayout mFrameLayoutCameraPreview -> J
     android.view.SurfaceView mSurfaceViewCameraPreview -> K
-    android.widget.ImageView mImageViewRectangle0 -> L
-    android.hardware.Camera mCamera -> M
+    android.hardware.Camera mCamera -> L
     int defaultCameraId -> a
-    android.widget.TextView mTextViewHeartRate -> N
-    android.widget.TextView mTextViewBloodPressure -> O
-    android.widget.TextView mTextViewTemperature -> P
-    android.widget.TextView mTextViewFace0Coordinates -> Q
-    android.widget.TextView mTextViewDebug -> R
-    android.widget.TextView mTextViewAge -> S
-    android.widget.TextView mTextViewSex -> T
-    android.widget.TextView mTextViewHeight -> U
-    android.widget.TextView mTextViewWeight -> V
-    android.widget.TextView mTextViewPosition -> W
-    int previewWidth -> X
-    int previewHeight -> Y
+    android.widget.TextView mTextViewHeartRate -> M
+    android.widget.TextView mTextViewBloodPressure -> N
+    android.widget.TextView mTextViewTemperature -> O
+    android.widget.TextView mTextViewFace0Coordinates -> P
+    android.widget.TextView mTextViewDebug -> Q
+    android.widget.TextView mTextViewAge -> R
+    android.widget.TextView mTextViewSex -> S
+    android.widget.TextView mTextViewHeight -> T
+    android.widget.TextView mTextViewWeight -> U
+    android.widget.TextView mTextViewPosition -> V
+    int previewWidth -> W
+    int previewHeight -> X
     int heartRateFrameLength -> b
     double[] arrayRed -> c
     double[] arrayGreen -> d
@@ -901,13 +900,12 @@ net.simplyadvanced.vitalsigns.TestBloodPressure -> net.simplyadvanced.vitalsigns
     android.content.SharedPreferences access$12(net.simplyadvanced.vitalsigns.TestBloodPressure) -> i
     void access$13(net.simplyadvanced.vitalsigns.TestBloodPressure,java.lang.String,int) -> a
     void access$14(net.simplyadvanced.vitalsigns.TestBloodPressure) -> j
-    android.widget.ImageView access$15(net.simplyadvanced.vitalsigns.TestBloodPressure) -> k
-    void access$16(net.simplyadvanced.vitalsigns.TestBloodPressure,java.lang.String,java.lang.String) -> a
-    void access$17(net.simplyadvanced.vitalsigns.TestBloodPressure,java.lang.String) -> a
-    void access$18(net.simplyadvanced.vitalsigns.TestBloodPressure,java.lang.String,java.lang.String) -> b
-    java.lang.String access$19(net.simplyadvanced.vitalsigns.TestBloodPressure) -> l
-    void access$20(net.simplyadvanced.vitalsigns.TestBloodPressure,java.lang.String,java.lang.String) -> c
-    void access$21(net.simplyadvanced.vitalsigns.TestBloodPressure,java.lang.String,java.lang.String) -> d
+    void access$15(net.simplyadvanced.vitalsigns.TestBloodPressure,java.lang.String,java.lang.String) -> a
+    void access$16(net.simplyadvanced.vitalsigns.TestBloodPressure,java.lang.String) -> a
+    void access$17(net.simplyadvanced.vitalsigns.TestBloodPressure,java.lang.String,java.lang.String) -> b
+    java.lang.String access$18(net.simplyadvanced.vitalsigns.TestBloodPressure) -> k
+    void access$19(net.simplyadvanced.vitalsigns.TestBloodPressure,java.lang.String,java.lang.String) -> c
+    void access$20(net.simplyadvanced.vitalsigns.TestBloodPressure,java.lang.String,java.lang.String) -> d
 net.simplyadvanced.vitalsigns.TestBloodPressure$1 -> net.simplyadvanced.vitalsigns.d:
     net.simplyadvanced.vitalsigns.TestBloodPressure this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
@@ -1062,6 +1060,9 @@ net.simplyadvanced.vitalsigns.TestRespiratoryRate -> net.simplyadvanced.vitalsig
     android.widget.Button mButtonPlayback -> g
     boolean mStartRecording -> a
     boolean mStartPlaying -> b
+    double[] source -> h
+    int count -> i
+    int sampleRate -> j
     void onCreate(android.os.Bundle) -> onCreate
     void onClickRecordStart(android.view.View) -> onClickRecordStart
     void onClickRecordStop(android.view.View) -> onClickRecordStop

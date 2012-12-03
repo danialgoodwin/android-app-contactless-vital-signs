@@ -21,6 +21,7 @@
     <TextView android:id="@+id/textViewRightSide1" style="@style/DefaultTextViewRightSide" android:text="Age: 23"           android:layout_above="@id/textViewRightSide2" />
     <TextView android:id="@+id/textViewRightSide0" style="@style/DefaultTextViewRightSide" android:text="Position: Sitting" android:layout_above="@id/textViewRightSide1" />
     
-    <ImageView android:id="@+id/imageViewRectangle0" android:layout_width="300dp" android:layout_height="400dp" android:src="@drawable/rectangle" android:paddingLeft="150px" android:paddingTop="200px" />
+    <!-- TODO: Add back after taking pictures without rectangle -->
+<!--     <ImageView android:id="@+id/imageViewRectangle0" android:layout_width="300dp" android:layout_height="400dp" android:src="@drawable/rectangle" android:paddingLeft="150px" android:paddingTop="200px" /> -->
         
 </RelativeLayout>

@@ -84,7 +84,6 @@ net.simplyadvanced.vitalsigns.R$id: int editTextSex
 net.simplyadvanced.vitalsigns.R$id: int editTextSkinTemperature
 net.simplyadvanced.vitalsigns.R$id: int editTextWeight
 net.simplyadvanced.vitalsigns.R$id: int frameLayoutCameraPreview
-net.simplyadvanced.vitalsigns.R$id: int imageViewRectangle0
 net.simplyadvanced.vitalsigns.R$id: int linearLayout1
 net.simplyadvanced.vitalsigns.R$id: int menu_change_units
 net.simplyadvanced.vitalsigns.R$id: int menu_convertUnits

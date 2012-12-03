@@ -613,6 +613,7 @@ android.support.v4.widget.SimpleCursorAdapter$CursorToStringConverter
 android.support.v4.widget.SimpleCursorAdapter$ViewBinder
 net.simplyadvanced.vitalsigns.AddTemperature:
     public static final java.lang.String PREFS_NAME
+net.simplyadvanced.vitalsigns.AudioFilter
 net.simplyadvanced.vitalsigns.BuildConfig
 net.simplyadvanced.vitalsigns.DrawRect
 net.simplyadvanced.vitalsigns.EditStats:
@@ -628,6 +629,7 @@ net.simplyadvanced.vitalsigns.R$string
 net.simplyadvanced.vitalsigns.R$style
 net.simplyadvanced.vitalsigns.TestBloodPressure:
     private static final java.lang.String PREFS_NAME
+    private android.widget.ImageView mImageViewRectangle0
     static final int CONTACT_PICKER_EMAIL_RESULT
     static final int CONTACT_PICKER_PHONE_NUMBER_RESULT
 net.simplyadvanced.vitalsigns.TestBodyTemperature:
