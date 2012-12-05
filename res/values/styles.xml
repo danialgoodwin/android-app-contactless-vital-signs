@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <style name="AppTheme" parent="android:Theme.Light" />
 
@@ -18,6 +18,7 @@
 	    <item name="android:layout_height">wrap_content</item>
 	    <item name="android:background">#f000</item> <!-- WAS #5000 -->
 	    <item name="android:textColor">#fff</item>
+	    <item name="android:textSize">29dp</item>
 	</style>
     <style name="DefaultTextViewRightSide">
 	    <item name="android:layout_width">wrap_content</item> <!-- WAS match_parent -->
@@ -28,6 +29,8 @@
 	    <item name="android:gravity">right</item>
 	    <item name="android:onClick">onClickGoToEditStats</item>
 	    <item name="android:clickable">true</item>
+	    <item name="android:textSize">0dp</item>
+	    <item name="android:visibility">gone</item>
 	    
 	</style>
 	

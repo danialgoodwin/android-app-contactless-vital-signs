@@ -68,28 +68,41 @@ net.simplyadvanced.vitalsigns.R$drawable: int ic_action_search
 net.simplyadvanced.vitalsigns.R$drawable: int ic_launcher
 net.simplyadvanced.vitalsigns.R$drawable: int logoman
 net.simplyadvanced.vitalsigns.R$drawable: int logou
+net.simplyadvanced.vitalsigns.R$drawable: int pdfour
+net.simplyadvanced.vitalsigns.R$drawable: int pdone
+net.simplyadvanced.vitalsigns.R$drawable: int pdthree
+net.simplyadvanced.vitalsigns.R$drawable: int pdtwo
 net.simplyadvanced.vitalsigns.R$drawable: int rectangle
+net.simplyadvanced.vitalsigns.R$id: int PDnext
+net.simplyadvanced.vitalsigns.R$id: int PDnext2
+net.simplyadvanced.vitalsigns.R$id: int PDnext3
+net.simplyadvanced.vitalsigns.R$id: int PDnext4
 net.simplyadvanced.vitalsigns.R$id: int blue
+net.simplyadvanced.vitalsigns.R$id: int button1
 net.simplyadvanced.vitalsigns.R$id: int buttonPlayback
 net.simplyadvanced.vitalsigns.R$id: int buttonRecordStart
 net.simplyadvanced.vitalsigns.R$id: int buttonRecordStop
 net.simplyadvanced.vitalsigns.R$id: int camera_preview
 net.simplyadvanced.vitalsigns.R$id: int debug
+net.simplyadvanced.vitalsigns.R$id: int editText1
+net.simplyadvanced.vitalsigns.R$id: int editText2
 net.simplyadvanced.vitalsigns.R$id: int editTextAge
 net.simplyadvanced.vitalsigns.R$id: int editTextHeight
 net.simplyadvanced.vitalsigns.R$id: int editTextIndoorTemperature
-net.simplyadvanced.vitalsigns.R$id: int editTextInputTemperature
 net.simplyadvanced.vitalsigns.R$id: int editTextPosition
 net.simplyadvanced.vitalsigns.R$id: int editTextSex
 net.simplyadvanced.vitalsigns.R$id: int editTextSkinTemperature
 net.simplyadvanced.vitalsigns.R$id: int editTextWeight
 net.simplyadvanced.vitalsigns.R$id: int frameLayoutCameraPreview
+net.simplyadvanced.vitalsigns.R$id: int imageViewRectangle0
 net.simplyadvanced.vitalsigns.R$id: int linearLayout1
 net.simplyadvanced.vitalsigns.R$id: int menu_change_units
 net.simplyadvanced.vitalsigns.R$id: int menu_convertUnits
+net.simplyadvanced.vitalsigns.R$id: int menu_cycleCamera
 net.simplyadvanced.vitalsigns.R$id: int menu_sendEmail
 net.simplyadvanced.vitalsigns.R$id: int menu_sendSMS
 net.simplyadvanced.vitalsigns.R$id: int menu_settings
+net.simplyadvanced.vitalsigns.R$id: int pdfo
 net.simplyadvanced.vitalsigns.R$id: int rectImage0
 net.simplyadvanced.vitalsigns.R$id: int relativeLayoutRoot
 net.simplyadvanced.vitalsigns.R$id: int surfaceView1
@@ -108,7 +121,6 @@ net.simplyadvanced.vitalsigns.R$id: int textViewHeartRate
 net.simplyadvanced.vitalsigns.R$id: int textViewHeight
 net.simplyadvanced.vitalsigns.R$id: int textViewIndoorTemperature
 net.simplyadvanced.vitalsigns.R$id: int textViewOutdoorTemperature
-net.simplyadvanced.vitalsigns.R$id: int textViewOutputTemperature
 net.simplyadvanced.vitalsigns.R$id: int textViewPosition
 net.simplyadvanced.vitalsigns.R$id: int textViewRightSide0
 net.simplyadvanced.vitalsigns.R$id: int textViewRightSide1
@@ -117,7 +129,6 @@ net.simplyadvanced.vitalsigns.R$id: int textViewRightSide3
 net.simplyadvanced.vitalsigns.R$id: int textViewRightSide4
 net.simplyadvanced.vitalsigns.R$id: int textViewSex
 net.simplyadvanced.vitalsigns.R$id: int textViewSkinTemperature
-net.simplyadvanced.vitalsigns.R$id: int textViewWeatherTemperature
 net.simplyadvanced.vitalsigns.R$id: int textViewWeight
 net.simplyadvanced.vitalsigns.R$layout: int activity_add_temperature
 net.simplyadvanced.vitalsigns.R$layout: int activity_edit_stats
@@ -131,6 +142,9 @@ net.simplyadvanced.vitalsigns.R$layout: int activity_test_oxygen_saturation
 net.simplyadvanced.vitalsigns.R$layout: int activity_test_pupil_dilation
 net.simplyadvanced.vitalsigns.R$layout: int activity_test_respiratory_rate
 net.simplyadvanced.vitalsigns.R$layout: int activity_test_vital_signs
+net.simplyadvanced.vitalsigns.R$layout: int activity_tpd_four
+net.simplyadvanced.vitalsigns.R$layout: int activity_tpd_three
+net.simplyadvanced.vitalsigns.R$layout: int activity_tpd_two
 net.simplyadvanced.vitalsigns.R$menu: int activity_add_temperature
 net.simplyadvanced.vitalsigns.R$menu: int activity_edit_stats
 net.simplyadvanced.vitalsigns.R$menu: int activity_main
@@ -147,6 +161,7 @@ net.simplyadvanced.vitalsigns.R$string: int app_name
 net.simplyadvanced.vitalsigns.R$string: int hello_world
 net.simplyadvanced.vitalsigns.R$string: int menu_change_units
 net.simplyadvanced.vitalsigns.R$string: int menu_convertUnits
+net.simplyadvanced.vitalsigns.R$string: int menu_cycleCamera
 net.simplyadvanced.vitalsigns.R$string: int menu_sendEmail
 net.simplyadvanced.vitalsigns.R$string: int menu_sendSMS
 net.simplyadvanced.vitalsigns.R$string: int menu_settings
@@ -167,6 +182,15 @@ net.simplyadvanced.vitalsigns.R$style: int AppTheme
 net.simplyadvanced.vitalsigns.R$style: int DefaultTextViewLeftSide
 net.simplyadvanced.vitalsigns.R$style: int DefaultTextViewRightSide
 net.simplyadvanced.vitalsigns.R$style: int ImageButtonWithText
+net.simplyadvanced.vitalsigns.TPDFour
+net.simplyadvanced.vitalsigns.TPDFour: TPDFour()
+net.simplyadvanced.vitalsigns.TPDFour: void onClick(android.view.View)
+net.simplyadvanced.vitalsigns.TPDThree
+net.simplyadvanced.vitalsigns.TPDThree: TPDThree()
+net.simplyadvanced.vitalsigns.TPDThree: void onClick(android.view.View)
+net.simplyadvanced.vitalsigns.TPDTwo
+net.simplyadvanced.vitalsigns.TPDTwo: TPDTwo()
+net.simplyadvanced.vitalsigns.TPDTwo: void onClick(android.view.View)
 net.simplyadvanced.vitalsigns.TestBloodPressure
 net.simplyadvanced.vitalsigns.TestBloodPressure: TestBloodPressure()
 net.simplyadvanced.vitalsigns.TestBloodPressure: void onClickGoToEditStats(android.view.View)
@@ -182,10 +206,10 @@ net.simplyadvanced.vitalsigns.TestHeartRate
 net.simplyadvanced.vitalsigns.TestHeartRate: TestHeartRate()
 net.simplyadvanced.vitalsigns.TestOxygenSaturation
 net.simplyadvanced.vitalsigns.TestOxygenSaturation: TestOxygenSaturation()
-net.simplyadvanced.vitalsigns.TestOxygenSaturation: void Save(android.view.View)
-net.simplyadvanced.vitalsigns.TestOxygenSaturation: void Cancel(android.view.View)
+net.simplyadvanced.vitalsigns.TestOxygenSaturation: void onClickCalculateO2(android.view.View)
 net.simplyadvanced.vitalsigns.TestPupilDilation
 net.simplyadvanced.vitalsigns.TestPupilDilation: TestPupilDilation()
+net.simplyadvanced.vitalsigns.TestPupilDilation: void onClick(android.view.View)
 net.simplyadvanced.vitalsigns.TestRespiratoryRate
 net.simplyadvanced.vitalsigns.TestRespiratoryRate: TestRespiratoryRate()
 net.simplyadvanced.vitalsigns.TestRespiratoryRate: void onClickRecordStart(android.view.View)
@@ -193,5 +217,7 @@ net.simplyadvanced.vitalsigns.TestRespiratoryRate: void onClickRecordStop(androi
 net.simplyadvanced.vitalsigns.TestRespiratoryRate: void onClickPlayback(android.view.View)
 net.simplyadvanced.vitalsigns.TestVitalSigns
 net.simplyadvanced.vitalsigns.TestVitalSigns: TestVitalSigns()
+net.simplyadvanced.vitalsigns.TestVitalSigns: void onClickGoToEditStats(android.view.View)
+net.simplyadvanced.vitalsigns.TestVitalSigns: void onClickGoToTemperature(android.view.View)
 net.simplyadvanced.vitalsigns.heartrate.DoubleFFT_1D$Plans: net.simplyadvanced.vitalsigns.heartrate.DoubleFFT_1D$Plans[] values()
 net.simplyadvanced.vitalsigns.heartrate.DoubleFFT_1D$Plans: net.simplyadvanced.vitalsigns.heartrate.DoubleFFT_1D$Plans valueOf(java.lang.String)

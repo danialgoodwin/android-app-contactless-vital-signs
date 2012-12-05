@@ -613,6 +613,7 @@ android.support.v4.widget.SimpleCursorAdapter$CursorToStringConverter
 android.support.v4.widget.SimpleCursorAdapter$ViewBinder
 net.simplyadvanced.vitalsigns.AddTemperature:
     public static final java.lang.String PREFS_NAME
+    192:208:public java.lang.String convertCoordinatesToZipCode(double,double)
 net.simplyadvanced.vitalsigns.AudioFilter
 net.simplyadvanced.vitalsigns.BuildConfig
 net.simplyadvanced.vitalsigns.DrawRect
@@ -629,7 +630,6 @@ net.simplyadvanced.vitalsigns.R$string
 net.simplyadvanced.vitalsigns.R$style
 net.simplyadvanced.vitalsigns.TestBloodPressure:
     private static final java.lang.String PREFS_NAME
-    private android.widget.ImageView mImageViewRectangle0
     static final int CONTACT_PICKER_EMAIL_RESULT
     static final int CONTACT_PICKER_PHONE_NUMBER_RESULT
 net.simplyadvanced.vitalsigns.TestBodyTemperature:
@@ -646,10 +646,12 @@ net.simplyadvanced.vitalsigns.TestFacialGestures:
     private static final java.lang.String TAG
     android.widget.ImageView mRectImage1
     android.widget.ImageView mRectImage2
-net.simplyadvanced.vitalsigns.TestOxygenSaturation:
-    public static final java.lang.String PREFS_NAME
 net.simplyadvanced.vitalsigns.TestRespiratoryRate:
     private static final java.lang.String LOG_TAG
+net.simplyadvanced.vitalsigns.TestVitalSigns:
+    private static final java.lang.String PREFS_NAME
+    static final int CONTACT_PICKER_EMAIL_RESULT
+    static final int CONTACT_PICKER_PHONE_NUMBER_RESULT
 net.simplyadvanced.vitalsigns.heartrate.ConcurrencyUtils:
     63:65:private ConcurrencyUtils()
     115:116:public static void setNumberOfThreads(int)

@@ -79,7 +79,7 @@ public class TestBloodPressure extends Activity {
     private int previewWidth = 0, previewHeight = 0; // Defined in surfaceChanged()
 
     /* Heart Rate Related Variables */
-    int heartRateFrameLength = 100; // WAS 256;
+    int heartRateFrameLength = 24; // WAS 256;
     double[] arrayRed = new double[heartRateFrameLength]; //ArrayList<Double> arrayRed = new ArrayList<Double>();
     double[] arrayGreen = new double[heartRateFrameLength]; //ArrayList<Double> arrayGreen = new ArrayList<Double>();
     double[] arrayBlue = new double[heartRateFrameLength]; //ArrayList<Double> arrayBlue = new ArrayList<Double>();
@@ -137,7 +137,7 @@ public class TestBloodPressure extends Activity {
         mRelativeLayoutRoot       = (RelativeLayout) findViewById(R.id.relativeLayoutRoot);
         mFrameLayoutCameraPreview = (FrameLayout) findViewById(R.id.frameLayoutCameraPreview);
         mSurfaceViewCameraPreview = (SurfaceView) findViewById(R.id.surfaceViewCameraPreview);
-        //mImageViewRectangle0      = (ImageView) findViewById(R.id.imageViewRectangle0); // TODO: Add back after taking pictures without rectangle
+        mImageViewRectangle0      = (ImageView) findViewById(R.id.imageViewRectangle0);
 
         mCamera = getCameraInstance();
         mFrameLayoutCameraPreview.addView(new CameraPreview(_activity, mCamera)); // Create and add camera preview to screen
@@ -164,10 +164,10 @@ public class TestBloodPressure extends Activity {
     	double ejectionTime = (position.equalsIgnoreCase("sitting"))?376-1.64*heartRate:354.5-1.23*heartRate; // ()?sitting:supine
     	double bodySurfaceArea = 0.007184*(Math.pow(weight,0.425))*(Math.pow(height,0.725));
         double strokeVolume = -6.6 + 0.25*(ejectionTime-35) - 0.62*heartRate + 40.4*bodySurfaceArea - 0.51*age; // Volume of blood pumped from heart in one beat
-        double pulsePressure = strokeVolume / ((0.013*weight - 0.007*age-0.004*heartRate)+1.307);
+        double pulsePressure = Math.abs(strokeVolume / ((0.013*weight - 0.007*age-0.004*heartRate)+1.307));
     	double meanPulsePressure = Q*R;
         
-    	systolicPressure = (int) (meanPulsePressure + 2/3*pulsePressure);
+    	systolicPressure = (int) (meanPulsePressure + 3/2*pulsePressure);
     	diastolicPressure = (int) (meanPulsePressure - pulsePressure/3);
     	
     	mTextViewBloodPressure.setText("Blood Pressure: " + systolicPressure + "/" + diastolicPressure);
@@ -257,7 +257,6 @@ public class TestBloodPressure extends Activity {
 	        			//int top = faceLeft0+1000, left = faceTop0+1000, bottom = faceRight0+1000, right = faceBottom0+1000; // because coordinate systems are different and backwards
 	        			int left = faceLeft0+1000, top = faceTop0+1000, right = faceRight0+1000, bottom = faceBottom0+1000;
 	        			//int left = 50, top = 50, right = 100, bottom = 100; // NOTE: Negative values not accepted
-			        	Log.d("DEBUG", "DEBUG: Actual Rect left,top,right,bottom = " + left + "," + top + "," + right + "," + bottom); //
 	                	//int smallPreviewWidth = right - left;
 	        			//int smallPreviewWidth = left - right; // because coordinate system is different
 	        			int smallPreviewWidth = right - left+1; // because coordinate system is different and backwards // 731
@@ -279,9 +278,9 @@ public class TestBloodPressure extends Activity {
 						
 	        			/** Trying to analyze part of the screen*/
 	                	ByteArrayOutputStream outstr = new ByteArrayOutputStream();
-			        	Log.d("DEBUG", "DEBUG: PreviewWidth,Height = " + previewWidth + "," + previewHeight); // 540,922
-			        	Log.d("DEBUG", "DEBUG: smallPreviewWidth,Height = " + smallPreviewWidth + "," + smallPreviewHeight); // 540,922
-			        	Log.d("DEBUG", "DEBUG: Rect left, top, right, bottom = " + top + "," + left + "," + topEnd + "," + leftEnd); // 0,0, 772,1372
+//			        	Log.d("DEBUG", "DEBUG: PreviewWidth,Height = " + previewWidth + "," + previewHeight); // 540,922
+//			        	Log.d("DEBUG", "DEBUG: smallPreviewWidth,Height = " + smallPreviewWidth + "," + smallPreviewHeight); // 540,922
+//			        	Log.d("DEBUG", "DEBUG: Rect left, top, right, bottom = " + top + "," + left + "," + topEnd + "," + leftEnd); // 0,0, 772,1372
 	                    Rect rect = new Rect(left, top, leftEnd, topEnd);
 	                    YuvImage yuvimage = new YuvImage(data,ImageFormat.NV21,previewWidth,previewHeight,null); // Create YUV image from byte[]
 	                    yuvimage.compressToJpeg(rect, 100, outstr);                                              // Convert YUV image to Jpeg // NOTE: changes Rect's size
@@ -289,7 +288,7 @@ public class TestBloodPressure extends Activity {
 
 			        	smallPreviewWidth = bmp.getWidth();
 			        	smallPreviewHeight = bmp.getHeight();
-			        	Log.d("DEBUG", "DEBUG: Bitmap Width,Height = " + smallPreviewWidth + "," + smallPreviewHeight);
+//			        	Log.d("DEBUG", "DEBUG: Bitmap Width,Height = " + smallPreviewWidth + "," + smallPreviewHeight);
 			        	
 	                    int r = 0, g = 0, b = 0;
 	                    int[] pix = new int[numberOfPixelsToAnalyze];
@@ -454,10 +453,10 @@ public class TestBloodPressure extends Activity {
 	            faceBottom0 = faces[0].rect.bottom;
 		    	mTextViewFace0Coordinates.setText("Face Rectangle: (" + faceLeft0 + "," + faceTop0 + "), (" + faceRight0 + "," + faceBottom0 + ")");
 		    	
-		    	//mImageViewRectangle0.bringToFront(); // TODO: Add back after taking pictures without rectangle
+		    	mImageViewRectangle0.bringToFront();
 		    	//mImageViewRectangle0.setPadding(100, 100, 0, 0);
-//		    	mImageViewRectangle0.setPadding(faceLeft0, faceTop0, 0, 0);  // TODO: Add back after taking pictures without rectangle // TODO: change coordinate system for left and top
-//		    	mImageViewRectangle0.postInvalidate();  // TODO: Add back after taking pictures without rectangle
+		    	mImageViewRectangle0.setPadding(faceLeft0, faceTop0, 0, 0); // TODO: change coordinate system for left and top
+		    	mImageViewRectangle0.postInvalidate();
 		    	
 		    	// Try 4
 //		    	Bitmap bitmap = Bitmap.createBitmap(previewWidth, previewHeight, Bitmap.Config.RGB_565);
@@ -640,10 +639,8 @@ public class TestBloodPressure extends Activity {
         switch (item.getItemId()) {
             case R.id.menu_settings: // TODO: Change to Reset Default, or set default.
             	// Do nothing
-            	
             	saveSharedPreference("userInputForEmail", ""); // This is done so that the one-time popup will show again
             	saveSharedPreference("userInputForPhoneNumber", "");
-            	
             	Toast.makeText(_activity, "Settings returned to default", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.menu_convertUnits:
@@ -851,7 +848,7 @@ public class TestBloodPressure extends Activity {
 	
 	
 	/** GPS Related Code */
-	public void activateGps() { // TODO: Fix soon
+	public void activateGps() {
 		// Acquire a reference to the system Location Manager
 		locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
 

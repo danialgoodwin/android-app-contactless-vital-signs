@@ -2,57 +2,70 @@ package net.simplyadvanced.vitalsigns;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.support.v4.app.NavUtils;
 
 public class TestOxygenSaturation extends Activity {
-    public static final String PREFS_NAME = "MyPrefsFile";
-	EditText mEditTextInputTemperature;
-	TextView mTextViewOutputTemperature;
-	SharedPreferences settings;
+	TestOxygenSaturation _activity;
+	EditText mEditText1, mEditText2;
+	
+    int config = 1; // 1 yes, 0 no // Select "1" if user is using PPG because IR will be higher than usual
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        _activity = this;
         setContentView(R.layout.activity_test_oxygen_saturation);
         
-        mEditTextInputTemperature = (EditText) findViewById(R.id.editTextInputTemperature); // Connects variables here to ids in xml
-        mTextViewOutputTemperature = (TextView) findViewById(R.id.textViewOutputTemperature); 
+        mEditText1 = (EditText) findViewById(R.id.editText1);
+        mEditText2 = (EditText) findViewById(R.id.editText2);
         
-    	settings = getSharedPreferences(PREFS_NAME, 0); // Load saved stats
-        mEditTextInputTemperature.setText( String.format("%.2f",settings.getFloat("temperature", 0)) );
     }
-
-    public void Save(View v) {
-    	SharedPreferences.Editor editor = settings.edit(); // Needed to make changes
-    	editor.putFloat("skinTemperature", Float.parseFloat(mEditTextInputTemperature.getText().toString()));
-    	editor.commit(); // This line saves the edits
-    	
-    	float ambientTemp = 70; //TODO: link to variable
-    	float measurement = settings.getFloat("skinTemperature", 88);
-    	float modifiedTemp = (float) convertTemp((double)measurement, (double)ambientTemp);
-    	
-    	editor.putFloat("internalTemperature", modifiedTemp);
-    	editor.commit();
-    	
-    	//finish(); // Navigate back on stack
-	}
-    public void Cancel(View v) {
-    	//finish(); // Navigate back on stack
-	}
-
-	public double convertTemp(double measuredSkinTemperature, double atmosphericTemperature) {
-		//etemp: external (measured) temperature, atemp: ambient temperature
-		double factor = 3; //approximate constant factor irregardless of C/F
-		double itemp = 1/(factor-1)*(factor*measuredSkinTemperature - atmosphericTemperature);
-		return itemp;
+    
+	public void onClickCalculateO2(View v) {
+		calculateO2(Double.parseDouble(mEditText1.getText().toString()), Double.parseDouble(mEditText2.getText().toString()));
 	}
     
+    
+    public void calculateO2(double r, double nearInfrared) { // TODO: change red to array
+		double scaledown = 1;
+		double red = r;	//red intensity of face // replace 9 with red
+		double nir = nearInfrared; //nir intensity of face // nearInfrared // TODO: replace .5 with nearInfrared
+		double result = 0;	//o2 level of people
+		
+		if(config == 1) {
+			scaledown = configure(red, nir);
+			nir = nir/scaledown;
+			result = o2_level(red, nir);
+			config = 0; // So that it is only ran once
+		} else {
+			result = o2_level(red, nir);
+			Toast.makeText(_activity, "result: " + result , Toast.LENGTH_LONG).show();
+		}
+	}
+	
+	public double o2_level(double hbO2, double hb) {
+		Toast.makeText(_activity, "result: " + hbO2/(hbO2+hb), Toast.LENGTH_LONG).show();
+		return hbO2/(hbO2+hb);
+	}
+	
+	public double configure(double red, double nir) {
+		double target_o2_level = .98;
+		double hbO2 = red;
+		double hb = nir;
+		double scaledown = 1;
+		if(.02*hbO2 < hb) {
+			scaledown = hb / (.02 * hbO2);
+		}
+		return scaledown;
+	}
     
     
     @Override

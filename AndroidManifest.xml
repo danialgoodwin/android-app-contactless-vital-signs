@@ -59,6 +59,36 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
+            android:name=".TPDTwo"
+            android:label="@string/title_activity_test_pupil_dilation"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="net.simplyadvanced.vitalsigns.TPDTWO" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".TPDThree"
+            android:label="@string/title_activity_test_pupil_dilation"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="net.simplyadvanced.vitalsigns.TPDTHREE" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>        
+        <activity
+            android:name=".TPDFour"
+            android:label="@string/title_activity_test_pupil_dilation"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="net.simplyadvanced.vitalsigns.TPDFOUR" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".TestEyeSaccades"
             android:label="@string/title_activity_test_eye_saccades"
             android:screenOrientation="portrait" >

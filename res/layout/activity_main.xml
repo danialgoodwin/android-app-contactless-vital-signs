@@ -8,13 +8,13 @@
     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_weight="1">
 	     <Button android:layout_weight="1"
 	         style="@style/ImageButtonWithText"
-	         android:drawableTop="@drawable/logoman"
-	         android:text="Final Prototype UI"
+	         android:drawableTop="@drawable/logou"
+	         android:text="HR/BP/Temp w/Hardcoded Forehead"
 	         android:onClick="goToTestVitalSigns"/>
 	     <Button android:layout_weight="1"
 	         style="@style/ImageButtonWithText"
-	         android:drawableTop="@drawable/logou"
-	         android:text="HR/BP/Temp at 15fps (TestBloodPres.java)"
+	         android:drawableTop="@drawable/logoman"
+	         android:text="HR/BP/Temp w/Face Detection"
 	         android:onClick="goToTestBloodPressure"/>
     </LinearLayout>
     
@@ -35,7 +35,7 @@
         <Button android:layout_weight="1"
             style="@style/ImageButtonWithText"
             android:drawableTop="@drawable/logou"
-            android:text="[N/A] Oxygen Saturation"
+            android:text="[SIM] Oxygen Saturation"
             android:onClick="goToTestOxygenSaturation"/>
         <Button android:layout_weight="1"
             style="@style/ImageButtonWithText"

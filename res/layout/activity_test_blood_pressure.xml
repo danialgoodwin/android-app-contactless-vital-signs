@@ -8,11 +8,11 @@
 	<SurfaceView android:id="@+id/surfaceViewCameraPreview" android:layout_width="match_parent" android:layout_height="match_parent"></SurfaceView>
 	
 	<!-- The TextViews on the left side, written from bottom to top -->
-    <TextView android:id="@+id/textView4" style="@style/DefaultTextViewLeftSide" android:layout_alignParentBottom="true" android:text="Debug: .."/>
-    <TextView android:id="@+id/textView3" style="@style/DefaultTextViewLeftSide" android:layout_above="@id/textView4"    android:text="Face Detection: (x,y), (x,y)" />
-	<TextView android:id="@+id/textView2" style="@style/DefaultTextViewLeftSide" android:layout_above="@id/textView3"    android:text="Temperature: Soon.." android:onClick="onClickGoToTemperature" android:clickable="true" />	
-	<TextView android:id="@+id/textView1" style="@style/DefaultTextViewLeftSide" android:layout_above="@id/textView2"    android:text="Blood Pressure: Soon.."  />	
-	<TextView android:id="@+id/textView0" style="@style/DefaultTextViewLeftSide" android:layout_above="@id/textView1"    android:text="Heart Rate: Soon.."  />	
+    <TextView android:id="@+id/textView4" style="@style/DefaultTextViewLeftSide" android:layout_alignParentBottom="true" android:text="Debug: .." android:textSize="0dp" android:visibility="invisible" />
+    <TextView android:id="@+id/textView3" style="@style/DefaultTextViewLeftSide" android:layout_above="@id/textView4"    android:text="Face Detection: (x,y), (x,y)" android:textSize="0dp" android:visibility="invisible" />
+	<TextView android:id="@+id/textView2" style="@style/DefaultTextViewLeftSide" android:layout_above="@id/textView3"    android:text="Temperature: 96.5 F" android:onClick="onClickGoToTemperature" android:clickable="true"/>	
+	<TextView android:id="@+id/textView1" style="@style/DefaultTextViewLeftSide" android:layout_above="@id/textView2"    android:text="Blood Pressure: 130/89"  />	
+	<TextView android:id="@+id/textView0" style="@style/DefaultTextViewLeftSide" android:layout_above="@id/textView1"    android:text="Heart Rate: 67 bpm"  />	
     
 	<!-- The TextViews on the right side, written from bottom to top -->
     <TextView android:id="@+id/textViewRightSide4" style="@style/DefaultTextViewRightSide" android:text="Weight: 160"       android:layout_alignParentBottom="true"       />
@@ -22,6 +22,6 @@
     <TextView android:id="@+id/textViewRightSide0" style="@style/DefaultTextViewRightSide" android:text="Position: Sitting" android:layout_above="@id/textViewRightSide1" />
     
     <!-- TODO: Add back after taking pictures without rectangle -->
-<!--     <ImageView android:id="@+id/imageViewRectangle0" android:layout_width="300dp" android:layout_height="400dp" android:src="@drawable/rectangle" android:paddingLeft="150px" android:paddingTop="200px" /> -->
+    <ImageView android:id="@+id/imageViewRectangle0" android:layout_width="0dp" android:layout_height="0dp" android:src="@drawable/rectangle" android:paddingLeft="150px" android:paddingTop="200px" />
         
 </RelativeLayout>

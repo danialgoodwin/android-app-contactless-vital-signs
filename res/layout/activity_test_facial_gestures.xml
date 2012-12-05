@@ -25,15 +25,21 @@
         <TextView android:id="@+id/textViewFace0Coordinates"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:text="This is where we test for facial gestures"/>
+	        android:text="This is where we test for facial gestures"
+	        android:textSize="24dp"
+	        android:background="#7FFF"/>
         <TextView android:id="@+id/textViewFace1Coordinates"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:text="This is where we test for facial gestures"/>
+	        android:text="This is where we test for facial gestures"
+	        android:textSize="24dp"
+	        android:background="#7FFF"/>
         <TextView android:id="@+id/textViewFace2Coordinates"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:text="This is where we test for facial gestures"/>
+	        android:text="This is where we test for facial gestures"
+	        android:textSize="24dp"
+	        android:background="#7FFF"/>
         
         <ImageView 
 			android:id="@+id/rectImage0" 

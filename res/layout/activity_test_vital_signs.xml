@@ -1,109 +1,27 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
+     android:id="@+id/relativeLayoutRoot" android:layout_width="match_parent" android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:orientation="vertical" >
-
-        <TextView
-            android:id="@+id/textView1"
-            android:layout_width="match_parent"
-            android:layout_height="0dip"
-            android:text="Camera goes here" />
-        
-        <SurfaceView
-            android:id="@+id/surfaceView1"
-            android:layout_width="match_parent"
-            android:layout_height="0dip"
-            android:layout_weight="1" />
-
-        
-        
-<!--         <TextView -->
-<!--             android:id="@+id/textView2" -->
-<!--             android:layout_width="wrap_content" -->
-<!--             android:layout_height="wrap_content" -->
-<!--             android:text="Age: 22" /> -->
-        
-<!--         <TextView -->
-<!--             android:id="@+id/textView2" -->
-<!--             android:layout_width="wrap_content" -->
-<!--             android:layout_height="wrap_content" -->
-<!--             android:text="Sex: Male" /> -->
-        
-<!--         <TextView -->
-<!--             android:id="@+id/textView2" -->
-<!--             android:layout_width="wrap_content" -->
-<!--             android:layout_height="wrap_content" -->
-<!--             android:text="Weight: 160lbs" /> -->
-        
-<!--         <TextView -->
-<!--             android:id="@+id/textView2" -->
-<!--             android:layout_width="wrap_content" -->
-<!--             android:layout_height="wrap_content" -->
-<!--             android:text="Height: 75inches" /> -->
-        
-        
-        
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Heart Rate: 62 beats/min" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Blood Pressure: 120/80" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Body Temperature: 96.8°F" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Respiratory: 12 breaths/min" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Blood Oxygen Saturation: 70%" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Skin Conductivity: Yes" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Pupil Dilation: Okay" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Eye Saccades: Good" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Facial Gesture: No Change" />
-
-    </LinearLayout>
+	<FrameLayout android:id="@+id/frameLayoutCameraPreview" android:layout_width="match_parent" android:layout_height="match_parent"> <!-- android:foreground="@drawable/rectangle" -->
+	
+	</FrameLayout>
+	
+	<SurfaceView android:id="@+id/surfaceViewCameraPreview" android:layout_width="match_parent" android:layout_height="match_parent"></SurfaceView>
+	
+	<!-- The TextViews on the left side, written from bottom to top -->
+    <TextView android:id="@+id/textView4" style="@style/DefaultTextViewLeftSide" android:layout_alignParentBottom="true" android:text="Debug: .."/>
+    <TextView android:id="@+id/textView3" style="@style/DefaultTextViewLeftSide" android:layout_above="@id/textView4"    android:text="Face Detection: (x,y), (x,y)" />
+	<TextView android:id="@+id/textView2" style="@style/DefaultTextViewLeftSide" android:layout_above="@id/textView3"    android:text="Temperature: Soon.." android:onClick="onClickGoToTemperature" android:clickable="true" />	
+	<TextView android:id="@+id/textView1" style="@style/DefaultTextViewLeftSide" android:layout_above="@id/textView2"    android:text="Blood Pressure: Soon.."  />	
+	<TextView android:id="@+id/textView0" style="@style/DefaultTextViewLeftSide" android:layout_above="@id/textView1"    android:text="Heart Rate: Soon.."  />	
+    
+	<!-- The TextViews on the right side, written from bottom to top -->
+    <TextView android:id="@+id/textViewRightSide4" style="@style/DefaultTextViewRightSide" android:text="Weight: 160"       android:layout_alignParentBottom="true"       />
+    <TextView android:id="@+id/textViewRightSide3" style="@style/DefaultTextViewRightSide" android:text="Height: 75"        android:layout_above="@id/textViewRightSide4" />
+    <TextView android:id="@+id/textViewRightSide2" style="@style/DefaultTextViewRightSide" android:text="Sex: Male"         android:layout_above="@id/textViewRightSide3" />
+    <TextView android:id="@+id/textViewRightSide1" style="@style/DefaultTextViewRightSide" android:text="Age: 23"           android:layout_above="@id/textViewRightSide2" />
+    <TextView android:id="@+id/textViewRightSide0" style="@style/DefaultTextViewRightSide" android:text="Position: Sitting" android:layout_above="@id/textViewRightSide1" />
+    
+    <!-- TODO: Add back after taking pictures without rectangle -->
+    <ImageView android:id="@+id/imageViewRectangle0" android:layout_width="300dp" android:layout_height="400dp" android:src="@drawable/rectangle" android:paddingLeft="150dp" android:paddingTop="200dp" />
 
 </RelativeLayout>

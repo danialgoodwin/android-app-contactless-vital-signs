@@ -1,11 +1,20 @@
-# view AndroidManifest.xml #generated:73
+# view AndroidManifest.xml #generated:103
 -keep class net.simplyadvanced.vitalsigns.AddTemperature { <init>(...); }
 
-# view AndroidManifest.xml #generated:66
+# view AndroidManifest.xml #generated:96
 -keep class net.simplyadvanced.vitalsigns.EditStats { <init>(...); }
 
 # view AndroidManifest.xml #generated:27
 -keep class net.simplyadvanced.vitalsigns.MainActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:81
+-keep class net.simplyadvanced.vitalsigns.TPDFour { <init>(...); }
+
+# view AndroidManifest.xml #generated:71
+-keep class net.simplyadvanced.vitalsigns.TPDThree { <init>(...); }
+
+# view AndroidManifest.xml #generated:61
+-keep class net.simplyadvanced.vitalsigns.TPDTwo { <init>(...); }
 
 # view AndroidManifest.xml #generated:39
 -keep class net.simplyadvanced.vitalsigns.TestBloodPressure { <init>(...); }
@@ -13,7 +22,7 @@
 # view AndroidManifest.xml #generated:41
 -keep class net.simplyadvanced.vitalsigns.TestBodyTemperature { <init>(...); }
 
-# view AndroidManifest.xml #generated:61
+# view AndroidManifest.xml #generated:91
 -keep class net.simplyadvanced.vitalsigns.TestEyeSaccades { <init>(...); }
 
 # view AndroidManifest.xml #generated:38
@@ -52,10 +61,14 @@
 -keepclassmembers class * { *** goToTestBodyTemperature(...); }
 
 # onClick res/layout/activity_main.xml #generated:40
+# onClick res/layout/activity_main.xml #generated:53
 -keepclassmembers class * { *** goToTestFacialGestures(...); }
 
 # onClick res/layout/activity_main.xml #generated:35
 -keepclassmembers class * { *** goToTestOxygenSaturation(...); }
+
+# onClick res/layout/activity_main.xml #generated:48
+-keepclassmembers class * { *** goToTestPupilDilation(...); }
 
 # onClick res/layout/activity_main.xml #generated:27
 -keepclassmembers class * { *** goToTestRespiratoryRate(...); }
@@ -63,7 +76,11 @@
 # onClick res/layout/activity_main.xml #generated:9
 -keepclassmembers class * { *** goToTestVitalSigns(...); }
 
+# onClick res/layout/activity_test_oxygen_saturation.xml #generated:43
+-keepclassmembers class * { *** onClickCalculateO2(...); }
+
 # onClick res/layout/activity_test_blood_pressure.xml #generated:13
+# onClick res/layout/activity_test_vital_signs.xml #generated:13
 -keepclassmembers class * { *** onClickGoToTemperature(...); }
 
 # onClick res/layout/activity_test_respiratory_rate.xml #generated:38
