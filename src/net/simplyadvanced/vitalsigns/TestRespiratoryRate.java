@@ -70,9 +70,9 @@ public class TestRespiratoryRate extends Activity {
     
     
     /** Audio Filter Stuff */
-    private double[] source = null;
-    private int count = (Integer) null;
-    private int sampleRate = (Integer) null;
+    //private double[] source = null;
+    //private int count = (Integer) null;
+    //private int sampleRate = (Integer) null;
     
     
     //AudioFilter mAudioFilter = new AudioFilter();
