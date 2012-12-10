@@ -59,20 +59,14 @@ public class AddTemperature extends Activity {
         
         
         // DEBUG
-    	//int lat = settings.getInt("currentLatitude", 28058987); // Gets coordinates that were saved from TestBloodPressure.java
-    	//int lon = settings.getInt("currentLongitude", -82415560); // Tampa coordinates
-    	int lat = 28058987;
-    	int lon = -82415560;
+    	int lat = settings.getInt("currentLatitude", 0/*28058987*/); // Gets coordinates that were saved from TestBloodPressure.java
+    	int lon = settings.getInt("currentLongitude", 0/*-82415560*/); // Tampa coordinates
+    	//int lat = 28058987;
+    	//int lon = -82415560;
         
     	Toast.makeText(_activity, "lat,long = " + lat + "," + lon, Toast.LENGTH_LONG).show(); // DEBUG
         
         
-        
-        
-        
-        
-        
-
         getOutdoorTemperature();
     }
     
@@ -134,17 +128,17 @@ public class AddTemperature extends Activity {
 
     private class DownloadUrlStream extends AsyncTask<Void, Integer, String> { // Gets outdoorTemperature in a different thread than the main thread // Needed for APIs 3.0+(?)
         protected String doInBackground(Void... params) { // Do the long-running work in here
-        	//int lat = settings.getInt("currentLatitude", 0); // Gets coordinates that were saved from TestBloodPressure.java
-        	//int lon = settings.getInt("currentLongitude", 0);
+        	int lat = settings.getInt("currentLatitude", 0); // Gets coordinates that were saved from TestBloodPressure.java
+        	int lon = settings.getInt("currentLongitude", 0);
         	
-        	int lat = 28058987;
-        	int lon = -82415560;
+        	//int lat = 28058987;
+        	//int lon = -82415560;
         	
         	if (lat == 0 || lon == 0) {
         		return "Not available";
         	}
         	
-        	String zipCode = "33620"; //convertCoordinatesToZipCode(lat/(double)1000000,lon/(double)1000000);// TODO: readd
+        	String zipCode = convertCoordinatesToZipCode(lat/(double)1000000,lon/(double)1000000);
         	Log.d("DEBUG", "zipCode: " + zipCode); // Works
     		//Toast.makeText(_activity, "zip code = " + zipCode, Toast.LENGTH_SHORT).show(); // DEBUG // Can't call in AsyncTask (because it is not on the UI thread?)
             

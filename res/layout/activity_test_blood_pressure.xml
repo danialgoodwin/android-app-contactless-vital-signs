@@ -8,11 +8,14 @@
 	<SurfaceView android:id="@+id/surfaceViewCameraPreview" android:layout_width="match_parent" android:layout_height="match_parent"></SurfaceView>
 	
 	<!-- The TextViews on the left side, written from bottom to top -->
-    <TextView android:id="@+id/textView4" style="@style/DefaultTextViewLeftSide" android:layout_alignParentBottom="true" android:text="Debug: .." android:textSize="0dp" android:visibility="invisible" />
-    <TextView android:id="@+id/textView3" style="@style/DefaultTextViewLeftSide" android:layout_above="@id/textView4"    android:text="Face Detection: (x,y), (x,y)" android:textSize="0dp" android:visibility="invisible" />
-	<TextView android:id="@+id/textView2" style="@style/DefaultTextViewLeftSide" android:layout_above="@id/textView3"    android:text="Temperature: 96.5 F" android:onClick="onClickGoToTemperature" android:clickable="true"/>	
-	<TextView android:id="@+id/textView1" style="@style/DefaultTextViewLeftSide" android:layout_above="@id/textView2"    android:text="Blood Pressure: 130/89"  />	
-	<TextView android:id="@+id/textView0" style="@style/DefaultTextViewLeftSide" android:layout_above="@id/textView1"    android:text="Heart Rate: 67 bpm"  />	
+    <TextView android:id="@+id/textView4"               style="@style/DefaultTextViewLeftSide" android:layout_alignParentBottom="true" android:text="Debug: .." android:textSize="0dp" android:visibility="invisible" />
+    <TextView android:id="@+id/textView3"               style="@style/DefaultTextViewLeftSide" android:layout_above="@id/textView4"    android:text="Face Detection: (x,y), (x,y)" android:textSize="0dp" android:visibility="invisible" />
+	<TextView android:id="@+id/textViewO2Saturation"    style="@style/DefaultTextViewLeftSide" android:layout_above="@id/textView3"    android:text="O2 Sat: 98%"  />
+	<TextView android:id="@+id/textViewRespiratoryRate" style="@style/DefaultTextViewLeftSide" android:layout_above="@id/textViewO2Saturation"       android:text="Resp. Rate: 12 breath/min"  />
+	<TextView android:id="@+id/textView2"               style="@style/DefaultTextViewLeftSide" android:layout_above="@id/textViewRespiratoryRate"    android:text="Temperature: 96.5 F" android:onClick="onClickGoToTemperature" android:clickable="true"/>	
+	<TextView android:id="@+id/textView1"               style="@style/DefaultTextViewLeftSide" android:layout_above="@id/textView2"    android:text="Blood Pressure: 130/89"  />	
+	<TextView android:id="@+id/textView0"               style="@style/DefaultTextViewLeftSide" android:layout_above="@id/textView1"    android:text="Heart Rate: 67 bpm"  />
+	
     
 	<!-- The TextViews on the right side, written from bottom to top -->
     <TextView android:id="@+id/textViewRightSide4" style="@style/DefaultTextViewRightSide" android:text="Weight: 160"       android:layout_alignParentBottom="true"       />

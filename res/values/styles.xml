@@ -12,26 +12,24 @@
 	    <item name="android:clickable">true</item>
 	</style>
 	
-    
     <style name="DefaultTextViewLeftSide">
 	    <item name="android:layout_width">wrap_content</item> <!-- WAS match_parent -->
 	    <item name="android:layout_height">wrap_content</item>
-	    <item name="android:background">#f000</item> <!-- WAS #5000 -->
-	    <item name="android:textColor">#fff</item>
-	    <item name="android:textSize">29dp</item>
+	    <item name="android:background">#A000</item> <!-- WAS #5000 -->
+	    <item name="android:textColor">#FFF</item>
+	    <item name="android:textSize">20dp</item> <!-- WAS 29 -->
 	</style>
     <style name="DefaultTextViewRightSide">
 	    <item name="android:layout_width">wrap_content</item> <!-- WAS match_parent -->
 	    <item name="android:layout_height">wrap_content</item>
-	    <item name="android:background">#f000</item> <!-- WAS #5000 -->
-	    <item name="android:textColor">#fff</item>
+	    <item name="android:background">#A000</item> <!-- WAS #5000 -->
+	    <item name="android:textColor">#FFF</item>
 	    <item name="android:layout_alignParentRight">true</item>
 	    <item name="android:gravity">right</item>
 	    <item name="android:onClick">onClickGoToEditStats</item>
 	    <item name="android:clickable">true</item>
-	    <item name="android:textSize">0dp</item>
-	    <item name="android:visibility">gone</item>
-	    
+	    <item name="android:textSize">15dp</item>
+	    <item name="android:visibility">visible</item>   
 	</style>
 	
 </resources>

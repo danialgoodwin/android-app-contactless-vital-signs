@@ -47,14 +47,14 @@
 -keep class net.simplyadvanced.vitalsigns.TestVitalSigns { <init>(...); }
 
 # onClick res/layout/activity_add_temperature.xml #generated:38
-# onClick res/layout/activity_edit_stats.xml #generated:104
+# onClick res/layout/activity_edit_stats.xml #generated:101
 -keepclassmembers class * { *** Cancel(...); }
 
 # onClick res/layout/activity_add_temperature.xml #generated:40
-# onClick res/layout/activity_edit_stats.xml #generated:99
+# onClick res/layout/activity_edit_stats.xml #generated:96
 -keepclassmembers class * { *** Save(...); }
 
-# onClick res/layout/activity_test_body_temperature.xml #generated:51
+# onClick res/layout/activity_test_body_temperature.xml #generated:36
 -keepclassmembers class * { *** goToEditStats(...); }
 
 # onClick res/layout/activity_main.xml #generated:14
@@ -84,7 +84,7 @@
 # onClick res/layout/activity_test_oxygen_saturation.xml #generated:43
 -keepclassmembers class * { *** onClickCalculateO2(...); }
 
-# onClick res/layout/activity_test_blood_pressure.xml #generated:13
+# onClick res/layout/activity_test_blood_pressure.xml #generated:15
 # onClick res/layout/activity_test_vital_signs.xml #generated:13
 -keepclassmembers class * { *** onClickGoToTemperature(...); }
 
