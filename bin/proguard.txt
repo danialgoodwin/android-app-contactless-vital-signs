@@ -47,11 +47,11 @@
 -keep class net.simplyadvanced.vitalsigns.TestVitalSigns { <init>(...); }
 
 # onClick res/layout/activity_add_temperature.xml #generated:38
-# onClick res/layout/activity_edit_stats.xml #generated:105
+# onClick res/layout/activity_edit_stats.xml #generated:104
 -keepclassmembers class * { *** Cancel(...); }
 
 # onClick res/layout/activity_add_temperature.xml #generated:40
-# onClick res/layout/activity_edit_stats.xml #generated:100
+# onClick res/layout/activity_edit_stats.xml #generated:99
 -keepclassmembers class * { *** Save(...); }
 
 # onClick res/layout/activity_test_body_temperature.xml #generated:51

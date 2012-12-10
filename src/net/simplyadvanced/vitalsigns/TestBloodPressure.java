@@ -161,7 +161,7 @@ public class TestBloodPressure extends Activity {
     public void setBloodPressure(double heartRate, int age, String sex, int weight, int height, String position) {
     	double R = 18.5; // Average R = 18.31; // Vascular resistance // Very hard to calculate from person to person
     	double Q = (sex.equalsIgnoreCase("Male") || sex.equalsIgnoreCase("M"))?5:4.5; // Liters per minute of blood through heart
-    	double ejectionTime = (position.equalsIgnoreCase("sitting"))?386-1.64*heartRate:364.5-1.23*heartRate; // WAS ()?376-1.64*heartRate:354.5-1.23*heartRate; // ()?sitting:supine
+    	double ejectionTime = (!position.equalsIgnoreCase("Laying Down"))?386-1.64*heartRate:364.5-1.23*heartRate; // WAS ()?376-1.64*heartRate:354.5-1.23*heartRate; // ()?sitting:supine
     	double bodySurfaceArea = 0.007184*(Math.pow(weight,0.425))*(Math.pow(height,0.725));
         double strokeVolume = -6.6 + 0.25*(ejectionTime-35) - 0.62*heartRate + 40.4*bodySurfaceArea - 0.51*age; // Volume of blood pumped from heart in one beat
         double pulsePressure = Math.abs(strokeVolume / ((0.013*weight - 0.007*age-0.004*heartRate)+1.307));

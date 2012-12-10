@@ -89,14 +89,10 @@
         <TextView android:id="@+id/textViewPosition" android:layout_width="wrap_content" android:layout_height="wrap_content"
             android:text="Position: " />
 
-        <EditText android:id="@+id/editTextPosition" android:layout_width="0dip" android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:inputType="number" >
-        </EditText>
+		<Spinner android:id="@+id/spinnerPosition" android:layout_width="match_parent" android:layout_height="wrap_content" />
     </LinearLayout>
     
     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" >
-        
 		<Button android:layout_width="wrap_content" android:layout_height="wrap_content"
 		    android:layout_weight="1"
 		    android:text="Save"

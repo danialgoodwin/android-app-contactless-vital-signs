@@ -23,4 +23,13 @@
     <string name="title_activity_add_temperature">Add Temperature</string>
     <string name="title_activity_test_multiple_faces_detection">Detect Multiple Faces</string>
 
+    
+    
+    
+    <string-array name="spinnerPositionsArrray">
+        <item>Sitting</item>
+        <item>Laying Down</item>
+        <item>Standing</item>
+    </string-array>
+    
 </resources>
