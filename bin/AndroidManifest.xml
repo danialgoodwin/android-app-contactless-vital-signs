@@ -11,8 +11,8 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
-<!--     <uses-permission android:name="android.permission.READ_CONTACTS" /> Not needed because Intent is called for this-->
-<!--     <uses-permission android:name="android.permission.READ_PROFILE" /> -->
+    <!-- <uses-permission android:name="android.permission.READ_CONTACTS" /> Not needed because Intent is called for this -->
+    <!-- <uses-permission android:name="android.permission.READ_PROFILE" /> -->
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -20,10 +20,10 @@
     <uses-feature android:name="android.hardware.camera" />
 
     <application
+        android:hardwareAccelerated="false"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme"
-        android:hardwareAccelerated="false" >
+        android:theme="@style/AppTheme" >
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
@@ -34,10 +34,26 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".TestVitalSigns"     android:label="@string/title_activity_test_vital_signs"     android:screenOrientation="portrait" ></activity>
-        <activity android:name=".TestFacialGestures" android:label="@string/title_activity_test_facial_gestures" android:screenOrientation="portrait" ></activity>
-        <activity android:name=".TestBloodPressure"  android:label="@string/title_activity_test_blood_pressure" ><!-- android:screenOrientation="nosensor" --></activity>
-        <activity android:name=".TestHeartRate"      android:label="@string/title_activity_test_heart_rate"      android:screenOrientation="portrait" ></activity>
+        <activity
+            android:name=".TestVitalSigns"
+            android:label="@string/title_activity_test_vital_signs"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".TestFacialGestures"
+            android:label="@string/title_activity_test_facial_gestures"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".TestBloodPressure"
+            android:label="@string/title_activity_test_blood_pressure" >
+ <!-- android:screenOrientation="nosensor" -->
+        </activity>
+        <activity
+            android:name=".TestHeartRate"
+            android:label="@string/title_activity_test_heart_rate"
+            android:screenOrientation="portrait" >
+        </activity>
         <activity
             android:name=".TestBodyTemperature"
             android:label="@string/title_activity_test_body_temperature"
@@ -77,7 +93,7 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-        </activity>        
+        </activity>
         <activity
             android:name=".TPDFour"
             android:label="@string/title_activity_test_pupil_dilation"
@@ -99,12 +115,16 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Dialog" >
         </activity>
- <!--  -->
+        <!--  -->
         <activity
             android:name=".AddTemperature"
             android:label="@string/title_activity_add_temperature"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Dialog" >
+        </activity>
+        <activity
+            android:name=".TestMultipleFacesDetection"
+            android:label="@string/title_activity_test_multiple_faces_detection" >
         </activity>
     </application>
 

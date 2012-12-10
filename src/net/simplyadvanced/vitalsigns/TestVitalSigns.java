@@ -159,15 +159,15 @@ public class TestVitalSigns extends Activity {
     }
 
     public void setBloodPressure(double heartRate, int age, String sex, int weight, int height, String position) {
-    	double R = 17.6; // Dan's R = 17.6 // Average R = 18.31; // Vascular resistance // Very hard to calculate from person to person
+    	double R = 18.5; // Average R = 18.31; // Vascular resistance // Very hard to calculate from person to person
     	double Q = (sex.equalsIgnoreCase("Male") || sex.equalsIgnoreCase("M"))?5:4.5; // Liters per minute of blood through heart
-    	double ejectionTime = (position.equalsIgnoreCase("sitting"))?376-1.64*heartRate:354.5-1.23*heartRate; // ()?sitting:supine
+    	double ejectionTime = (position.equalsIgnoreCase("sitting"))?386-1.64*heartRate:364.5-1.23*heartRate; // WAS ()?376-1.64*heartRate:354.5-1.23*heartRate; // ()?sitting:supine
     	double bodySurfaceArea = 0.007184*(Math.pow(weight,0.425))*(Math.pow(height,0.725));
         double strokeVolume = -6.6 + 0.25*(ejectionTime-35) - 0.62*heartRate + 40.4*bodySurfaceArea - 0.51*age; // Volume of blood pumped from heart in one beat
         double pulsePressure = strokeVolume / ((0.013*weight - 0.007*age-0.004*heartRate)+1.307);
     	double meanPulsePressure = Q*R;
         
-    	systolicPressure = (int) (meanPulsePressure + 2/3*pulsePressure);
+    	systolicPressure = (int) (meanPulsePressure + 3/2*pulsePressure);
     	diastolicPressure = (int) (meanPulsePressure - pulsePressure/3);
     	
     	mTextViewBloodPressure.setText("Blood Pressure: " + systolicPressure + "/" + diastolicPressure);
@@ -368,18 +368,23 @@ public class TestVitalSigns extends Activity {
 				        	
 					        FastICA_RGB.preICA(arrayRed, arrayGreen, arrayBlue, heartRateFrameLength, arrayRed, arrayGreen, arrayBlue); // heartRateFrameLength = 300 frames for now
 					        double heartRateFrequency = fft.FFT(arrayGreen, heartRateFrameLength,  finalSamplingFrequency);
-				        	heartRate = heartRateFrequency * 60;
-	
-				            mTextViewHeartRate.setText("Heart Rate: " + heartRate);
-				        	mTextViewBloodPressure.setText("Blood Pressure: in 0.."); // Just informing the user that BP almost calculated
-				        	mTextViewDebug.setText("Fps: " + finalSamplingFrequency);
-				            setBloodPressure(heartRate, settings.getInt("age", 25), settings.getString("sex", "Male"), settings.getInt("weight", 160), settings.getInt("height", 70), settings.getString("position", "Sitting"));
-					        
-				            saveSharedPreference("heartRate",(int)heartRate);
-				        	frameNumber++; // Ensures this if-statement is only ran once by making frameNumber one bigger than heartRateLength
-				        	
-				        	
-				        	promptUserToSaveData(); // Ask user if they would like to save this data
+					        if (heartRateFrequency == 0) {
+					        	mTextViewHeartRate.setText("Heart Rate: (" + Math.round((heartRateFrequency * 60) * 100) / 100 + ") Error, try again");
+					        	mTextViewBloodPressure.setText("Blood Pressure: Error, try again");
+					        } else {
+					        	heartRate = Math.round((heartRateFrequency * 60) * 100) / 100;
+		
+					            mTextViewHeartRate.setText("Heart Rate: " + heartRate);
+					        	mTextViewBloodPressure.setText("Blood Pressure: in 0.."); // Just informing the user that BP almost calculated
+					        	mTextViewDebug.setText("Fps: " + finalSamplingFrequency);
+					            setBloodPressure(heartRate, settings.getInt("age", 25), settings.getString("sex", "Male"), settings.getInt("weight", 160), settings.getInt("height", 70), settings.getString("position", "Sitting"));
+						        
+					            saveSharedPreference("heartRate",(int)heartRate);
+					        	frameNumber++; // Ensures this if-statement is only ran once by making frameNumber one bigger than heartRateLength
+					        	
+					        	
+					        	promptUserToSaveData(); // Ask user if they would like to save this data
+					        }
 				        }
 				        else {
 				        	// do nothing

@@ -54,6 +54,9 @@ public class MainActivity extends Activity {
 	public void goToTestFacialGestures(View v) {
     	startActivity(new Intent(_activity, TestFacialGestures.class));
 	}
+	public void goToTestMultipleFacesDetection(View v) {
+    	startActivity(new Intent(_activity, TestMultipleFacesDetection.class));
+	}
 	public void goTo(View v) {
 		setAlertDialogs(null, "Ex: Heart Rate", "Right Here", "The is for a single vital sign. To be complete.");
 	}

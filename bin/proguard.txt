@@ -1,43 +1,46 @@
-# view AndroidManifest.xml #generated:103
+# view AndroidManifest.xml #generated:119
 -keep class net.simplyadvanced.vitalsigns.AddTemperature { <init>(...); }
 
-# view AndroidManifest.xml #generated:96
+# view AndroidManifest.xml #generated:112
 -keep class net.simplyadvanced.vitalsigns.EditStats { <init>(...); }
 
 # view AndroidManifest.xml #generated:27
 -keep class net.simplyadvanced.vitalsigns.MainActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:81
+# view AndroidManifest.xml #generated:97
 -keep class net.simplyadvanced.vitalsigns.TPDFour { <init>(...); }
 
-# view AndroidManifest.xml #generated:71
+# view AndroidManifest.xml #generated:87
 -keep class net.simplyadvanced.vitalsigns.TPDThree { <init>(...); }
 
-# view AndroidManifest.xml #generated:61
+# view AndroidManifest.xml #generated:77
 -keep class net.simplyadvanced.vitalsigns.TPDTwo { <init>(...); }
 
-# view AndroidManifest.xml #generated:39
+# view AndroidManifest.xml #generated:47
 -keep class net.simplyadvanced.vitalsigns.TestBloodPressure { <init>(...); }
 
-# view AndroidManifest.xml #generated:41
+# view AndroidManifest.xml #generated:57
 -keep class net.simplyadvanced.vitalsigns.TestBodyTemperature { <init>(...); }
 
-# view AndroidManifest.xml #generated:91
+# view AndroidManifest.xml #generated:107
 -keep class net.simplyadvanced.vitalsigns.TestEyeSaccades { <init>(...); }
 
-# view AndroidManifest.xml #generated:38
+# view AndroidManifest.xml #generated:42
 -keep class net.simplyadvanced.vitalsigns.TestFacialGestures { <init>(...); }
 
-# view AndroidManifest.xml #generated:40
+# view AndroidManifest.xml #generated:52
 -keep class net.simplyadvanced.vitalsigns.TestHeartRate { <init>(...); }
 
-# view AndroidManifest.xml #generated:51
+# view AndroidManifest.xml #generated:125
+-keep class net.simplyadvanced.vitalsigns.TestMultipleFacesDetection { <init>(...); }
+
+# view AndroidManifest.xml #generated:67
 -keep class net.simplyadvanced.vitalsigns.TestOxygenSaturation { <init>(...); }
 
-# view AndroidManifest.xml #generated:56
+# view AndroidManifest.xml #generated:72
 -keep class net.simplyadvanced.vitalsigns.TestPupilDilation { <init>(...); }
 
-# view AndroidManifest.xml #generated:46
+# view AndroidManifest.xml #generated:62
 -keep class net.simplyadvanced.vitalsigns.TestRespiratoryRate { <init>(...); }
 
 # view AndroidManifest.xml #generated:37
@@ -61,8 +64,10 @@
 -keepclassmembers class * { *** goToTestBodyTemperature(...); }
 
 # onClick res/layout/activity_main.xml #generated:40
-# onClick res/layout/activity_main.xml #generated:53
 -keepclassmembers class * { *** goToTestFacialGestures(...); }
+
+# onClick res/layout/activity_main.xml #generated:53
+-keepclassmembers class * { *** goToTestMultipleFacesDetection(...); }
 
 # onClick res/layout/activity_main.xml #generated:35
 -keepclassmembers class * { *** goToTestOxygenSaturation(...); }

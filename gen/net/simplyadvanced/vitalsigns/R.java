@@ -27,19 +27,19 @@ public final class R {
         public static final int rectangle=0x7f020008;
     }
     public static final class id {
-        public static final int PDnext=0x7f08002b;
-        public static final int PDnext2=0x7f080032;
-        public static final int PDnext3=0x7f080031;
-        public static final int PDnext4=0x7f080030;
+        public static final int PDnext=0x7f08002c;
+        public static final int PDnext2=0x7f080033;
+        public static final int PDnext3=0x7f080032;
+        public static final int PDnext4=0x7f080031;
         public static final int blue=0x7f080021;
-        public static final int button1=0x7f08002a;
-        public static final int buttonPlayback=0x7f08002e;
-        public static final int buttonRecordStart=0x7f08002c;
-        public static final int buttonRecordStop=0x7f08002d;
+        public static final int button1=0x7f08002b;
+        public static final int buttonPlayback=0x7f08002f;
+        public static final int buttonRecordStart=0x7f08002d;
+        public static final int buttonRecordStop=0x7f08002e;
         public static final int camera_preview=0x7f08001e;
         public static final int debug=0x7f080022;
-        public static final int editText1=0x7f080028;
-        public static final int editText2=0x7f080029;
+        public static final int editText1=0x7f080029;
+        public static final int editText2=0x7f08002a;
         public static final int editTextAge=0x7f080007;
         public static final int editTextHeight=0x7f08000d;
         public static final int editTextIndoorTemperature=0x7f080004;
@@ -50,14 +50,14 @@ public final class R {
         public static final int frameLayoutCameraPreview=0x7f080011;
         public static final int imageViewRectangle0=0x7f08001d;
         public static final int linearLayout1=0x7f080000;
-        public static final int menu_change_units=0x7f080038;
-        public static final int menu_convertUnits=0x7f080037;
-        public static final int menu_cycleCamera=0x7f080036;
-        public static final int menu_sendEmail=0x7f080034;
-        public static final int menu_sendSMS=0x7f080035;
-        public static final int menu_settings=0x7f080033;
-        public static final int pdfo=0x7f08002f;
-        public static final int rectImage0=0x7f080027;
+        public static final int menu_change_units=0x7f080039;
+        public static final int menu_convertUnits=0x7f080038;
+        public static final int menu_cycleCamera=0x7f080037;
+        public static final int menu_sendEmail=0x7f080035;
+        public static final int menu_sendSMS=0x7f080036;
+        public static final int menu_settings=0x7f080034;
+        public static final int pdfo=0x7f080030;
+        public static final int rectImage0=0x7f080028;
         public static final int relativeLayoutRoot=0x7f080010;
         public static final int surfaceView1=0x7f080023;
         public static final int surfaceViewCameraPreview=0x7f080012;
@@ -69,8 +69,9 @@ public final class R {
         public static final int textViewAge=0x7f080006;
         public static final int textViewBloodPressure=0x7f08001f;
         public static final int textViewFace0Coordinates=0x7f080024;
-        public static final int textViewFace1Coordinates=0x7f080025;
-        public static final int textViewFace2Coordinates=0x7f080026;
+        public static final int textViewFace1Coordinates=0x7f080026;
+        public static final int textViewFace2Coordinates=0x7f080027;
+        public static final int textViewFace3Coordinates=0x7f080025;
         public static final int textViewHeartRate=0x7f080020;
         public static final int textViewHeight=0x7f08000c;
         public static final int textViewIndoorTemperature=0x7f080003;
@@ -94,13 +95,14 @@ public final class R {
         public static final int activity_test_eye_saccades=0x7f030005;
         public static final int activity_test_facial_gestures=0x7f030006;
         public static final int activity_test_heart_rate=0x7f030007;
-        public static final int activity_test_oxygen_saturation=0x7f030008;
-        public static final int activity_test_pupil_dilation=0x7f030009;
-        public static final int activity_test_respiratory_rate=0x7f03000a;
-        public static final int activity_test_vital_signs=0x7f03000b;
-        public static final int activity_tpd_four=0x7f03000c;
-        public static final int activity_tpd_three=0x7f03000d;
-        public static final int activity_tpd_two=0x7f03000e;
+        public static final int activity_test_multiple_faces_detection=0x7f030008;
+        public static final int activity_test_oxygen_saturation=0x7f030009;
+        public static final int activity_test_pupil_dilation=0x7f03000a;
+        public static final int activity_test_respiratory_rate=0x7f03000b;
+        public static final int activity_test_vital_signs=0x7f03000c;
+        public static final int activity_tpd_four=0x7f03000d;
+        public static final int activity_tpd_three=0x7f03000e;
+        public static final int activity_tpd_two=0x7f03000f;
     }
     public static final class menu {
         public static final int activity_add_temperature=0x7f070000;
@@ -111,10 +113,11 @@ public final class R {
         public static final int activity_test_eye_saccades=0x7f070005;
         public static final int activity_test_facial_gestures=0x7f070006;
         public static final int activity_test_heart_rate=0x7f070007;
-        public static final int activity_test_oxygen_saturation=0x7f070008;
-        public static final int activity_test_pupil_dilation=0x7f070009;
-        public static final int activity_test_respiratory_rate=0x7f07000a;
-        public static final int activity_test_vital_signs=0x7f07000b;
+        public static final int activity_test_multiple_faces_detection=0x7f070008;
+        public static final int activity_test_oxygen_saturation=0x7f070009;
+        public static final int activity_test_pupil_dilation=0x7f07000a;
+        public static final int activity_test_respiratory_rate=0x7f07000b;
+        public static final int activity_test_vital_signs=0x7f07000c;
     }
     public static final class string {
         public static final int app_name=0x7f050000;
@@ -134,6 +137,7 @@ public final class R {
         public static final int title_activity_test_eye_saccades=0x7f050012;
         public static final int title_activity_test_facial_gestures=0x7f05000b;
         public static final int title_activity_test_heart_rate=0x7f05000d;
+        public static final int title_activity_test_multiple_faces_detection=0x7f050015;
         public static final int title_activity_test_oxygen_saturation=0x7f050010;
         public static final int title_activity_test_pupil_dilation=0x7f050011;
         public static final int title_activity_test_respiratory_rate=0x7f05000f;

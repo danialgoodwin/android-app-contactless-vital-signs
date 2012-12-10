@@ -2,31 +2,22 @@ package net.simplyadvanced.vitalsigns;
 
 import java.io.IOException;
 
-import android.graphics.Color;
-import android.graphics.Matrix;
-import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.shapes.RectShape;
 import android.hardware.Camera;
-import android.hardware.Camera.CameraInfo;
 import android.hardware.Camera.Face;
 import android.os.Bundle;
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.support.v4.app.NavUtils;
 
-public class TestFacialGestures extends Activity implements SurfaceHolder.Callback {
-	private TestFacialGestures _activity;
+public class TestMultipleFacesDetection extends Activity implements SurfaceHolder.Callback {
+	private TestMultipleFacesDetection _activity;
 	private static final String TAG = "DEBUG";
-	TextView mTextViewFace0Coordinates, mTextViewFace1Coordinates, mTextViewFace2Coordinates, mTextViewFace3Coordinates;
+	TextView mTextViewFace0Coordinates, mTextViewFace1Coordinates, mTextViewFace2Coordinates;
 	ImageView mRectImage0, mRectImage1, mRectImage2;
 	SurfaceView surfaceView1;
 	SurfaceHolder surfaceHolder;
@@ -39,12 +30,11 @@ public class TestFacialGestures extends Activity implements SurfaceHolder.Callba
     public void onCreate(Bundle savedInstanceState) {
         _activity = this;
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test_facial_gestures);
+        setContentView(R.layout.activity_test_multiple_faces_detection);
         
         mTextViewFace0Coordinates = (TextView) findViewById(R.id.textViewFace0Coordinates);
         mTextViewFace1Coordinates = (TextView) findViewById(R.id.textViewFace1Coordinates);
         mTextViewFace2Coordinates = (TextView) findViewById(R.id.textViewFace2Coordinates);
-        mTextViewFace3Coordinates = (TextView) findViewById(R.id.textViewFace3Coordinates);
         mRectImage0 = (ImageView) findViewById(R.id.rectImage0);
         
         
@@ -98,65 +88,24 @@ public class TestFacialGestures extends Activity implements SurfaceHolder.Callba
 	
 	
 	
+	
+	
+	
 	class MyFaceDetectionListener implements Camera.FaceDetectionListener {
 	    public void onFaceDetection(Face[] faces, Camera camera) {
-	    	if (faces.length == 0) {
-		    	mTextViewFace3Coordinates.setText("Confidence Score: 0%");
-	    	} else if (faces.length > 0) {
+	        if (faces.length == 0) {
+		    	mTextViewFace0Coordinates.setText("Face 0: Not detected");
+		    	mTextViewFace1Coordinates.setText("Face 1: Not detected");
+		    	mTextViewFace2Coordinates.setText("Face 2: Not detected");
+	        } else if (faces.length == 1) {
 	            int left0   = faces[0].rect.left;
 	            int top0    = faces[0].rect.top;
 	            int right0  = faces[0].rect.right;
 	            int bottom0 = faces[0].rect.bottom;
-		    	mTextViewFace0Coordinates.setText("Face Rectangle: (" + left0 + "," + top0 + "), (" + right0 + "," + bottom0 + ")");
-		    	mTextViewFace3Coordinates.setText("Confidence Score: " + faces[0].score + "%");
-	            
-	            try {
-	            	int leftEyeX = faces[0].leftEye.x;
-	            	int leftEyeY = faces[0].leftEye.y;
-	            	int rightEyeX = faces[0].rightEye.x;
-	            	int rightEyeY = faces[0].leftEye.y;
-			    	mTextViewFace1Coordinates.setText("Left,Right Eye: (" + leftEyeX + "," + leftEyeY + "), (" + rightEyeX + "," + rightEyeY + ")");
-	            } catch (Exception e) {
-			    	mTextViewFace1Coordinates.setText("Left,Right Eye: not supported");
-	            }
-	            
-	            try {
-		            int mouthX = faces[0].mouth.x;
-		            int mouthY = faces[0].mouth.y;
-			    	mTextViewFace2Coordinates.setText("Mouth: (" + mouthX + "," + mouthY + ")");
-	            } catch (Exception e) {
-			    	mTextViewFace2Coordinates.setText("Mouth: not supported");
-	            }
+		    	mTextViewFace0Coordinates.setText("Face 0: (" + left0 + "," + top0 + "), (" + right0 + "," + bottom0 + ")");
+		    	mTextViewFace1Coordinates.setText("Face 1: Not detected");
+		    	mTextViewFace2Coordinates.setText("Face 2: Not detected");
 		    	
-		    	
-	            
-	            
-	            
-	            
-	            // TODO: Use this somewhere to help draw rectangles around faces
-//	            Matrix matrix = new Matrix();
-//	            CameraInfo info = CameraHolder.instance().getCameraInfo()[0];
-//	            // Need mirror for front camera.
-//	            boolean mirror = (info.facing == CameraInfo.CAMERA_FACING_FRONT);
-//	            matrix.setScale(mirror ? -1 : 1, 1);
-//	            // This is the value for android.hardware.Camera.setDisplayOrientation.
-//	            matrix.postRotate(90);
-//	            // Camera driver coordinates range from (-1000, -1000) to (1000, 1000).
-//	            // UI coordinates range from (0, 0) to (width, height).
-//	            matrix.postScale(surfaceView1.getWidth() / 2000f, surfaceView1.getHeight() / 2000f);
-//	            matrix.postTranslate(surfaceView1.getWidth() / 2f, surfaceView1.getHeight() / 2f);
-	            
-	            
-	            
-	            
-	            
-	            
-	            
-	            
-	            
-	            
-	            
-	            
 //		    	mRectImage0.setPadding(left0, top0, previewWidth-right0, previewHeight-bottom0);
 //		    	mRectImage0.bringToFront();
 		    	
@@ -173,6 +122,37 @@ public class TestFacialGestures extends Activity implements SurfaceHolder.Callba
 		        // Try 1
 		    	//DrawRect drawRect = new DrawRect(_activity, faces);
 		    	//setContentView(drawRect);
+	        } else if (faces.length == 2) {
+	            int left0   = faces[0].rect.left;
+	            int top0    = faces[0].rect.top;
+	            int right0  = faces[0].rect.right;
+	            int bottom0 = faces[0].rect.bottom;
+		    	mTextViewFace0Coordinates.setText("Face 0: (" + left0 + "," + top0 + "), (" + right0 + "," + bottom0 + ")");
+		    	
+	            int left1   = faces[1].rect.left;
+	            int top1    = faces[1].rect.top;
+	            int right1  = faces[1].rect.right;
+	            int bottom1 = faces[1].rect.bottom;
+		    	mTextViewFace1Coordinates.setText("Face 1: (" + left1 + "," + top1 + "), (" + right1 + "," + bottom1 + ")");
+		    	mTextViewFace2Coordinates.setText("Face 2: Not detected");
+	        } if (faces.length == 3) {
+	            int left0   = faces[0].rect.left;
+	            int top0    = faces[0].rect.top;
+	            int right0  = faces[0].rect.right;
+	            int bottom0 = faces[0].rect.bottom;
+		    	mTextViewFace0Coordinates.setText("Face 0: (" + left0 + "," + top0 + "), (" + right0 + "," + bottom0 + ")");
+
+	            int left1   = faces[1].rect.left;
+	            int top1    = faces[1].rect.top;
+	            int right1  = faces[1].rect.right;
+	            int bottom1 = faces[1].rect.bottom;
+		    	mTextViewFace1Coordinates.setText("Face 1: (" + left1 + "," + top1 + "), (" + right1 + "," + bottom1 + ")");
+	        	
+	            int left2   = faces[2].rect.left;
+	            int top2    = faces[2].rect.top;
+	            int right2  = faces[2].rect.right;
+	            int bottom2 = faces[2].rect.bottom;
+		    	mTextViewFace2Coordinates.setText("Face 2: (" + left2 + "," + top2 + "), (" + right2 + "," + bottom2 + ")");
 	        }
 	    }
 	}

@@ -40,7 +40,7 @@
         <Button android:layout_weight="1"
             style="@style/ImageButtonWithText"
             android:drawableTop="@drawable/logou"
-            android:text="[N/A] TODO"
+            android:text="Locate Facial Features"
             android:onClick="goToTestFacialGestures"/>
     </LinearLayout>
     
@@ -53,8 +53,8 @@
         <Button android:layout_weight="1"
             style="@style/ImageButtonWithText"
             android:drawableTop="@drawable/logou"
-            android:text="Facial Detection"
-            android:onClick="goToTestFacialGestures"/>
+            android:text="Detect Multiple Faces"
+            android:onClick="goToTestMultipleFacesDetection"/>
     </LinearLayout>
     
 </LinearLayout>

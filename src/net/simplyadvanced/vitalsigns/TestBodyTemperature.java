@@ -87,7 +87,7 @@ public class TestBodyTemperature extends Activity {
         _activity = this;
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE); // Hide the window title
-        setContentView(R.layout.activity_test_blood_pressure);
+        setContentView(R.layout.activity_test_body_temperature);
 
         mTextViewAge = (TextView) findViewById(R.id.textViewAge); // Connects variables here to id's in xml, must be done in order to access id's in the layout (xml)
         mTextViewSex = (TextView) findViewById(R.id.textViewSex);
@@ -126,15 +126,15 @@ public class TestBodyTemperature extends Activity {
     }
     
     public void setBloodPressure(double heartRate, int age, String sex, int weight, int height, String position) {
-    	double R = 17.6; // Dan's R // Average R = 18.31; // Vascular resistance // Very hard to calculate from person to person
+    	double R = 18.5; // Average R = 18.31; // Vascular resistance // Very hard to calculate from person to person
     	double Q = (sex.equalsIgnoreCase("Male") || sex.equalsIgnoreCase("M"))?5:4.5; // Liters per minute of blood through heart
-    	double ejectionTime = (position.equalsIgnoreCase("sitting"))?376-1.64*heartRate:354.5-1.23*heartRate; // ()?sitting:supine
+    	double ejectionTime = (position.equalsIgnoreCase("sitting"))?386-1.64*heartRate:364.5-1.23*heartRate; // WAS ()?376-1.64*heartRate:354.5-1.23*heartRate; // ()?sitting:supine
     	double bodySurfaceArea = 0.007184*(Math.pow(weight,0.425))*(Math.pow(height,0.725));
         double strokeVolume = -6.6 + 0.25*(ejectionTime-35) - 0.62*heartRate + 40.4*bodySurfaceArea - 0.51*age; // Volume of blood pumped from heart in one beat
         double pulsePressure = strokeVolume / ((0.013*weight - 0.007*age-0.004*heartRate)+1.307);
     	double meanPulsePressure = Q*R;
         
-    	systolicPressure = (int) (meanPulsePressure + 2/3*pulsePressure);
+    	systolicPressure = (int) (meanPulsePressure + 3/2*pulsePressure);
     	diastolicPressure = (int) (meanPulsePressure - pulsePressure/3);
     	
     	mTextViewBloodPressure.setText("Blood Pressure: " + systolicPressure + "/" + diastolicPressure);
@@ -275,16 +275,20 @@ public class TestBodyTemperature extends Activity {
 				        
 				        FastICA_RGB.preICA(outRed, outGreen, outBlue, heartRateFrameLength, outRed, outGreen, outBlue); // heartRateFrameLength = 32 for now
 				        double heartRateFrequency = fft.FFT(outGreen, heartRateFrameLength, (double) samplingFrequency);
-			        	Log.d("DEBUG RGB", "DEBUG: samplingFrequency: " + samplingFrequency);
-			        	heartRate = heartRateFrequency * 60;
-
-			            mTextViewHeartRate.setText("Heart Rate: " + heartRate);
-			        	mTextViewBloodPressure.setText("Blood Pressure: in 0.."); // Just informing the user that BP almost calculated
-			        	mDebug.setText("Fps: " + samplingFrequency);
-			            setBloodPressure(heartRate, settings.getInt("age", 25), settings.getString("sex", "Male"), settings.getInt("weight", 160), settings.getInt("height", 70), settings.getString("position", "Sitting"));
-				        
-			            saveSharedPreference("heartRate",(int)heartRate);
-				        arrayRed.add(1.0); // Ensures this if-statement is only ran once by making arrayRed.size() one bigger than heartRateLength
+				        if (heartRateFrequency == 0) {
+				        	mTextViewHeartRate.setText("Heart Rate: (" + Math.round((heartRateFrequency * 60) * 100) / 100 + ") Error, try again");
+				        	mTextViewBloodPressure.setText("Blood Pressure: Error, try again");
+				        } else {
+				        	heartRate = Math.round((heartRateFrequency * 60) * 100) / 100;
+	
+				            mTextViewHeartRate.setText("Heart Rate: " + heartRate);
+				        	mTextViewBloodPressure.setText("Blood Pressure: in 0.."); // Just informing the user that BP almost calculated
+				        	mDebug.setText("Fps: " + samplingFrequency);
+				            setBloodPressure(heartRate, settings.getInt("age", 25), settings.getString("sex", "Male"), settings.getInt("weight", 160), settings.getInt("height", 70), settings.getString("position", "Sitting"));
+					        
+				            saveSharedPreference("heartRate",(int)heartRate);
+					        arrayRed.add(1.0); // Ensures this if-statement is only ran once by making arrayRed.size() one bigger than heartRateLength
+				        }
 			        }
 			        else {
 			        	// do nothing

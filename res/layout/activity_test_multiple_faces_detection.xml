@@ -25,38 +25,31 @@
         <TextView android:id="@+id/textViewFace0Coordinates"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:text="Face Rectangle: (,), (,)"
+	        android:text="Face 0: Not detected"
 	        android:textSize="24dp"
 	        android:textColor="#000"
-	        android:background="#BFFF"/>
-        <TextView android:id="@+id/textViewFace3Coordinates"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="Confidence Score: 0%"
-	        android:textSize="24dp"
-	        android:textColor="#000"
-	        android:background="#BFFF"/>
+	        android:background="#AFFF"/>
         <TextView android:id="@+id/textViewFace1Coordinates"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:text="Left,Right Eye: (,), (,)"
+	        android:text="Face 1: Not detected"
 	        android:textSize="24dp"
 	        android:textColor="#000"
-	        android:background="#BFFF"/>
+	        android:background="#AFFF"/>
         <TextView android:id="@+id/textViewFace2Coordinates"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:text="Mouth: (,)"
+	        android:text="Face 2: Not detected"
 	        android:textSize="24dp"
 	        android:textColor="#000"
-	        android:background="#BFFF"/>
-    </LinearLayout>
-    
-	<ImageView 
-		android:id="@+id/rectImage0" 
-		android:layout_height="match_parent" 
-		android:layout_width="match_parent"
-		android:src="@drawable/rectangle">
-	</ImageView>
+	        android:background="#AFFF"/>
+    </LinearLayout>   
+         
+        <ImageView 
+			android:id="@+id/rectImage0" 
+			android:layout_height="match_parent" 
+			android:layout_width="match_parent"
+			android:src="@drawable/rectangle">
+		</ImageView>
 
 </RelativeLayout>

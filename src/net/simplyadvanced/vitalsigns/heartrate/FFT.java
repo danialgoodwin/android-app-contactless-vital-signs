@@ -23,15 +23,21 @@ public class fft {
         	Log.d("DEBUG Freq", "DEBUG - outputFFT[" + x + "]: " + output[x]);
 		}
 		
-		for(int z=12; z<size; z++) { // TODO change 12 to a function 30-180 bpm
+		for(int z=8; z<size; z++) { // 12 was chosen because it is a minimum frequency that we think people can get to determine heart rate.
         	if(temp < output[z]) {
         		temp = output[z];
         		maxPosition = z;
 	        	Log.d("DEBUG Freq", "DEBUG - maxPosition: " + maxPosition);
         	}
         }
+    	if (maxPosition < 12) {
+    		maxPosition = 0;
+    	}
 		
         frequency = maxPosition*samplingFrequency/(2*size);
+        // TODO: If < 14,20.3, then return 0    14.5 // TODO: nevermind that
+        //real face: 15.4 (HR55)
+        //picture: 14.5(HR67)
         //System.out.println(maxPosition+" "+samplingFrequency+" "+frequency);
         return frequency;
 	}
