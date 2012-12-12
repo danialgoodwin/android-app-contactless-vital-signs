@@ -369,7 +369,7 @@ public class TestVitalSigns extends Activity {
 					        FastICA_RGB.preICA(arrayRed, arrayGreen, arrayBlue, heartRateFrameLength, arrayRed, arrayGreen, arrayBlue); // heartRateFrameLength = 300 frames for now
 					        double heartRateFrequency = fft.FFT(arrayGreen, heartRateFrameLength,  finalSamplingFrequency);
 					        if (heartRateFrequency == 0) {
-					        	mTextViewHeartRate.setText("Heart Rate: (" + Math.round((heartRateFrequency * 60) * 100) / 100 + ") Error, try again");
+					        	mTextViewHeartRate.setText("Heart Rate: Error, try again");
 					        	mTextViewBloodPressure.setText("Blood Pressure: Error, try again");
 					        } else {
 					        	heartRate = Math.round((heartRateFrequency * 60) * 100) / 100;

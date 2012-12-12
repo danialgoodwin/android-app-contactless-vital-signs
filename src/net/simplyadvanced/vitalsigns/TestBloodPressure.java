@@ -83,7 +83,8 @@ public class TestBloodPressure extends Activity {
     double[] arrayRed = new double[heartRateFrameLength]; //ArrayList<Double> arrayRed = new ArrayList<Double>();
     double[] arrayGreen = new double[heartRateFrameLength]; //ArrayList<Double> arrayGreen = new ArrayList<Double>();
     double[] arrayBlue = new double[heartRateFrameLength]; //ArrayList<Double> arrayBlue = new ArrayList<Double>();
-    int systolicPressure = 0, diastolicPressure = 0, temperature = 0;
+    int systolicPressure = 0, diastolicPressure = 0;
+    float temperature = 0;
     double heartRate = 0;
     int frameNumber = 0;
     
@@ -338,7 +339,7 @@ public class TestBloodPressure extends Activity {
 					        FastICA_RGB.preICA(arrayRed, arrayGreen, arrayBlue, heartRateFrameLength, arrayRed, arrayGreen, arrayBlue); // heartRateFrameLength = 300 frames for now
 					        double heartRateFrequency = fft.FFT(arrayGreen, heartRateFrameLength,  finalSamplingFrequency);
 					        if (heartRateFrequency == 0) {
-					        	mTextViewHeartRate.setText("Heart Rate: (" + Math.round((heartRateFrequency * 60) * 100) / 100 + ") Error, try again");
+					        	mTextViewHeartRate.setText("Heart Rate: Error, try again");
 					        	mTextViewBloodPressure.setText("Blood Pressure:");
 					        } else {
 					        	heartRate = Math.round((heartRateFrequency * 60) * 100) / 100;
@@ -553,19 +554,20 @@ public class TestBloodPressure extends Activity {
     }
 
 	private void promptUserToSaveData() {
-    	//final EditText input = new EditText(_activity);
+    	final EditText input = new EditText(_activity); // Added for debugging purposes, not needed in final product
+    	input.setHint("HR,BP,BP,temp");
     	new AlertDialog.Builder(_activity)
                 .setTitle("Save Data?")
                 .setMessage("Would you like to save the data?")
-                //.setView(input)
+                .setView(input) // Added for debugging purposes, not needed in final product
                 .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        //Editable value = input.getText();
+                        Editable value = input.getText(); // Added for debugging purposes, not needed in final product
                     	if (mExternalStorageAvailable == true && mExternalStorageWriteable == true) {
                     		Time timeNow = new Time(Time.getCurrentTimezone());
                     		timeNow.setToNow();
-                    		writeToTextFile("Heart Rate: " + heartRate + " bpm\nBlood Pressure: " + systolicPressure + "/" + diastolicPressure + "\nTemperature: " + temperature + ((displayEnglishUnits==true)?" F":" C") + "\nTime: " + timeNow.format2445(), "data-LastMeasurement");
-                    		writeToTextFile2(heartRate + "," + systolicPressure + "," + diastolicPressure + "," + temperature + "," + ((displayEnglishUnits==true)?"F":"C") + "," + timeNow.format2445() + "\n");
+                    		writeToTextFile(getFormattedVitalSigns() + "\nTime: " + timeNow.format2445() + "," + value, "data-LastMeasurement");
+                    		writeToTextFile2(heartRate + "," + systolicPressure + "," + diastolicPressure + "," + temperature + "," + ((displayEnglishUnits==true)?"F":"C") + "," + timeNow.format2445() + "," + value + "\n");
                     	} else {
                     		Toast.makeText(_activity, "SD card storage not available", Toast.LENGTH_SHORT).show();
                     	}
@@ -595,20 +597,21 @@ public class TestBloodPressure extends Activity {
 	
 	private void loadPatientEditableStats() {
 		displayEnglishUnits = settings.getBoolean("displayEnglishUnits", true);
+		temperature = settings.getFloat("internalTemperature", 0);
         if(displayEnglishUnits) {
 	        mTextViewAge.setText("Age: " + settings.getInt("age", 23));
 	        mTextViewSex.setText("Sex: " + settings.getString("sex", "Male"));
 	        mTextViewWeight.setText("Weight: " + settings.getInt("weight", 160) + " pounds");
 	        mTextViewHeight.setText("Height: " + settings.getInt("height", 75) + " inches");
 	        mTextViewPosition.setText("Position: " + settings.getString("position", "Sitting"));
-	        mTextViewTemperature.setText("Temperature: " + settings.getFloat("internalTemperature", 0)); // TODO: Add Click to add..
+	        mTextViewTemperature.setText("Temperature: " + temperature); // TODO: Add Click to add..
         } else {
 	        mTextViewAge.setText("Age: " + settings.getInt("age", 23));
 	        mTextViewSex.setText("Sex: " + settings.getString("sex", "Male"));
 	        mTextViewWeight.setText("Weight: " + settings.getInt("weight", 73) + " kg");
 	        mTextViewHeight.setText("Height: " + settings.getInt("height", 75) + " cm");
 	        mTextViewPosition.setText("Position: " + settings.getString("position", "Sitting"));
-	        mTextViewTemperature.setText("Temperature: " + settings.getFloat("internalTemperature", 0)); // TODO: Add Click to add..
+	        mTextViewTemperature.setText("Temperature: " + temperature); // TODO: Add Click to add..
         }
 	}
 	

@@ -276,7 +276,7 @@ public class TestBodyTemperature extends Activity {
 				        FastICA_RGB.preICA(outRed, outGreen, outBlue, heartRateFrameLength, outRed, outGreen, outBlue); // heartRateFrameLength = 32 for now
 				        double heartRateFrequency = fft.FFT(outGreen, heartRateFrameLength, (double) samplingFrequency);
 				        if (heartRateFrequency == 0) {
-				        	mTextViewHeartRate.setText("Heart Rate: (" + Math.round((heartRateFrequency * 60) * 100) / 100 + ") Error, try again");
+				        	mTextViewHeartRate.setText("Heart Rate: Error, try again");
 				        	mTextViewBloodPressure.setText("Blood Pressure: Error, try again");
 				        } else {
 				        	heartRate = Math.round((heartRateFrequency * 60) * 100) / 100;

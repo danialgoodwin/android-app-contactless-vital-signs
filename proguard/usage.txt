@@ -613,13 +613,13 @@ android.support.v4.widget.SimpleCursorAdapter$CursorToStringConverter
 android.support.v4.widget.SimpleCursorAdapter$ViewBinder
 net.simplyadvanced.vitalsigns.AddTemperature:
     public static final java.lang.String PREFS_NAME
-    192:208:public java.lang.String convertCoordinatesToZipCode(double,double)
 net.simplyadvanced.vitalsigns.AudioFilter
 net.simplyadvanced.vitalsigns.BuildConfig
 net.simplyadvanced.vitalsigns.DrawRect
 net.simplyadvanced.vitalsigns.EditStats:
     public static final java.lang.String PREFS_NAME
 net.simplyadvanced.vitalsigns.R
+net.simplyadvanced.vitalsigns.R$array
 net.simplyadvanced.vitalsigns.R$attr
 net.simplyadvanced.vitalsigns.R$dimen
 net.simplyadvanced.vitalsigns.R$drawable
@@ -634,15 +634,19 @@ net.simplyadvanced.vitalsigns.TestBloodPressure:
     static final int CONTACT_PICKER_PHONE_NUMBER_RESULT
 net.simplyadvanced.vitalsigns.TestBodyTemperature:
     public static final java.lang.String PREFS_NAME
-    379:383:private void tempReleaseCamera()
-    429:455:public static void decodeYUV2(int[],byte[],int,int)
-    540:543:private void saveSharedPreference(java.lang.String,boolean)
-    545:548:private void saveSharedPreference(java.lang.String,java.lang.String)
-    551:557:public void playSound()
+    383:387:private void tempReleaseCamera()
+    433:459:public static void decodeYUV2(int[],byte[],int,int)
+    544:547:private void saveSharedPreference(java.lang.String,boolean)
+    549:552:private void saveSharedPreference(java.lang.String,java.lang.String)
+    555:561:public void playSound()
 net.simplyadvanced.vitalsigns.TestBodyTemperature$1
 net.simplyadvanced.vitalsigns.TestBodyTemperature$CameraPreview:
     private static final java.lang.String TAG
 net.simplyadvanced.vitalsigns.TestFacialGestures:
+    private static final java.lang.String TAG
+    android.widget.ImageView mRectImage1
+    android.widget.ImageView mRectImage2
+net.simplyadvanced.vitalsigns.TestMultipleFacesDetection:
     private static final java.lang.String TAG
     android.widget.ImageView mRectImage1
     android.widget.ImageView mRectImage2

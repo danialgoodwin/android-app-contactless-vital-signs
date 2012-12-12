@@ -754,6 +754,7 @@ net.simplyadvanced.vitalsigns.AddTemperature -> net.simplyadvanced.vitalsigns.Ad
     android.widget.TextView mTextViewOutdoorTemperature -> f
     android.content.SharedPreferences settings -> g
     int outdoorTemperature -> h
+    boolean displayEnglishUnits -> i
     void onCreate(android.os.Bundle) -> onCreate
     void getOutdoorTemperature() -> a
     void Save(android.view.View) -> Save
@@ -761,6 +762,7 @@ net.simplyadvanced.vitalsigns.AddTemperature -> net.simplyadvanced.vitalsigns.Ad
     double convertTemp(double,double) -> a
     boolean checkInternetConnection(android.app.Activity) -> a
     boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
+    java.lang.String convertCoordinatesToZipCode(double,double) -> b
 net.simplyadvanced.vitalsigns.AddTemperature$DownloadUrlStream -> net.simplyadvanced.vitalsigns.a:
     net.simplyadvanced.vitalsigns.AddTemperature this$0 -> a
     java.lang.String doInBackground(java.lang.Void[]) -> a
@@ -772,10 +774,12 @@ net.simplyadvanced.vitalsigns.EditStats -> net.simplyadvanced.vitalsigns.EditSta
     android.widget.EditText editTextSex -> b
     android.widget.EditText editTextWeight -> c
     android.widget.EditText editTextHeight -> d
-    android.widget.EditText editTextPosition -> e
+    android.widget.Spinner mSpinnerPosition -> e
     void onCreate(android.os.Bundle) -> onCreate
     void Save(android.view.View) -> Save
     void Cancel(android.view.View) -> Cancel
+    void onItemSelected(android.widget.AdapterView,android.view.View,int,long) -> onItemSelected
+    void onNothingSelected(android.widget.AdapterView) -> onNothingSelected
     boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
 net.simplyadvanced.vitalsigns.MainActivity -> net.simplyadvanced.vitalsigns.MainActivity:
     net.simplyadvanced.vitalsigns.MainActivity _activity -> a
@@ -790,6 +794,7 @@ net.simplyadvanced.vitalsigns.MainActivity -> net.simplyadvanced.vitalsigns.Main
     void goToTestPupilDilation(android.view.View) -> goToTestPupilDilation
     void goToTestEyeSaccades(android.view.View) -> goToTestEyeSaccades
     void goToTestFacialGestures(android.view.View) -> goToTestFacialGestures
+    void goToTestMultipleFacesDetection(android.view.View) -> goToTestMultipleFacesDetection
     void goTo(android.view.View) -> goTo
     void setAlertDialogs(java.lang.String,java.lang.String,java.lang.String,java.lang.String) -> a
 net.simplyadvanced.vitalsigns.MainActivity$1 -> net.simplyadvanced.vitalsigns.b:
@@ -843,7 +848,7 @@ net.simplyadvanced.vitalsigns.TestBloodPressure -> net.simplyadvanced.vitalsigns
     double[] arrayBlue -> e
     int systolicPressure -> f
     int diastolicPressure -> g
-    int temperature -> h
+    float temperature -> h
     double heartRate -> i
     int frameNumber -> j
     long samplingFrequency -> k
@@ -913,10 +918,10 @@ net.simplyadvanced.vitalsigns.TestBloodPressure -> net.simplyadvanced.vitalsigns
     void access$13(net.simplyadvanced.vitalsigns.TestBloodPressure,java.lang.String,int) -> a
     void access$14(net.simplyadvanced.vitalsigns.TestBloodPressure) -> j
     android.widget.ImageView access$15(net.simplyadvanced.vitalsigns.TestBloodPressure) -> k
-    void access$16(net.simplyadvanced.vitalsigns.TestBloodPressure,java.lang.String,java.lang.String) -> a
-    void access$17(net.simplyadvanced.vitalsigns.TestBloodPressure,java.lang.String) -> a
-    void access$18(net.simplyadvanced.vitalsigns.TestBloodPressure,java.lang.String,java.lang.String) -> b
-    java.lang.String access$19(net.simplyadvanced.vitalsigns.TestBloodPressure) -> l
+    java.lang.String access$16(net.simplyadvanced.vitalsigns.TestBloodPressure) -> l
+    void access$17(net.simplyadvanced.vitalsigns.TestBloodPressure,java.lang.String,java.lang.String) -> a
+    void access$18(net.simplyadvanced.vitalsigns.TestBloodPressure,java.lang.String) -> a
+    void access$19(net.simplyadvanced.vitalsigns.TestBloodPressure,java.lang.String,java.lang.String) -> b
     void access$20(net.simplyadvanced.vitalsigns.TestBloodPressure,java.lang.String,java.lang.String) -> c
     void access$21(net.simplyadvanced.vitalsigns.TestBloodPressure,java.lang.String,java.lang.String) -> d
 net.simplyadvanced.vitalsigns.TestBloodPressure$1 -> net.simplyadvanced.vitalsigns.d:
@@ -1030,7 +1035,32 @@ net.simplyadvanced.vitalsigns.TestEyeSaccades -> net.simplyadvanced.vitalsigns.T
     void onCreate(android.os.Bundle) -> onCreate
     boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
 net.simplyadvanced.vitalsigns.TestFacialGestures -> net.simplyadvanced.vitalsigns.TestFacialGestures:
-    net.simplyadvanced.vitalsigns.TestFacialGestures _activity -> k
+    net.simplyadvanced.vitalsigns.TestFacialGestures _activity -> l
+    android.widget.TextView mTextViewFace0Coordinates -> a
+    android.widget.TextView mTextViewFace1Coordinates -> b
+    android.widget.TextView mTextViewFace2Coordinates -> c
+    android.widget.TextView mTextViewFace3Coordinates -> d
+    android.widget.ImageView mRectImage0 -> e
+    android.view.SurfaceView surfaceView1 -> f
+    android.view.SurfaceHolder surfaceHolder -> g
+    android.hardware.Camera mCamera -> h
+    boolean isPreviewing -> i
+    int previewWidth -> j
+    int previewHeight -> k
+    void onCreate(android.os.Bundle) -> onCreate
+    void surfaceChanged(android.view.SurfaceHolder,int,int,int) -> surfaceChanged
+    void surfaceCreated(android.view.SurfaceHolder) -> surfaceCreated
+    void surfaceDestroyed(android.view.SurfaceHolder) -> surfaceDestroyed
+    void startFaceDetection() -> a
+    boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
+net.simplyadvanced.vitalsigns.TestFacialGestures$MyFaceDetectionListener -> net.simplyadvanced.vitalsigns.p:
+    net.simplyadvanced.vitalsigns.TestFacialGestures this$0 -> a
+    void onFaceDetection(android.hardware.Camera$Face[],android.hardware.Camera) -> onFaceDetection
+net.simplyadvanced.vitalsigns.TestHeartRate -> net.simplyadvanced.vitalsigns.TestHeartRate:
+    void onCreate(android.os.Bundle) -> onCreate
+    boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
+net.simplyadvanced.vitalsigns.TestMultipleFacesDetection -> net.simplyadvanced.vitalsigns.TestMultipleFacesDetection:
+    net.simplyadvanced.vitalsigns.TestMultipleFacesDetection _activity -> k
     android.widget.TextView mTextViewFace0Coordinates -> a
     android.widget.TextView mTextViewFace1Coordinates -> b
     android.widget.TextView mTextViewFace2Coordinates -> c
@@ -1047,12 +1077,9 @@ net.simplyadvanced.vitalsigns.TestFacialGestures -> net.simplyadvanced.vitalsign
     void surfaceDestroyed(android.view.SurfaceHolder) -> surfaceDestroyed
     void startFaceDetection() -> a
     boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
-net.simplyadvanced.vitalsigns.TestFacialGestures$MyFaceDetectionListener -> net.simplyadvanced.vitalsigns.p:
-    net.simplyadvanced.vitalsigns.TestFacialGestures this$0 -> a
+net.simplyadvanced.vitalsigns.TestMultipleFacesDetection$MyFaceDetectionListener -> net.simplyadvanced.vitalsigns.q:
+    net.simplyadvanced.vitalsigns.TestMultipleFacesDetection this$0 -> a
     void onFaceDetection(android.hardware.Camera$Face[],android.hardware.Camera) -> onFaceDetection
-net.simplyadvanced.vitalsigns.TestHeartRate -> net.simplyadvanced.vitalsigns.TestHeartRate:
-    void onCreate(android.os.Bundle) -> onCreate
-    boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
 net.simplyadvanced.vitalsigns.TestOxygenSaturation -> net.simplyadvanced.vitalsigns.TestOxygenSaturation:
     net.simplyadvanced.vitalsigns.TestOxygenSaturation _activity -> a
     android.widget.EditText mEditText1 -> b
@@ -1077,9 +1104,6 @@ net.simplyadvanced.vitalsigns.TestRespiratoryRate -> net.simplyadvanced.vitalsig
     android.widget.Button mButtonPlayback -> g
     boolean mStartRecording -> a
     boolean mStartPlaying -> b
-    double[] source -> h
-    int count -> i
-    int sampleRate -> j
     void onCreate(android.os.Bundle) -> onCreate
     void onClickRecordStart(android.view.View) -> onClickRecordStart
     void onClickRecordStop(android.view.View) -> onClickRecordStop
@@ -1200,33 +1224,33 @@ net.simplyadvanced.vitalsigns.TestVitalSigns -> net.simplyadvanced.vitalsigns.Te
     java.lang.String access$20(net.simplyadvanced.vitalsigns.TestVitalSigns) -> m
     void access$21(net.simplyadvanced.vitalsigns.TestVitalSigns,java.lang.String,java.lang.String) -> c
     void access$22(net.simplyadvanced.vitalsigns.TestVitalSigns,java.lang.String,java.lang.String) -> d
-net.simplyadvanced.vitalsigns.TestVitalSigns$1 -> net.simplyadvanced.vitalsigns.q:
+net.simplyadvanced.vitalsigns.TestVitalSigns$1 -> net.simplyadvanced.vitalsigns.r:
     net.simplyadvanced.vitalsigns.TestVitalSigns this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
-net.simplyadvanced.vitalsigns.TestVitalSigns$2 -> net.simplyadvanced.vitalsigns.r:
+net.simplyadvanced.vitalsigns.TestVitalSigns$2 -> net.simplyadvanced.vitalsigns.s:
     net.simplyadvanced.vitalsigns.TestVitalSigns this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
-net.simplyadvanced.vitalsigns.TestVitalSigns$3 -> net.simplyadvanced.vitalsigns.s:
-    net.simplyadvanced.vitalsigns.TestVitalSigns this$0 -> a
-    android.widget.EditText val$input -> b
-    void onClick(android.content.DialogInterface,int) -> onClick
-net.simplyadvanced.vitalsigns.TestVitalSigns$4 -> net.simplyadvanced.vitalsigns.t:
-    net.simplyadvanced.vitalsigns.TestVitalSigns this$0 -> a
-    void onClick(android.content.DialogInterface,int) -> onClick
-net.simplyadvanced.vitalsigns.TestVitalSigns$5 -> net.simplyadvanced.vitalsigns.u:
+net.simplyadvanced.vitalsigns.TestVitalSigns$3 -> net.simplyadvanced.vitalsigns.t:
     net.simplyadvanced.vitalsigns.TestVitalSigns this$0 -> a
     android.widget.EditText val$input -> b
     void onClick(android.content.DialogInterface,int) -> onClick
-net.simplyadvanced.vitalsigns.TestVitalSigns$6 -> net.simplyadvanced.vitalsigns.v:
+net.simplyadvanced.vitalsigns.TestVitalSigns$4 -> net.simplyadvanced.vitalsigns.u:
     net.simplyadvanced.vitalsigns.TestVitalSigns this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
-net.simplyadvanced.vitalsigns.TestVitalSigns$7 -> net.simplyadvanced.vitalsigns.w:
+net.simplyadvanced.vitalsigns.TestVitalSigns$5 -> net.simplyadvanced.vitalsigns.v:
+    net.simplyadvanced.vitalsigns.TestVitalSigns this$0 -> a
+    android.widget.EditText val$input -> b
+    void onClick(android.content.DialogInterface,int) -> onClick
+net.simplyadvanced.vitalsigns.TestVitalSigns$6 -> net.simplyadvanced.vitalsigns.w:
+    net.simplyadvanced.vitalsigns.TestVitalSigns this$0 -> a
+    void onClick(android.content.DialogInterface,int) -> onClick
+net.simplyadvanced.vitalsigns.TestVitalSigns$7 -> net.simplyadvanced.vitalsigns.x:
     net.simplyadvanced.vitalsigns.TestVitalSigns this$0 -> a
     void onLocationChanged(android.location.Location) -> onLocationChanged
     void onStatusChanged(java.lang.String,int,android.os.Bundle) -> onStatusChanged
     void onProviderEnabled(java.lang.String) -> onProviderEnabled
     void onProviderDisabled(java.lang.String) -> onProviderDisabled
-net.simplyadvanced.vitalsigns.TestVitalSigns$CameraPreview -> net.simplyadvanced.vitalsigns.x:
+net.simplyadvanced.vitalsigns.TestVitalSigns$CameraPreview -> net.simplyadvanced.vitalsigns.y:
     android.hardware.Camera$Size mPreviewSize -> a
     java.util.List mSupportedPreviewSizes -> b
     net.simplyadvanced.vitalsigns.TestVitalSigns this$0 -> c
@@ -1235,10 +1259,10 @@ net.simplyadvanced.vitalsigns.TestVitalSigns$CameraPreview -> net.simplyadvanced
     void surfaceChanged(android.view.SurfaceHolder,int,int,int) -> surfaceChanged
     void onMeasure(int,int) -> onMeasure
     net.simplyadvanced.vitalsigns.TestVitalSigns access$0(net.simplyadvanced.vitalsigns.TestVitalSigns$CameraPreview) -> a
-net.simplyadvanced.vitalsigns.TestVitalSigns$CameraPreview$1 -> net.simplyadvanced.vitalsigns.y:
+net.simplyadvanced.vitalsigns.TestVitalSigns$CameraPreview$1 -> net.simplyadvanced.vitalsigns.z:
     net.simplyadvanced.vitalsigns.TestVitalSigns$CameraPreview this$1 -> a
     void onPreviewFrame(byte[],android.hardware.Camera) -> onPreviewFrame
-net.simplyadvanced.vitalsigns.TestVitalSigns$MyFaceDetectionListener -> net.simplyadvanced.vitalsigns.z:
+net.simplyadvanced.vitalsigns.TestVitalSigns$MyFaceDetectionListener -> net.simplyadvanced.vitalsigns.aa:
     net.simplyadvanced.vitalsigns.TestVitalSigns this$0 -> a
     void onFaceDetection(android.hardware.Camera$Face[],android.hardware.Camera) -> onFaceDetection
 net.simplyadvanced.vitalsigns.heartrate.ConcurrencyUtils -> net.simplyadvanced.vitalsigns.a.a:

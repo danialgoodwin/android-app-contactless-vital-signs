@@ -36,36 +36,31 @@ public class AddTemperature extends Activity {
 	SharedPreferences settings;
 	int outdoorTemperature = 75;
 
+	boolean displayEnglishUnits = true;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     	_activity = this;
         setContentView(R.layout.activity_add_temperature);
 
+    	settings = getSharedPreferences(PREFS_NAME, 0);
+
         mEditTextSkinTemperature = (EditText) findViewById(R.id.editTextSkinTemperature);
         mEditTextIndoorTemperature = (EditText) findViewById(R.id.editTextIndoorTemperature);
         mTextViewSkinTemperature = (TextView) findViewById(R.id.textViewSkinTemperature);
         mTextViewIndoorTemperature = (TextView) findViewById(R.id.textViewIndoorTemperature);
         mTextViewOutdoorTemperature = (TextView) findViewById(R.id.textViewOutdoorTemperature);
-        // TODO: settings.getBoolean("displayEnglishUnits", true);
+		displayEnglishUnits = settings.getBoolean("displayEnglishUnits", true); // TODO: Use: (displayEnglishUnits==true)?" F":" C"
 
-    	settings = getSharedPreferences(PREFS_NAME, 0);
 
         //mEditTextInputTemperature.setText("" + settings.getFloat("skinTemperature", 0));
         mEditTextSkinTemperature.setText( String.format("%.2f",settings.getFloat("skinTemperature", (float) 88.666)) );
-        
-        
-        
-        
-        
+       
         // DEBUG
     	int lat = settings.getInt("currentLatitude", 0/*28058987*/); // Gets coordinates that were saved from TestBloodPressure.java
     	int lon = settings.getInt("currentLongitude", 0/*-82415560*/); // Tampa coordinates
-    	//int lat = 28058987;
-    	//int lon = -82415560;
-        
     	Toast.makeText(_activity, "lat,long = " + lat + "," + lon, Toast.LENGTH_LONG).show(); // DEBUG
-        
         
         getOutdoorTemperature();
     }
@@ -139,6 +134,7 @@ public class AddTemperature extends Activity {
         	}
         	
         	String zipCode = convertCoordinatesToZipCode(lat/(double)1000000,lon/(double)1000000);
+        	//String zipCode = "33620";
         	Log.d("DEBUG", "zipCode: " + zipCode); // Works
     		//Toast.makeText(_activity, "zip code = " + zipCode, Toast.LENGTH_SHORT).show(); // DEBUG // Can't call in AsyncTask (because it is not on the UI thread?)
             

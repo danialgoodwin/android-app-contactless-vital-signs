@@ -60,7 +60,9 @@ net.simplyadvanced.vitalsigns.MainActivity: void goToTestOxygenSaturation(androi
 net.simplyadvanced.vitalsigns.MainActivity: void goToTestPupilDilation(android.view.View)
 net.simplyadvanced.vitalsigns.MainActivity: void goToTestEyeSaccades(android.view.View)
 net.simplyadvanced.vitalsigns.MainActivity: void goToTestFacialGestures(android.view.View)
+net.simplyadvanced.vitalsigns.MainActivity: void goToTestMultipleFacesDetection(android.view.View)
 net.simplyadvanced.vitalsigns.MainActivity: void goTo(android.view.View)
+net.simplyadvanced.vitalsigns.R$array: int spinnerPositionsArrray
 net.simplyadvanced.vitalsigns.R$dimen: int padding_large
 net.simplyadvanced.vitalsigns.R$dimen: int padding_medium
 net.simplyadvanced.vitalsigns.R$dimen: int padding_small
@@ -89,7 +91,6 @@ net.simplyadvanced.vitalsigns.R$id: int editText2
 net.simplyadvanced.vitalsigns.R$id: int editTextAge
 net.simplyadvanced.vitalsigns.R$id: int editTextHeight
 net.simplyadvanced.vitalsigns.R$id: int editTextIndoorTemperature
-net.simplyadvanced.vitalsigns.R$id: int editTextPosition
 net.simplyadvanced.vitalsigns.R$id: int editTextSex
 net.simplyadvanced.vitalsigns.R$id: int editTextSkinTemperature
 net.simplyadvanced.vitalsigns.R$id: int editTextWeight
@@ -105,6 +106,7 @@ net.simplyadvanced.vitalsigns.R$id: int menu_settings
 net.simplyadvanced.vitalsigns.R$id: int pdfo
 net.simplyadvanced.vitalsigns.R$id: int rectImage0
 net.simplyadvanced.vitalsigns.R$id: int relativeLayoutRoot
+net.simplyadvanced.vitalsigns.R$id: int spinnerPosition
 net.simplyadvanced.vitalsigns.R$id: int surfaceView1
 net.simplyadvanced.vitalsigns.R$id: int surfaceViewCameraPreview
 net.simplyadvanced.vitalsigns.R$id: int textView0
@@ -117,11 +119,14 @@ net.simplyadvanced.vitalsigns.R$id: int textViewBloodPressure
 net.simplyadvanced.vitalsigns.R$id: int textViewFace0Coordinates
 net.simplyadvanced.vitalsigns.R$id: int textViewFace1Coordinates
 net.simplyadvanced.vitalsigns.R$id: int textViewFace2Coordinates
+net.simplyadvanced.vitalsigns.R$id: int textViewFace3Coordinates
 net.simplyadvanced.vitalsigns.R$id: int textViewHeartRate
 net.simplyadvanced.vitalsigns.R$id: int textViewHeight
 net.simplyadvanced.vitalsigns.R$id: int textViewIndoorTemperature
+net.simplyadvanced.vitalsigns.R$id: int textViewO2Saturation
 net.simplyadvanced.vitalsigns.R$id: int textViewOutdoorTemperature
 net.simplyadvanced.vitalsigns.R$id: int textViewPosition
+net.simplyadvanced.vitalsigns.R$id: int textViewRespiratoryRate
 net.simplyadvanced.vitalsigns.R$id: int textViewRightSide0
 net.simplyadvanced.vitalsigns.R$id: int textViewRightSide1
 net.simplyadvanced.vitalsigns.R$id: int textViewRightSide2
@@ -138,6 +143,7 @@ net.simplyadvanced.vitalsigns.R$layout: int activity_test_body_temperature
 net.simplyadvanced.vitalsigns.R$layout: int activity_test_eye_saccades
 net.simplyadvanced.vitalsigns.R$layout: int activity_test_facial_gestures
 net.simplyadvanced.vitalsigns.R$layout: int activity_test_heart_rate
+net.simplyadvanced.vitalsigns.R$layout: int activity_test_multiple_faces_detection
 net.simplyadvanced.vitalsigns.R$layout: int activity_test_oxygen_saturation
 net.simplyadvanced.vitalsigns.R$layout: int activity_test_pupil_dilation
 net.simplyadvanced.vitalsigns.R$layout: int activity_test_respiratory_rate
@@ -153,6 +159,7 @@ net.simplyadvanced.vitalsigns.R$menu: int activity_test_body_temperature
 net.simplyadvanced.vitalsigns.R$menu: int activity_test_eye_saccades
 net.simplyadvanced.vitalsigns.R$menu: int activity_test_facial_gestures
 net.simplyadvanced.vitalsigns.R$menu: int activity_test_heart_rate
+net.simplyadvanced.vitalsigns.R$menu: int activity_test_multiple_faces_detection
 net.simplyadvanced.vitalsigns.R$menu: int activity_test_oxygen_saturation
 net.simplyadvanced.vitalsigns.R$menu: int activity_test_pupil_dilation
 net.simplyadvanced.vitalsigns.R$menu: int activity_test_respiratory_rate
@@ -174,6 +181,7 @@ net.simplyadvanced.vitalsigns.R$string: int title_activity_test_body_temperature
 net.simplyadvanced.vitalsigns.R$string: int title_activity_test_eye_saccades
 net.simplyadvanced.vitalsigns.R$string: int title_activity_test_facial_gestures
 net.simplyadvanced.vitalsigns.R$string: int title_activity_test_heart_rate
+net.simplyadvanced.vitalsigns.R$string: int title_activity_test_multiple_faces_detection
 net.simplyadvanced.vitalsigns.R$string: int title_activity_test_oxygen_saturation
 net.simplyadvanced.vitalsigns.R$string: int title_activity_test_pupil_dilation
 net.simplyadvanced.vitalsigns.R$string: int title_activity_test_respiratory_rate
@@ -204,6 +212,8 @@ net.simplyadvanced.vitalsigns.TestFacialGestures
 net.simplyadvanced.vitalsigns.TestFacialGestures: TestFacialGestures()
 net.simplyadvanced.vitalsigns.TestHeartRate
 net.simplyadvanced.vitalsigns.TestHeartRate: TestHeartRate()
+net.simplyadvanced.vitalsigns.TestMultipleFacesDetection
+net.simplyadvanced.vitalsigns.TestMultipleFacesDetection: TestMultipleFacesDetection()
 net.simplyadvanced.vitalsigns.TestOxygenSaturation
 net.simplyadvanced.vitalsigns.TestOxygenSaturation: TestOxygenSaturation()
 net.simplyadvanced.vitalsigns.TestOxygenSaturation: void onClickCalculateO2(android.view.View)

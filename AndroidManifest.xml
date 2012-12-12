@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="net.simplyadvanced.vitalsigns"
-    android:versionCode="5"
-    android:versionName="1.13" >
+    android:versionCode="6"
+    android:versionName="1.19" >
 
     <uses-sdk
         android:minSdkVersion="14"
@@ -38,6 +38,11 @@
             android:name=".TestVitalSigns"
             android:label="@string/title_activity_test_vital_signs"
             android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".TestFacialGestures"
@@ -47,6 +52,11 @@
         <activity
             android:name=".TestBloodPressure"
             android:label="@string/title_activity_test_blood_pressure" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
  <!-- android:screenOrientation="nosensor" -->
         </activity>
         <activity
