@@ -926,6 +926,7 @@ net.simplyadvanced.vitalsigns.TestBloodPressure -> net.simplyadvanced.vitalsigns
     void access$21(net.simplyadvanced.vitalsigns.TestBloodPressure,java.lang.String,java.lang.String) -> d
 net.simplyadvanced.vitalsigns.TestBloodPressure$1 -> net.simplyadvanced.vitalsigns.d:
     net.simplyadvanced.vitalsigns.TestBloodPressure this$0 -> a
+    android.widget.EditText val$input -> b
     void onClick(android.content.DialogInterface,int) -> onClick
 net.simplyadvanced.vitalsigns.TestBloodPressure$2 -> net.simplyadvanced.vitalsigns.e:
     net.simplyadvanced.vitalsigns.TestBloodPressure this$0 -> a
