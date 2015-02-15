@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Contactless Vital Signs</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_sendEmail">Send Email</string>
+    <string name="menu_sendSMS">Send SMS</string>
+    <string name="menu_cycleCamera">Cycle Camera Views</string>
+    <string name="menu_settings">Default Settings</string>
+    <string name="menu_convertUnits">Convert Units</string>
+    <string name="menu_change_units">Change Units</string>
+    <string name="title_activity_main">Vital Signs</string>
+    <string name="title_activity_test_vital_signs">Center face</string>
+    <string name="resp_rate">Respiratory\nRate</string>
+    <string name="title_activity_test_facial_gestures">Locate Facial Features</string>
+    <string name="title_activity_test_blood_pressure">Test Blood Pressure</string>
+    <string name="title_activity_test_heart_rate">Test Heart Rate</string>
+    <string name="title_activity_test_body_temperature">Test Body Temperature</string>
+    <string name="title_activity_test_respiratory_rate">Test Respiratory Rate</string>
+    <string name="title_activity_test_oxygen_saturation">Test Oxygen Saturation</string>
+    <string name="title_activity_test_pupil_dilation">Test Pupil Dilation</string>
+    <string name="title_activity_test_eye_saccades">Test Eye Saccades</string>
+    <string name="title_activity_edit_stats">Edit Stats</string>
+    <string name="title_activity_add_temperature">Add Temperature</string>
+    <string name="title_activity_test_multiple_faces_detection">Detect Multiple Faces</string>
+
+
+
+    <string-array name="spinnerPositionsArrray">
+        <item>Sitting</item>
+        <item>Laying Down</item>
+        <item>Standing</item>
+    </string-array>
+
+</resources>

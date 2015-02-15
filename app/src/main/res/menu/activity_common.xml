@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/menu_sendEmail"
+          android:title="@string/menu_sendEmail"
+          android:showAsAction="ifRoom" />
+
+    <item android:id="@+id/menu_sendSMS"
+          android:title="@string/menu_sendSMS"
+          android:showAsAction="ifRoom" />
+
+    <item android:id="@+id/menu_cycleCamera"
+          android:title="@string/menu_cycleCamera"
+          android:showAsAction="never" />
+
+    <item android:id="@+id/menu_settings"
+          android:title="@string/menu_settings"
+          android:showAsAction="never" />
+
+    <item android:id="@+id/menu_convertUnits"
+          android:title="@string/menu_convertUnits"
+          android:showAsAction="never" />
+
+</menu>

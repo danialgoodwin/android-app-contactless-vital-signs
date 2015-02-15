@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentTop="true"
+    android:orientation="vertical" >
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" >
+
+        <TextView android:id="@+id/textViewSkinTemperature" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:text="Skin Temperature: " android:textSize="23dp"  />
+
+        <EditText android:id="@+id/editTextSkinTemperature" android:layout_width="0dip" android:layout_height="wrap_content" android:layout_weight="1"
+                  android:hint="98.6 F" android:textSize="21dp" android:textStyle="bold">
+
+            <requestFocus />
+        </EditText>
+    </LinearLayout>
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" >
+        <TextView android:id="@+id/textViewIndoorTemperature" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:text="Indoor Temperature: " android:textSize="23dp" />
+
+        <EditText android:id="@+id/editTextIndoorTemperature" android:layout_width="0dip" android:layout_height="wrap_content" android:layout_weight="1"
+                  android:hint="Enter if indoors" android:textSize="21dp" android:textStyle="bold" />
+    </LinearLayout>
+
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" >
+        <TextView android:id="@+id/textViewOutdoorTemperature" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:text="Outdoor Temperature: " android:textSize="24dp" />
+    </LinearLayout>
+
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" >
+        <Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1"
+                android:text="Cancel" android:onClick="Cancel" />
+        <Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1"
+                android:text="Save" android:onClick="Save" />
+    </LinearLayout>
+
+</LinearLayout>

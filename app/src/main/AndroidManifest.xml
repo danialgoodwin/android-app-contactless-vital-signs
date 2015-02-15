@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="net.simplyadvanced.vitalsigns" >
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-feature android:name="android.hardware.camera" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme"
+        android:hardwareAccelerated="false" >
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".CheckVitalSignsActivity"
+            android:label="@string/title_activity_test_vital_signs"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".bloodpressure.BloodPressureActivity"
+            android:label="@string/title_activity_test_blood_pressure" />
+        <activity
+            android:name=".bloodpressure.AddTemperatureActivity"
+            android:label="@string/title_activity_add_temperature"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Dialog" />
+
+        <activity
+            android:name=".bodytemperature.BodyTemperatureActivity"
+            android:label="@string/title_activity_test_body_temperature"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".respiratoryrate.RespiratoryRateActivity"
+            android:label="@string/title_activity_test_respiratory_rate"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".oxygensaturation.OxygenSaturationActivity"
+            android:label="@string/title_activity_test_oxygen_saturation"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".facialgestures.FacialGesturesActivity"
+            android:label="@string/title_activity_test_facial_gestures"
+            android:screenOrientation="portrait" />
+
+        <activity android:name=".pupil.PupilDilationActivity"
+            android:label="@string/title_activity_test_pupil_dilation"
+            android:screenOrientation="portrait" />
+        <activity android:name=".pupil.PupilDilation2Activity"
+            android:label="@string/title_activity_test_pupil_dilation"
+            android:screenOrientation="portrait" />
+        <activity android:name=".pupil.PupilDilation3Activity"
+            android:label="@string/title_activity_test_pupil_dilation"
+            android:screenOrientation="portrait" />
+        <activity android:name=".pupil.PupilDilation4Activity"
+            android:label="@string/title_activity_test_pupil_dilation"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".multiplefaces.MultipleFacesDetectionActivity"
+            android:label="@string/title_activity_test_multiple_faces_detection" />
+
+
+
+        <activity
+            android:name=".setting.UserStatsSettingsActivity"
+            android:label="@string/title_activity_edit_stats"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Dialog" />
+
+    </application>
+
+</manifest>

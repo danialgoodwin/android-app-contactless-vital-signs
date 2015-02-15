@@ -20,7 +20,7 @@ The APK to download to your Android phone can be found in the root of this direc
 
 
 ## Background
-This project was a team effort done by Danial Goodwin, James Coakley, Yi Zhuo, and Chris Mackey as part of our senior capstone project at the University of South Florida in 2013. In the beginning we knew little about Android development, Java, and health-related processes. In just a few months, we learned it all, completed our IRB certificates to do human testing, and delivered the final working project on-time. For more information, please email danialgoodwin@gmail.com
+This project was a team effort done by Danial Goodwin, James Coakley, Yi Zhuo, and Chris Mackey as part of our senior capstone project at the University of South Florida in 2013. In the beginning we knew little about Android development, Java, and health-related processes. In just a few months, we learned it all, completed our IRB certificates to do human testing, and delivered the final working project on-time. For more information, please email danialgoodwin you-know-what-symbol gmail.com.
 
 
 
