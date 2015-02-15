@@ -1,20 +1,28 @@
-AndroidContactlessVitalSigns
-============================
+# AndroidContactlessVitalSigns
+(Sidenote: The code in this repo is over two years old and I'm sorry for how bad it's organized. It could be much more modular and better overall. Recently, I've just decided to go through and convert it to use Android Studio by default instead, and clean up just a little bit and change to more descriptive names. This repo is not active, but I'll still answer any questions about it.)
 
-Using the Android camera, the app detects faces and starts to calculate heart rate, blood pressure, and body temperature.
-
-Check out for more info: http://danialgoodwin.github.io/AndroidContactlessVitalSigns
-
-The main code for heart rate and blood pressure will be found in src/net/simplyadvanced/vitalsigns/TestBloodPressure.java and src/net/simplyadvanced/vitalsigns/TestVitalSigns.java
-The layout for the two can be found at res/layout/activity_test_blood_pressure.xml and res/layout/activity/activity_test_vital_signs.xml
-
-The code for temperature can be src/net/simplyadvanced/vitalsigns/TestBloodPressure.java and src/net/simplyadvanced/vitalsigns/AddTemperature.java
-The layout for temperture can be found in res/layout/activity_add_temperature.xml
-
-The apk to download to your Android phone can be found in bin/net.simplyadvanced.vitalsigns.MainActivity.apk
+Using the Android camera, the app detects faces and starts to calculate heart rate, blood pressure, and body temperature. For more info: [http://danialgoodwin.github.io/android-app-contactless-vital-signs/](http://danialgoodwin.github.io/android-app-contactless-vital-signs/)
 
 
-This project was done by Danial Goodwin, James Coakley, Yi Zhuo, and Chris Mackey as part of our senior capstone project at the University of South Florida.
-For more information, please email danialgoodwin@gmail.com
 
-DISCLAIMER: This app comes as-is, and makes no guarantee to diagnose or cure any diseases or health problems.
+## The Code
+The main code for heart rate and blood pressure is in `net/simplyadvanced/vitalsigns/bloodpressure/BloodPressureActivity.java` and `net/simplyadvanced/vitalsigns/CheckVitalSignsActivity.java`. The layout for those two can be found at `res/layout/activity_blood_pressure.xml` and `res/layout/activity_vital_signs.xml`.
+
+The code for temperature can be `net/simplyadvanced/vitalsigns/bloodpressure/BloodPressureActivity.java` and `net/simplyadvanced/vitalsigns/bloodpressure/AddTemperatureActivity.java`. The layout for temperture can be found in `res/layout/activity_add_temperature.xml`
+
+The other classes are mainly simulations for how they could be accomplished.
+
+
+
+## Test the APK
+The APK to download to your Android phone can be found in the root of this directory: `app-debug.apk`.
+
+
+
+## Background
+This project was a team effort done by Danial Goodwin, James Coakley, Yi Zhuo, and Chris Mackey as part of our senior capstone project at the University of South Florida in 2013. In the beginning we knew little about Android development, Java, and health-related processes. In just a few months, we learned it all, completed our IRB certificates to do human testing, and delivered the final working project on-time. For more information, please email danialgoodwin@gmail.com
+
+
+
+#### Disclaimer
+This app comes as-is, and makes no guarantee to diagnose or cure any diseases or health problems.
