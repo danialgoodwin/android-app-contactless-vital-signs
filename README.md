@@ -14,9 +14,9 @@ The other classes are mainly simulations for how they could be accomplished.
 
 ### Algorithms
 
-To calculate blood pressure, there is `[BloodPressureActivity.setBloodPress(...)](https://github.com/danialgoodwin/android-app-contactless-vital-signs/blob/master/app/src/main/java/net/simplyadvanced/vitalsigns/bloodpressure/BloodPressureActivity.java#L152)`. Unfortunately, some parts of it are hardcoded and can still be improved.
+To calculate blood pressure, there is [`BloodPressureActivity.setBloodPress(...)`](https://github.com/danialgoodwin/android-app-contactless-vital-signs/blob/master/app/src/main/java/net/simplyadvanced/vitalsigns/bloodpressure/BloodPressureActivity.java#L152). Unfortunately, some parts of it are hardcoded and can still be improved.
 
-To calculate oxygen levels, there is `[OxygenSaturationActivity.calculat)2(...)](https://github.com/danialgoodwin/android-app-contactless-vital-signs/blob/master/app/src/main/java/net/simplyadvanced/vitalsigns/oxygensaturation/OxygenSaturationActivity.java#L30)`.
+To calculate oxygen levels, there is [`OxygenSaturationActivity.calculateO2(...)`](https://github.com/danialgoodwin/android-app-contactless-vital-signs/blob/master/app/src/main/java/net/simplyadvanced/vitalsigns/oxygensaturation/OxygenSaturationActivity.java#L30).
 
 
 ## Test the APK
